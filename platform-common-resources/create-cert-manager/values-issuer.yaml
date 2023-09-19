@@ -1,0 +1,33 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: ${CERT_MANAGER_ACME}
+spec:
+  acme:
+    server: "${CERT_MANAGER_ACME_SERVER}"
+    email: "${TLS_CERTIFICATE_LET_S_ENCRYPT_CONTACT_EMAIL}"
+    privateKeySecretRef:
+      name: ${CERT_MANAGER_ACME}-private-key
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+            podTemplate:
+              metadata:
+                labels:
+                  networking/traffic-allowed: "yes"
+              spec:
+                tolerations:
+                - key: "vendor"
+                  operator: "Equal"
+                  value: "cosmotech"
+                  effect: "NoSchedule"
+                nodeSelector:
+                  "cosmotech.com/tier": "services"
+                resources:
+                  requests:
+                    cpu: 10m
+                    memory: 64Mi
+                  limits:
+                    cpu: 1000m
+                    memory: 64Mi

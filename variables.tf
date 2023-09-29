@@ -245,3 +245,137 @@ variable "create_adx" {
   type    = bool
   default = false
 }
+
+variable "deployment_type" {
+  type    = string
+  default = "Terraform"
+  validation {
+    condition = contains([
+      "ARM",
+      "Terraform"
+    ], var.deployment_type)
+    error_message = "Stage must be either: ARM or Terraform."
+  }
+  description = "Represents the kind of deployment. Currently two modes: ARM or Terraform"
+}
+
+# ARM deployment mode
+variable "adt_principal_id" {
+  type        = string
+  default     = ""
+  description = "The ID of the existing ADT Network's service principal"
+}
+
+variable "platform_client_id" {
+  type        = string
+  default     = ""
+  description = "The ID of the existing ADT Platform's app registration"
+}
+
+variable "platform_client_secret" {
+  type        = string
+  default     = ""
+  description = "The client secret of the existing ADT Platform's app registration"
+}
+
+variable "platform_subnet_id" {
+  type        = string
+  default     = ""
+  description = "The ID of the existing subnet the AKS must be attached to."
+}
+
+# Backend remote vars
+variable "tf_resource_group_name" {
+  type        = string
+  default     = ""
+  description = <<EOT
+Variable to be used with backend remote option :
+First set necessary vars:
+- export TF_VAR_tf_resource_group_name="some_value"
+Then call terraform init:
+terraform init \
+    -backend-config "resource_group_name=$TF_VAR_tf_resource_group_name" \
+    -backend-config "storage_account_name=$TF_VAR_tf_storage_account_name" \
+    -backend-config "container_name=$TF_VAR_tf_container_name" \
+    -backend-config "key=$TF_VAR_tf_blob_name" \
+    -backend-config "access_key=$TF_VAR_tf_access_key"
+EOT
+}
+
+variable "tf_storage_account_name" {
+  type        = string
+  default     = ""
+  description = <<EOT
+Variable to be used with backend remote option :
+First set necessary vars:
+- export TF_VAR_tf_storage_account_name="some_value"
+Then call terraform init:
+terraform init \
+    -backend-config "resource_group_name=$TF_VAR_tf_resource_group_name" \
+    -backend-config "storage_account_name=$TF_VAR_tf_storage_account_name" \
+    -backend-config "container_name=$TF_VAR_tf_container_name" \
+    -backend-config "key=$TF_VAR_tf_blob_name" \
+    -backend-config "access_key=$TF_VAR_tf_access_key"
+EOT
+}
+
+variable "tf_container_name" {
+  type        = string
+  default     = ""
+  description = <<EOT
+Variable to be used with backend remote option :
+First set necessary vars:
+- export TF_VAR_tf_container_name="some_value"
+Then call terraform init:
+terraform init \
+    -backend-config "resource_group_name=$TF_VAR_tf_resource_group_name" \
+    -backend-config "storage_account_name=$TF_VAR_tf_storage_account_name" \
+    -backend-config "container_name=$TF_VAR_tf_container_name" \
+    -backend-config "key=$TF_VAR_tf_blob_name" \
+    -backend-config "access_key=$TF_VAR_tf_access_key"
+EOT
+}
+
+variable "tf_blob_name" {
+  type        = string
+  default     = ""
+  description = <<EOT
+Variable to be used with backend remote option :
+First set necessary vars:
+- export TF_VAR_tf_blob_name="some_value"
+Then call terraform init:
+terraform init \
+    -backend-config "resource_group_name=$TF_VAR_tf_resource_group_name" \
+    -backend-config "storage_account_name=$TF_VAR_tf_storage_account_name" \
+    -backend-config "container_name=$TF_VAR_tf_container_name" \
+    -backend-config "key=$TF_VAR_tf_blob_name" \
+    -backend-config "access_key=$TF_VAR_tf_access_key"
+EOT
+}
+
+variable "tf_access_key" {
+  type        = string
+  default     = ""
+  description = <<EOT
+Variable to be used with backend remote option :
+First set necessary vars:
+- export TF_VAR_tf_access_key="some_value"
+Then call terraform init:
+terraform init \
+    -backend-config "resource_group_name=$TF_VAR_tf_resource_group_name" \
+    -backend-config "storage_account_name=$TF_VAR_tf_storage_account_name" \
+    -backend-config "container_name=$TF_VAR_tf_container_name" \
+    -backend-config "key=$TF_VAR_tf_blob_name" \
+    -backend-config "access_key=$TF_VAR_tf_access_key"
+EOT
+}
+
+variable "vault_addr" {
+  type        = string
+  description = "The address of the Vault to save current platform configuration values"
+}
+
+variable "vault_token" {
+  type        = string
+  description = "The token of the Vault to save current platform configuration values"
+}

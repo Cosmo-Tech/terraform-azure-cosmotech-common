@@ -179,38 +179,3 @@ resource "azurerm_dns_a_record" "platform_fqdn" {
   ttl                 = 300
   target_resource_id  = azurerm_public_ip.publicip[0].id
 }
-
-# Virtual Network
-resource "azurerm_virtual_network" "platform_vnet" {
-  count               = var.create_vnet ? 1 : 0
-  name                = "CosmoTech${var.customer_name}${var.project_name}${var.project_stage}VNet"
-  location            = var.location
-  resource_group_name = azurerm_resource_group.platform_rg.name
-  address_space       = [local.vnet_iprange]
-
-  subnet {
-    name           = local.subnet_name
-    address_prefix = local.vnet_iprange
-  }
-
-  tags = local.tags
-}
-
-resource "azurerm_role_assignment" "vnet_network_contributor" {
-  count                = var.create_vnet ? 1 : 0
-  scope                = azurerm_virtual_network.platform_vnet[0].id
-  role_definition_name = "Network Contributor"
-  principal_id         = azuread_service_principal.network_adt.id
-}
-
-resource "azurerm_private_dns_zone" "private_dns" {
-  name                = "privatelink.blob.core.windows.net"
-  resource_group_name = azurerm_resource_group.platform_rg.name
-}
-
-resource "azurerm_private_dns_zone_virtual_network_link" "private_link" {
-  name                  = "test"
-  resource_group_name   = azurerm_resource_group.platform_rg.name
-  private_dns_zone_name = azurerm_private_dns_zone.private_dns.name
-  virtual_network_id    = azurerm_virtual_network.platform_vnet[0].id
-}

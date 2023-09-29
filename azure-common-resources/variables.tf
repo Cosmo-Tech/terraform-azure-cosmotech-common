@@ -277,3 +277,23 @@ variable "tenant_name" {
   type    = string
   default = "phoenix"
 }
+
+variable "deployment_type" {
+  type = string
+}
+
+variable "adt_principal_id" {
+  type = string
+}
+
+variable "platform_client_id" {
+  type = string
+}
+
+variable "platform_client_secret" {
+  type = string
+}
+
+variable "platform_subnet_id" {
+  type = string
+}

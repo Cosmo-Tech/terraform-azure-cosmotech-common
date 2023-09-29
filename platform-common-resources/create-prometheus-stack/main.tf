@@ -36,3 +36,14 @@ resource "helm_release" "prometheus-stack" {
     templatefile("${path.module}/values.yaml", local.values_prometheus_stack)
   ]
 }
+
+# Experimental: gives helm time to finish cleaning up.
+#
+# Otherwise, after `terraform destroy`:
+# │ Error: uninstallation completed with 1 error(s): uninstall: Failed to purge
+#   the release: release: not found
+resource "time_sleep" "wait_30_seconds" {
+  depends_on = [helm_release.prometheus-stack]
+
+  destroy_duration = "30s"
+}

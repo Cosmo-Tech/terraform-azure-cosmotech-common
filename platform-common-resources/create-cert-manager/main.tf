@@ -61,3 +61,14 @@ resource "kubectl_manifest" "certificates" {
 
   depends_on = [kubectl_manifest.cluster_issuer]
 }
+
+# Experimental: gives helm time to finish cleaning up.
+#
+# Otherwise, after `terraform destroy`:
+# │ Error: uninstallation completed with 1 error(s): uninstall: Failed to purge
+#   the release: release: not found
+resource "time_sleep" "wait_30_seconds" {
+  depends_on = [helm_release.cert-manager]
+
+  destroy_duration = "30s"
+}

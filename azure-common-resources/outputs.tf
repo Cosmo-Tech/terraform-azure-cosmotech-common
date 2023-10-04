@@ -1,13 +1,13 @@
 output "out_platform_sp_client_id" {
-  value = module.create-platform-prerequisite.0.out_platform_clientid
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_clientid : null
 }
 
 output "out_platform_sp_client_secret" {
-  value = module.create-platform-prerequisite.0.out_platform_password
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_password : null
 }
 
 output "out_public_ip" {
-  value = module.create-platform-prerequisite.0.out_public_ip
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_public_ip : null
 }
 
 # for test purpose
@@ -16,19 +16,19 @@ output "out_subnet_id" {
 }
 
 output "out_public_ip_name" {
-  value = module.create-platform-prerequisite.0.out_public_ip_name
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_public_ip_name : null
 }
 
 output "out_ip_resource_group" {
-  value = module.create-platform-prerequisite.0.out_ip_resource_group
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_ip_resource_group : null
 }
 
 output "out_networkadt_clientid" {
-  value = module.create-platform-prerequisite.0.out_networkadt_clientid
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_networkadt_clientid : null
 }
 
 output "out_network_adt_password" {
-  value     = module.create-platform-prerequisite.0.out_network_adt_password
+  value     = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_network_adt_password : null
   sensitive = true
 }
 
@@ -38,5 +38,5 @@ output "out_aks_phoenix_config" {
 }
 
 output "out_fqdn" {
-  value = module.create-platform-prerequisite.0.out_fqdn
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_fqdn : null
 }

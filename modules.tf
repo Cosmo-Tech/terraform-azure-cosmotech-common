@@ -44,5 +44,4 @@ module "cosmotech-platform" {
   loadbalancer_ip      = module.cosmotech-prerequisites.out_public_ip
   kube_config          = module.cosmotech-prerequisites.out_aks_phoenix_config
 
-  depends_on = [module.cosmotech-prerequisites]
 }

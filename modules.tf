@@ -39,9 +39,10 @@ module "cosmotech-platform" {
   tls_secret_name      = var.tls_secret_name
   namespace            = var.namespace
   monitoring_namespace = var.monitoring_namespace
-  api_dns_name         = module.cosmotech-prerequisites.out_fqdn
-  resource_group       = module.cosmotech-prerequisites.out_ip_resource_group
-  loadbalancer_ip      = module.cosmotech-prerequisites.out_public_ip
+  api_dns_name         = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.0.out_fqdn : var.dns_record
+  resource_group       = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.0.out_ip_resource_group : var.resource_group
+  loadbalancer_ip      = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.0.out_public_ip : var.loadbalancer_ip
   kube_config          = module.cosmotech-prerequisites.out_aks_phoenix_config
 
+  # depends_on = [ module.cosmotech-prerequisites ]
 }

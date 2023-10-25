@@ -369,13 +369,3 @@ terraform init \
     -backend-config "access_key=$TF_VAR_tf_access_key"
 EOT
 }
-
-variable "vault_addr" {
-  type        = string
-  description = "The address of the Vault to save current platform configuration values"
-}
-
-variable "vault_token" {
-  type        = string
-  description = "The token of the Vault to save current platform configuration values"
-}

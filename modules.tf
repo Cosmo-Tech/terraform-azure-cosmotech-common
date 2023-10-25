@@ -42,6 +42,4 @@ module "cosmotech-platform" {
   resource_group       = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.0.out_ip_resource_group : var.resource_group
   loadbalancer_ip      = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.0.out_public_ip : var.loadbalancer_ip
   kube_config          = module.cosmotech-prerequisites.out_aks_phoenix_config
-
-  # depends_on = [ module.cosmotech-prerequisites ] # TODO: remove
 }

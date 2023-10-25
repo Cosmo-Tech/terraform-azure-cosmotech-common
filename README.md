@@ -38,8 +38,6 @@
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The project name | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The subscription id | `string` | n/a | yes |
 | <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | The tenant id | `string` | n/a | yes |
-| <a name="input_vault_addr"></a> [vault\_addr](#input\_vault\_addr) | The address of the Vault to save current platform configuration values | `string` | n/a | yes |
-| <a name="input_vault_token"></a> [vault\_token](#input\_vault\_token) | The token of the Vault to save current platform configuration values | `string` | n/a | yes |
 | <a name="input_adt_principal_id"></a> [adt\_principal\_id](#input\_adt\_principal\_id) | The ID of the existing ADT Network's service principal | `string` | `""` | no |
 | <a name="input_api_dns_name"></a> [api\_dns\_name](#input\_api\_dns\_name) | n/a | `string` | `""` | no |
 | <a name="input_api_version_path"></a> [api\_version\_path](#input\_api\_version\_path) | The API version path | `string` | `"/"` | no |

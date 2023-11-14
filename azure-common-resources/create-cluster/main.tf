@@ -17,6 +17,7 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
   kubernetes_version                = var.kubernetes_version
   role_based_access_control_enabled = true
   private_cluster_enabled           = false
+  automatic_channel_upgrade         = "patch"
   tags                              = local.tags
 
   network_profile {

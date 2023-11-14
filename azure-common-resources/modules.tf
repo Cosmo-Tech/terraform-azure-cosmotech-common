@@ -64,3 +64,25 @@ module "create-cluster" {
     module.create-platform-prerequisite, module.create-network
   ]
 }
+
+locals {
+  kusto_name = var.resource_group
+  tags = {
+    vendor      = "cosmotech"
+    stage       = var.project_stage
+    customer    = var.customer_name
+    project     = var.project_name
+    cost_center = var.cost_center
+  }
+}
+
+module "create-kusto" {
+  source = "./create-kusto"
+
+  location            = var.location
+  resource_group      = var.resource_group
+  kusto_name          = local.kusto_name
+  private_dns_zone_id = module.create-network.out_private_dns_zone_id
+  tags                = local.tags
+  subnet_id           = module.create-network.out_subnet_id
+}

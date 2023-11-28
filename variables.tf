@@ -262,25 +262,21 @@ variable "deployment_type" {
 # ARM deployment mode
 variable "adt_principal_id" {
   type        = string
-  default     = ""
   description = "The ID of the existing ADT Network's service principal"
 }
 
 variable "platform_client_id" {
   type        = string
-  default     = ""
   description = "The ID of the existing ADT Platform's app registration"
 }
 
 variable "platform_client_secret" {
   type        = string
-  default     = ""
   description = "The client secret of the existing ADT Platform's app registration"
 }
 
 variable "platform_subnet_id" {
   type        = string
-  default     = ""
   description = "The ID of the existing subnet the AKS must be attached to."
 }
 

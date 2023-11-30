@@ -31,14 +31,17 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_adt_principal_id"></a> [adt\_principal\_id](#input\_adt\_principal\_id) | The ID of the existing ADT Network's service principal | `string` | n/a | yes |
 | <a name="input_client_id"></a> [client\_id](#input\_client\_id) | The client id | `string` | n/a | yes |
 | <a name="input_client_secret"></a> [client\_secret](#input\_client\_secret) | The client secret | `string` | n/a | yes |
 | <a name="input_dns_record"></a> [dns\_record](#input\_dns\_record) | The DNS zone name to create platform subdomain. Example: myplatform | `string` | n/a | yes |
 | <a name="input_owner_list"></a> [owner\_list](#input\_owner\_list) | List of mail addresses for App Registration owners | `list(string)` | n/a | yes |
+| <a name="input_platform_client_id"></a> [platform\_client\_id](#input\_platform\_client\_id) | The ID of the existing ADT Platform's app registration | `string` | n/a | yes |
+| <a name="input_platform_client_secret"></a> [platform\_client\_secret](#input\_platform\_client\_secret) | The client secret of the existing ADT Platform's app registration | `string` | n/a | yes |
+| <a name="input_platform_subnet_id"></a> [platform\_subnet\_id](#input\_platform\_subnet\_id) | The ID of the existing subnet the AKS must be attached to. | `string` | n/a | yes |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The project name | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The subscription id | `string` | n/a | yes |
 | <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | The tenant id | `string` | n/a | yes |
-| <a name="input_adt_principal_id"></a> [adt\_principal\_id](#input\_adt\_principal\_id) | The ID of the existing ADT Network's service principal | `string` | `""` | no |
 | <a name="input_api_dns_name"></a> [api\_dns\_name](#input\_api\_dns\_name) | n/a | `string` | `""` | no |
 | <a name="input_api_version_path"></a> [api\_version\_path](#input\_api\_version\_path) | The API version path | `string` | `"/"` | no |
 | <a name="input_audience"></a> [audience](#input\_audience) | The App Registration audience type | `string` | `"AzureADMultipleOrgs"` | no |

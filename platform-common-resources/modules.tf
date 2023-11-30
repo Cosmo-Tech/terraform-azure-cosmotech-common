@@ -33,3 +33,7 @@ module "cert-manager" {
   tls_secret_name      = var.tls_secret_name
   api_dns_name         = var.api_dns_name
 }
+
+module "loki" {
+  source = "./create-loki"
+}

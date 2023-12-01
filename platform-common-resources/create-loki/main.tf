@@ -9,10 +9,11 @@ terraform {
 
 locals {
   values_loki = {
-    "MONITORING_NAMESPACE"        = var.monitoring_namespace
-    "LOKI_RETENTION_PERIOD"       = var.loki_retention_period
-    "LOKI_PERSISTENCE_MEMORY"     = var.loki_persistence_memory
-    "NAMESPACE"                   = var.namespace
+    "MONITORING_NAMESPACE"             = var.monitoring_namespace
+    "LOKI_RETENTION_PERIOD"            = var.loki_retention_period
+    "LOKI_PERSISTENCE_MEMORY"          = var.loki_persistence_memory
+    "LOKI_MAX_ENTRIES_LIMIT_PER_QUERY" = var.loki_max_entries_limet_per_query
+    "NAMESPACE"                        = var.namespace
   }
 }
 

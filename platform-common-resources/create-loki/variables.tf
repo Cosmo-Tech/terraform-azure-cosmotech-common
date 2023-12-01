@@ -32,3 +32,8 @@ variable "helm_chart" {
   default = "loki-stack"
 }
 
+variable "loki_max_entries_limet_per_query" {
+  type    = number
+  default = 50000
+}
+

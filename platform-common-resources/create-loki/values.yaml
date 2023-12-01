@@ -9,6 +9,8 @@ loki:
     table_manager:
       retention_deletes_enabled: true
       retention_period: "${LOKI_RETENTION_PERIOD}"
+    limits_config:
+      max_entries_limit_per_query: ${LOKI_MAX_ENTRIES_LIMIT_PER_QUERY}
 grafana:
   enabled: true
   persistence:

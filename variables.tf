@@ -170,12 +170,6 @@ variable "create_dnsrecord" {
   default     = true
 }
 
-variable "create_vnet" {
-  description = "Create the Virtual Network for AKS"
-  type        = bool
-  default     = true
-}
-
 variable "create_secrets" {
   description = "Create secret for application registrtations"
   type        = bool

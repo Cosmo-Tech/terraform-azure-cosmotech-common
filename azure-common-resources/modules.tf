@@ -19,7 +19,6 @@ module "create-platform-prerequisite" {
   dns_zone_name    = var.dns_zone_name
   dns_zone_rg      = var.dns_zone_rg
   dns_record       = var.dns_record
-  create_vnet      = var.create_vnet
   vnet_iprange     = var.vnet_iprange
   api_version_path = var.api_version_path
   customer_name    = var.customer_name
@@ -34,7 +33,6 @@ module "create-network" {
 
   resource_group   = local.resource_group
   vnet_iprange     = var.vnet_iprange
-  create_vnet      = var.create_vnet
   location         = var.location
   customer_name    = var.customer_name
   cost_center      = var.cost_center
@@ -49,16 +47,17 @@ module "create-network" {
 module "create-cluster" {
   source = "./create-cluster"
 
-  location       = var.location
-  resource_group = var.resource_group
-  client_secret  = local.platform_password
-  cluster_name   = var.cluster_name
-  project_stage  = var.project_stage
-  project_name   = var.project_name
-  customer_name  = var.customer_name
-  cost_center    = var.cost_center
-  application_id = local.platform_clientid
-  subnet_id      = local.subnet_id
+  location           = var.location
+  resource_group     = var.resource_group
+  client_secret      = local.platform_password
+  cluster_name       = var.cluster_name
+  project_stage      = var.project_stage
+  project_name       = var.project_name
+  customer_name      = var.customer_name
+  cost_center        = var.cost_center
+  application_id     = local.platform_clientid
+  subnet_id          = module.create-network.out_subnet_id
+  kubernetes_version = var.kubernetes_version
 
   depends_on = [
     module.create-platform-prerequisite, module.create-network

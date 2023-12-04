@@ -100,12 +100,6 @@ variable "resource_group" {
   type        = string
 }
 
-variable "create_vnet" {
-  description = "Create the Virtual Network for AKS"
-  type        = bool
-  default     = true
-}
-
 variable "create_secrets" {
   description = "Create secret for application registrtations"
   type        = bool

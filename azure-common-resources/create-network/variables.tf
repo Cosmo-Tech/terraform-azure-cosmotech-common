@@ -30,12 +30,6 @@ variable "project_name" {
   description = "The project name"
 }
 
-variable "create_vnet" {
-  description = "Create the Virtual Network for AKS"
-  type        = bool
-  default     = true
-}
-
 variable "location" {
   description = "The Azure location"
   default     = "West Europe"

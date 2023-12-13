@@ -90,3 +90,15 @@ variable "create_prometheus_stack" {
   type    = bool
   default = true
 }
+
+variable "opencost_object_id" {
+  type = string
+}
+
+variable "opencost_password" {
+  type = string
+}
+
+variable "azure_offer_id" {
+  type = string
+}

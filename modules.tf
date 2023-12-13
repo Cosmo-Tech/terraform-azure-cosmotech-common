@@ -39,6 +39,9 @@ module "cosmotech-platform" {
   tls_secret_name      = var.tls_secret_name
   namespace            = var.namespace
   monitoring_namespace = var.monitoring_namespace
+  opencost_object_id   = module.cosmotech-prerequisites.out_OpenCostAccess_object_id
+  opencost_password    = module.cosmotech-prerequisites.out_OpenCostAccess_password
+  azure_offer_id       = var.azure_offer_id
   api_dns_name         = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_fqdn : var.dns_record
   resource_group       = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.resource_group
   loadbalancer_ip      = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : var.loadbalancer_ip

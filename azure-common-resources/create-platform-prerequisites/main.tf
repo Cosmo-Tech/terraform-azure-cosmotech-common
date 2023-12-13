@@ -179,3 +179,54 @@ resource "azurerm_dns_a_record" "platform_fqdn" {
   ttl                 = 300
   target_resource_id  = azurerm_public_ip.publicip[0].id
 }
+
+# Opencost
+data "azurerm_subscription" "primary" {
+}
+
+resource "azurerm_role_definition" "opencost" {
+  name        = "OpenCostRole"
+  scope       = data.azurerm_subscription.primary.id
+  description = "Custom role for OpenCost"
+
+  permissions {
+    actions = [
+      "Microsoft.Compute/virtualMachines/vmSizes/read",
+      "Microsoft.Resources/subscriptions/locations/read",
+      "Microsoft.Resources/providers/read",
+      "Microsoft.ContainerService/containerServices/read",
+      "Microsoft.Commerce/RateCard/read"
+    ]
+    not_actions = []
+  }
+
+  assignable_scopes = [
+    data.azurerm_subscription.primary.id,
+  ]
+}
+
+# Service Principal for Opencost
+resource "azuread_application" "OpenCostAccess" {
+  display_name = "OpenCostAccess"
+  owners       = data.azuread_users.owners.object_ids
+}
+
+resource "azuread_service_principal" "OpenCostAccess" {
+  application_id               = azuread_application.OpenCostAccess.application_id
+  app_role_assignment_required = false
+  owners                       = data.azuread_users.owners.object_ids
+}
+
+resource "azurerm_role_assignment" "opencost_custom_role" {
+  scope                = data.azurerm_subscription.primary.id
+  role_definition_name = "OpenCostRole"
+  principal_id         = azuread_service_principal.OpenCostAccess.object_id
+
+  depends_on = [azurerm_role_definition.opencost]
+}
+
+resource "azuread_application_password" "opencost_password" {
+  display_name          = "opencost_secret"
+  application_object_id = azuread_application.OpenCostAccess.object_id
+  end_date_relative     = "4464h"
+}

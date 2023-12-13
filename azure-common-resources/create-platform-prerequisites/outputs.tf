@@ -71,3 +71,12 @@ output "out_platform_resource_group_id" {
 output "out_adt_principal_id" {
   value = azuread_service_principal.network_adt.id
 }
+
+output "out_OpenCostAccess_object_id" {
+  value = azuread_service_principal.OpenCostAccess.object_id
+}
+
+output "out_OpenCostAccess_password" {
+  value     = azuread_application_password.opencost_password.value
+  sensitive = true
+}

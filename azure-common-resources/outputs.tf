@@ -40,3 +40,12 @@ output "out_aks_phoenix_config" {
 output "out_fqdn" {
   value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_fqdn : null
 }
+
+output "out_OpenCostAccess_object_id" {
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_OpenCostAccess_object_id : null
+}
+
+output "out_OpenCostAccess_password" {
+  value     = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_OpenCostAccess_password : null
+  sensitive = true
+}

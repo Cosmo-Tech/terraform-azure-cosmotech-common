@@ -274,6 +274,11 @@ variable "platform_subnet_id" {
   description = "The ID of the existing subnet the AKS must be attached to."
 }
 
+variable "azure_offer_id" {
+  type    = string
+  default = ""
+}
+
 # Backend remote vars
 variable "tf_resource_group_name" {
   type        = string

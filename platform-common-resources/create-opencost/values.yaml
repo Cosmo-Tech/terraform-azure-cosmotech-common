@@ -1,0 +1,66 @@
+opencost:
+  customPricing:
+    enabled: true
+    provider: Azure
+  exporter:
+    extraVolumeMounts:
+      - mountPath: /var/secrets
+        name: service-key-secret
+    defaultClusterId: default
+    extraEnv:
+      EMIT_KSM_V1_METRICS: "false"
+      EMIT_KSM_V1_METRICS_ONLY: "true"
+      LOG_LEVEL: warn #error
+      AZURE_BILLING_ACCOUNT: ${AZURE_BILLING_ID}
+      AZURE_OFFER_ID: ${AZURE_OFFER_ID}
+  prometheus:
+    internal:
+      enabled: true
+      serviceName: kube-prometheus-stack-prometheus
+      port: 9090
+  ui:
+    enabled: true
+  metrics:
+    serviceMonitor:
+      enabled: true
+  tolerations:
+  - key: "vendor"
+    operator: "Equal"
+    value: "cosmotech"
+    effect: "NoSchedule"
+  nodeSelector:
+    "cosmotech.com/tier": "monitoring"  
+extraVolumes:
+  - name: service-key-secret
+    secret:
+      secretName: azure-service-key
+
+# opencost:
+#   customPricing:
+#     # -- Enables custom pricing for on-premise setup.
+#     enabled: true
+#     configmapName: custom-pricing-model
+#     # -- Path for the pricing configuration.
+#     configPath: /tmp/custom-config
+#     # -- Configures the pricing model provided in the values file.
+#     createConfigmap: true
+#     # -- More information about these values here: https://www.opencost.io/docs/configuration/on-prem#custom-pricing-using-the-opencost-helm-chart
+#     costModel:
+#       description: Modified prices based on your internal pricing
+#       CPU: 1.25
+#       spotCPU: 0.006655
+#       RAM: 0.50
+#       spotRAM: 0.000892
+#       GPU: 0.95
+#       storage: 0.25
+#       zoneNetworkEgress: 0.01
+#       regionNetworkEgress: 0.01
+#       internetNetworkEgress: 0.12
+        # "provider": "Azure",
+        # "description": "Azure estimates based on April 2019 advertised prices",
+        # "spotLabel": "kubernetes.azure.com/scalesetpriority",
+        # "spotLabelValue": "spot",
+        # "azureSubscriptionID": "",
+        # "azureClientID": "",
+        # "azureClientSecret": "",
+        # "azureTenantID": ""

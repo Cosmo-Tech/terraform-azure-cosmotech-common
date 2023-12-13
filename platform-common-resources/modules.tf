@@ -33,3 +33,16 @@ module "cert-manager" {
   tls_secret_name      = var.tls_secret_name
   api_dns_name         = var.api_dns_name
 }
+
+module "create-opencost" {
+  source = "./create-opencost"
+
+  subscription_id      = var.subscription_id
+  tenant_id            = var.tenant_id
+  monitoring_namespace = var.monitoring_namespace
+  opencost_object_id   = var.opencost_object_id
+  opencost_password    = var.opencost_password
+  azure_offer_id       = var.azure_offer_id
+
+  depends_on = [module.create-prometheus-stack]
+}

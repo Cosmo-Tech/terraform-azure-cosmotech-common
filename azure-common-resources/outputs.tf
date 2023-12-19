@@ -40,3 +40,19 @@ output "out_aks_phoenix_config" {
 output "out_fqdn" {
   value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_fqdn : null
 }
+
+output "out_aks_cluster_name" {
+  value = module.create-cluster.cluster.name
+}
+
+output "out_platform_vnet_name" {
+  value = module.create-network.out_vnet
+}
+
+output "out_platform_sp_name" {
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_name : null
+}
+
+output "out_platform_public_ip" {
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_public_ip_name: null
+}

@@ -269,11 +269,6 @@ variable "platform_client_secret" {
   description = "The client secret of the existing ADT Platform's app registration"
 }
 
-variable "platform_subnet_id" {
-  type        = string
-  description = "The ID of the existing subnet the AKS must be attached to."
-}
-
 # Backend remote vars
 variable "tf_resource_group_name" {
   type        = string

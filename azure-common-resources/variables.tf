@@ -287,7 +287,3 @@ variable "platform_client_id" {
 variable "platform_client_secret" {
   type = string
 }
-
-variable "platform_subnet_id" {
-  type = string
-}

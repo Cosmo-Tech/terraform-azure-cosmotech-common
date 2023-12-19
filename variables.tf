@@ -60,7 +60,7 @@ variable "ingress_nginx_version" {
 
 variable "kubernetes_version" {
   type    = string
-  default = "1.25.6"
+  default = "1.26.6"
 }
 
 variable "tenant_id" {

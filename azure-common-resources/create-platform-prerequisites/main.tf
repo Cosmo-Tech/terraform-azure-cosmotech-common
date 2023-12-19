@@ -148,7 +148,7 @@ resource "azurerm_role_assignment" "rg_owner" {
 # Public IP
 resource "azurerm_public_ip" "publicip" {
   count               = var.create_publicip ? 1 : 0
-  name                = "CosmoTech${var.customer_name}${var.project_name}${var.project_stage}PublicIP"
+  name                = substr("CosmoTech${var.customer_name}${var.project_name}${var.project_stage}PublicIP", 0, 80)
   resource_group_name = azurerm_resource_group.platform_rg.name
   location            = var.location
   allocation_method   = "Static"

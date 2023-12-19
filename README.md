@@ -38,7 +38,6 @@
 | <a name="input_owner_list"></a> [owner\_list](#input\_owner\_list) | List of mail addresses for App Registration owners | `list(string)` | n/a | yes |
 | <a name="input_platform_client_id"></a> [platform\_client\_id](#input\_platform\_client\_id) | The ID of the existing ADT Platform's app registration | `string` | n/a | yes |
 | <a name="input_platform_client_secret"></a> [platform\_client\_secret](#input\_platform\_client\_secret) | The client secret of the existing ADT Platform's app registration | `string` | n/a | yes |
-| <a name="input_platform_subnet_id"></a> [platform\_subnet\_id](#input\_platform\_subnet\_id) | The ID of the existing subnet the AKS must be attached to. | `string` | n/a | yes |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The project name | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The subscription id | `string` | n/a | yes |
 | <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | The tenant id | `string` | n/a | yes |

@@ -82,4 +82,13 @@
 | <a name="input_tf_storage_account_name"></a> [tf\_storage\_account\_name](#input\_tf\_storage\_account\_name) | Variable to be used with backend remote option :<br>First set necessary vars:<br>- export TF\_VAR\_tf\_storage\_account\_name="some\_value"<br>Then call terraform init:<br>terraform init \<br>    -backend-config "resource\_group\_name=$TF\_VAR\_tf\_resource\_group\_name" \<br>    -backend-config "storage\_account\_name=$TF\_VAR\_tf\_storage\_account\_name" \<br>    -backend-config "container\_name=$TF\_VAR\_tf\_container\_name" \<br>    -backend-config "key=$TF\_VAR\_tf\_blob\_name" \<br>    -backend-config "access\_key=$TF\_VAR\_tf\_access\_key" | `string` | `""` | no |
 | <a name="input_tls_secret_name"></a> [tls\_secret\_name](#input\_tls\_secret\_name) | n/a | `string` | `"letsencrypt-prod"` | no |
 | <a name="input_vnet_iprange"></a> [vnet\_iprange](#input\_vnet\_iprange) | The Virtual Network IP range. Minimum /26 NetMaskLength | `string` | `""` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_out_cluster_name"></a> [out\_cluster\_name](#output\_out\_cluster\_name) | n/a |
+| <a name="output_out_platform_public_ip"></a> [out\_platform\_public\_ip](#output\_out\_platform\_public\_ip) | n/a |
+| <a name="output_out_platform_sp_name"></a> [out\_platform\_sp\_name](#output\_out\_platform\_sp\_name) | n/a |
+| <a name="output_out_vnet_name"></a> [out\_vnet\_name](#output\_out\_vnet\_name) | n/a |
 <!-- END_TF_DOCS -->

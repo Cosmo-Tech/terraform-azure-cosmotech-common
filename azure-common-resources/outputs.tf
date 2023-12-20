@@ -54,5 +54,5 @@ output "out_platform_sp_name" {
 }
 
 output "out_platform_public_ip" {
-  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_public_ip_name: null
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_public_ip_name : null
 }

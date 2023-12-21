@@ -257,16 +257,19 @@ variable "deployment_type" {
 variable "adt_principal_id" {
   type        = string
   description = "The ID of the existing ADT Network's service principal"
+  default     = ""
 }
 
 variable "platform_client_id" {
   type        = string
   description = "The ID of the existing ADT Platform's app registration"
+  default     = ""
 }
 
 variable "platform_client_secret" {
   type        = string
   description = "The client secret of the existing ADT Platform's app registration"
+  default     = ""
 }
 
 # Backend remote vars

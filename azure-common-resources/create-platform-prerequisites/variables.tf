@@ -8,16 +8,6 @@ variable "subscription_id" {
   type        = string
 }
 
-variable "client_id" {
-  description = "The client id"
-  type        = string
-}
-
-variable "client_secret" {
-  description = "The client secret"
-  type        = string
-}
-
 variable "platform_url" {
   description = "The platform url"
   type        = string

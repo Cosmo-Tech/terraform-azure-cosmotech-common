@@ -30,19 +30,6 @@ provider "kubectl" {
   load_config_file = false
 }
 
-# resource "kubernetes_namespace" "main_namespace" {
-#   metadata {
-#     name = var.namespace
-#   }
-# }
-
-# resource "kubernetes_namespace" "monitoring_namespace" {
-#   count = var.create_prometheus_stack ? 1 : 0
-#   metadata {
-#     name = var.monitoring_namespace
-#   }
-# }
-
 resource "random_password" "prom_admin_password" {
   length  = 30
   special = false

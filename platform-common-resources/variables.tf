@@ -12,26 +12,16 @@ variable "subscription_id" {
   description = "The subscription id"
 }
 
-variable "client_id" {
-  type        = string
-  description = "The client id of the app registration used to build this"
-  default     = ""
-}
-
-# variable "platform_sp_client_id" {
+# variable "client_id" {
 #   type        = string
-#   description = "The client_id of the platform's service principal"
+#   description = "The client id of the app registration used to build this"
+#   default     = ""
 # }
 
-variable "client_secret" {
-  type        = string
-  description = "The client secret of the app registration used to build this"
-  default     = ""
-}
-
-# variable "platform_sp_client_secret" {
+# variable "client_secret" {
 #   type        = string
-#   description = "The client_secret of the platform's service principal"
+#   description = "The client secret of the app registration used to build this"
+#   default     = ""
 # }
 
 variable "location" {
@@ -74,14 +64,6 @@ variable "ingress_nginx_version" {
   type    = string
   default = "4.2.5"
 }
-
-# variable "network_adt_clientid" {
-#   type = string
-# }
-
-# variable "network_adt_password" {
-#   type = string
-# }
 
 variable "kube_config" {
 }

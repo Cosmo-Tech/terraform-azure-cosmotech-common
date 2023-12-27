@@ -1,7 +1,5 @@
 module "cosmotech-prerequisites" {
   source                 = "./azure-common-resources"
-  client_id              = var.client_id
-  client_secret          = var.client_secret
   tenant_id              = var.tenant_id
   subscription_id        = var.subscription_id
   platform_url           = var.platform_url
@@ -29,10 +27,10 @@ module "cosmotech-prerequisites" {
 module "cosmotech-platform" {
   source = "./platform-common-resources"
 
-  subscription_id      = var.subscription_id
-  tenant_id            = var.tenant_id
-  client_id            = var.client_id     # Should be discarded
-  client_secret        = var.client_secret # Should be discarded
+  subscription_id = var.subscription_id
+  tenant_id       = var.tenant_id
+  # client_id            = var.client_id     # Should be discarded
+  # client_secret        = var.client_secret # Should be discarded
   cluster_issuer_email = var.cluster_issuer_email
   cluster_issuer_name  = var.cluster_issuer_name
   tls_secret_name      = var.tls_secret_name

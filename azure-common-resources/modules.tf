@@ -4,8 +4,6 @@ module "create-platform-prerequisite" {
   count            = var.deployment_type != "ARM" ? 1 : 0
   tenant_id        = var.tenant_id
   subscription_id  = var.subscription_id
-  client_id        = var.client_id
-  client_secret    = var.client_secret
   platform_url     = var.platform_url
   identifier_uri   = var.identifier_uri
   project_stage    = var.project_stage

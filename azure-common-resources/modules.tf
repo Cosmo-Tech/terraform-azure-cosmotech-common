@@ -63,3 +63,14 @@ module "create-cluster" {
     module.create-platform-prerequisite, module.create-network
   ]
 }
+
+module "create-firewall" {
+  source = "./create-firewall"
+
+  location       = var.location
+  resource_group = var.resource_group
+  subnet_id      = module.create-network.out_subnet_id
+  public_ip_id   = module.create-platform-prerequisite.0.out_public_ip_id
+
+  depends_on = [module.create-platform-prerequisite, module.create-network]
+}

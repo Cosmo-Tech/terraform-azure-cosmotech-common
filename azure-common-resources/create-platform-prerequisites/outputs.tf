@@ -52,6 +52,10 @@ output "out_public_ip_name" {
   value = azurerm_public_ip.publicip[0].name
 }
 
+output "out_public_ip_id" {
+  value = azurerm_public_ip.publicip[0].id
+}
+
 output "out_ip_resource_group" {
   value = azurerm_resource_group.platform_rg.name
 }

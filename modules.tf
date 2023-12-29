@@ -24,6 +24,7 @@ module "cosmotech-prerequisites" {
   platform_client_id     = var.platform_client_id
   platform_client_secret = var.platform_client_secret
   kubernetes_version     = var.kubernetes_version
+  location               = var.location
 }
 
 module "cosmotech-platform" {

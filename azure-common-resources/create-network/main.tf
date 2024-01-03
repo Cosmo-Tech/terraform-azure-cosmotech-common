@@ -12,7 +12,7 @@ locals {
 
 # Virtual Network
 resource "azurerm_virtual_network" "platform_vnet" {
-  name                = "CosmoTech${var.customer_name}${var.project_name}${var.project_stage}VNet"
+  name                = substr("CosmoTech${var.customer_name}${var.project_name}${var.project_stage}VNet", 0, 80)
   location            = var.location
   resource_group_name = var.resource_group
   address_space       = [local.vnet_iprange]

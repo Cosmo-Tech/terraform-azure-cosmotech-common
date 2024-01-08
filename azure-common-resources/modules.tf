@@ -29,8 +29,9 @@ module "create-platform-prerequisite" {
 
 
 module "create-network" {
-  source = "./create-network"
-
+  source           = "./create-network"
+  count            = var.vnet_new == "new" ? 1 : 0
+  vnet_name        = var.vnet_name
   resource_group   = local.resource_group
   vnet_iprange     = var.vnet_iprange
   location         = var.location
@@ -42,6 +43,13 @@ module "create-network" {
   subscription_id  = var.subscription_id
 
   depends_on = [module.create-platform-prerequisite]
+}
+
+module "create-privatedns" {
+  source = "./create-privatedns"
+
+  resource_group = local.resource_group
+  vnet_id        = local.platform_subnet_id
 }
 
 module "create-cluster" {
@@ -56,7 +64,7 @@ module "create-cluster" {
   customer_name      = var.customer_name
   cost_center        = var.cost_center
   application_id     = local.platform_clientid
-  subnet_id          = module.create-network.out_subnet_id
+  subnet_id          = local.platform_subnet_id
   kubernetes_version = var.kubernetes_version
 
   depends_on = [

@@ -14,7 +14,6 @@ module "cosmotech-prerequisites" {
   dns_zone_name          = var.dns_zone_name
   dns_zone_rg            = var.dns_zone_rg
   dns_record             = var.dns_record
-  vnet_iprange           = var.vnet_iprange
   api_version_path       = var.api_version_path
   resource_group         = local.resource_group
   image_path             = var.image_path
@@ -25,6 +24,11 @@ module "cosmotech-prerequisites" {
   platform_client_secret = var.platform_client_secret
   kubernetes_version     = var.kubernetes_version
   location               = var.location
+  vnet_name              = var.vnet_name
+  vnet_new               = var.vnet_new
+  subnet_name            = var.subnet_name
+  vnet_iprange           = var.vnet_iprange
+  subnet_iprange         = var.subnet_iprange
 }
 
 module "cosmotech-platform" {

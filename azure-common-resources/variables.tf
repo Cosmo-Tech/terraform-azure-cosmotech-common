@@ -229,12 +229,6 @@ variable "dns_record" {
   default     = ""
 }
 
-variable "vnet_iprange" {
-  description = "The Virtual Network IP range. Minimum /26 NetMaskLength"
-  type        = string
-  default     = ""
-}
-
 variable "api_version_path" {
   description = "The API version path"
   type        = string
@@ -285,5 +279,34 @@ variable "platform_client_id" {
 }
 
 variable "platform_client_secret" {
+  type = string
+}
+
+variable "vnet_new" {
+  type    = string
+  default = "new"
+}
+
+variable "vnet_name" {
+  type    = string
+  default = ""
+}
+
+variable "subnet_name" {
+  type    = string
+  default = "default"
+}
+
+variable "vnet_iprange" {
+  type    = string
+  default = "10.21.0.0/16"
+}
+
+variable "subnet_iprange" {
+  type    = string
+  default = "10.21.0.0/24"
+}
+
+variable "vnet_resource_group" {
   type = string
 }

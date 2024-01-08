@@ -12,7 +12,7 @@ output "out_public_ip" {
 
 # for test purpose
 output "out_subnet_id" {
-  value = module.create-network.out_subnet_id
+  value = var.vnet_new == "new" ? module.create-network.0.out_subnet_id : null
 }
 
 output "out_public_ip_name" {
@@ -46,7 +46,7 @@ output "out_aks_cluster_name" {
 }
 
 output "out_platform_vnet_name" {
-  value = module.create-network.out_vnet
+  value = var.vnet_name
 }
 
 output "out_platform_sp_name" {

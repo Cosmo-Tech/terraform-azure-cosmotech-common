@@ -90,3 +90,7 @@ variable "create_prometheus_stack" {
   type    = bool
   default = true
 }
+
+variable "publicip_resource_group" {
+  type = string
+}

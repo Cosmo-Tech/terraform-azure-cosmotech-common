@@ -14,7 +14,6 @@ module "cosmotech-prerequisites" {
   dns_zone_name          = var.dns_zone_name
   dns_zone_rg            = var.dns_zone_rg
   dns_record             = var.dns_record
-  vnet_iprange           = var.vnet_iprange
   api_version_path       = var.api_version_path
   resource_group         = local.resource_group
   image_path             = var.image_path
@@ -25,22 +24,30 @@ module "cosmotech-prerequisites" {
   platform_client_secret = var.platform_client_secret
   kubernetes_version     = var.kubernetes_version
   location               = var.location
+  vnet_name              = var.vnet_name
+  vnet_new               = var.vnet_new
+  subnet_name            = var.subnet_name
+  vnet_iprange           = var.vnet_iprange
+  subnet_iprange         = var.subnet_iprange
+  vnet_resource_group    = var.vnet_resource_group
 }
 
 module "cosmotech-platform" {
   source = "./platform-common-resources"
 
-  subscription_id      = var.subscription_id
-  tenant_id            = var.tenant_id
-  client_id            = var.client_id     # Should be discarded
-  client_secret        = var.client_secret # Should be discarded
-  cluster_issuer_email = var.cluster_issuer_email
-  cluster_issuer_name  = var.cluster_issuer_name
-  tls_secret_name      = var.tls_secret_name
-  namespace            = var.namespace
-  monitoring_namespace = var.monitoring_namespace
-  api_dns_name         = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_fqdn : "${var.dns_record}.${var.dns_zone_name}"
-  resource_group       = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.resource_group
-  loadbalancer_ip      = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : var.loadbalancer_ip
-  kube_config          = module.cosmotech-prerequisites.out_aks_phoenix_config
+  subscription_id         = var.subscription_id
+  tenant_id               = var.tenant_id
+  client_id               = var.client_id     # Should be discarded
+  client_secret           = var.client_secret # Should be discarded
+  cluster_issuer_email    = var.cluster_issuer_email
+  cluster_issuer_name     = var.cluster_issuer_name
+  tls_secret_name         = var.tls_secret_name
+  namespace               = var.namespace
+  monitoring_namespace    = var.monitoring_namespace
+  publicip_resource_group = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.publicip_resource_group
+  api_dns_name            = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_fqdn : var.fqdn
+  resource_group          = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.resource_group
+  loadbalancer_ip         = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : var.loadbalancer_ip
+  kube_config             = module.cosmotech-prerequisites.out_aks_phoenix_config
+  depends_on = [ module.cosmotech-prerequisites ]
 }

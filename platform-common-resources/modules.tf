@@ -1,14 +1,14 @@
 module "create-ingress-nginx" {
   source = "./create-ingress-nginx"
 
-  monitoring_namespace  = var.monitoring_namespace
-  ingress_nginx_version = var.ingress_nginx_version
-  loadbalancer_ip       = var.loadbalancer_ip
-  tls_secret_name       = var.tls_secret_name
-  resource_group        = var.resource_group
+  monitoring_namespace    = var.monitoring_namespace
+  ingress_nginx_version   = var.ingress_nginx_version
+  loadbalancer_ip         = var.loadbalancer_ip
+  tls_secret_name         = var.tls_secret_name
+  publicip_resource_group = var.publicip_resource_group
 
   depends_on = [
-    module.create-prometheus-stack
+    module.create-prometheus-stack, module.cert-manager
   ]
 }
 

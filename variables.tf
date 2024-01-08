@@ -357,3 +357,32 @@ terraform init \
     -backend-config "access_key=$TF_VAR_tf_access_key"
 EOT
 }
+
+variable "vnet_new" {
+  type = string
+}
+
+variable "vnet_name" {
+  type = string
+}
+
+variable "subnet_name" {
+  type = string
+}
+
+variable "subnet_iprange" {
+  type    = string
+  default = "10.21.0.0/24"
+}
+
+variable "vnet_resource_group" {
+  type = string
+}
+
+variable "publicip_resource_group" {
+  type = string
+}
+
+variable "fqdn" {
+  type = string
+}

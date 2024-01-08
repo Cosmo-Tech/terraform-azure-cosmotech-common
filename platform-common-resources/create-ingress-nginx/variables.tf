@@ -31,6 +31,6 @@ variable "tls_secret_name" {
   type = string
 }
 
-variable "resource_group" {
+variable "publicip_resource_group" {
   type = string
 }

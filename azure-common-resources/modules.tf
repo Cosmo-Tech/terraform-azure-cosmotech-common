@@ -49,8 +49,9 @@ module "create-network" {
 module "create-privatedns" {
   source = "./create-privatedns"
 
-  resource_group = local.resource_group
-  vnet_id        = local.platform_vnet_id
+  resource_group        = local.resource_group
+  vnet_id               = local.platform_vnet_id
+  private_dns_name_blob = var.private_dns_name_blob
 }
 
 module "create-cluster" {

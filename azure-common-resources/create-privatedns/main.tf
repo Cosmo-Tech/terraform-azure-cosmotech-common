@@ -1,5 +1,5 @@
 resource "azurerm_private_dns_zone" "private_dns" {
-  name                = "privatelink.blob.core.windows.net"
+  name                = var.private_dns_name_blob
   resource_group_name = var.resource_group
 }
 

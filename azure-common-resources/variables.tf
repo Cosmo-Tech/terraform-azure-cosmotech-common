@@ -310,3 +310,7 @@ variable "subnet_iprange" {
 variable "vnet_resource_group" {
   type = string
 }
+
+variable "private_dns_name_blob" {
+  type = string
+}

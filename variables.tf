@@ -386,3 +386,8 @@ variable "publicip_resource_group" {
 variable "fqdn" {
   type = string
 }
+
+variable "private_dns_name_blob" {
+  type = string
+  default = "privatelink.blob.core.windows.net"
+}

@@ -5,3 +5,7 @@ variable "resource_group" {
 variable "vnet_id" {
   type = string
 }
+
+variable "private_dns_name_blob" {
+  type = string
+}

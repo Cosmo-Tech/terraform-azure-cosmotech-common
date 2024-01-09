@@ -30,6 +30,7 @@ module "cosmotech-prerequisites" {
   vnet_iprange           = var.vnet_iprange
   subnet_iprange         = var.subnet_iprange
   vnet_resource_group    = var.vnet_resource_group
+  private_dns_name_blob  = var.private_dns_name_blob
 }
 
 module "cosmotech-platform" {
@@ -49,5 +50,5 @@ module "cosmotech-platform" {
   resource_group          = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.resource_group
   loadbalancer_ip         = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : var.loadbalancer_ip
   kube_config             = module.cosmotech-prerequisites.out_aks_phoenix_config
-  depends_on = [ module.cosmotech-prerequisites ]
+  depends_on              = [module.cosmotech-prerequisites]
 }

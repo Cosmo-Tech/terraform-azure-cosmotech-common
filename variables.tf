@@ -191,11 +191,6 @@ variable "dns_zone_rg" {
 variable "dns_record" {
   description = "The DNS zone name to create platform subdomain. Example: myplatform"
   type        = string
-}
-
-variable "vnet_iprange" {
-  description = "The Virtual Network IP range. Minimum /26 NetMaskLength"
-  type        = string
   default     = ""
 }
 
@@ -370,11 +365,6 @@ variable "subnet_name" {
   type = string
 }
 
-variable "subnet_iprange" {
-  type    = string
-  default = "10.21.0.0/24"
-}
-
 variable "vnet_resource_group" {
   type = string
 }
@@ -388,6 +378,77 @@ variable "fqdn" {
 }
 
 variable "private_dns_name_blob" {
-  type = string
+  type    = string
   default = "privatelink.blob.core.windows.net"
+}
+
+# aks variables
+variable "kubernetes_max_db_instances" {
+  type    = number
+  default = 5
+}
+variable "kubernetes_min_db_instances" {
+  type    = number
+  default = 2
+}
+variable "kubernetes_max_services_instances" {
+  type    = number
+  default = 5
+}
+variable "kubernetes_max_monitoring_instances" {
+  type    = number
+  default = 10
+}
+variable "kubernetes_max_highmemory_compute_instances" {
+  type    = number
+  default = 3
+}
+variable "kubernetes_max_highcpu_compute_instances" {
+  type    = number
+  default = 2
+}
+variable "kubernetes_max_basic_compute_instances" {
+  type    = number
+  default = 5
+}
+variable "kubernetes_db_type" {
+  type    = string
+  default = "Standard_D2ads_v5"
+}
+variable "kubernetes_services_type" {
+  type    = string
+  default = "Standard_B4ms"
+}
+variable "kubernetes_monitoring_type" {
+  type    = string
+  default = "Standard_D2ads_v5"
+}
+variable "kubernetes_highmemory_compute_type" {
+  type    = string
+  default = "Standard_E16ads_v5"
+}
+variable "kubernetes_highcpu_compute_type" {
+  type    = string
+  default = "Standard_F72s_v2"
+}
+variable "kubernetes_basic_compute_type" {
+  type    = string
+  default = "Standard_F4s_v2"
+}
+variable "kubernetes_nodepool_system_type" {
+  type    = string
+  default = "Standard_A2_v2"
+}
+variable "kubernetes_network_plugin" {
+  type    = string
+  default = "azure"
+}
+variable "virtual_network_address_prefix" {
+  description = "The Virtual Network IP range. Minimum /26 NetMaskLength"
+  type = string
+  default = "10.21.0.0/16"
+}
+variable "virtual_network_subnet_address_prefix" {
+  type    = string
+  default = "10.21.0.0/24"
 }

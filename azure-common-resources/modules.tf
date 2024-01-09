@@ -57,17 +57,32 @@ module "create-privatedns" {
 module "create-cluster" {
   source = "./create-cluster"
 
-  location           = var.location
-  resource_group     = var.resource_group
-  client_secret      = local.platform_password
-  cluster_name       = var.cluster_name
-  project_stage      = var.project_stage
-  project_name       = var.project_name
-  customer_name      = var.customer_name
-  cost_center        = var.cost_center
-  application_id     = local.platform_clientid
-  subnet_id          = local.platform_subnet_id
-  kubernetes_version = var.kubernetes_version
+  location                                    = var.location
+  resource_group                              = var.resource_group
+  client_secret                               = local.platform_password
+  cluster_name                                = var.cluster_name
+  project_stage                               = var.project_stage
+  project_name                                = var.project_name
+  customer_name                               = var.customer_name
+  cost_center                                 = var.cost_center
+  application_id                              = local.platform_clientid
+  subnet_id                                   = local.platform_subnet_id
+  kubernetes_version                          = var.kubernetes_version
+  kubernetes_max_db_instances                 = var.kubernetes_max_db_instances
+  kubernetes_min_db_instances                 = var.kubernetes_min_db_instances
+  kubernetes_max_services_instances           = var.kubernetes_max_services_instances
+  kubernetes_max_monitoring_instances         = var.kubernetes_max_monitoring_instances
+  kubernetes_max_highmemory_compute_instances = var.kubernetes_max_highmemory_compute_instances
+  kubernetes_max_highcpu_compute_instances    = var.kubernetes_max_highcpu_compute_instances
+  kubernetes_max_basic_compute_instances      = var.kubernetes_max_basic_compute_instances
+  kubernetes_db_type                          = var.kubernetes_db_type
+  kubernetes_services_type                    = var.kubernetes_services_type
+  kubernetes_monitoring_type                  = var.kubernetes_monitoring_type
+  kubernetes_highmemory_compute_type          = var.kubernetes_highmemory_compute_type
+  kubernetes_highcpu_compute_type             = var.kubernetes_highcpu_compute_type
+  kubernetes_basic_compute_type               = var.kubernetes_basic_compute_type
+  kubernetes_nodepool_system_type             = var.kubernetes_nodepool_system_type
+  kubernetes_network_plugin                   = var.kubernetes_network_plugin
 
   depends_on = [
     module.create-platform-prerequisite, module.create-network, module.create-privatedns

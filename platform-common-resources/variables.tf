@@ -34,11 +34,6 @@ variable "client_secret" {
 #   description = "The client_secret of the platform's service principal"
 # }
 
-variable "location" {
-  type    = string
-  default = ""
-}
-
 variable "namespace" {
   type = string
 }

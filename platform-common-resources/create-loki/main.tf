@@ -18,10 +18,10 @@ locals {
 }
 
 resource "helm_release" "loki" {
-  name = var.loki_release_name
+  name       = var.loki_release_name
   repository = var.helm_repo_url
-  chart = var.helm_chart
-  namespace = var.monitoring_namespace
+  chart      = var.helm_chart
+  namespace  = var.monitoring_namespace
   values = [
     templatefile("${path.module}/values.yaml", local.values_loki)
   ]

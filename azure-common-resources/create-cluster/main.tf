@@ -20,7 +20,7 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
   automatic_channel_upgrade         = "patch"
   sku_tier                          = "Standard"
   tags                              = local.tags
-  
+
   network_profile {
     load_balancer_sku = "standard"
     outbound_type     = "loadBalancer"

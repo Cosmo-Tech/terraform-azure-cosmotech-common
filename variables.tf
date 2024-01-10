@@ -158,16 +158,10 @@ variable "create_webapp" {
   default     = false
 }
 
-variable "create_publicip" {
-  description = "Create the public IP for the platform"
-  type        = bool
-  default     = true
-}
-
 variable "create_dnsrecord" {
   description = "Create the DNS record"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "create_secrets" {
@@ -185,7 +179,6 @@ variable "dns_zone_name" {
 variable "dns_zone_rg" {
   description = "The DNS zone resource group"
   type        = string
-  default     = "phoenix"
 }
 
 variable "dns_record" {
@@ -445,10 +438,13 @@ variable "kubernetes_network_plugin" {
 }
 variable "virtual_network_address_prefix" {
   description = "The Virtual Network IP range. Minimum /26 NetMaskLength"
-  type = string
-  default = "10.21.0.0/16"
+  type        = string
+  default     = "10.21.0.0/16"
 }
 variable "virtual_network_subnet_address_prefix" {
   type    = string
   default = "10.21.0.0/24"
+}
+variable "publicip_new_or_existing_or_none" {
+  type = string
 }

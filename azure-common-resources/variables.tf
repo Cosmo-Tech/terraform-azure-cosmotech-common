@@ -202,13 +202,11 @@ variable "resource_group" {
 variable "create_publicip" {
   description = "Create the public IP for the platform"
   type        = bool
-  default     = true
 }
 
 variable "create_dnsrecord" {
   description = "Create the DNS record"
   type        = bool
-  default     = true
 }
 
 variable "dns_zone_name" {
@@ -306,7 +304,9 @@ variable "subnet_iprange" {
   type    = string
   default = "10.21.0.0/24"
 }
-
+variable "publicip_resource_group" {
+  type = string
+}
 variable "vnet_resource_group" {
   type = string
 }

@@ -14,8 +14,6 @@ module "create-platform-prerequisite" {
   audience         = var.audience
   location         = var.location
   resource_group   = var.resource_group
-  create_publicip  = var.create_publicip
-  create_dnsrecord = var.create_dnsrecord
   dns_zone_name    = var.dns_zone_name
   dns_zone_rg      = var.dns_zone_rg
   dns_record       = var.dns_record
@@ -26,7 +24,6 @@ module "create-platform-prerequisite" {
   image_path       = var.image_path
   cost_center      = var.cost_center
 }
-
 
 module "create-network" {
   source              = "./create-network"
@@ -44,6 +41,25 @@ module "create-network" {
   vnet_resource_group = var.vnet_resource_group
 
   depends_on = [module.create-platform-prerequisite]
+}
+
+module "create-publicip" {
+  source = "./create-publicip"
+
+  count                   = var.create_publicip ? 1 : 0
+  cost_center             = var.cost_center
+  customer_name           = var.customer_name
+  project_name            = var.project_name
+  location                = var.location
+  project_stage           = var.project_stage
+  create_publicip         = var.create_publicip
+  create_dnsrecord        = var.create_dnsrecord
+  dns_record              = var.dns_record
+  dns_zone_name           = var.dns_zone_name
+  dns_zone_rg             = var.dns_zone_rg
+  publicip_resource_group = var.publicip_resource_group
+  networkadt_sp_object_id = local.adt_principal_id
+  platform_client_id      = var.platform_client_id
 }
 
 module "create-privatedns" {

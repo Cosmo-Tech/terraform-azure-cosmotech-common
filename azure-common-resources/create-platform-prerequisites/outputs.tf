@@ -44,22 +44,6 @@ output "out_identifier_uri" {
   value = var.identifier_uri
 }
 
-output "out_public_ip" {
-  value = azurerm_public_ip.publicip[0].ip_address
-}
-
-output "out_public_ip_name" {
-  value = azurerm_public_ip.publicip[0].name
-}
-
-output "out_ip_resource_group" {
-  value = azurerm_resource_group.platform_rg.name
-}
-
-output "out_fqdn" {
-  value = var.create_dnsrecord ? "${azurerm_dns_a_record.platform_fqdn[0].name}.${var.dns_zone_name}" : null
-}
-
 output "out_vnet_resource_group" {
   value = azurerm_resource_group.platform_rg.name
 }

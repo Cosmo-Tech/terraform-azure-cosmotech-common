@@ -11,6 +11,9 @@ module "cosmotech-prerequisites" {
   project_name                                = var.project_name
   owner_list                                  = var.owner_list
   audience                                    = var.audience
+  publicip_resource_group                     = var.publicip_resource_group
+  create_publicip                             = var.publicip_new_or_existing_or_none == "new" ? true : false
+  create_dnsrecord                            = var.create_dnsrecord
   dns_zone_name                               = var.dns_zone_name
   dns_zone_rg                                 = var.dns_zone_rg
   dns_record                                  = var.dns_record

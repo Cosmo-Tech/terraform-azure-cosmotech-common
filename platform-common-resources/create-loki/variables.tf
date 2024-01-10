@@ -1,10 +1,10 @@
 variable "monitoring_namespace" {
-  type = string
+  type    = string
   default = "cosmotech-monitoring"
 }
 
 variable "namespace" {
-  type = string
+  type    = string
   default = "phoenix"
 }
 

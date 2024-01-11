@@ -31,9 +31,6 @@ variable "cost_center" {
 variable "publicip_resource_group" {
   type = string
 }
-variable "networkadt_sp_object_id" {
-  type = string
-}
-variable "platform_client_id" {
+variable "network_sp_objectid" {
   type = string
 }

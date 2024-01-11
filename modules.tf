@@ -1,30 +1,35 @@
 module "cosmotech-prerequisites" {
-  source                                      = "./azure-common-resources"
-  client_id                                   = var.client_id
-  client_secret                               = var.client_secret
-  tenant_id                                   = var.tenant_id
-  subscription_id                             = var.subscription_id
-  platform_url                                = var.platform_url
-  identifier_uri                              = var.identifier_uri
-  project_stage                               = var.project_stage
-  customer_name                               = var.customer_name
-  project_name                                = var.project_name
-  owner_list                                  = var.owner_list
-  audience                                    = var.audience
-  publicip_resource_group                     = var.publicip_resource_group
-  create_publicip                             = var.publicip_new_or_existing_or_none == "new" ? true : false
-  create_dnsrecord                            = var.create_dnsrecord
-  dns_zone_name                               = var.dns_zone_name
-  dns_zone_rg                                 = var.dns_zone_rg
-  dns_record                                  = var.dns_record
-  api_version_path                            = var.api_version_path
-  resource_group                              = local.resource_group
-  image_path                                  = var.image_path
-  cluster_name                                = local.cluster_name
-  deployment_type                             = var.deployment_type
-  adt_principal_id                            = var.adt_principal_id
-  platform_client_id                          = var.platform_client_id
-  platform_client_secret                      = var.platform_client_secret
+  source = "./azure-common-resources"
+
+  client_id       = var.client_id
+  client_secret   = var.client_secret
+  tenant_id       = var.tenant_id
+  subscription_id = var.subscription_id
+
+  platform_url            = var.platform_url
+  identifier_uri          = var.identifier_uri
+  project_stage           = var.project_stage
+  customer_name           = var.customer_name
+  project_name            = var.project_name
+  owner_list              = var.owner_list
+  audience                = var.audience
+  publicip_resource_group = var.publicip_resource_group
+  create_publicip         = var.publicip_new_or_existing_or_none == "new" ? true : false
+  create_dnsrecord        = var.create_dnsrecord
+  dns_zone_name           = var.dns_zone_name
+  dns_zone_rg             = var.dns_zone_rg
+  dns_record              = var.dns_record
+  api_version_path        = var.api_version_path
+  resource_group          = local.resource_group
+  image_path              = var.image_path
+  cluster_name            = local.cluster_name
+  deployment_type         = var.deployment_type
+
+  # network common
+  network_client_id     = var.network_client_id
+  network_client_secret = var.network_client_secret
+  network_sp_object_id  = var.network_sp_object_id
+
   kubernetes_version                          = var.kubernetes_version
   location                                    = var.location
   vnet_name                                   = var.vnet_name
@@ -34,6 +39,11 @@ module "cosmotech-prerequisites" {
   subnet_iprange                              = var.virtual_network_subnet_address_prefix
   vnet_resource_group                         = var.vnet_resource_group
   private_dns_name_blob                       = var.private_dns_name_blob
+  private_dns_name_queue                      = var.private_dns_name_queue
+  private_dns_name_table                      = var.private_dns_name_table
+  private_dns_name_kusto                      = var.private_dns_name_kusto
+  private_dns_name_adt                        = var.private_dns_name_adt
+  private_dns_name_eventhub                   = var.private_dns_name_eventhub
   kubernetes_max_db_instances                 = var.kubernetes_max_db_instances
   kubernetes_min_db_instances                 = var.kubernetes_min_db_instances
   kubernetes_max_services_instances           = var.kubernetes_max_services_instances

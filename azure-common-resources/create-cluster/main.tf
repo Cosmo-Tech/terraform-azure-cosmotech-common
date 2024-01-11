@@ -31,8 +31,8 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
   http_application_routing_enabled = false
 
   service_principal {
-    client_id     = var.application_id
-    client_secret = var.client_secret
+    client_id     = var.network_clientid
+    client_secret = var.network_clientsecret
   }
 
   default_node_pool {

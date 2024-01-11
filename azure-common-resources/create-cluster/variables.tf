@@ -2,15 +2,15 @@ variable "location" {
   type = string
 }
 
-variable "application_id" {
+variable "network_clientid" {
+  type = string
+}
+
+variable "network_clientsecret" {
   type = string
 }
 
 variable "resource_group" {
-  type = string
-}
-
-variable "client_secret" {
   type = string
 }
 

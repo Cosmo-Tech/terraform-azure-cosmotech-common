@@ -264,19 +264,19 @@ variable "tenant_name" {
   default = "phoenix"
 }
 
+variable "network_client_id" {
+  type = string
+}
+
+variable "network_client_secret" {
+  type = string
+}
+variable "network_sp_object_id" {
+  type        = string
+  description = "The ID of the existing Network's service principal"
+}
+
 variable "deployment_type" {
-  type = string
-}
-
-variable "adt_principal_id" {
-  type = string
-}
-
-variable "platform_client_id" {
-  type = string
-}
-
-variable "platform_client_secret" {
   type = string
 }
 
@@ -311,11 +311,6 @@ variable "vnet_resource_group" {
   type = string
 }
 
-variable "private_dns_name_blob" {
-  type = string
-}
-
-# aks variables
 variable "kubernetes_max_db_instances" {
   type = number
 }
@@ -359,5 +354,23 @@ variable "kubernetes_nodepool_system_type" {
   type = string
 }
 variable "kubernetes_network_plugin" {
+  type = string
+}
+variable "private_dns_name_blob" {
+  type = string
+}
+variable "private_dns_name_queue" {
+  type = string
+}
+variable "private_dns_name_table" {
+  type = string
+}
+variable "private_dns_name_kusto" {
+  type = string
+}
+variable "private_dns_name_adt" {
+  type = string
+}
+variable "private_dns_name_eventhub" {
   type = string
 }

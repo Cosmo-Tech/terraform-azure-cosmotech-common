@@ -7,6 +7,10 @@ variable "vnet_iprange" {
   default = "10.21.0.0/16"
 }
 
+variable "network_sp_objectid" {
+  type = string
+}
+
 variable "project_stage" {
   description = "The platform stage"
   validation {
@@ -34,10 +38,6 @@ variable "project_name" {
 variable "location" {
   description = "The Azure location"
   default     = "West Europe"
-}
-
-variable "adt_principal_id" {
-  type = string
 }
 
 variable "cost_center" {

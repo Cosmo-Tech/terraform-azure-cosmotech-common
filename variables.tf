@@ -184,7 +184,6 @@ variable "dns_zone_rg" {
 variable "dns_record" {
   description = "The DNS zone name to create platform subdomain. Example: myplatform"
   type        = string
-  default     = ""
 }
 
 variable "api_version_path" {
@@ -196,16 +195,6 @@ variable "api_version_path" {
 variable "image_path" {
   type    = string
   default = "./cosmotech.png"
-}
-
-variable "network_adt_clientid" {
-  type    = string
-  default = ""
-}
-
-variable "network_adt_password" {
-  type    = string
-  default = ""
 }
 
 variable "create_cosmosdb" {
@@ -241,23 +230,20 @@ variable "deployment_type" {
   description = "Represents the kind of deployment. Currently two modes: ARM or Terraform"
 }
 
+variable "network_client_id" {
+  type    = string
+  default = ""
+}
+
+variable "network_client_secret" {
+  type    = string
+  default = ""
+}
+
 # ARM deployment mode
-variable "adt_principal_id" {
+variable "network_sp_object_id" {
   type        = string
-  description = "The ID of the existing ADT Network's service principal"
-  default     = ""
-}
-
-variable "platform_client_id" {
-  type        = string
-  description = "The ID of the existing ADT Platform's app registration"
-  default     = ""
-}
-
-variable "platform_client_secret" {
-  type        = string
-  description = "The client secret of the existing ADT Platform's app registration"
-  default     = ""
+  description = "The ID of the existing Network's service principal"
 }
 
 # Backend remote vars
@@ -370,12 +356,6 @@ variable "fqdn" {
   type = string
 }
 
-variable "private_dns_name_blob" {
-  type    = string
-  default = "privatelink.blob.core.windows.net"
-}
-
-# aks variables
 variable "kubernetes_max_db_instances" {
   type    = number
   default = 5
@@ -447,4 +427,27 @@ variable "virtual_network_subnet_address_prefix" {
 }
 variable "publicip_new_or_existing_or_none" {
   type = string
+}
+variable "private_dns_name_blob" {
+  type    = string
+  default = "privatelink.blob.core.windows.net"
+}
+variable "private_dns_name_queue" {
+  type = string
+  default = "privatelink.queue.core.windows.net"
+}
+variable "private_dns_name_table" {
+  type = string
+  default = "privatelink.table.core.windows.net"
+}
+variable "private_dns_name_eventhub" {
+  type = string
+  default = "privatelink.servicebus.windows.net"
+}
+variable "private_dns_name_kusto" {
+  type = string
+}
+variable "private_dns_name_adt" {
+  type = string
+  default = "privatelink.digitaltwins.azure.net"
 }

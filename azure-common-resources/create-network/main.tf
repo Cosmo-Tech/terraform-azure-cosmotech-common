@@ -28,5 +28,5 @@ resource "azurerm_virtual_network" "platform_vnet" {
 resource "azurerm_role_assignment" "vnet_network_contributor" {
   scope                = azurerm_virtual_network.platform_vnet.id
   role_definition_name = "Network Contributor"
-  principal_id         = var.adt_principal_id
+  principal_id         = var.network_sp_objectid
 }

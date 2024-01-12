@@ -91,7 +91,6 @@ module "create-privatedns" {
 
   private_dns_name_blob     = var.private_dns_name_blob
   private_dns_name_adt      = var.private_dns_name_adt
-  private_dns_name_kusto    = var.private_dns_name_kusto
   private_dns_name_queue    = var.private_dns_name_queue
   private_dns_name_table    = var.private_dns_name_table
   private_dns_name_eventhub = var.private_dns_name_eventhub

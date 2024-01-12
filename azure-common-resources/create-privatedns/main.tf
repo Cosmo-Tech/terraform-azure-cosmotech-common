@@ -34,18 +34,6 @@ resource "azurerm_private_dns_zone_virtual_network_link" "private_link_table" {
   virtual_network_id    = var.vnet_id
 }
 
-resource "azurerm_private_dns_zone" "private_dns_kusto" {
-  name                = var.private_dns_name_kusto
-  resource_group_name = var.resource_group
-}
-
-resource "azurerm_private_dns_zone_virtual_network_link" "private_link_kusto" {
-  name                  = "test-kusto"
-  resource_group_name   = var.resource_group
-  private_dns_zone_name = azurerm_private_dns_zone.private_dns_kusto.name
-  virtual_network_id    = var.vnet_id
-}
-
 resource "azurerm_private_dns_zone" "private_dns_eventhub" {
   name                = var.private_dns_name_eventhub
   resource_group_name = var.resource_group

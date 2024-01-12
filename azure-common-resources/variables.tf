@@ -1,11 +1,3 @@
-variable "tenant_id" {
-  description = "The tenant id"
-}
-
-variable "subscription_id" {
-  description = "The subscription id"
-}
-
 variable "client_id" {
   description = "The client id"
   default     = ""
@@ -16,6 +8,38 @@ variable "client_secret" {
   default     = ""
 }
 
+variable "subscription_id" {
+  description = "The subscription id"
+}
+
+variable "tenant_id" {
+  description = "The tenant id"
+}
+
+variable "location" {
+  description = "The Azure location"
+  default     = "West Europe"
+}
+
+variable "resource_group" {
+  description = "Resource group to create which will contain created Azure resources"
+  type        = string
+}
+
+variable "cluster_name" {
+  type    = string
+  default = ""
+}
+
+variable "deployment_type" {
+  type = string
+}
+
+variable "image_path" {
+  type    = string
+  default = "./cosmotech.png"
+}
+
 variable "platform_url" {
   description = "The platform url"
   default     = ""
@@ -24,35 +48,6 @@ variable "platform_url" {
 variable "identifier_uri" {
   description = "The platform identifier uri"
   default     = ""
-}
-
-variable "project_stage" {
-  description = "The platform stage"
-  validation {
-    condition = contains([
-      "OnBoarding",
-      "Dev",
-      "QA",
-      "IA",
-      "EA",
-      "Demo",
-      "Prod"
-    ], var.project_stage)
-    error_message = "Stage must be either: OnBoarding, Dev, QA, IA, EA, Demo, Prod."
-  }
-}
-
-variable "cluster_name" {
-  type    = string
-  default = ""
-}
-
-variable "customer_name" {
-  description = "The customer name"
-}
-
-variable "project_name" {
-  description = "The project name"
 }
 
 variable "owner_list" {
@@ -71,6 +66,191 @@ variable "audience" {
   }
   default = "AzureADMultipleOrgs"
 }
+
+variable "api_version_path" {
+  description = "The API version path"
+  type        = string
+  default     = "/v2/"
+}
+
+variable "create_publicip" {
+  description = "Create the public IP for the platform"
+  type        = bool
+}
+
+variable "create_dnsrecord" {
+  description = "Create the DNS record"
+  type        = bool
+}
+
+variable "publicip_resource_group" {
+  type = string
+}
+
+variable "project_stage" {
+  description = "The platform stage"
+  validation {
+    condition = contains([
+      "OnBoarding",
+      "Dev",
+      "QA",
+      "IA",
+      "EA",
+      "Demo",
+      "Prod"
+    ], var.project_stage)
+    error_message = "Stage must be either: OnBoarding, Dev, QA, IA, EA, Demo, Prod."
+  }
+}
+
+variable "project_name" {
+  description = "The project name"
+}
+
+variable "customer_name" {
+  description = "The customer name"
+}
+
+variable "dns_record" {
+  description = "The DNS zone name to create platform subdomain. Example: myplatform"
+  type        = string
+  default     = ""
+}
+
+variable "dns_zone_name" {
+  description = "The DNS zone name to create platform subdomain. Example: api.cosmotech.com"
+  type        = string
+  default     = "api.cosmotech.com"
+}
+
+variable "dns_zone_rg" {
+  description = "The DNS zone resource group"
+  type        = string
+  default     = "phoenix"
+}
+
+variable "network_client_id" {
+  type = string
+}
+
+variable "network_client_secret" {
+  type = string
+}
+
+variable "network_sp_object_id" {
+  type        = string
+  description = "The ID of the existing Network's service principal"
+}
+
+variable "vnet_name" {
+  type    = string
+}
+
+variable "vnet_new" {
+  type    = string
+}
+
+variable "subnet_name" {
+  type    = string
+}
+
+variable "vnet_iprange" {
+  type    = string
+}
+
+variable "subnet_iprange" {
+  type    = string
+}
+
+variable "vnet_resource_group" {
+  type = string
+}
+
+variable "private_dns_name_blob" {
+  type = string
+}
+
+variable "private_dns_name_queue" {
+  type = string
+}
+
+variable "private_dns_name_table" {
+  type = string
+}
+
+variable "private_dns_name_adt" {
+  type = string
+}
+
+variable "private_dns_name_eventhub" {
+  type = string
+}
+
+variable "kubernetes_version" {
+  type    = string
+  default = "1.25.6"
+}
+
+variable "kubernetes_max_db_instances" {
+  type = number
+}
+
+variable "kubernetes_min_db_instances" {
+  type = number
+}
+
+variable "kubernetes_max_services_instances" {
+  type = number
+}
+
+variable "kubernetes_max_monitoring_instances" {
+  type = number
+}
+
+variable "kubernetes_max_highmemory_compute_instances" {
+  type = number
+}
+
+variable "kubernetes_max_highcpu_compute_instances" {
+  type = number
+}
+
+variable "kubernetes_max_basic_compute_instances" {
+  type = number
+}
+
+variable "kubernetes_db_type" {
+  type = string
+}
+
+variable "kubernetes_services_type" {
+  type = string
+}
+
+variable "kubernetes_monitoring_type" {
+  type = string
+}
+
+variable "kubernetes_highmemory_compute_type" {
+  type = string
+}
+
+variable "kubernetes_highcpu_compute_type" {
+  type = string
+}
+
+variable "kubernetes_basic_compute_type" {
+  type = string
+}
+
+variable "kubernetes_nodepool_system_type" {
+  type = string
+}
+
+variable "kubernetes_network_plugin" {
+  type = string
+}
+
 
 variable "user_app_role" {
   type = list(object({
@@ -189,64 +369,24 @@ variable "user_app_role" {
   ]
 }
 
-variable "location" {
-  description = "The Azure location"
-  default     = "West Europe"
-}
 
-variable "resource_group" {
-  description = "Resource group to create which will contain created Azure resources"
-  type        = string
-}
 
-variable "create_publicip" {
-  description = "Create the public IP for the platform"
-  type        = bool
-}
 
-variable "create_dnsrecord" {
-  description = "Create the DNS record"
-  type        = bool
-}
 
-variable "dns_zone_name" {
-  description = "The DNS zone name to create platform subdomain. Example: api.cosmotech.com"
-  type        = string
-  default     = "api.cosmotech.com"
-}
 
-variable "dns_zone_rg" {
-  description = "The DNS zone resource group"
-  type        = string
-  default     = "phoenix"
-}
 
-variable "dns_record" {
-  description = "The DNS zone name to create platform subdomain. Example: myplatform"
-  type        = string
-  default     = ""
-}
 
-variable "api_version_path" {
-  description = "The API version path"
-  type        = string
-  default     = "/v2/"
-}
 
-variable "image_path" {
-  type    = string
-  default = "./cosmotech.png"
-}
+
+
+
 
 variable "create_secrets" {
   type    = bool
   default = true
 }
 
-variable "kubernetes_version" {
-  type    = string
-  default = "1.25.6"
-}
+
 
 variable "create_babylon" {
   description = "Create the Azure Active Directory Application for Babylon"
@@ -262,115 +402,4 @@ variable "cost_center" {
 variable "tenant_name" {
   type    = string
   default = "phoenix"
-}
-
-variable "network_client_id" {
-  type = string
-}
-
-variable "network_client_secret" {
-  type = string
-}
-variable "network_sp_object_id" {
-  type        = string
-  description = "The ID of the existing Network's service principal"
-}
-
-variable "deployment_type" {
-  type = string
-}
-
-variable "vnet_new" {
-  type    = string
-  default = "new"
-}
-
-variable "vnet_name" {
-  type    = string
-  default = ""
-}
-
-variable "subnet_name" {
-  type    = string
-  default = "default"
-}
-
-variable "vnet_iprange" {
-  type    = string
-  default = "10.21.0.0/16"
-}
-
-variable "subnet_iprange" {
-  type    = string
-  default = "10.21.0.0/24"
-}
-variable "publicip_resource_group" {
-  type = string
-}
-variable "vnet_resource_group" {
-  type = string
-}
-
-variable "kubernetes_max_db_instances" {
-  type = number
-}
-variable "kubernetes_min_db_instances" {
-  type = number
-}
-variable "kubernetes_max_services_instances" {
-  type = number
-}
-variable "kubernetes_max_monitoring_instances" {
-  type = number
-}
-variable "kubernetes_max_highmemory_compute_instances" {
-  type = number
-}
-variable "kubernetes_max_highcpu_compute_instances" {
-  type = number
-}
-variable "kubernetes_max_basic_compute_instances" {
-  type = number
-}
-variable "kubernetes_db_type" {
-  type = string
-}
-variable "kubernetes_services_type" {
-  type = string
-}
-variable "kubernetes_monitoring_type" {
-  type = string
-}
-variable "kubernetes_highmemory_compute_type" {
-  type = string
-}
-variable "kubernetes_highcpu_compute_type" {
-  type = string
-}
-variable "kubernetes_basic_compute_type" {
-  type = string
-}
-variable "kubernetes_nodepool_system_type" {
-  type = string
-}
-variable "kubernetes_network_plugin" {
-  type = string
-}
-variable "private_dns_name_blob" {
-  type = string
-}
-variable "private_dns_name_queue" {
-  type = string
-}
-variable "private_dns_name_table" {
-  type = string
-}
-variable "private_dns_name_kusto" {
-  type = string
-}
-variable "private_dns_name_adt" {
-  type = string
-}
-variable "private_dns_name_eventhub" {
-  type = string
 }

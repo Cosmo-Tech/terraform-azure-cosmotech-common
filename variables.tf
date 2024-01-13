@@ -239,6 +239,7 @@ variable "dns_zone_name" {
 variable "dns_zone_rg" {
   description = "The DNS zone resource group"
   type        = string
+  default = ""
 }
 
 variable "api_dns_name" {
@@ -254,6 +255,7 @@ variable "api_version_path" {
 
 variable "cluster_name" {
   type    = string
+  default = ""
 }
 
 variable "namespace" {
@@ -368,6 +370,11 @@ variable "create_adx" {
 variable "create_prometheus_stack" {
   type    = bool
   default = true
+}
+
+variable "public_ip_name" {
+  type = string
+  default = ""
 }
 
 # Backend remote vars

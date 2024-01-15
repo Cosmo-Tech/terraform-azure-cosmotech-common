@@ -28,7 +28,6 @@ variable "resource_group" {
 
 variable "cluster_name" {
   type    = string
-  default = ""
 }
 
 variable "deployment_type" {

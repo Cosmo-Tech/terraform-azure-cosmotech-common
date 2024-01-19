@@ -389,12 +389,12 @@ variable "public_ip_name" {
   default = ""
 }
 
-variable "certificate_cert_content" {
+variable "tls_certificate_custom_certificate" {
   type    = string
   default = ""
 }
 
-variable "certificate_key_content" {
+variable "tls_certificate_custom_key" {
   type    = string
   default = ""
 }

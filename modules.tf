@@ -86,6 +86,6 @@ module "cosmotech-platform" {
   resource_group           = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.resource_group
   loadbalancer_ip          = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : var.loadbalancer_ip
   kube_config              = module.cosmotech-prerequisites.out_aks_phoenix_config
-  certificate_cert_content = var.certificate_cert_content
-  certificate_key_content  = var.certificate_key_content
+  certificate_cert_content = var.tls_certificate_custom_certificate
+  certificate_key_content  = var.tls_certificate_custom_key
 }

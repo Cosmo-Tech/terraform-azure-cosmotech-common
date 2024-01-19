@@ -73,7 +73,7 @@ resource "kubernetes_secret" "tls" {
   count = var.tls_certificate_type == "custom" ? 1 : 0
   metadata {
     name      = var.tls_secret_name
-    namespace = var.namespace
+    namespace = var.monitoring_namespace
   }
 
   type = "kubernetes.io/tls"

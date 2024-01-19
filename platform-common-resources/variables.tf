@@ -34,6 +34,10 @@ variable "tls_secret_name" {
   default = "letsencrypt-prod"
 }
 
+variable "tls_certificate_type" {
+  type = string
+}
+
 variable "namespace" {
   type = string
 }
@@ -44,11 +48,11 @@ variable "monitoring_namespace" {
 }
 
 variable "ingress_nginx_version" {
-  type    = string
+  type = string
 }
 
 variable "create_prometheus_stack" {
-  type    = bool
+  type = bool
 }
 
 variable "publicip_resource_group" {
@@ -68,4 +72,10 @@ variable "loadbalancer_ip" {
 }
 
 variable "kube_config" {
+}
+
+variable "certificate_cert_content" {
+}
+
+variable "certificate_key_content" {
 }

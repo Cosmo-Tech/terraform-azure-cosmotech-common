@@ -3,6 +3,7 @@ locals {
   client_certificate     = base64decode(var.kube_config.0.client_certificate)
   client_key             = base64decode(var.kube_config.0.client_key)
   cluster_ca_certificate = base64decode(var.kube_config.0.cluster_ca_certificate)
+  tls_secret_name        = var.tls_certificate_type != "none" ? var.tls_secret_name : ""
 }
 
 provider "kubernetes" {
@@ -29,19 +30,6 @@ provider "kubectl" {
 
   load_config_file = false
 }
-
-# resource "kubernetes_namespace" "main_namespace" {
-#   metadata {
-#     name = var.namespace
-#   }
-# }
-
-# resource "kubernetes_namespace" "monitoring_namespace" {
-#   count = var.create_prometheus_stack ? 1 : 0
-#   metadata {
-#     name = var.monitoring_namespace
-#   }
-# }
 
 resource "random_password" "prom_admin_password" {
   length  = 30

@@ -27,7 +27,7 @@ variable "resource_group" {
 }
 
 variable "cluster_name" {
-  type    = string
+  type = string
 }
 
 variable "deployment_type" {
@@ -142,23 +142,23 @@ variable "network_sp_object_id" {
 }
 
 variable "vnet_name" {
-  type    = string
+  type = string
 }
 
 variable "vnet_new" {
-  type    = string
+  type = string
 }
 
 variable "subnet_name" {
-  type    = string
+  type = string
 }
 
 variable "vnet_iprange" {
-  type    = string
+  type = string
 }
 
 variable "subnet_iprange" {
-  type    = string
+  type = string
 }
 
 variable "vnet_resource_group" {

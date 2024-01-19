@@ -10,7 +10,7 @@ locals {
 
 # Resource group
 data "azurerm_resource_group" "publicip_rg" {
-  name     = var.publicip_resource_group
+  name = var.publicip_resource_group
 }
 
 # Public IP

@@ -7,7 +7,7 @@ output "out_platform_sp_client_secret" {
 }
 
 output "out_public_ip" {
-  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_public_ip : null
+  value = var.deployment_type != "ARM" && var.create_publicip ? module.create-publicip.0.out_public_ip : null
 }
 
 # for test purpose
@@ -16,11 +16,11 @@ output "out_subnet_id" {
 }
 
 output "out_public_ip_name" {
-  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_public_ip_name : null
+  value = var.deployment_type != "ARM" ? module.create-publicip.0.out_public_ip_name : null
 }
 
 output "out_ip_resource_group" {
-  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_ip_resource_group : null
+  value = var.deployment_type != "ARM" ? module.create-publicip.0.out_ip_resource_group : null
 }
 
 output "out_networkadt_clientid" {
@@ -38,7 +38,7 @@ output "out_aks_phoenix_config" {
 }
 
 output "out_fqdn" {
-  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_fqdn : null
+  value = var.deployment_type != "ARM" ? module.create-publicip.0.out_fqdn : null
 }
 
 output "out_aks_cluster_name" {
@@ -51,8 +51,4 @@ output "out_platform_vnet_name" {
 
 output "out_platform_sp_name" {
   value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_name : null
-}
-
-output "out_platform_public_ip" {
-  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_public_ip_name : null
 }

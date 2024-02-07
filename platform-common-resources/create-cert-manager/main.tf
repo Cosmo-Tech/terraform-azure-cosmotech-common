@@ -34,6 +34,7 @@ resource "helm_release" "cert-manager" {
   repository = var.helm_repo_url
   chart      = var.helm_release_name
   namespace  = var.namespace
+  version = var.cert_manager_version
 
   reuse_values = true
 
@@ -78,12 +79,6 @@ resource "kubernetes_secret" "tls" {
 
   type = "kubernetes.io/tls"
 
-  # This option supposedly needs the two files to be created and located at the root of the module.
-  # data = {
-  #   "tls.crt" = file("${path.module}/certificate.cert")
-  #   "tls.key" = file("${path.module}/certificate_key.key")
-  # }
-  # This option supposedly needs the vars to be created and passed to this module.
   data = {
     "tls.crt" = var.certificate_cert_content
     "tls.key" = var.certificate_key_content

@@ -74,7 +74,7 @@ variable "api_version_path" {
 
 variable "create_publicip" {
   description = "Create the public IP for the platform"
-  type        = bool
+  type        = string
 }
 
 variable "create_dnsrecord" {

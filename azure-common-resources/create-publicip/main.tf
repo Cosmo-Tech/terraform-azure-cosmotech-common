@@ -9,15 +9,15 @@ locals {
 }
 
 # Resource group
-data "azurerm_resource_group" "publicip_rg" {
-  name = var.publicip_resource_group
-}
+# data "azurerm_resource_group" "publicip_rg" {
+#   name = var.publicip_resource_group
+# }
 
 # Public IP
 resource "azurerm_public_ip" "publicip" {
   count               = var.create_publicip ? 1 : 0
   name                = substr("CosmoTech${var.customer_name}${var.project_name}${var.project_stage}PublicIP", 0, 80)
-  resource_group_name = data.azurerm_resource_group.publicip_rg.name
+  resource_group_name = var.publicip_resource_group.name
   location            = var.location
   allocation_method   = "Static"
   sku                 = "Standard"
@@ -26,7 +26,7 @@ resource "azurerm_public_ip" "publicip" {
 
 resource "azurerm_role_assignment" "publicip_contributor" {
   count                = var.create_publicip ? 1 : 0
-  scope                = data.azurerm_resource_group.publicip_rg.id
+  scope                = var.publicip_resource_group.id
   role_definition_name = "Contributor"
   principal_id         = var.network_sp_objectid
 }

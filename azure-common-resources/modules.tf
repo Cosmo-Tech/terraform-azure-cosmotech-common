@@ -50,7 +50,7 @@ module "create-network" {
   project_stage       = var.project_stage
   project_name        = var.project_name
   subscription_id     = var.subscription_id
-  vnet_resource_group = var.vnet_resource_group
+  vnet_resource_group = local.vnet_resource_group
 
   depends_on = [module.create-platform-prerequisite]
 }
@@ -102,16 +102,16 @@ module "create-publicip" {
   count = var.create_publicip ? 1 : 0
 
   network_sp_objectid = local.network_sp_objectid
+  publicip_resource_group = local.publicip_resource_group
 
   cost_center             = var.cost_center
   customer_name           = var.customer_name
   project_name            = var.project_name
   location                = var.location
   project_stage           = var.project_stage
-  create_publicip         = var.create_publicip
+  create_publicip         = var.create_publicip # == "new" ? true : false
   create_dnsrecord        = var.create_dnsrecord
   dns_record              = var.dns_record
   dns_zone_name           = var.dns_zone_name
   dns_zone_rg             = var.dns_zone_rg
-  publicip_resource_group = var.publicip_resource_group
 }

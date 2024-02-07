@@ -55,3 +55,7 @@ output "out_platform_resource_group_id" {
 output "out_adt_principal_id" {
   value = azuread_service_principal.network_adt.id
 }
+
+output "out_platform_resource_group_object" {
+  value = azurerm_resource_group.platform_rg
+}

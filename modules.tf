@@ -20,7 +20,7 @@ module "cosmotech-prerequisites" {
   # publicip
   create_publicip         = var.publicip_new_or_existing_or_none == "new" ? true : false
   create_dnsrecord        = var.create_dnsrecord
-  publicip_resource_group = var.publicip_resource_group
+  publicip_resource_group = var.deployment_type != "ARM" ? local.resource_group : var.publicip_resource_group
   project_stage           = var.project_stage
   project_name            = var.project_name
   customer_name           = var.customer_name

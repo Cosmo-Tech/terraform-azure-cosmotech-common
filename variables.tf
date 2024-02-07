@@ -21,11 +21,6 @@ variable "project_name" {
   type        = string
 }
 
-variable "common_tenant_id" {
-  description = "The tenant id"
-  type        = string
-}
-
 variable "network_client_id" {
   type    = string
   default = ""
@@ -37,7 +32,8 @@ variable "network_client_secret" {
 }
 
 variable "fqdn" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "kubernetes_azurefile_storage_class_sku" {
@@ -130,11 +126,13 @@ variable "kubernetes_max_db_instances" {
 }
 
 variable "publicip_new_or_existing_or_none" {
-  type = string
+  type    = string
+  default = "new"
 }
 
 variable "publicip_resource_group" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "client_id" {
@@ -148,15 +146,18 @@ variable "client_secret" {
 }
 
 variable "vnet_name" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "vnet_new" {
-  type = string
+  type    = string
+  default = "new"
 }
 
 variable "vnet_resource_group" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "virtual_network_address_prefix" {
@@ -166,11 +167,12 @@ variable "virtual_network_address_prefix" {
 }
 variable "virtual_network_subnet_address_prefix" {
   type    = string
-  default = "10.21.0.0/24"
+  default = "10.21.0.0/16"
 }
 
 variable "subnet_name" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "private_dns_name_blob" {
@@ -204,6 +206,7 @@ variable "owner_list" {
 variable "network_sp_object_id" {
   type        = string
   description = "The ID of the existing Network's service principal"
+  default     = ""
 }
 
 variable "loadbalancer_ip" {
@@ -239,7 +242,7 @@ variable "dns_zone_name" {
 variable "dns_zone_rg" {
   description = "The DNS zone resource group"
   type        = string
-  default     = ""
+  default     = "phoenix"
 }
 
 variable "api_dns_name" {
@@ -361,7 +364,7 @@ variable "image_path" {
 variable "create_dnsrecord" {
   description = "Create the DNS record"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "create_cosmosdb" {

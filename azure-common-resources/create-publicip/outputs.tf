@@ -1,13 +1,13 @@
 output "out_public_ip" {
-  value = azurerm_public_ip.publicip[0].ip_address
+  value = var.create_publicip ? azurerm_public_ip.publicip[0].ip_address : null
 }
 
 output "out_public_ip_name" {
-  value = azurerm_public_ip.publicip[0].name
+  value = var.create_publicip ? azurerm_public_ip.publicip[0].name : null
 }
 
 output "out_ip_resource_group" {
-  value = data.azurerm_resource_group.publicip_rg.name
+  value = var.publicip_resource_group.name
 }
 
 output "out_fqdn" {

@@ -59,7 +59,7 @@ variable "subnet_name" {
 
 variable "subnet_iprange" {
   type    = string
-  default = "10.21.0.0/24"
+  default = "10.21.0.0/16"
 }
 
 variable "vnet_resource_group" {

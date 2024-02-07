@@ -8,7 +8,7 @@ module "create-ingress-nginx" {
   publicip_resource_group = var.publicip_resource_group
 
   depends_on = [
-    module.create-prometheus-stack, module.cert-manager
+    module.create-prometheus-stack
   ]
 }
 

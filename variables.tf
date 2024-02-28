@@ -53,7 +53,7 @@ variable "kubernetes_network_plugin" {
 
 variable "kubernetes_version" {
   type    = string
-  default = "1.26.6"
+  default = "1.26.10"
 }
 
 variable "kubernetes_nodepool_system_type" {

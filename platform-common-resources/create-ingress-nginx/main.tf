@@ -21,7 +21,7 @@ resource "helm_release" "ingress-nginx" {
   repository = var.helm_repo_url
   chart      = var.helm_release_name
   version    = var.ingress_nginx_version
-  namespace = var.namespace
+  namespace  = var.namespace
 
   reuse_values = true
 

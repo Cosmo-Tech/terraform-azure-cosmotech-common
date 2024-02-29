@@ -94,6 +94,8 @@ module "create-privatedns" {
   private_dns_name_queue    = var.private_dns_name_queue
   private_dns_name_table    = var.private_dns_name_table
   private_dns_name_eventhub = var.private_dns_name_eventhub
+
+  depends_on = [module.create-platform-prerequisite]
 }
 
 module "create-publicip" {
@@ -101,17 +103,20 @@ module "create-publicip" {
 
   count = var.create_publicip ? 1 : 0
 
-  network_sp_objectid = local.network_sp_objectid
+  network_sp_objectid     = local.network_sp_objectid
   publicip_resource_group = local.publicip_resource_group
+  platform_client_id      = local.platform_client_id
 
-  cost_center             = var.cost_center
-  customer_name           = var.customer_name
-  project_name            = var.project_name
-  location                = var.location
-  project_stage           = var.project_stage
-  create_publicip         = var.create_publicip # == "new" ? true : false
-  create_dnsrecord        = var.create_dnsrecord
-  dns_record              = var.dns_record
-  dns_zone_name           = var.dns_zone_name
-  dns_zone_rg             = var.dns_zone_rg
+  cost_center      = var.cost_center
+  customer_name    = var.customer_name
+  project_name     = var.project_name
+  location         = var.location
+  project_stage    = var.project_stage
+  create_publicip  = var.create_publicip
+  create_dnsrecord = var.create_dnsrecord
+  dns_record       = var.dns_record
+  dns_zone_name    = var.dns_zone_name
+  dns_zone_rg      = var.dns_zone_rg
+
+  depends_on = [module.create-platform-prerequisite]
 }

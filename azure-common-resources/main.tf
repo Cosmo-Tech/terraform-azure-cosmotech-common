@@ -30,4 +30,5 @@ locals {
   network_clientid        = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_clientid : var.network_client_id
   network_sp_objectid     = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_adt_principal_id : var.network_sp_object_id
   publicip_resource_group = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_resource_group_object : data.azurerm_resource_group.publicip_rg.0
+  platform_client_id      = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_sp_object_id : ""
 }

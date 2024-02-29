@@ -36,4 +36,6 @@ module "cert-manager" {
   api_dns_name             = var.api_dns_name
   certificate_cert_content = var.certificate_cert_content
   certificate_key_content  = var.certificate_key_content
+
+  depends_on = [module.create-ingress-nginx]
 }

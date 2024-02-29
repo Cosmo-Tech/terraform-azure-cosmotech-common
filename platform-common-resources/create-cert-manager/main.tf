@@ -34,7 +34,7 @@ resource "helm_release" "cert-manager" {
   repository = var.helm_repo_url
   chart      = var.helm_release_name
   namespace  = var.namespace
-  version = var.cert_manager_version
+  version    = var.cert_manager_version
 
   reuse_values = true
 

@@ -6,12 +6,8 @@ locals {
     project     = var.project_name
     cost_center = var.cost_center
   }
+  platform_client_id = var.platform_client_id != "" ? true : false
 }
-
-# Resource group
-# data "azurerm_resource_group" "publicip_rg" {
-#   name = var.publicip_resource_group
-# }
 
 # Public IP
 resource "azurerm_public_ip" "publicip" {
@@ -31,12 +27,12 @@ resource "azurerm_role_assignment" "publicip_contributor" {
   principal_id         = var.network_sp_objectid
 }
 
-# resource "azurerm_role_assignment" "publicip_owner" {
-#   count                = var.create_publicip ? 1 : 0
-#   scope                = var.create_publicip ? azurerm_public_ip.publicip[0].id : null
-#   role_definition_name = "Owner"
-#   principal_id         = var.platform_client_id
-# }
+resource "azurerm_role_assignment" "publicip_owner" {
+  count                = var.create_publicip && local.platform_client_id ? 1 : 0
+  scope                = var.create_publicip ? azurerm_public_ip.publicip[0].id : null
+  role_definition_name = "Owner"
+  principal_id         = var.platform_client_id
+}
 
 resource "azurerm_dns_a_record" "platform_fqdn" {
   depends_on          = [azurerm_public_ip.publicip]

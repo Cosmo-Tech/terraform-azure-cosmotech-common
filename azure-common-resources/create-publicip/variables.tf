@@ -33,3 +33,6 @@ variable "publicip_resource_group" {
 variable "network_sp_objectid" {
   type = string
 }
+variable "platform_client_id" {
+  type = string
+}

@@ -46,7 +46,7 @@ output "out_aks_cluster_name" {
 }
 
 output "out_platform_vnet_name" {
-  value = var.vnet_name
+  value = var.deployment_type != "ARM" ? module.create-network.0.out_platform_vnet_name : var.vnet_name
 }
 
 output "out_platform_sp_name" {

@@ -33,20 +33,11 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_client_id"></a> [client\_id](#input\_client\_id) | The client id | `string` | n/a | yes |
 | <a name="input_client_secret"></a> [client\_secret](#input\_client\_secret) | The client secret | `string` | n/a | yes |
-| <a name="input_common_tenant_id"></a> [common\_tenant\_id](#input\_common\_tenant\_id) | The tenant id | `string` | n/a | yes |
 | <a name="input_dns_record"></a> [dns\_record](#input\_dns\_record) | The DNS zone name to create platform subdomain. Example: myplatform | `string` | n/a | yes |
-| <a name="input_fqdn"></a> [fqdn](#input\_fqdn) | n/a | `string` | n/a | yes |
-| <a name="input_network_sp_object_id"></a> [network\_sp\_object\_id](#input\_network\_sp\_object\_id) | The ID of the existing Network's service principal | `string` | n/a | yes |
 | <a name="input_owner_list"></a> [owner\_list](#input\_owner\_list) | List of mail addresses for App Registration owners | `list(string)` | n/a | yes |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The project name | `string` | n/a | yes |
-| <a name="input_publicip_new_or_existing_or_none"></a> [publicip\_new\_or\_existing\_or\_none](#input\_publicip\_new\_or\_existing\_or\_none) | n/a | `string` | n/a | yes |
-| <a name="input_publicip_resource_group"></a> [publicip\_resource\_group](#input\_publicip\_resource\_group) | n/a | `string` | n/a | yes |
-| <a name="input_subnet_name"></a> [subnet\_name](#input\_subnet\_name) | n/a | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The subscription id | `string` | n/a | yes |
 | <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | n/a | `string` | n/a | yes |
-| <a name="input_vnet_name"></a> [vnet\_name](#input\_vnet\_name) | n/a | `string` | n/a | yes |
-| <a name="input_vnet_new"></a> [vnet\_new](#input\_vnet\_new) | n/a | `string` | n/a | yes |
-| <a name="input_vnet_resource_group"></a> [vnet\_resource\_group](#input\_vnet\_resource\_group) | n/a | `string` | n/a | yes |
 | <a name="input_api_dns_name"></a> [api\_dns\_name](#input\_api\_dns\_name) | n/a | `string` | `""` | no |
 | <a name="input_api_version_path"></a> [api\_version\_path](#input\_api\_version\_path) | The API version path | `string` | `"/"` | no |
 | <a name="input_audience"></a> [audience](#input\_audience) | The App Registration audience type | `string` | `"AzureADMultipleOrgs"` | no |
@@ -56,12 +47,13 @@
 | <a name="input_create_adx"></a> [create\_adx](#input\_create\_adx) | n/a | `bool` | `false` | no |
 | <a name="input_create_backup"></a> [create\_backup](#input\_create\_backup) | n/a | `bool` | `false` | no |
 | <a name="input_create_cosmosdb"></a> [create\_cosmosdb](#input\_create\_cosmosdb) | n/a | `bool` | `false` | no |
-| <a name="input_create_dnsrecord"></a> [create\_dnsrecord](#input\_create\_dnsrecord) | Create the DNS record | `bool` | `false` | no |
+| <a name="input_create_dnsrecord"></a> [create\_dnsrecord](#input\_create\_dnsrecord) | Create the DNS record | `bool` | `true` | no |
 | <a name="input_create_prometheus_stack"></a> [create\_prometheus\_stack](#input\_create\_prometheus\_stack) | n/a | `bool` | `true` | no |
 | <a name="input_customer_name"></a> [customer\_name](#input\_customer\_name) | The customer name | `string` | `"cosmotech"` | no |
 | <a name="input_deployment_type"></a> [deployment\_type](#input\_deployment\_type) | Represents the kind of deployment. Currently two modes: ARM or Terraform | `string` | `"Terraform"` | no |
 | <a name="input_dns_zone_name"></a> [dns\_zone\_name](#input\_dns\_zone\_name) | The DNS zone name to create platform subdomain. Example: api.cosmotech.com | `string` | `"api.cosmotech.com"` | no |
-| <a name="input_dns_zone_rg"></a> [dns\_zone\_rg](#input\_dns\_zone\_rg) | The DNS zone resource group | `string` | `""` | no |
+| <a name="input_dns_zone_rg"></a> [dns\_zone\_rg](#input\_dns\_zone\_rg) | The DNS zone resource group | `string` | `"phoenix"` | no |
+| <a name="input_fqdn"></a> [fqdn](#input\_fqdn) | n/a | `string` | `""` | no |
 | <a name="input_identifier_uri"></a> [identifier\_uri](#input\_identifier\_uri) | The platform identifier uri | `string` | `""` | no |
 | <a name="input_image_path"></a> [image\_path](#input\_image\_path) | n/a | `string` | `"./cosmotech.png"` | no |
 | <a name="input_ingress_nginx_version"></a> [ingress\_nginx\_version](#input\_ingress\_nginx\_version) | n/a | `string` | `"4.2.5"` | no |
@@ -82,13 +74,14 @@
 | <a name="input_kubernetes_network_plugin"></a> [kubernetes\_network\_plugin](#input\_kubernetes\_network\_plugin) | n/a | `string` | `"azure"` | no |
 | <a name="input_kubernetes_nodepool_system_type"></a> [kubernetes\_nodepool\_system\_type](#input\_kubernetes\_nodepool\_system\_type) | n/a | `string` | `"Standard_A2_v2"` | no |
 | <a name="input_kubernetes_services_type"></a> [kubernetes\_services\_type](#input\_kubernetes\_services\_type) | n/a | `string` | `"Standard_B4ms"` | no |
-| <a name="input_kubernetes_version"></a> [kubernetes\_version](#input\_kubernetes\_version) | n/a | `string` | `"1.26.6"` | no |
+| <a name="input_kubernetes_version"></a> [kubernetes\_version](#input\_kubernetes\_version) | n/a | `string` | `"1.26.10"` | no |
 | <a name="input_loadbalancer_ip"></a> [loadbalancer\_ip](#input\_loadbalancer\_ip) | n/a | `string` | `""` | no |
 | <a name="input_location"></a> [location](#input\_location) | The Azure location | `string` | `"West Europe"` | no |
 | <a name="input_monitoring_namespace"></a> [monitoring\_namespace](#input\_monitoring\_namespace) | n/a | `string` | `"cosmotech-monitoring"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | n/a | `string` | `"phoenix"` | no |
 | <a name="input_network_client_id"></a> [network\_client\_id](#input\_network\_client\_id) | n/a | `string` | `""` | no |
 | <a name="input_network_client_secret"></a> [network\_client\_secret](#input\_network\_client\_secret) | n/a | `string` | `""` | no |
+| <a name="input_network_sp_object_id"></a> [network\_sp\_object\_id](#input\_network\_sp\_object\_id) | The ID of the existing Network's service principal | `string` | `""` | no |
 | <a name="input_platform_url"></a> [platform\_url](#input\_platform\_url) | The platform url | `string` | `""` | no |
 | <a name="input_private_dns_name_adt"></a> [private\_dns\_name\_adt](#input\_private\_dns\_name\_adt) | n/a | `string` | `"privatelink.digitaltwins.azure.net"` | no |
 | <a name="input_private_dns_name_blob"></a> [private\_dns\_name\_blob](#input\_private\_dns\_name\_blob) | n/a | `string` | `"privatelink.blob.core.windows.net"` | no |
@@ -97,7 +90,10 @@
 | <a name="input_private_dns_name_table"></a> [private\_dns\_name\_table](#input\_private\_dns\_name\_table) | n/a | `string` | `"privatelink.table.core.windows.net"` | no |
 | <a name="input_project_stage"></a> [project\_stage](#input\_project\_stage) | The Project stage | `string` | `"Dev"` | no |
 | <a name="input_public_ip_name"></a> [public\_ip\_name](#input\_public\_ip\_name) | n/a | `string` | `""` | no |
+| <a name="input_publicip_new_or_existing_or_none"></a> [publicip\_new\_or\_existing\_or\_none](#input\_publicip\_new\_or\_existing\_or\_none) | n/a | `string` | `"new"` | no |
+| <a name="input_publicip_resource_group"></a> [publicip\_resource\_group](#input\_publicip\_resource\_group) | n/a | `string` | `""` | no |
 | <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group) | n/a | `string` | `""` | no |
+| <a name="input_subnet_name"></a> [subnet\_name](#input\_subnet\_name) | n/a | `string` | `""` | no |
 | <a name="input_tf_access_key"></a> [tf\_access\_key](#input\_tf\_access\_key) | Variable to be used with backend remote option :<br>First set necessary vars:<br>- export TF\_VAR\_tf\_access\_key="some\_value"<br>Then call terraform init:<br>terraform init \<br>    -backend-config "resource\_group\_name=$TF\_VAR\_tf\_resource\_group\_name" \<br>    -backend-config "storage\_account\_name=$TF\_VAR\_tf\_storage\_account\_name" \<br>    -backend-config "container\_name=$TF\_VAR\_tf\_container\_name" \<br>    -backend-config "key=$TF\_VAR\_tf\_blob\_name" \<br>    -backend-config "access\_key=$TF\_VAR\_tf\_access\_key" | `string` | `""` | no |
 | <a name="input_tf_blob_name"></a> [tf\_blob\_name](#input\_tf\_blob\_name) | Variable to be used with backend remote option :<br>First set necessary vars:<br>- export TF\_VAR\_tf\_blob\_name="some\_value"<br>Then call terraform init:<br>terraform init \<br>    -backend-config "resource\_group\_name=$TF\_VAR\_tf\_resource\_group\_name" \<br>    -backend-config "storage\_account\_name=$TF\_VAR\_tf\_storage\_account\_name" \<br>    -backend-config "container\_name=$TF\_VAR\_tf\_container\_name" \<br>    -backend-config "key=$TF\_VAR\_tf\_blob\_name" \<br>    -backend-config "access\_key=$TF\_VAR\_tf\_access\_key" | `string` | `""` | no |
 | <a name="input_tf_container_name"></a> [tf\_container\_name](#input\_tf\_container\_name) | Variable to be used with backend remote option :<br>First set necessary vars:<br>- export TF\_VAR\_tf\_container\_name="some\_value"<br>Then call terraform init:<br>terraform init \<br>    -backend-config "resource\_group\_name=$TF\_VAR\_tf\_resource\_group\_name" \<br>    -backend-config "storage\_account\_name=$TF\_VAR\_tf\_storage\_account\_name" \<br>    -backend-config "container\_name=$TF\_VAR\_tf\_container\_name" \<br>    -backend-config "key=$TF\_VAR\_tf\_blob\_name" \<br>    -backend-config "access\_key=$TF\_VAR\_tf\_access\_key" | `string` | `""` | no |
@@ -108,7 +104,10 @@
 | <a name="input_tls_certificate_type"></a> [tls\_certificate\_type](#input\_tls\_certificate\_type) | n/a | `string` | `"let_s_encrypt"` | no |
 | <a name="input_tls_secret_name"></a> [tls\_secret\_name](#input\_tls\_secret\_name) | n/a | `string` | `"letsencrypt-prod"` | no |
 | <a name="input_virtual_network_address_prefix"></a> [virtual\_network\_address\_prefix](#input\_virtual\_network\_address\_prefix) | The Virtual Network IP range. Minimum /26 NetMaskLength | `string` | `"10.21.0.0/16"` | no |
-| <a name="input_virtual_network_subnet_address_prefix"></a> [virtual\_network\_subnet\_address\_prefix](#input\_virtual\_network\_subnet\_address\_prefix) | n/a | `string` | `"10.21.0.0/24"` | no |
+| <a name="input_virtual_network_subnet_address_prefix"></a> [virtual\_network\_subnet\_address\_prefix](#input\_virtual\_network\_subnet\_address\_prefix) | n/a | `string` | `"10.21.0.0/16"` | no |
+| <a name="input_vnet_name"></a> [vnet\_name](#input\_vnet\_name) | n/a | `string` | `""` | no |
+| <a name="input_vnet_new"></a> [vnet\_new](#input\_vnet\_new) | n/a | `string` | `"new"` | no |
+| <a name="input_vnet_resource_group"></a> [vnet\_resource\_group](#input\_vnet\_resource\_group) | n/a | `string` | `""` | no |
 
 ## Outputs
 

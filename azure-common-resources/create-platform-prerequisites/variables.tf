@@ -83,18 +83,6 @@ variable "location" {
   default     = "West Europe"
 }
 
-variable "create_publicip" {
-  description = "Create the public IP for the platform"
-  type        = bool
-  default     = true
-}
-
-variable "create_dnsrecord" {
-  description = "Create the DNS record"
-  type        = bool
-  default     = true
-}
-
 variable "resource_group" {
   description = "Resource group to create which will contain created Azure resources"
   type        = string

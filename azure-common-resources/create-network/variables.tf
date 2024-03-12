@@ -3,6 +3,11 @@ variable "resource_group" {
 }
 
 variable "vnet_iprange" {
+  type    = string
+  default = "10.21.0.0/16"
+}
+
+variable "network_sp_objectid" {
   type = string
 }
 
@@ -35,14 +40,28 @@ variable "location" {
   default     = "West Europe"
 }
 
-variable "adt_principal_id" {
-  type = string
-}
-
 variable "cost_center" {
   type = string
 }
 
 variable "subscription_id" {
+  type = string
+}
+
+variable "vnet_name" {
+  type = string
+}
+
+variable "subnet_name" {
+  type    = string
+  default = "default"
+}
+
+variable "subnet_iprange" {
+  type    = string
+  default = "10.21.0.0/16"
+}
+
+variable "vnet_resource_group" {
   type = string
 }

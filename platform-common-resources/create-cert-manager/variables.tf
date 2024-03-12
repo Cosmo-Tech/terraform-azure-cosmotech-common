@@ -47,3 +47,13 @@ variable "tls_secret_name" {
 variable "api_dns_name" {
   type = string
 }
+
+variable "tls_certificate_type" {
+  type = string
+}
+
+variable "certificate_cert_content" {
+}
+
+variable "certificate_key_content" {
+}

@@ -1,9 +1,136 @@
-variable "resource_group" {
+variable "deployment_type" {
+  type    = string
+  default = "Terraform"
+  validation {
+    condition = contains([
+      "ARM",
+      "Terraform"
+    ], var.deployment_type)
+    error_message = "Stage must be either: ARM or Terraform."
+  }
+  description = "Represents the kind of deployment. Currently two modes: ARM or Terraform"
+}
+
+variable "location" {
+  description = "The Azure location"
+  default     = "West Europe"
+}
+
+variable "project_name" {
+  description = "The project name"
+  type        = string
+}
+
+variable "network_client_id" {
   type    = string
   default = ""
 }
 
-variable "cluster_name" {
+variable "network_client_secret" {
+  type    = string
+  default = ""
+}
+
+variable "fqdn" {
+  type    = string
+  default = ""
+}
+
+variable "kubernetes_azurefile_storage_class_sku" {
+  type    = string
+  default = "Premium_LRS"
+}
+
+variable "kubernetes_azurefile_storage_tags" {
+  type    = string
+  default = ""
+}
+
+variable "kubernetes_network_plugin" {
+  type    = string
+  default = "azure"
+}
+
+variable "kubernetes_version" {
+  type    = string
+  default = "1.26.10"
+}
+
+variable "kubernetes_nodepool_system_type" {
+  type    = string
+  default = "Standard_A2_v2"
+}
+
+variable "kubernetes_basic_compute_type" {
+  type    = string
+  default = "Standard_F4s_v2"
+}
+
+variable "kubernetes_highcpu_compute_type" {
+  type    = string
+  default = "Standard_F72s_v2"
+}
+
+variable "kubernetes_highmemory_compute_type" {
+  type    = string
+  default = "Standard_E16ads_v5"
+}
+
+variable "kubernetes_monitoring_type" {
+  type    = string
+  default = "Standard_D2ads_v5"
+}
+
+variable "kubernetes_services_type" {
+  type    = string
+  default = "Standard_B4ms"
+}
+
+variable "kubernetes_db_type" {
+  type    = string
+  default = "Standard_D2ads_v5"
+}
+
+variable "kubernetes_max_basic_compute_instances" {
+  type    = number
+  default = 5
+}
+
+variable "kubernetes_max_highcpu_compute_instances" {
+  type    = number
+  default = 2
+}
+variable "kubernetes_max_highmemory_compute_instances" {
+  type    = number
+  default = 3
+}
+
+variable "kubernetes_max_monitoring_instances" {
+  type    = number
+  default = 10
+}
+
+variable "kubernetes_max_services_instances" {
+  type    = number
+  default = 5
+}
+
+variable "kubernetes_min_db_instances" {
+  type    = number
+  default = 2
+}
+
+variable "kubernetes_max_db_instances" {
+  type    = number
+  default = 5
+}
+
+variable "publicip_new_or_existing_or_none" {
+  type    = string
+  default = "new"
+}
+
+variable "publicip_resource_group" {
   type    = string
   default = ""
 }
@@ -18,6 +145,122 @@ variable "client_secret" {
   description = "The client secret"
 }
 
+variable "vnet_name" {
+  type    = string
+  default = ""
+}
+
+variable "vnet_new" {
+  type    = string
+  default = "new"
+}
+
+variable "vnet_resource_group" {
+  type    = string
+  default = ""
+}
+
+variable "virtual_network_address_prefix" {
+  description = "The Virtual Network IP range. Minimum /26 NetMaskLength"
+  type        = string
+  default     = "10.21.0.0/16"
+}
+variable "virtual_network_subnet_address_prefix" {
+  type    = string
+  default = "10.21.0.0/16"
+}
+
+variable "subnet_name" {
+  type    = string
+  default = ""
+}
+
+variable "private_dns_name_blob" {
+  type    = string
+  default = "privatelink.blob.core.windows.net"
+}
+
+variable "private_dns_name_queue" {
+  type    = string
+  default = "privatelink.queue.core.windows.net"
+}
+variable "private_dns_name_table" {
+  type    = string
+  default = "privatelink.table.core.windows.net"
+}
+variable "private_dns_name_eventhub" {
+  type    = string
+  default = "privatelink.servicebus.windows.net"
+}
+variable "private_dns_name_adt" {
+  type    = string
+  default = "privatelink.digitaltwins.azure.net"
+}
+
+variable "owner_list" {
+  description = "List of mail addresses for App Registration owners"
+  type        = list(string)
+}
+
+# ARM deployment mode
+variable "network_sp_object_id" {
+  type        = string
+  description = "The ID of the existing Network's service principal"
+  default     = ""
+}
+
+variable "loadbalancer_ip" {
+  type    = string
+  default = ""
+}
+
+variable "subscription_id" {
+  description = "The subscription id"
+  type        = string
+}
+
+variable "tenant_id" {
+  type = string
+}
+
+variable "resource_group" {
+  type    = string
+  default = ""
+}
+
+variable "dns_record" {
+  description = "The DNS zone name to create platform subdomain. Example: myplatform"
+  type        = string
+}
+
+variable "dns_zone_name" {
+  description = "The DNS zone name to create platform subdomain. Example: api.cosmotech.com"
+  type        = string
+  default     = "api.cosmotech.com"
+}
+
+variable "dns_zone_rg" {
+  description = "The DNS zone resource group"
+  type        = string
+  default     = "phoenix"
+}
+
+variable "api_dns_name" {
+  type    = string
+  default = ""
+}
+
+variable "api_version_path" {
+  description = "The API version path"
+  type        = string
+  default     = "/"
+}
+
+variable "cluster_name" {
+  type    = string
+  default = ""
+}
+
 variable "namespace" {
   type    = string
   default = "phoenix"
@@ -26,21 +269,6 @@ variable "namespace" {
 variable "monitoring_namespace" {
   type    = string
   default = "cosmotech-monitoring"
-}
-
-variable "loadbalancer_ip" {
-  type    = string
-  default = ""
-}
-
-variable "tls_secret_name" {
-  type    = string
-  default = "letsencrypt-prod"
-}
-
-variable "api_dns_name" {
-  type    = string
-  default = ""
 }
 
 variable "cluster_issuer_email" {
@@ -55,22 +283,7 @@ variable "cluster_issuer_name" {
 
 variable "ingress_nginx_version" {
   type    = string
-  default = "4.2.1"
-}
-
-variable "kubernetes_version" {
-  type    = string
-  default = "1.26.6"
-}
-
-variable "tenant_id" {
-  description = "The tenant id"
-  type        = string
-}
-
-variable "subscription_id" {
-  description = "The subscription id"
-  type        = string
+  default = "4.2.5"
 }
 
 variable "platform_url" {
@@ -106,20 +319,28 @@ variable "project_stage" {
   }
 }
 
+variable "tls_secret_name" {
+  type    = string
+  default = "letsencrypt-prod"
+}
+
+variable "tls_certificate_type" {
+  type    = string
+  default = "let_s_encrypt"
+  validation {
+    condition = contains([
+      "let_s_encrypt",
+      "custom",
+      "none"
+    ], var.tls_certificate_type)
+    error_message = "Only let_s_encrypt and none are supported for tls_certificate_type."
+  }
+}
+
 variable "customer_name" {
   description = "The customer name"
   type        = string
   default     = "cosmotech"
-}
-
-variable "project_name" {
-  description = "The project name"
-  type        = string
-}
-
-variable "owner_list" {
-  description = "List of mail addresses for App Registration owners"
-  type        = list(string)
 }
 
 variable "audience" {
@@ -135,89 +356,15 @@ variable "audience" {
   default = "AzureADMultipleOrgs"
 }
 
-variable "location" {
-  description = "The Azure location"
-  default     = "West Europe"
-}
-
-variable "create_restish" {
-  description = "Create the Azure Active Directory Application for Restish"
-  type        = bool
-  default     = false
-}
-
-variable "create_powerbi" {
-  description = "Create the Azure Active Directory Application for PowerBI"
-  type        = bool
-  default     = false
-}
-
-variable "create_webapp" {
-  description = "Create the Azure Active Directory Application for WebApp"
-  type        = bool
-  default     = false
-}
-
-variable "create_publicip" {
-  description = "Create the public IP for the platform"
-  type        = bool
-  default     = true
+variable "image_path" {
+  type    = string
+  default = "./cosmotech.png"
 }
 
 variable "create_dnsrecord" {
   description = "Create the DNS record"
   type        = bool
   default     = true
-}
-
-variable "create_secrets" {
-  description = "Create secret for application registrtations"
-  type        = bool
-  default     = true
-}
-
-variable "dns_zone_name" {
-  description = "The DNS zone name to create platform subdomain. Example: api.cosmotech.com"
-  type        = string
-  default     = "api.cosmotech.com"
-}
-
-variable "dns_zone_rg" {
-  description = "The DNS zone resource group"
-  type        = string
-  default     = "phoenix"
-}
-
-variable "dns_record" {
-  description = "The DNS zone name to create platform subdomain. Example: myplatform"
-  type        = string
-}
-
-variable "vnet_iprange" {
-  description = "The Virtual Network IP range. Minimum /26 NetMaskLength"
-  type        = string
-  default     = ""
-}
-
-variable "api_version_path" {
-  description = "The API version path"
-  type        = string
-  default     = "/"
-}
-
-variable "image_path" {
-  type    = string
-  default = "./cosmotech.png"
-}
-
-variable "network_adt_clientid" {
-  type    = string
-  default = ""
-}
-
-variable "network_adt_password" {
-  type    = string
-  default = ""
 }
 
 variable "create_cosmosdb" {
@@ -230,46 +377,29 @@ variable "create_backup" {
   default = false
 }
 
-variable "create_babylon" {
-  type    = bool
-  default = false
-}
-
 variable "create_adx" {
   type    = bool
   default = false
 }
 
-variable "deployment_type" {
+variable "create_prometheus_stack" {
+  type    = bool
+  default = true
+}
+
+variable "public_ip_name" {
   type    = string
-  default = "Terraform"
-  validation {
-    condition = contains([
-      "ARM",
-      "Terraform"
-    ], var.deployment_type)
-    error_message = "Stage must be either: ARM or Terraform."
-  }
-  description = "Represents the kind of deployment. Currently two modes: ARM or Terraform"
+  default = ""
 }
 
-# ARM deployment mode
-variable "adt_principal_id" {
-  type        = string
-  description = "The ID of the existing ADT Network's service principal"
-  default     = ""
+variable "tls_certificate_custom_certificate" {
+  type    = string
+  default = ""
 }
 
-variable "platform_client_id" {
-  type        = string
-  description = "The ID of the existing ADT Platform's app registration"
-  default     = ""
-}
-
-variable "platform_client_secret" {
-  type        = string
-  description = "The client secret of the existing ADT Platform's app registration"
-  default     = ""
+variable "tls_certificate_custom_key" {
+  type    = string
+  default = ""
 }
 
 # Backend remote vars

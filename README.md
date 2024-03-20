@@ -114,6 +114,7 @@
 | Name | Description |
 |------|-------------|
 | <a name="output_out_cluster_name"></a> [out\_cluster\_name](#output\_out\_cluster\_name) | n/a |
+| <a name="output_out_platform_sp_name"></a> [out\_platform\_sp\_name](#output\_out\_platform\_sp\_name) | n/a |
 | <a name="output_out_public_ip_name"></a> [out\_public\_ip\_name](#output\_out\_public\_ip\_name) | n/a |
 | <a name="output_out_vnet_name"></a> [out\_vnet\_name](#output\_out\_vnet\_name) | n/a |
 <!-- END_TF_DOCS -->

@@ -12,6 +12,7 @@ locals {
     "PROM_STORAGE_CLASS_NAME"       = var.prom_storage_class_name
     "PROM_CPU_MEM_LIMITS"           = var.prom_cpu_mem_limits
     "PROM_CPU_MEM_REQUESTS"         = var.prom_cpu_mem_request
+    "PROM_RETENTION"                = var.prom_retention
   }
 }
 

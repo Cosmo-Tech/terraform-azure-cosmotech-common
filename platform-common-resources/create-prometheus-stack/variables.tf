@@ -48,6 +48,11 @@ variable "prom_replicas_number" {
   default = "1"
 }
 
+variable "prom_retention" {
+  type    = string
+  default = "100d"
+}
+
 variable "redis_port" {
   type    = number
   default = 6379

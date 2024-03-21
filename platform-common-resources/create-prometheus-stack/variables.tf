@@ -75,5 +75,5 @@ variable "helm_release_name" {
 
 variable "prometheus_stack_version" {
   type    = string
-  default = "47.6.1"
+  default = "57.1.0"
 }

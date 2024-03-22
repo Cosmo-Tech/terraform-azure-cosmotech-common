@@ -114,7 +114,10 @@
 | Name | Description |
 |------|-------------|
 | <a name="output_out_cluster_name"></a> [out\_cluster\_name](#output\_out\_cluster\_name) | n/a |
+| <a name="output_out_networkadt_clientid"></a> [out\_networkadt\_clientid](#output\_out\_networkadt\_clientid) | n/a |
+| <a name="output_out_networkadt_sp_objectid"></a> [out\_networkadt\_sp\_objectid](#output\_out\_networkadt\_sp\_objectid) | n/a |
 | <a name="output_out_platform_sp_name"></a> [out\_platform\_sp\_name](#output\_out\_platform\_sp\_name) | n/a |
+| <a name="output_out_platform_sp_object_id"></a> [out\_platform\_sp\_object\_id](#output\_out\_platform\_sp\_object\_id) | n/a |
 | <a name="output_out_public_ip_name"></a> [out\_public\_ip\_name](#output\_out\_public\_ip\_name) | n/a |
 | <a name="output_out_vnet_name"></a> [out\_vnet\_name](#output\_out\_vnet\_name) | n/a |
 <!-- END_TF_DOCS -->

@@ -52,3 +52,11 @@ output "out_platform_vnet_name" {
 output "out_platform_sp_name" {
   value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_name : null
 }
+
+output "out_platform_sp_object_id" {
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_sp_object_id : null
+}
+
+output "out_networkadt_sp_objectid" {
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_networkadt_sp_objectid : null
+}

@@ -6,7 +6,6 @@ locals {
     project     = var.project_name
     cost_center = var.cost_center
   }
-  platform_client_id = var.platform_client_id != "" ? true : false
 }
 
 # Public IP
@@ -28,7 +27,7 @@ resource "azurerm_role_assignment" "publicip_contributor" {
 }
 
 resource "azurerm_role_assignment" "publicip_owner" {
-  count                = var.create_publicip && local.platform_client_id ? 1 : 0
+  count                = var.create_publicip ? 1 : 0
   scope                = var.create_publicip ? azurerm_public_ip.publicip[0].id : null
   role_definition_name = "Owner"
   principal_id         = var.platform_client_id

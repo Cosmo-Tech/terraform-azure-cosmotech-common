@@ -120,6 +120,10 @@ grafana:
         gnetId: 11001
         revision: 1
         datasource: Prometheus
+      rabbitmq:
+        gnetId: 10991
+        revision: 14
+        datasource: Prometheus
       csm_licensing:
         url: "https://raw.githubusercontent.com/Cosmo-Tech/azure-platform-deployment-tools/main/grafana/cosmotech_licensing/v8/cosmotech_licensing.json"
       csm_licensing_light:

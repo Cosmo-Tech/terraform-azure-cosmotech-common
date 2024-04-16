@@ -39,3 +39,7 @@ module "cert-manager" {
 
   depends_on = [module.create-ingress-nginx]
 }
+
+module "loki" {
+  source = "./create-loki"
+}

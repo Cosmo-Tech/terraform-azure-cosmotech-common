@@ -1,0 +1,42 @@
+loki:
+  persistence:
+    enabled: true
+    accessModes:
+    - ReadWriteOnce
+    size: "${LOKI_PERSISTENCE_MEMORY}"
+  config:
+    table_manager:
+      retention_deletes_enabled: true
+      retention_period: 720h
+promtail:
+  config:
+    clients:
+      - url: http://loki.${MONITORING_NAMESPACE}:3100/loki/api/v1/push
+    snippets:
+      pipelineStages:
+      - cri: {}
+      - match:
+          action: drop
+          pipeline_name: keep only workflows logs
+          selector: '{container!="main"}'
+      - match:
+          action: drop
+          pipeline_name: drop redis
+          selector: '{app="redis"}'
+      - match:
+          action: drop
+          pipeline_name: drop minio
+          selector: '{app="minio"}'
+      - match:
+          action: drop
+          pipeline_name: drop postgresql
+          selector: '{app="postgresql"}'
+      - match:
+          action: drop
+          pipeline_name: drop cosmotech-api
+          selector: '{app="cosmotech-api"}'
+      - output:
+          source: message
+  tolerations:
+    - effect: NoSchedule
+      operator: Exists

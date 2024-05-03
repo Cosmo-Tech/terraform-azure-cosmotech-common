@@ -43,4 +43,12 @@ module "cosmotech-platform" {
   resource_group       = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.resource_group
   loadbalancer_ip      = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : var.loadbalancer_ip
   kube_config          = module.cosmotech-prerequisites.out_aks_phoenix_config
+
+  # loki
+  loki_release_name                = var.loki_release_name
+  loki_persistence_memory          = var.loki_persistence_memory
+  loki_retention_period            = var.loki_retention_period
+  helm_repo_url                    = var.helm_repo_url
+  helm_chart                       = var.helm_chart
+  loki_max_entries_limet_per_query = var.loki_max_entries_limet_per_query
 }

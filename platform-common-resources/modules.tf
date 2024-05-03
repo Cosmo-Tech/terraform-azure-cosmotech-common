@@ -33,3 +33,17 @@ module "cert-manager" {
   tls_secret_name      = var.tls_secret_name
   api_dns_name         = var.api_dns_name
 }
+
+module "loki" {
+  source = "./create-loki"
+
+  namespace                        = var.namespace
+  monitoring_namespace             = var.monitoring_namespace
+  
+  loki_release_name                = var.loki_release_name
+  loki_persistence_memory          = var.loki_persistence_memory
+  loki_retention_period            = var.loki_retention_period
+  helm_repo_url                    = var.helm_repo_url
+  helm_chart                       = var.helm_chart
+  loki_max_entries_limet_per_query = var.loki_max_entries_limet_per_query
+}

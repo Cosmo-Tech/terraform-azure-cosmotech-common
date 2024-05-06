@@ -22,6 +22,7 @@ resource "helm_release" "loki" {
   repository = var.helm_repo_url
   chart      = var.helm_chart
   namespace  = var.monitoring_namespace
+  reset_values = true
   values = [
     templatefile("${path.module}/values.yaml", local.values_loki)
   ]

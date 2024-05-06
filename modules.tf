@@ -88,6 +88,8 @@ module "cosmotech-platform" {
   kube_config                      = module.cosmotech-prerequisites.out_aks_phoenix_config
   certificate_cert_content         = var.tls_certificate_custom_certificate
   certificate_key_content          = var.tls_certificate_custom_key
+
+  # loki
   loki_release_name                = var.loki_release_name
   loki_persistence_memory          = var.loki_persistence_memory
   loki_retention_period            = var.loki_retention_period

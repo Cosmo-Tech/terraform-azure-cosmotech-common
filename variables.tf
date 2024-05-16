@@ -519,7 +519,7 @@ variable "loki_max_entries_limet_per_query" {
 
 variable "temporary_name_for_rotation_system_pool" {
   type    = string
-  default = "system_rotation"
+  default = "systemrotation"
 }
 
 variable "kubernetes_min_monitoring_instances" {

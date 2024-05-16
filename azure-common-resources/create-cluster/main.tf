@@ -37,7 +37,7 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
 
   default_node_pool {
     name                        = "system"
-    temporary_name_for_rotation = var.temporary_name_for_rotation_system_pool
+    temporary_name_for_rotation = substr(var.temporary_name_for_rotation_system_pool, 0, 12)
     orchestrator_version        = var.kubernetes_version
     vm_size                     = var.kubernetes_nodepool_system_type
     max_pods                    = var.kubernetes_max_system_pods

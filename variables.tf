@@ -53,7 +53,7 @@ variable "kubernetes_network_plugin" {
 
 variable "kubernetes_version" {
   type    = string
-  default = "1.26.10"
+  default = "1.27.7"
 }
 
 variable "kubernetes_nodepool_system_type" {
@@ -122,7 +122,7 @@ variable "kubernetes_min_db_instances" {
 
 variable "kubernetes_max_db_instances" {
   type    = number
-  default = 5
+  default = 6
 }
 
 variable "publicip_new_or_existing_or_none" {

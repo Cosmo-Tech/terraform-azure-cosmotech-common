@@ -38,6 +38,7 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
   default_node_pool {
     name                        = "system"
     temporary_name_for_rotation = var.temporary_name_for_rotation_system_pool
+    orchestrator_version        = var.kubernetes_version
     vm_size                     = var.kubernetes_nodepool_system_type
     max_pods                    = 110
     max_count                   = 6
@@ -58,6 +59,7 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
 resource "azurerm_kubernetes_cluster_node_pool" "basic" {
   name                  = "basic"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
+  orchestrator_version  = var.kubernetes_version
   vm_size               = var.kubernetes_basic_compute_type
   max_pods              = 110
   max_count             = var.kubernetes_max_basic_compute_instances
@@ -82,6 +84,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "basic" {
 resource "azurerm_kubernetes_cluster_node_pool" "highcpu" {
   name                  = "highcpu"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
+  orchestrator_version  = var.kubernetes_version
   vm_size               = var.kubernetes_highcpu_compute_type
   max_pods              = 110
   max_count             = var.kubernetes_max_highcpu_compute_instances
@@ -106,6 +109,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "highcpu" {
 resource "azurerm_kubernetes_cluster_node_pool" "highmemory" {
   name                  = "highmemory"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
+  orchestrator_version  = var.kubernetes_version
   vm_size               = var.kubernetes_highmemory_compute_type
   max_pods              = 110
   max_count             = var.kubernetes_max_highmemory_compute_instances
@@ -130,6 +134,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "highmemory" {
 resource "azurerm_kubernetes_cluster_node_pool" "services" {
   name                  = "services"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
+  orchestrator_version  = var.kubernetes_version
   vm_size               = var.kubernetes_services_type
   max_pods              = 110
   max_count             = var.kubernetes_max_services_instances
@@ -154,6 +159,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "services" {
 resource "azurerm_kubernetes_cluster_node_pool" "db" {
   name                  = "db"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
+  orchestrator_version  = var.kubernetes_version
   vm_size               = var.kubernetes_db_type
   max_pods              = 110
   max_count             = var.kubernetes_max_db_instances
@@ -178,6 +184,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "db" {
 resource "azurerm_kubernetes_cluster_node_pool" "monitoring" {
   name                  = "monitoring"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
+  orchestrator_version  = var.kubernetes_version
   vm_size               = var.kubernetes_monitoring_type
   max_pods              = 110
   max_count             = var.kubernetes_max_monitoring_instances

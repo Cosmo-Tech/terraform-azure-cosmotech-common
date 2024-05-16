@@ -516,3 +516,8 @@ variable "loki_max_entries_limet_per_query" {
   type    = number
   default = 50000
 }
+
+variable "temporary_name_for_rotation_system_pool" {
+  type = string
+  default = "system_rotation"
+}

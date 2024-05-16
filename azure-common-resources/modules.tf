@@ -28,6 +28,7 @@ module "create-cluster" {
   kubernetes_basic_compute_type               = var.kubernetes_basic_compute_type
   kubernetes_nodepool_system_type             = var.kubernetes_nodepool_system_type
   kubernetes_network_plugin                   = var.kubernetes_network_plugin
+  temporary_name_for_rotation_system_pool     = var.temporary_name_for_rotation_system_pool
 
   depends_on = [
     module.create-platform-prerequisite, module.create-network, module.create-privatedns

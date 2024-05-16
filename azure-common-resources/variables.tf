@@ -402,3 +402,7 @@ variable "tenant_name" {
   type    = string
   default = "phoenix"
 }
+
+variable "temporary_name_for_rotation_system_pool" {
+  type = string
+}

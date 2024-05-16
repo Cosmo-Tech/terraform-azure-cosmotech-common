@@ -36,15 +36,16 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
   }
 
   default_node_pool {
-    name                = "system"
-    vm_size             = var.kubernetes_nodepool_system_type
-    max_pods            = 110
-    max_count           = 6
-    min_count           = 3
-    enable_auto_scaling = true
-    os_disk_size_gb     = 128
-    os_disk_type        = "Managed"
-    vnet_subnet_id      = var.subnet_id
+    name                        = "system"
+    temporary_name_for_rotation = var.temporary_name_for_rotation_system_pool
+    vm_size                     = var.kubernetes_nodepool_system_type
+    max_pods                    = 110
+    max_count                   = 6
+    min_count                   = 3
+    enable_auto_scaling         = true
+    os_disk_size_gb             = 128
+    os_disk_type                = "Managed"
+    vnet_subnet_id              = var.subnet_id
   }
 
   lifecycle {

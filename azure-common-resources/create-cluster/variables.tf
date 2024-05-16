@@ -108,3 +108,7 @@ variable "kubernetes_nodepool_system_type" {
 variable "kubernetes_network_plugin" {
   type = string
 }
+
+variable "temporary_name_for_rotation_system_pool" {
+  type = string
+}

@@ -62,20 +62,48 @@
 | <a name="input_kubernetes_azurefile_storage_class_sku"></a> [kubernetes\_azurefile\_storage\_class\_sku](#input\_kubernetes\_azurefile\_storage\_class\_sku) | n/a | `string` | `"Premium_LRS"` | no |
 | <a name="input_kubernetes_azurefile_storage_tags"></a> [kubernetes\_azurefile\_storage\_tags](#input\_kubernetes\_azurefile\_storage\_tags) | n/a | `string` | `""` | no |
 | <a name="input_kubernetes_basic_compute_type"></a> [kubernetes\_basic\_compute\_type](#input\_kubernetes\_basic\_compute\_type) | n/a | `string` | `"Standard_F4s_v2"` | no |
+| <a name="input_kubernetes_basic_enable_auto_scaling"></a> [kubernetes\_basic\_enable\_auto\_scaling](#input\_kubernetes\_basic\_enable\_auto\_scaling) | n/a | `bool` | `true` | no |
+| <a name="input_kubernetes_basic_os_disk_size"></a> [kubernetes\_basic\_os\_disk\_size](#input\_kubernetes\_basic\_os\_disk\_size) | n/a | `number` | `128` | no |
+| <a name="input_kubernetes_db_enable_auto_scaling"></a> [kubernetes\_db\_enable\_auto\_scaling](#input\_kubernetes\_db\_enable\_auto\_scaling) | n/a | `bool` | `true` | no |
+| <a name="input_kubernetes_db_os_disk_size"></a> [kubernetes\_db\_os\_disk\_size](#input\_kubernetes\_db\_os\_disk\_size) | n/a | `number` | `128` | no |
 | <a name="input_kubernetes_db_type"></a> [kubernetes\_db\_type](#input\_kubernetes\_db\_type) | n/a | `string` | `"Standard_D2ads_v5"` | no |
 | <a name="input_kubernetes_highcpu_compute_type"></a> [kubernetes\_highcpu\_compute\_type](#input\_kubernetes\_highcpu\_compute\_type) | n/a | `string` | `"Standard_F72s_v2"` | no |
+| <a name="input_kubernetes_highcpu_enable_auto_scaling"></a> [kubernetes\_highcpu\_enable\_auto\_scaling](#input\_kubernetes\_highcpu\_enable\_auto\_scaling) | n/a | `bool` | `true` | no |
+| <a name="input_kubernetes_highcpu_os_disk_size"></a> [kubernetes\_highcpu\_os\_disk\_size](#input\_kubernetes\_highcpu\_os\_disk\_size) | n/a | `number` | `128` | no |
 | <a name="input_kubernetes_highmemory_compute_type"></a> [kubernetes\_highmemory\_compute\_type](#input\_kubernetes\_highmemory\_compute\_type) | n/a | `string` | `"Standard_E16ads_v5"` | no |
+| <a name="input_kubernetes_highmemory_enable_auto_scaling"></a> [kubernetes\_highmemory\_enable\_auto\_scaling](#input\_kubernetes\_highmemory\_enable\_auto\_scaling) | n/a | `bool` | `true` | no |
+| <a name="input_kubernetes_highmemory_os_disk_size"></a> [kubernetes\_highmemory\_os\_disk\_size](#input\_kubernetes\_highmemory\_os\_disk\_size) | n/a | `number` | `128` | no |
 | <a name="input_kubernetes_max_basic_compute_instances"></a> [kubernetes\_max\_basic\_compute\_instances](#input\_kubernetes\_max\_basic\_compute\_instances) | n/a | `number` | `5` | no |
+| <a name="input_kubernetes_max_basic_pods"></a> [kubernetes\_max\_basic\_pods](#input\_kubernetes\_max\_basic\_pods) | n/a | `number` | `110` | no |
 | <a name="input_kubernetes_max_db_instances"></a> [kubernetes\_max\_db\_instances](#input\_kubernetes\_max\_db\_instances) | n/a | `number` | `5` | no |
+| <a name="input_kubernetes_max_db_pods"></a> [kubernetes\_max\_db\_pods](#input\_kubernetes\_max\_db\_pods) | n/a | `number` | `110` | no |
 | <a name="input_kubernetes_max_highcpu_compute_instances"></a> [kubernetes\_max\_highcpu\_compute\_instances](#input\_kubernetes\_max\_highcpu\_compute\_instances) | n/a | `number` | `2` | no |
+| <a name="input_kubernetes_max_highcpu_pods"></a> [kubernetes\_max\_highcpu\_pods](#input\_kubernetes\_max\_highcpu\_pods) | n/a | `number` | `110` | no |
 | <a name="input_kubernetes_max_highmemory_compute_instances"></a> [kubernetes\_max\_highmemory\_compute\_instances](#input\_kubernetes\_max\_highmemory\_compute\_instances) | n/a | `number` | `3` | no |
+| <a name="input_kubernetes_max_highmemory_pods"></a> [kubernetes\_max\_highmemory\_pods](#input\_kubernetes\_max\_highmemory\_pods) | n/a | `number` | `110` | no |
 | <a name="input_kubernetes_max_monitoring_instances"></a> [kubernetes\_max\_monitoring\_instances](#input\_kubernetes\_max\_monitoring\_instances) | n/a | `number` | `10` | no |
+| <a name="input_kubernetes_max_monitoring_pods"></a> [kubernetes\_max\_monitoring\_pods](#input\_kubernetes\_max\_monitoring\_pods) | n/a | `number` | `110` | no |
 | <a name="input_kubernetes_max_services_instances"></a> [kubernetes\_max\_services\_instances](#input\_kubernetes\_max\_services\_instances) | n/a | `number` | `5` | no |
+| <a name="input_kubernetes_max_services_pods"></a> [kubernetes\_max\_services\_pods](#input\_kubernetes\_max\_services\_pods) | n/a | `number` | `110` | no |
+| <a name="input_kubernetes_max_system_instances"></a> [kubernetes\_max\_system\_instances](#input\_kubernetes\_max\_system\_instances) | n/a | `number` | `6` | no |
+| <a name="input_kubernetes_max_system_pods"></a> [kubernetes\_max\_system\_pods](#input\_kubernetes\_max\_system\_pods) | n/a | `number` | `110` | no |
+| <a name="input_kubernetes_min_basic_compute_instances"></a> [kubernetes\_min\_basic\_compute\_instances](#input\_kubernetes\_min\_basic\_compute\_instances) | n/a | `number` | `1` | no |
 | <a name="input_kubernetes_min_db_instances"></a> [kubernetes\_min\_db\_instances](#input\_kubernetes\_min\_db\_instances) | n/a | `number` | `2` | no |
+| <a name="input_kubernetes_min_highcpu_compute_instances"></a> [kubernetes\_min\_highcpu\_compute\_instances](#input\_kubernetes\_min\_highcpu\_compute\_instances) | n/a | `number` | `0` | no |
+| <a name="input_kubernetes_min_highmemory_compute_instances"></a> [kubernetes\_min\_highmemory\_compute\_instances](#input\_kubernetes\_min\_highmemory\_compute\_instances) | n/a | `number` | `0` | no |
+| <a name="input_kubernetes_min_monitoring_instances"></a> [kubernetes\_min\_monitoring\_instances](#input\_kubernetes\_min\_monitoring\_instances) | n/a | `number` | `1` | no |
+| <a name="input_kubernetes_min_services_instances"></a> [kubernetes\_min\_services\_instances](#input\_kubernetes\_min\_services\_instances) | n/a | `number` | `2` | no |
+| <a name="input_kubernetes_min_system_instances"></a> [kubernetes\_min\_system\_instances](#input\_kubernetes\_min\_system\_instances) | n/a | `number` | `3` | no |
+| <a name="input_kubernetes_monitoring_enable_auto_scaling"></a> [kubernetes\_monitoring\_enable\_auto\_scaling](#input\_kubernetes\_monitoring\_enable\_auto\_scaling) | n/a | `bool` | `true` | no |
+| <a name="input_kubernetes_monitoring_os_disk_size"></a> [kubernetes\_monitoring\_os\_disk\_size](#input\_kubernetes\_monitoring\_os\_disk\_size) | n/a | `number` | `128` | no |
 | <a name="input_kubernetes_monitoring_type"></a> [kubernetes\_monitoring\_type](#input\_kubernetes\_monitoring\_type) | n/a | `string` | `"Standard_D2ads_v5"` | no |
 | <a name="input_kubernetes_network_plugin"></a> [kubernetes\_network\_plugin](#input\_kubernetes\_network\_plugin) | n/a | `string` | `"azure"` | no |
 | <a name="input_kubernetes_nodepool_system_type"></a> [kubernetes\_nodepool\_system\_type](#input\_kubernetes\_nodepool\_system\_type) | n/a | `string` | `"Standard_A2_v2"` | no |
+| <a name="input_kubernetes_services_enable_auto_scaling"></a> [kubernetes\_services\_enable\_auto\_scaling](#input\_kubernetes\_services\_enable\_auto\_scaling) | n/a | `bool` | `true` | no |
+| <a name="input_kubernetes_services_os_disk_size"></a> [kubernetes\_services\_os\_disk\_size](#input\_kubernetes\_services\_os\_disk\_size) | n/a | `number` | `128` | no |
 | <a name="input_kubernetes_services_type"></a> [kubernetes\_services\_type](#input\_kubernetes\_services\_type) | n/a | `string` | `"Standard_B4ms"` | no |
+| <a name="input_kubernetes_system_enable_auto_scaling"></a> [kubernetes\_system\_enable\_auto\_scaling](#input\_kubernetes\_system\_enable\_auto\_scaling) | n/a | `bool` | `true` | no |
+| <a name="input_kubernetes_system_os_disk_size"></a> [kubernetes\_system\_os\_disk\_size](#input\_kubernetes\_system\_os\_disk\_size) | n/a | `number` | `128` | no |
 | <a name="input_kubernetes_version"></a> [kubernetes\_version](#input\_kubernetes\_version) | n/a | `string` | `"1.26.10"` | no |
 | <a name="input_loadbalancer_ip"></a> [loadbalancer\_ip](#input\_loadbalancer\_ip) | n/a | `string` | `""` | no |
 | <a name="input_location"></a> [location](#input\_location) | The Azure location | `string` | `"West Europe"` | no |
@@ -100,6 +128,7 @@
 | <a name="input_publicip_resource_group"></a> [publicip\_resource\_group](#input\_publicip\_resource\_group) | n/a | `string` | `""` | no |
 | <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group) | n/a | `string` | `""` | no |
 | <a name="input_subnet_name"></a> [subnet\_name](#input\_subnet\_name) | n/a | `string` | `""` | no |
+| <a name="input_temporary_name_for_rotation_system_pool"></a> [temporary\_name\_for\_rotation\_system\_pool](#input\_temporary\_name\_for\_rotation\_system\_pool) | n/a | `string` | `"system_rotation"` | no |
 | <a name="input_tf_access_key"></a> [tf\_access\_key](#input\_tf\_access\_key) | Variable to be used with backend remote option :<br>First set necessary vars:<br>- export TF\_VAR\_tf\_access\_key="some\_value"<br>Then call terraform init:<br>terraform init \<br>    -backend-config "resource\_group\_name=$TF\_VAR\_tf\_resource\_group\_name" \<br>    -backend-config "storage\_account\_name=$TF\_VAR\_tf\_storage\_account\_name" \<br>    -backend-config "container\_name=$TF\_VAR\_tf\_container\_name" \<br>    -backend-config "key=$TF\_VAR\_tf\_blob\_name" \<br>    -backend-config "access\_key=$TF\_VAR\_tf\_access\_key" | `string` | `""` | no |
 | <a name="input_tf_blob_name"></a> [tf\_blob\_name](#input\_tf\_blob\_name) | Variable to be used with backend remote option :<br>First set necessary vars:<br>- export TF\_VAR\_tf\_blob\_name="some\_value"<br>Then call terraform init:<br>terraform init \<br>    -backend-config "resource\_group\_name=$TF\_VAR\_tf\_resource\_group\_name" \<br>    -backend-config "storage\_account\_name=$TF\_VAR\_tf\_storage\_account\_name" \<br>    -backend-config "container\_name=$TF\_VAR\_tf\_container\_name" \<br>    -backend-config "key=$TF\_VAR\_tf\_blob\_name" \<br>    -backend-config "access\_key=$TF\_VAR\_tf\_access\_key" | `string` | `""` | no |
 | <a name="input_tf_container_name"></a> [tf\_container\_name](#input\_tf\_container\_name) | Variable to be used with backend remote option :<br>First set necessary vars:<br>- export TF\_VAR\_tf\_container\_name="some\_value"<br>Then call terraform init:<br>terraform init \<br>    -backend-config "resource\_group\_name=$TF\_VAR\_tf\_resource\_group\_name" \<br>    -backend-config "storage\_account\_name=$TF\_VAR\_tf\_storage\_account\_name" \<br>    -backend-config "container\_name=$TF\_VAR\_tf\_container\_name" \<br>    -backend-config "key=$TF\_VAR\_tf\_blob\_name" \<br>    -backend-config "access\_key=$TF\_VAR\_tf\_access\_key" | `string` | `""` | no |

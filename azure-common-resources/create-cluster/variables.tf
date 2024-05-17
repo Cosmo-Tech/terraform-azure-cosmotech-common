@@ -224,3 +224,7 @@ variable "kubernetes_db_enable_auto_scaling" {
 variable "kubernetes_monitoring_enable_auto_scaling" {
   type    = bool
 }
+
+variable "kubernetes_nodepool_system_name" {
+  type = string
+}

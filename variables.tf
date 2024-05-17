@@ -661,3 +661,8 @@ variable "kubernetes_monitoring_enable_auto_scaling" {
   type    = bool
   default = true
 }
+
+variable "kubernetes_nodepool_system_name" {
+  type = string
+  default = "system"
+}

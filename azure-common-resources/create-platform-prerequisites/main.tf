@@ -86,18 +86,17 @@ resource "azuread_application" "platform" {
 }
 
 resource "azuread_service_principal" "platform" {
-  application_id = azuread_application.platform.application_id
-  # assignment required to secure Function Apps using thi App Registration as identity provider
+  client_id                    = azuread_application.platform.client_id
   app_role_assignment_required = true
 
   tags = ["cosmotech", var.project_stage, var.customer_name, var.project_name, "HideApp", "WindowsAzureActiveDirectoryIntegratedApp", "terraformed"]
 }
 
 resource "azuread_application_password" "platform_password" {
-  display_name          = "platform_secret"
-  count                 = var.create_secrets ? 1 : 0
-  application_object_id = azuread_application.platform.object_id
-  end_date_relative     = "4464h"
+  display_name      = "platform_secret"
+  count             = var.create_secrets ? 1 : 0
+  application_id    = azuread_application.platform.id
+  end_date_relative = "4464h"
 }
 
 
@@ -110,18 +109,18 @@ resource "azuread_application" "network_adt" {
 }
 
 resource "azuread_service_principal" "network_adt" {
+  client_id                    = azuread_application.network_adt.client_id
   depends_on                   = [azuread_service_principal.platform]
-  application_id               = azuread_application.network_adt.application_id
   app_role_assignment_required = false
 
   tags = ["cosmotech", var.project_stage, var.customer_name, var.project_name, "HideApp", "WindowsAzureActiveDirectoryIntegratedApp", "terraformed"]
 }
 
 resource "azuread_application_password" "network_adt_password" {
-  display_name          = "network_adt_secret"
-  count                 = var.create_secrets ? 1 : 0
-  application_object_id = azuread_application.network_adt.object_id
-  end_date_relative     = "4464h"
+  display_name      = "network_adt_secret"
+  count             = var.create_secrets ? 1 : 0
+  application_id    = azuread_application.network_adt.id
+  end_date_relative = "4464h"
 }
 
 # create the Azure AD resource group

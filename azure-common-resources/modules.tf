@@ -57,6 +57,7 @@ module "create-cluster" {
   kubernetes_services_os_disk_size            = var.kubernetes_services_os_disk_size
   kubernetes_system_os_disk_size              = var.kubernetes_system_os_disk_size
   kubernetes_min_highcpu_compute_instances    = var.kubernetes_min_highcpu_compute_instances
+  kubernetes_nodepool_system_name             = var.kubernetes_nodepool_system_name
 
   depends_on = [
     module.create-platform-prerequisite, module.create-network, module.create-privatedns

@@ -93,7 +93,7 @@ module "cosmotech-prerequisites" {
   kubernetes_monitoring_os_disk_size          = var.kubernetes_monitoring_os_disk_size
   kubernetes_services_os_disk_size            = var.kubernetes_services_os_disk_size
   kubernetes_system_os_disk_size              = var.kubernetes_system_os_disk_size
-
+  kubernetes_nodepool_system_name             = var.kubernetes_nodepool_system_name
 }
 
 module "cosmotech-platform" {

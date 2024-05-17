@@ -6,7 +6,7 @@ terraform {
     }
     azuread = {
       source  = "hashicorp/azuread"
-      version = "2.38.0"
+      version = "2.48.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
@@ -17,8 +17,8 @@ terraform {
       version = "2.9.0"
     }
     kubectl = {
-      source  = "gavinbunney/kubectl"
-      version = "1.14.0"
+      source  = "alekc/kubectl"
+      version = "2.0.4"
     }
   }
 }

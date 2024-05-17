@@ -7,7 +7,7 @@ output "out_tenant_id" {
 }
 
 output "out_platform_clientid" {
-  value = azuread_application.platform.application_id
+  value = azuread_application.platform.client_id
 }
 
 output "out_platform_sp_object_id" {
@@ -28,7 +28,7 @@ output "out_networkadt_sp_objectid" {
 }
 
 output "out_networkadt_clientid" {
-  value = azuread_application.network_adt.application_id
+  value = azuread_application.network_adt.client_id
 }
 
 output "out_network_adt_password" {

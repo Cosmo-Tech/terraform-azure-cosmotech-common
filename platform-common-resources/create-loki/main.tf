@@ -1,12 +1,3 @@
-terraform {
-  required_providers {
-    kubectl = {
-      source  = "gavinbunney/kubectl"
-      version = "1.14.0"
-    }
-  }
-}
-
 locals {
   values_loki = {
     "MONITORING_NAMESPACE"             = var.monitoring_namespace

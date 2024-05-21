@@ -676,3 +676,8 @@ variable "prom_cpu_mem_request" {
   type    = string
   default = "2Gi"
 }
+
+variable "grafana_loki_compatibility_image_tag" {
+  type = string
+  default = "9.3.6"
+}

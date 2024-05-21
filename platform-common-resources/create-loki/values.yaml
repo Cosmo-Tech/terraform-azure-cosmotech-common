@@ -21,7 +21,7 @@ grafana:
       - ReadWriteOnce
     size: "${LOKI_PERSISTENCE_MEMORY}"
   image:
-    tag: latest
+    tag: "${GRAFANA_IMAGE_TAG}"
 
 promtail:
   config:

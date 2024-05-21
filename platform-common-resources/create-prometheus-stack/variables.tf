@@ -35,12 +35,10 @@ variable "prom_storage_class_name" {
 
 variable "prom_cpu_mem_limits" {
   type    = string
-  default = "2Gi"
 }
 
 variable "prom_cpu_mem_request" {
   type    = string
-  default = "2Gi"
 }
 
 variable "prom_replicas_number" {

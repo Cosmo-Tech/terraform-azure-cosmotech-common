@@ -108,3 +108,11 @@ variable "loki_max_entries_limet_per_query" {
   type    = number
   default = 50000
 }
+
+variable "prom_cpu_mem_limits" {
+  type    = string
+}
+
+variable "prom_cpu_mem_request" {
+  type    = string
+}

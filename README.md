@@ -4,8 +4,9 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.9 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.38.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.48.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~>3.54.0 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 2.0.4 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.20.0 |
 
 ## Providers
@@ -54,6 +55,7 @@
 | <a name="input_dns_zone_name"></a> [dns\_zone\_name](#input\_dns\_zone\_name) | The DNS zone name to create platform subdomain. Example: api.cosmotech.com | `string` | `"api.cosmotech.com"` | no |
 | <a name="input_dns_zone_rg"></a> [dns\_zone\_rg](#input\_dns\_zone\_rg) | The DNS zone resource group | `string` | `"phoenix"` | no |
 | <a name="input_fqdn"></a> [fqdn](#input\_fqdn) | n/a | `string` | `""` | no |
+| <a name="input_grafana_loki_compatibility_image_tag"></a> [grafana\_loki\_compatibility\_image\_tag](#input\_grafana\_loki\_compatibility\_image\_tag) | n/a | `string` | `"9.3.6"` | no |
 | <a name="input_helm_chart"></a> [helm\_chart](#input\_helm\_chart) | n/a | `string` | `"loki-stack"` | no |
 | <a name="input_helm_repo_url"></a> [helm\_repo\_url](#input\_helm\_repo\_url) | n/a | `string` | `"https://grafana.github.io/helm-charts"` | no |
 | <a name="input_identifier_uri"></a> [identifier\_uri](#input\_identifier\_uri) | The platform identifier uri | `string` | `""` | no |
@@ -98,6 +100,7 @@
 | <a name="input_kubernetes_monitoring_os_disk_size"></a> [kubernetes\_monitoring\_os\_disk\_size](#input\_kubernetes\_monitoring\_os\_disk\_size) | n/a | `number` | `128` | no |
 | <a name="input_kubernetes_monitoring_type"></a> [kubernetes\_monitoring\_type](#input\_kubernetes\_monitoring\_type) | n/a | `string` | `"Standard_D2ads_v5"` | no |
 | <a name="input_kubernetes_network_plugin"></a> [kubernetes\_network\_plugin](#input\_kubernetes\_network\_plugin) | n/a | `string` | `"azure"` | no |
+| <a name="input_kubernetes_nodepool_system_name"></a> [kubernetes\_nodepool\_system\_name](#input\_kubernetes\_nodepool\_system\_name) | n/a | `string` | `"system"` | no |
 | <a name="input_kubernetes_nodepool_system_type"></a> [kubernetes\_nodepool\_system\_type](#input\_kubernetes\_nodepool\_system\_type) | n/a | `string` | `"Standard_A2_v2"` | no |
 | <a name="input_kubernetes_services_enable_auto_scaling"></a> [kubernetes\_services\_enable\_auto\_scaling](#input\_kubernetes\_services\_enable\_auto\_scaling) | n/a | `bool` | `true` | no |
 | <a name="input_kubernetes_services_os_disk_size"></a> [kubernetes\_services\_os\_disk\_size](#input\_kubernetes\_services\_os\_disk\_size) | n/a | `number` | `128` | no |
@@ -123,6 +126,8 @@
 | <a name="input_private_dns_name_queue"></a> [private\_dns\_name\_queue](#input\_private\_dns\_name\_queue) | n/a | `string` | `"privatelink.queue.core.windows.net"` | no |
 | <a name="input_private_dns_name_table"></a> [private\_dns\_name\_table](#input\_private\_dns\_name\_table) | n/a | `string` | `"privatelink.table.core.windows.net"` | no |
 | <a name="input_project_stage"></a> [project\_stage](#input\_project\_stage) | The Project stage | `string` | `"Dev"` | no |
+| <a name="input_prom_cpu_mem_limits"></a> [prom\_cpu\_mem\_limits](#input\_prom\_cpu\_mem\_limits) | n/a | `string` | `"4Gi"` | no |
+| <a name="input_prom_cpu_mem_request"></a> [prom\_cpu\_mem\_request](#input\_prom\_cpu\_mem\_request) | n/a | `string` | `"2Gi"` | no |
 | <a name="input_public_ip_name"></a> [public\_ip\_name](#input\_public\_ip\_name) | n/a | `string` | `""` | no |
 | <a name="input_publicip_new_or_existing_or_none"></a> [publicip\_new\_or\_existing\_or\_none](#input\_publicip\_new\_or\_existing\_or\_none) | n/a | `string` | `"new"` | no |
 | <a name="input_publicip_resource_group"></a> [publicip\_resource\_group](#input\_publicip\_resource\_group) | n/a | `string` | `""` | no |

@@ -1,13 +1,28 @@
 loki:
+  isDefault: false
   persistence:
     enabled: true
     accessModes:
     - ReadWriteOnce
     size: "${LOKI_PERSISTENCE_MEMORY}"
   config:
+    auth_enabled: false
     table_manager:
       retention_deletes_enabled: true
-      retention_period: 720h
+      retention_period: "${LOKI_RETENTION_PERIOD}"
+    limits_config:
+      max_entries_limit_per_query: ${LOKI_MAX_ENTRIES_LIMIT_PER_QUERY}
+grafana:
+  enabled: true
+  persistence:
+    type: pvc
+    enabled: true
+    accessModes:
+      - ReadWriteOnce
+    size: "${LOKI_PERSISTENCE_MEMORY}"
+  image:
+    tag: latest
+
 promtail:
   config:
     clients:
@@ -15,6 +30,21 @@ promtail:
     snippets:
       pipelineStages:
       - cri: {}
+      - match:
+          selector: '{job="*"} |= "workflow"'
+          stages:
+            - json:
+                expressions:
+                  output: log
+            - json:
+                source: output
+                expressions:
+                  message: message
+                  level: log.level
+            - labels:
+                tenant_id:
+                message:
+                namespace:
       - match:
           action: drop
           pipeline_name: keep only workflows logs

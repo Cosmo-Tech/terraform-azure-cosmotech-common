@@ -126,4 +126,8 @@ module "cosmotech-platform" {
   helm_repo_url                    = var.helm_repo_url
   helm_chart                       = var.helm_chart
   loki_max_entries_limet_per_query = var.loki_max_entries_limet_per_query
+
+  # prometheus
+  prom_cpu_mem_limits  = var.prom_cpu_mem_limits
+  prom_cpu_mem_request = var.prom_cpu_mem_request
 }

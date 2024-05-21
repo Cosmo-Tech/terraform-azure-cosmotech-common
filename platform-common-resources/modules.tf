@@ -22,6 +22,8 @@ module "create-prometheus-stack" {
   tls_secret_name      = local.tls_secret_name
   redis_admin_password = random_password.redis_admin_password.result
   prom_admin_password  = random_password.prom_admin_password.result
+  prom_cpu_mem_limits  = var.prom_cpu_mem_limits
+  prom_cpu_mem_request = var.prom_cpu_mem_request
 }
 
 module "cert-manager" {
@@ -43,13 +45,14 @@ module "cert-manager" {
 module "loki" {
   source = "./create-loki"
 
-  namespace                        = var.namespace
-  monitoring_namespace             = var.monitoring_namespace
-  
-  loki_release_name                = var.loki_release_name
-  loki_persistence_memory          = var.loki_persistence_memory
-  loki_retention_period            = var.loki_retention_period
-  helm_repo_url                    = var.helm_repo_url
-  helm_chart                       = var.helm_chart
-  loki_max_entries_limet_per_query = var.loki_max_entries_limet_per_query
+  namespace            = var.namespace
+  monitoring_namespace = var.monitoring_namespace
+
+  loki_release_name                    = var.loki_release_name
+  loki_persistence_memory              = var.loki_persistence_memory
+  loki_retention_period                = var.loki_retention_period
+  helm_repo_url                        = var.helm_repo_url
+  helm_chart                           = var.helm_chart
+  loki_max_entries_limet_per_query     = var.loki_max_entries_limet_per_query
+  grafana_loki_compatibility_image_tag = var.grafana_loki_compatibility_image_tag
 }

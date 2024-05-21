@@ -120,12 +120,13 @@ module "cosmotech-platform" {
   certificate_key_content  = var.tls_certificate_custom_key
 
   # loki
-  loki_release_name                = var.loki_release_name
-  loki_persistence_memory          = var.loki_persistence_memory
-  loki_retention_period            = var.loki_retention_period
-  helm_repo_url                    = var.helm_repo_url
-  helm_chart                       = var.helm_chart
-  loki_max_entries_limet_per_query = var.loki_max_entries_limet_per_query
+  loki_release_name                    = var.loki_release_name
+  loki_persistence_memory              = var.loki_persistence_memory
+  loki_retention_period                = var.loki_retention_period
+  helm_repo_url                        = var.helm_repo_url
+  helm_chart                           = var.helm_chart
+  loki_max_entries_limet_per_query     = var.loki_max_entries_limet_per_query
+  grafana_loki_compatibility_image_tag = var.grafana_loki_compatibility_image_tag
 
   # prometheus
   prom_cpu_mem_limits  = var.prom_cpu_mem_limits

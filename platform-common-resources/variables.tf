@@ -116,3 +116,8 @@ variable "prom_cpu_mem_limits" {
 variable "prom_cpu_mem_request" {
   type    = string
 }
+
+
+variable "grafana_loki_compatibility_image_tag" {
+  type = string
+}

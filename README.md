@@ -19,7 +19,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cosmotech-platform"></a> [cosmotech-platform](#module\_cosmotech-platform) | ./platform-common-resources | n/a |
+| <a name="module_cosmotech-platform"></a> [cosmotech-platform](#module\_cosmotech-platform) | git@github.com:Cosmo-Tech/terraform-cosmotech-platform-core/ | master |
 | <a name="module_cosmotech-prerequisites"></a> [cosmotech-prerequisites](#module\_cosmotech-prerequisites) | ./azure-common-resources | n/a |
 
 ## Resources

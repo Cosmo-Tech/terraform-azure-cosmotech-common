@@ -97,7 +97,7 @@ module "cosmotech-prerequisites" {
 }
 
 module "cosmotech-platform" {
-  source = "./platform-common-resources"
+  source = "git@github.com:Cosmo-Tech/terraform-cosmotech-platform-core/?ref=main"
 
   client_id                = var.client_id     # Should be discarded
   client_secret            = var.client_secret # Should be discarded

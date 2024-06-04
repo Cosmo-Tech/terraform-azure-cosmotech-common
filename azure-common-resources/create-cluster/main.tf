@@ -1,5 +1,5 @@
 locals {
-  dns_prefix = substr("${var.cluster_name}-aks", 0, 80)
+  dns_prefix = "${var.cluster_name}-aks"
   tags = {
     vendor      = "cosmotech"
     stage       = var.project_stage
@@ -10,7 +10,7 @@ locals {
 }
 
 resource "azurerm_kubernetes_cluster" "phoenixcluster" {
-  name                              = substr(var.cluster_name, 0, 80)
+  name                              = var.cluster_name
   location                          = var.location
   resource_group_name               = var.resource_group
   dns_prefix                        = local.dns_prefix
@@ -36,7 +36,7 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
   }
 
   default_node_pool {
-    name                        = substr(var.kubernetes_nodepool_system_name, 0, 80)
+    name                        = substr(var.kubernetes_nodepool_system_name, 0, 12)
     temporary_name_for_rotation = substr(var.temporary_name_for_rotation_system_pool, 0, 12)
     orchestrator_version        = var.kubernetes_version
     vm_size                     = var.kubernetes_nodepool_system_type

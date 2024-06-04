@@ -1,5 +1,5 @@
 locals {
-  dns_prefix = "${var.cluster_name}-aks"
+  dns_prefix = substr("${var.cluster_name}-aks", 0, 80)
   tags = {
     vendor      = "cosmotech"
     stage       = var.project_stage
@@ -10,7 +10,7 @@ locals {
 }
 
 resource "azurerm_kubernetes_cluster" "phoenixcluster" {
-  name                              = var.cluster_name
+  name                              = substr(var.cluster_name, 0, 80)
   location                          = var.location
   resource_group_name               = var.resource_group
   dns_prefix                        = local.dns_prefix

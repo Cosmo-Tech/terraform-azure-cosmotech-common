@@ -6,7 +6,7 @@ module "create-cluster" {
   subnet_id            = local.platform_subnet_id
 
   location                                    = var.location
-  resource_group                              = var.resource_group
+  resource_group                              = local.resource_group
   cluster_name                                = var.cluster_name
   project_stage                               = var.project_stage
   project_name                                = var.project_name
@@ -101,7 +101,7 @@ module "create-platform-prerequisite" {
   owner_list       = var.owner_list
   audience         = var.audience
   location         = var.location
-  resource_group   = var.resource_group
+  resource_group   = local.resource_group
   dns_zone_name    = var.dns_zone_name
   dns_zone_rg      = var.dns_zone_rg
   dns_record       = var.dns_record

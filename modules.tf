@@ -113,7 +113,7 @@ module "cosmotech-platform" {
   create_prometheus_stack  = var.create_prometheus_stack
   publicip_resource_group  = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.publicip_resource_group
   api_dns_name             = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_fqdn : var.fqdn
-  resource_group           = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.resource_group
+  resource_group           = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : local.resource_group
   loadbalancer_ip          = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : var.loadbalancer_ip
   kube_config              = module.cosmotech-prerequisites.out_aks_phoenix_config
   certificate_cert_content = var.tls_certificate_custom_certificate

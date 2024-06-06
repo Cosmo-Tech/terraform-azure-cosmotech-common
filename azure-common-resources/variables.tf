@@ -420,7 +420,7 @@ variable "kubernetes_min_highmemory_compute_instances" {
 }
 
 variable "kubernetes_min_highcpu_compute_instances" {
-  type    = number
+  type = number
 }
 
 variable "kubernetes_min_basic_compute_instances" {
@@ -452,71 +452,71 @@ variable "kubernetes_max_highmemory_pods" {
 }
 
 variable "kubernetes_max_highcpu_pods" {
-  type    = number
+  type = number
 }
 
 variable "kubernetes_max_basic_pods" {
-  type    = number
+  type = number
 }
 
 variable "kubernetes_max_system_pods" {
-  type    = number
+  type = number
 }
 
 variable "kubernetes_monitoring_os_disk_size" {
-  type    = number
+  type = number
 }
 
 variable "kubernetes_db_os_disk_size" {
-  type    = number
+  type = number
 }
 
 variable "kubernetes_services_os_disk_size" {
-  type    = number
+  type = number
 }
 
 variable "kubernetes_highmemory_os_disk_size" {
-  type    = number
+  type = number
 }
 
 variable "kubernetes_highcpu_os_disk_size" {
-  type    = number
+  type = number
 }
 
 variable "kubernetes_basic_os_disk_size" {
-  type    = number
+  type = number
 }
 
 variable "kubernetes_system_os_disk_size" {
-  type    = number
+  type = number
 }
 
 variable "kubernetes_system_enable_auto_scaling" {
-  type    = bool
+  type = bool
 }
 
 variable "kubernetes_basic_enable_auto_scaling" {
-  type    = bool
+  type = bool
 }
 
 variable "kubernetes_highcpu_enable_auto_scaling" {
-  type    = bool
+  type = bool
 }
 
 variable "kubernetes_highmemory_enable_auto_scaling" {
-  type    = bool
+  type = bool
 }
 
 variable "kubernetes_services_enable_auto_scaling" {
-  type    = bool
+  type = bool
 }
 
 variable "kubernetes_db_enable_auto_scaling" {
-  type    = bool
+  type = bool
 }
 
 variable "kubernetes_monitoring_enable_auto_scaling" {
-  type    = bool
+  type = bool
 }
 
 variable "kubernetes_nodepool_system_name" {

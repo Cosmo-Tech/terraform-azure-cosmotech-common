@@ -97,7 +97,8 @@ module "cosmotech-prerequisites" {
 }
 
 module "cosmotech-platform" {
-  source = "./platform-common-resources"
+  source  = "Cosmo-Tech/platform-core/cosmotech"
+  version = "0.4.0"
 
   client_id                = var.client_id     # Should be discarded
   client_secret            = var.client_secret # Should be discarded

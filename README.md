@@ -19,8 +19,8 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cosmotech-platform"></a> [cosmotech-platform](#module\_cosmotech-platform) | ./platform-common-resources | n/a |
 | <a name="module_cosmotech-prerequisites"></a> [cosmotech-prerequisites](#module\_cosmotech-prerequisites) | ./azure-common-resources | n/a |
+| <a name="module_platform-core"></a> [platform-core](#module\_platform-core) | Cosmo-Tech/platform-core/cosmotech | 0.2.0 |
 
 ## Resources
 

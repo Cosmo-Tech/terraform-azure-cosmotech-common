@@ -96,9 +96,9 @@ module "cosmotech-prerequisites" {
   kubernetes_nodepool_system_name             = var.kubernetes_nodepool_system_name
 }
 
-module "cosmotech-platform" {
-  source = "git@github.com:Cosmo-Tech/terraform-cosmotech-platform-core/?ref=main"
-
+module "platform-core" {
+  source = "Cosmo-Tech/platform-core/cosmotech"
+  version = "0.2.0"
   client_id                = var.client_id     # Should be discarded
   client_secret            = var.client_secret # Should be discarded
   subscription_id          = var.subscription_id

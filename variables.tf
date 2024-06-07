@@ -663,7 +663,7 @@ variable "kubernetes_monitoring_enable_auto_scaling" {
 }
 
 variable "kubernetes_nodepool_system_name" {
-  type = string
+  type    = string
   default = "system"
 }
 
@@ -678,6 +678,6 @@ variable "prom_cpu_mem_request" {
 }
 
 variable "grafana_loki_compatibility_image_tag" {
-  type = string
+  type    = string
   default = "9.3.6"
 }

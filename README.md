@@ -6,6 +6,7 @@
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.9 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.48.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~>3.54.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.9.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 2.0.4 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.20.0 |
 
@@ -19,7 +20,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cosmotech-platform"></a> [cosmotech-platform](#module\_cosmotech-platform) | ./platform-common-resources | n/a |
+| <a name="module_cosmotech-platform"></a> [cosmotech-platform](#module\_cosmotech-platform) | Cosmo-Tech/platform-core/cosmotech | 1.0.0 |
 | <a name="module_cosmotech-prerequisites"></a> [cosmotech-prerequisites](#module\_cosmotech-prerequisites) | ./azure-common-resources | n/a |
 
 ## Resources

@@ -98,12 +98,8 @@ module "cosmotech-prerequisites" {
 
 module "cosmotech-platform" {
   source  = "Cosmo-Tech/platform-core/cosmotech"
-  version = "1.0.0"
+  version = "1.1.1"
 
-  client_id                = var.client_id     # Should be discarded
-  client_secret            = var.client_secret # Should be discarded
-  subscription_id          = var.subscription_id
-  tenant_id                = var.tenant_id
   cluster_issuer_email     = var.cluster_issuer_email
   cluster_issuer_name      = var.cluster_issuer_name
   tls_secret_name          = local.tls_secret_name

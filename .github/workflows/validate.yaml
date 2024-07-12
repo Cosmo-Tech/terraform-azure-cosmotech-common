@@ -1,0 +1,16 @@
+name: Validate
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs: 
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: module terraform init
+        run: terraform init
+      - name: validate configuration
+        run: terraform validate

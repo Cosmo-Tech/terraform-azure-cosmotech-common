@@ -681,3 +681,11 @@ variable "grafana_loki_compatibility_image_tag" {
   type    = string
   default = "9.3.6"
 }
+
+variable "create_keycloak" {
+  type = bool
+}
+
+variable "is_bare_metal" {
+  type = bool
+}

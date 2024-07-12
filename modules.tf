@@ -98,7 +98,7 @@ module "cosmotech-prerequisites" {
 
 module "cosmotech-platform" {
   source  = "Cosmo-Tech/platform-core/cosmotech"
-  version = "1.1.1"
+  version = "1.1.2"
 
   cluster_issuer_email     = var.cluster_issuer_email
   cluster_issuer_name      = var.cluster_issuer_name
@@ -128,4 +128,7 @@ module "cosmotech-platform" {
   # prometheus
   prom_cpu_mem_limits  = var.prom_cpu_mem_limits
   prom_cpu_mem_request = var.prom_cpu_mem_request
+
+  is_bare_metal   = var.is_bare_metal
+  create_keycloak = var.create_keycloak
 }

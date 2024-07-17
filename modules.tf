@@ -98,7 +98,7 @@ module "cosmotech-prerequisites" {
 
 module "cosmotech-platform" {
   source  = "Cosmo-Tech/platform-core/cosmotech"
-  version = "1.1.2"
+  version = "1.1.3"
 
   cluster_issuer_email     = var.cluster_issuer_email
   cluster_issuer_name      = var.cluster_issuer_name
@@ -112,7 +112,7 @@ module "cosmotech-platform" {
   api_dns_name             = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_fqdn : var.fqdn
   resource_group           = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.resource_group
   loadbalancer_ip          = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : var.loadbalancer_ip
-  kube_config              = module.cosmotech-prerequisites.out_aks_phoenix_config
+  # kube_config              = module.cosmotech-prerequisites.out_aks_phoenix_config
   certificate_cert_content = var.tls_certificate_custom_certificate
   certificate_key_content  = var.tls_certificate_custom_key
 

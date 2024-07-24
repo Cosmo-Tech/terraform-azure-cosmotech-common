@@ -55,7 +55,7 @@ variable "virtual_network_subnet_address_prefix" {
 
 variable "subnet_name" {
   type    = string
-  default = ""
+  default = "default"
 }
 
 variable "create_dnsrecord" {
@@ -101,6 +101,7 @@ variable "loadbalancer_ip" {
 variable "dns_record" {
   description = "The DNS zone name to create platform subdomain. Example: myplatform"
   type        = string
+  default     = ""
 }
 
 variable "dns_zone_name" {

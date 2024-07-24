@@ -24,7 +24,6 @@ variable "subnet_id" {
 
 variable "kubernetes_version" {
   type    = string
-  default = "1.26.6"
 }
 
 variable "project_stage" {
@@ -59,7 +58,6 @@ variable "project_name" {
 
 variable "cost_center" {
   type    = string
-  default = "NA"
 }
 
 # aks variables

@@ -4,7 +4,6 @@ variable "resource_group" {
 
 variable "vnet_iprange" {
   type    = string
-  default = "10.21.0.0/16"
 }
 
 variable "network_sp_objectid" {
@@ -37,7 +36,6 @@ variable "project_name" {
 
 variable "location" {
   description = "The Azure location"
-  default     = "West Europe"
 }
 
 variable "cost_center" {
@@ -54,12 +52,10 @@ variable "vnet_name" {
 
 variable "subnet_name" {
   type    = string
-  default = "default"
 }
 
 variable "subnet_iprange" {
   type    = string
-  default = "10.21.0.0/16"
 }
 
 variable "vnet_resource_group" {

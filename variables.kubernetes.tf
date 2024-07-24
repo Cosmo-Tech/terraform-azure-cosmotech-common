@@ -8,7 +8,6 @@ variable "api_version_path" {
   default     = "/"
 }
 
-
 variable "kubernetes_version" {
   type    = string
   default = "1.27.7"

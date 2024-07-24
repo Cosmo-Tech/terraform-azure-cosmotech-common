@@ -5,6 +5,7 @@ module "cosmotech-prerequisites" {
   client_secret   = var.client_secret
   subscription_id = var.subscription_id
   tenant_id       = var.tenant_id
+  tenant_name     = var.tenant_name
   location        = var.location
 
   resource_group   = local.resource_group
@@ -16,6 +17,11 @@ module "cosmotech-prerequisites" {
   owner_list       = var.owner_list
   audience         = var.audience
   api_version_path = var.api_version_path
+
+  user_app_role  = var.user_app_role
+  create_secrets = var.create_secrets
+  create_babylon = var.create_babylon
+  cost_center    = var.cost_center
 
   # publicip
   create_publicip         = var.publicip_new_or_existing_or_none == "new" ? true : false

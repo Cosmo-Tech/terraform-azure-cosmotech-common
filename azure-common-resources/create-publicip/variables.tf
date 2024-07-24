@@ -29,6 +29,7 @@ variable "cost_center" {
   type = string
 }
 variable "publicip_resource_group" {
+  type    = string
 }
 variable "network_sp_objectid" {
   type = string

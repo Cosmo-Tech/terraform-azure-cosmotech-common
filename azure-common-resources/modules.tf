@@ -81,6 +81,8 @@ module "create-network" {
   project_name        = var.project_name
   subscription_id     = var.subscription_id
   vnet_resource_group = local.vnet_resource_group
+  subnet_iprange      = var.subnet_iprange
+  subnet_name         = var.subnet_name
 
   depends_on = [module.create-platform-prerequisite]
 }
@@ -111,6 +113,7 @@ module "create-platform-prerequisite" {
   user_app_role    = var.user_app_role
   image_path       = var.image_path
   cost_center      = var.cost_center
+  create_secrets   = var.create_secrets
 }
 
 module "create-privatedns" {

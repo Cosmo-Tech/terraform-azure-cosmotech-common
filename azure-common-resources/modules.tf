@@ -114,6 +114,7 @@ module "create-platform-prerequisite" {
   image_path       = var.image_path
   cost_center      = var.cost_center
   create_secrets   = var.create_secrets
+  subnet_name      = var.subnet_name
 }
 
 module "create-privatedns" {

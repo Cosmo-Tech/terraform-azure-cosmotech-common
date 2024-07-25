@@ -58,6 +58,11 @@ variable "project_name" {
   type        = string
 }
 
+variable "subnet_name" {
+  description = "The subnet name"
+  type        = string
+}
+
 variable "owner_list" {
   description = "List of mail addresses for App Registration owners"
   type        = list(string)

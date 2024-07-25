@@ -1,7 +1,7 @@
 locals {
   pre_name       = "Cosmo Tech "
   post_name      = " ${var.project_stage} For ${var.customer_name} ${var.project_name}"
-  subnet_name    = "default"
+  subnet_name    = var.subnet_name
   identifier_uri = "https://${var.dns_record}.${var.dns_zone_name}"
   platform_url   = var.platform_url != "" ? var.platform_url : "https://${var.dns_record}.${var.dns_zone_name}"
   vnet_iprange   = var.vnet_iprange != "" ? var.vnet_iprange : "10.21.0.0/16"

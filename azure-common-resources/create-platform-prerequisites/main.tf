@@ -12,6 +12,10 @@ locals {
     project     = var.project_name
     cost_center = var.cost_center
   }
+  # Azure IDs
+  microsoft_graph_resource_access_id = "00000003-0000-0000-c000-000000000000" # Microsoft Graph
+  user_read_resource_access_id       = "e1fe6dd8-ba31-4d61-89e7-88639da4683d" # User.Read
+  platform_resource_access_id        = "6332363e-bcba-4c4a-a605-c25f23117400" # platform
 }
 
 data "azuread_users" "owners" {
@@ -29,10 +33,10 @@ resource "azuread_application" "platform" {
   tags = ["HideApp", "WindowsAzureActiveDirectoryIntegratedApp", var.project_stage, var.customer_name, var.project_name, "terraformed"]
 
   required_resource_access {
-    resource_app_id = "00000003-0000-0000-c000-000000000000" # Microsoft Graph
+    resource_app_id = local.microsoft_graph_resource_access_id # Microsoft Graph
 
     resource_access {
-      id   = "e1fe6dd8-ba31-4d61-89e7-88639da4683d" # User.Read
+      id   = local.user_read_resource_access_id # User.Read
       type = "Scope"
     }
   }
@@ -53,7 +57,7 @@ resource "azuread_application" "platform" {
       admin_consent_description  = "Allow the application to use the Cosmo Tech Platform with user account"
       admin_consent_display_name = "Cosmo Tech Platform Impersonate"
       enabled                    = true
-      id                         = "6332363e-bcba-4c4a-a605-c25f23117400"
+      id                         = local.platform_resource_access_id
       type                       = "User"
       user_consent_description   = "Allow the application to use the Cosmo Tech Platform with your account"
       user_consent_display_name  = "Cosmo Tech Platform Usage"

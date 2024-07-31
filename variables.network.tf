@@ -18,11 +18,6 @@ variable "publicip_new_or_existing_or_none" {
   default = "new"
 }
 
-variable "publicip_resource_group" {
-  type    = string
-  default = ""
-}
-
 variable "public_ip_name" {
   type    = string
   default = ""
@@ -91,11 +86,6 @@ variable "network_sp_object_id" {
   type        = string
   description = "The ID of the existing Network's service principal"
   default     = ""
-}
-
-variable "loadbalancer_ip" {
-  type    = string
-  default = ""
 }
 
 variable "dns_record" {

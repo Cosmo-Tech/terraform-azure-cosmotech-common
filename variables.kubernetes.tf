@@ -28,19 +28,9 @@ variable "monitoring_namespace" {
   default = "cosmotech-monitoring"
 }
 
-variable "create_prometheus_stack" {
-  type    = bool
-  default = true
-}
-
 variable "temporary_name_for_rotation_system_pool" {
   type    = string
   default = "systemrotation"
-}
-
-variable "ingress_nginx_version" {
-  type    = string
-  default = "4.2.5"
 }
 
 variable "kubernetes_azurefile_storage_class_sku" {

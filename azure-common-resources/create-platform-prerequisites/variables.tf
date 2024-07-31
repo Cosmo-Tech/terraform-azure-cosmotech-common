@@ -21,13 +21,11 @@ variable "client_secret" {
 variable "platform_url" {
   description = "The platform url"
   type        = string
-  default     = ""
 }
 
 variable "identifier_uri" {
   description = "The platform identifier uri"
   type        = string
-  default     = ""
 }
 
 variable "project_stage" {
@@ -60,6 +58,11 @@ variable "project_name" {
   type        = string
 }
 
+variable "subnet_name" {
+  description = "The subnet name"
+  type        = string
+}
+
 variable "owner_list" {
   description = "List of mail addresses for App Registration owners"
   type        = list(string)
@@ -75,12 +78,10 @@ variable "audience" {
     ], var.audience)
     error_message = "Only AzureADMyOrg and AzureADMultipleOrgs are supported for audience."
   }
-  default = "AzureADMultipleOrgs"
 }
 
 variable "location" {
   description = "The Azure location"
-  default     = "West Europe"
 }
 
 variable "resource_group" {
@@ -91,7 +92,6 @@ variable "resource_group" {
 variable "create_secrets" {
   description = "Create secret for application registrtations"
   type        = bool
-  default     = true
 }
 
 variable "dns_zone_name" {
@@ -117,7 +117,6 @@ variable "vnet_iprange" {
 variable "api_version_path" {
   description = "The API version path"
   type        = string
-  default     = "/"
 }
 
 variable "user_app_role" {
@@ -132,10 +131,8 @@ variable "user_app_role" {
 
 variable "image_path" {
   type    = string
-  default = "./cosmotech.png"
 }
 
 variable "cost_center" {
   type    = string
-  default = "NA"
 }

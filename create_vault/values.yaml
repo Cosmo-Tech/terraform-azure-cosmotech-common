@@ -1,0 +1,56 @@
+global:
+  enabled: true
+  namespace: ${NAMESPACE}
+
+  # Image pull secret to use for registry authentication.
+  # Alternatively, the value may be specified as an array of strings.
+  imagePullSecrets: []
+  # imagePullSecrets:
+  #   - name: image-pull-secret
+  tlsDisable: true
+  externalVaultAddr: ""
+server:
+  enabled: "-"
+
+
+  resources: {}
+  # resources:
+  #   requests:
+  #     memory: 256Mi
+  #     cpu: 250m
+  #   limits:
+  #     memory: 256Mi
+  #     cpu: 250m
+  ingress:
+    enabled: ${VAULT_INGRESS_ENABLED}
+    annotations:
+      cert-manager.io/cluster-issuer: ${TLS_SECRET_NAME}
+      kubernetes.io/ingress.class: nginx
+    # When HA mode is enabled and K8s service registration is being used,
+    # configure the ingress to point to the Vault active service.
+    activeService: true
+    hosts:
+      - host: ${VAULT_DNS_NAME}
+    tls:
+      - secretName: ${TLS_SECRET_NAME}
+        hosts: ["${VAULT_DNS_NAME}"]
+  dataStorage:
+    enabled: true
+    # Size of the PVC created
+    size: 10Gi
+    # Location where the PVC will be mounted.
+    mountPath: "/vault/data"
+    # Name of the storage class to use.  If null it will use the
+    # configured default Storage Class.
+    storageClass: null
+    # Access Mode of the storage device being used for the PVC
+    accessMode: ReadWriteOnce
+    # Annotations to apply to the PVC
+    annotations: {}
+    # Labels to apply to the PVC
+    labels: {}
+  ha:
+    enabled: true
+    replicas: ${VAULT_REPLICAS}
+    disruptionBudget:
+      enabled: false

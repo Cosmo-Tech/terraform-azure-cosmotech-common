@@ -132,3 +132,20 @@ module "cosmotech-platform" {
   is_bare_metal   = var.is_bare_metal
   create_keycloak = var.create_keycloak
 }
+
+module "create_vault" {
+  source = "./create_vault"
+
+  count = var.create_vault ? 1 : 0
+
+  namespace             = var.vault_namespace
+  helm_repo_url         = var.vault_helm_repo_url
+  helm_chart            = var.vault_helm_chart
+  helm_chart_version    = var.vault_helm_chart_version
+  helm_release_name     = var.vault_helm_release_name
+  vault_replicas        = var.vault_replicas
+  vault_ingress_enabled = var.vault_ingress_enabled
+  vault_secret_name     = var.vault_secret_name
+  tls_secret_name       = var.tls_secret_name
+  vault_dns_name        = var.vault_dns_name
+}

@@ -10,13 +10,13 @@ terraform {
 locals {
   values_vault = {
     "VAULT_REPLICAS"        = var.vault_replicas
-    "VAULT_INGRESS_ENABLED" = var.vault_ingress_enabled
     "NAMESPACE"             = var.namespace
-    "VAULT_DNS_NAME"        = var.vault_dns_name
-    "TLS_SECRET_NAME"       = local.tls_secret_name
-  }
+#     "VAULT_INGRESS_ENABLED" = var.vault_ingress_enabled
+#     "VAULT_DNS_NAME"        = var.vault_dns_name
+#     "TLS_SECRET_NAME"       = local.tls_secret_name
+    }
   instance_name = "${var.helm_release_name}-HA-${var.namespace}"
-  tls_secret_name = "${var.tls_secret_name}-${var.namespace}"
+  # tls_secret_name = "${var.tls_secret_name}-${var.namespace}"
 }
 
 resource "kubernetes_namespace" "vault_namespace" {

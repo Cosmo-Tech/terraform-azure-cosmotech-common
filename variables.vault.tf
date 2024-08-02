@@ -27,14 +27,14 @@ variable "vault_replicas" {
     type = number
 }
 
-variable "vault_ingress_enabled" {
-  type = bool
-}
-
 variable "vault_secret_name" {
   type = string
 }
 
-variable "vault_dns_name" {
-  type = string
-}
+# variable "vault_dns_name" {
+#   type = string
+# }
+
+# variable "vault_ingress_enabled" {
+#   type = bool
+# }

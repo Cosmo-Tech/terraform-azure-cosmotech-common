@@ -52,5 +52,40 @@ server:
   ha:
     enabled: true
     replicas: ${VAULT_REPLICAS}
+    raft:
+
+      # Enables Raft integrated storage
+      enabled: true
+      # Set the Node Raft ID to the name of the pod
+      setNodeId: true
+
+      # Note: Configuration files are stored in ConfigMaps so sensitive data
+      # such as passwords should be either mounted through extraSecretEnvironmentVars
+      # or through a Kube secret.  For more information see:
+      # https://developer.hashicorp.com/vault/docs/platform/k8s/helm/run#protecting-sensitive-vault-configurations
+      config: |
+        ui = true
+
+        listener "tcp" {
+          tls_disable = 1
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+        }
+
+        storage "raft" {
+          path = "/vault/data"
+        }
+
+        service_registration "kubernetes" {}
     disruptionBudget:
       enabled: false
+
+  affinity: |
+    # podAntiAffinity:
+    #   requiredDuringSchedulingIgnoredDuringExecution:
+    #     - labelSelector:
+    #         matchLabels:
+    #           app.kubernetes.io/name: {{ template "vault.name" . }}
+    #           app.kubernetes.io/instance: "{{ .Release.Name }}"
+    #           component: server
+    #       topologyKey: kubernetes.io/hostname

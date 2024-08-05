@@ -45,6 +45,6 @@ resource "null_resource" "vault_unseal" {
   depends_on = [helm_release.vault]
 
   provisioner "local-exec" {
-    command = "sh ./unseal.sh ${var.namespace} ${var.vault_secret_name}"
+    command = "sh ${path.module}/unseal.sh ${var.namespace} ${var.vault_secret_name} ${var.vault_replicas}"
   }
 }

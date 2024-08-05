@@ -15,7 +15,7 @@ locals {
 #     "VAULT_DNS_NAME"        = var.vault_dns_name
 #     "TLS_SECRET_NAME"       = local.tls_secret_name
     }
-  instance_name = "${var.helm_release_name}-HA-${var.namespace}"
+  instance_name = "${var.helm_release_name}-${var.namespace}"
   # tls_secret_name = "${var.tls_secret_name}-${var.namespace}"
 }
 

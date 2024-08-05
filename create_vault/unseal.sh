@@ -36,3 +36,10 @@ for i in $(seq 1 $(($REPLICAS - 1))); do
     kubectl exec vault-$i --namespace $NAMESPACE -- vault operator unseal $key
   done
 done
+
+echo "Waiting for 30 seconds before starting..."
+sleep 30
+
+echo "Raft list-peers output:"
+kubectl exec vault-0 --namespace $NAMESPACE -- vault login $root_token
+kubectl exec vault-0 --namespace $NAMESPACE -- vault operator raft list-peers

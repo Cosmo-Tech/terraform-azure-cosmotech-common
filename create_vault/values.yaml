@@ -21,19 +21,19 @@ server:
   #   limits:
   #     memory: 256Mi
   #     cpu: 250m
-  ingress:
-    enabled: ${VAULT_INGRESS_ENABLED}
-    annotations:
-      cert-manager.io/cluster-issuer: ${TLS_SECRET_NAME}
-      kubernetes.io/ingress.class: nginx
-    # When HA mode is enabled and K8s service registration is being used,
-    # configure the ingress to point to the Vault active service.
-    activeService: true
-    hosts:
-      - host: ${VAULT_DNS_NAME}
-    tls:
-      - secretName: ${TLS_SECRET_NAME}
-        hosts: ["${VAULT_DNS_NAME}"]
+  # ingress:
+  #   enabled: ${VAULT_INGRESS_ENABLED}
+  #   annotations:
+  #     cert-manager.io/cluster-issuer: ${TLS_SECRET_NAME}
+  #     kubernetes.io/ingress.class: nginx
+  #   # When HA mode is enabled and K8s service registration is being used,
+  #   # configure the ingress to point to the Vault active service.
+  #   activeService: true
+  #   hosts:
+  #     - host: ${VAULT_DNS_NAME}
+  #   tls:
+  #     - secretName: ${TLS_SECRET_NAME}
+  #       hosts: ["${VAULT_DNS_NAME}"]
   dataStorage:
     enabled: true
     # Size of the PVC created

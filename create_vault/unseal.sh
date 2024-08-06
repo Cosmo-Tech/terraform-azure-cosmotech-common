@@ -40,6 +40,7 @@ done
 echo "Waiting for 30 seconds before starting..."
 sleep 30
 
+# Output token and pods state
 echo "Raft list-peers output:"
 kubectl exec vault-0 --namespace $NAMESPACE -- vault login $root_token
 kubectl exec vault-0 --namespace $NAMESPACE -- vault operator raft list-peers

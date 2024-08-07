@@ -182,3 +182,15 @@ module "create_vault" {
   # tls_secret_name       = var.tls_secret_name
   vault_dns_name        = var.api_dns_name
 }
+
+module "create_vault_secrets_operator" {
+  source = "./create-vault-operator"
+
+  count = var.create_vault_secrets_operator ? 1 : 0
+
+  namespace             = var.vault_secrets_operator_namespace
+  helm_repo_url         = var.vault_secrets_operator_helm_repo_url
+  helm_chart            = var.vault_secrets_operator_helm_chart
+  helm_chart_version    = var.vault_secrets_operator_helm_chart_version
+  helm_release_name     = var.vault_secrets_operator_helm_release_name
+}

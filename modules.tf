@@ -132,3 +132,19 @@ module "cosmotech-platform" {
   is_bare_metal   = var.is_bare_metal
   create_keycloak = var.create_keycloak
 }
+
+module "create_argocd" {
+  source = "./create_argocd"
+
+  count = var.create_argocd ? 1 : 0
+
+  namespace               = var.argocd_namespace
+  helm_repo_url           = var.argocd_helm_repo_url
+  helm_chart              = var.argocd_helm_chart
+  helm_chart_version      = var.argocd_helm_chart_version
+  helm_release_name       = var.argocd_helm_release_name
+  replicas                = var.argocd_replicas
+  create_ingress          = var.argocd_create_ingress
+  argocd_project          = var.argocd_project
+  argocd_repositories     = var.argocd_repositories
+}

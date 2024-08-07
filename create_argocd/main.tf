@@ -1,0 +1,186 @@
+terraform {
+  required_providers {
+    kubectl = {
+      source  = "alekc/kubectl"
+      version = "2.0.4"
+    }
+  }
+}
+
+locals {
+  values_argocd = {
+    "REPLICAS"              = var.replicas
+    "NAMESPACE"             = var.namespace
+    "CREATE_INGRESS"        = var.create_ingress
+    }
+  instance_name = "${var.helm_release_name}"
+}
+
+resource "kubernetes_namespace" "argocd_namespace" {
+  metadata {
+    name = var.namespace
+  }
+}
+
+resource "helm_release" "argocd" {
+  name       = local.instance_name
+  repository = var.helm_repo_url
+  chart      = var.helm_chart
+  version    = var.helm_chart_version
+  namespace  = var.namespace
+
+  reuse_values = true
+  timeout      = 600
+
+  values = [
+    templatefile("${path.module}/values.yaml", local.values_argocd)
+  ]
+}
+
+# RBAC
+resource "kubernetes_manifest" "argocd_setup_serviceaccount" {
+  manifest = yamldecode(templatefile("${path.module}/argocd-setup-serviceaccount.yaml.tpl", 
+    local.values_argocd
+  ))
+}
+
+resource "kubernetes_manifest" "argocd_setup_role" {
+  manifest = yamldecode(templatefile("${path.module}/argocd-setup-role.yaml.tpl",
+    local.values_argocd
+  ))
+}
+
+resource "kubernetes_manifest" "argocd_setup_rolebinding" {
+  manifest = yamldecode(templatefile("${path.module}/argocd-setup-rolebinding.yaml.tpl",
+    local.values_argocd
+  ))
+}
+
+# ------------- GET ARGOCD PASSWORD ------------ #
+
+resource "kubernetes_config_map" "get_password_script" {
+  metadata {
+    name      = "get-password-script"
+    namespace = var.namespace
+  }
+
+  data = {
+    "get-password.sh" = file("${path.module}/get-password.sh")
+  }
+}
+
+resource "kubernetes_job" "get_argocd_password" {
+  metadata {
+    name      = "get-argocd-password-job"
+    namespace = var.namespace
+  }
+
+  spec {
+    template {
+      metadata {
+        name = "get-argocd-password-job"
+      }
+
+      spec {
+        restart_policy = "OnFailure"
+        service_account_name = "argocd-setup"
+        container {
+          name  = "get-password"
+          image = "bitnami/kubectl:latest"
+          command = ["/bin/sh", "/scripts/get-password.sh", var.namespace]
+
+          volume_mount {
+            name       = "scripts"
+            mount_path = "/scripts/get-password.sh"
+            sub_path   = "get-password.sh"
+          }
+        }
+
+        volume {
+          name = "scripts"
+
+          config_map {
+            name = kubernetes_config_map.get_password_script.metadata[0].name
+          }
+        }
+      }
+    }
+  }
+
+  depends_on = [helm_release.argocd]
+}
+
+# ------------- CONFIGURE ARGOCD ------------ #
+
+resource "kubernetes_config_map" "argocd_script" {
+  metadata {
+    name      = "argocd-setup-script"
+    namespace = var.namespace
+  }
+
+  data = {
+    "setup.sh" = file("${path.module}/argocd-setup.sh")
+  }
+  depends_on = [ helm_release.argocd ]
+}
+
+resource "kubernetes_job" "argocd_setup" {
+  metadata {
+    name      = "argocd-setup-job"
+    namespace = var.namespace
+  }
+
+  spec {
+    template {
+      metadata {
+        name = "argocd-setup-job"
+      }
+
+      spec {
+        restart_policy = "OnFailure"
+        service_account_name = "argocd-setup"
+        container {
+          name  = "setup-argocd"
+          image = "argoproj/argocd:v2.0.5"
+          command = ["/bin/sh", "/scripts/setup.sh", var.namespace, var.argocd_project, join(",", var.argocd_repositories)]
+
+          volume_mount {
+            name       = "scripts"
+            mount_path = "/scripts/setup.sh"
+            sub_path   = "setup.sh"
+          }
+          volume_mount {
+            name       = "argocd-initial-admin-secret"
+            mount_path = "/etc/argocd-initial-admin-secret"
+            read_only  = true
+          }
+        }
+
+        volume {
+          name = "scripts"
+
+          config_map {
+            name = kubernetes_config_map.argocd_script.metadata[0].name
+          }
+        }
+
+        volume {
+          name = "argocd-initial-admin-secret"
+
+          secret {
+            secret_name = "argocd-initial-admin-secret"
+          }
+        }
+      }
+    }
+  }
+
+  depends_on = [
+    kubernetes_job.get_argocd_password,
+    helm_release.argocd, 
+    kubernetes_config_map.argocd_script,
+    kubernetes_manifest.argocd_setup_role,
+    kubernetes_manifest.argocd_setup_rolebinding,
+    kubernetes_manifest.argocd_setup_serviceaccount
+  ]
+}

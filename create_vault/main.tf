@@ -72,41 +72,48 @@ resource "kubernetes_config_map" "vault_unseal_script" {
   depends_on = [ helm_release.vault ]
 }
 
-#Pod
-resource "kubernetes_pod" "vault_unseal" {
+#Job for script
+resource "kubernetes_job" "vault_unseal" {
   metadata {
     name      = "vault-unseal"
     namespace = var.namespace
   }
 
   spec {
-    service_account_name = "vault-unseal"
-    container {
-      name  = "vault-unseal"
-      image = "bitnami/kubectl:latest"
-      command = ["/bin/bash", "/scripts/unseal.sh", var.namespace, var.vault_secret_name, var.vault_replicas]
-
-      volume_mount {
-        name       = "script-volume"
-        mount_path = "/scripts/unseal.sh"
-        sub_path   = "unseal.sh"
+    template {
+      metadata {
+        name = "vault-unseal"
       }
-    }
 
-    volume {
-      name = "script-volume"
+      spec {
+        restart_policy = "OnFailure"
+        service_account_name = "vault-unseal"
+        container {
+          name  = "vault-unseal"
+          image = "bitnami/kubectl:latest"
+          command = ["/bin/bash", "/scripts/unseal.sh", var.namespace, var.vault_secret_name, var.vault_replicas]
 
-      config_map {
-        name = kubernetes_config_map.vault_unseal_script.metadata[0].name
+          volume_mount {
+            name       = "script-volume"
+            mount_path = "/scripts/unseal.sh"
+            sub_path   = "unseal.sh"
+          }
+        }
 
-        items {
-          key  = "unseal.sh"
-          path = "unseal.sh"
+        volume {
+          name = "script-volume"
+
+          config_map {
+            name = kubernetes_config_map.vault_unseal_script.metadata[0].name
+
+            items {
+              key  = "unseal.sh"
+              path = "unseal.sh"
+            }
+          }
         }
       }
     }
-
-    restart_policy = "OnFailure"
   }
   depends_on = [ 
     helm_release.vault, 

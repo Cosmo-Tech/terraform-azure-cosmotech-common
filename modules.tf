@@ -134,7 +134,7 @@ module "cosmotech-platform" {
 }
 
 module "create_vault_secrets_operator" {
-  source = "./create-vault-operator"
+  source = "./create-vault-secrets-operator"
 
   count = var.create_vault_secrets_operator ? 1 : 0
 

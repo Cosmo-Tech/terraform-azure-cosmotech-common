@@ -44,6 +44,7 @@
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The project name | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The subscription id | `string` | n/a | yes |
 | <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | n/a | `string` | n/a | yes |
+| <a name="input_vault_secrets_operator_allowed_namespaces"></a> [vault\_secrets\_operator\_allowed\_namespaces](#input\_vault\_secrets\_operator\_allowed\_namespaces) | List of namespaces allowed to access secrets | `list(string)` | n/a | yes |
 | <a name="input_vault_secrets_operator_helm_chart"></a> [vault\_secrets\_operator\_helm\_chart](#input\_vault\_secrets\_operator\_helm\_chart) | n/a | `string` | n/a | yes |
 | <a name="input_vault_secrets_operator_helm_chart_version"></a> [vault\_secrets\_operator\_helm\_chart\_version](#input\_vault\_secrets\_operator\_helm\_chart\_version) | n/a | `string` | n/a | yes |
 | <a name="input_vault_secrets_operator_helm_release_name"></a> [vault\_secrets\_operator\_helm\_release\_name](#input\_vault\_secrets\_operator\_helm\_release\_name) | n/a | `string` | n/a | yes |
@@ -153,6 +154,7 @@
 | <a name="input_tls_certificate_type"></a> [tls\_certificate\_type](#input\_tls\_certificate\_type) | n/a | `string` | `"let_s_encrypt"` | no |
 | <a name="input_tls_secret_name"></a> [tls\_secret\_name](#input\_tls\_secret\_name) | n/a | `string` | `"letsencrypt-prod"` | no |
 | <a name="input_vault_secrets_operator_namespace"></a> [vault\_secrets\_operator\_namespace](#input\_vault\_secrets\_operator\_namespace) | n/a | `string` | `"vault-secrets-operator"` | no |
+| <a name="input_vault_secrets_operator_vault_address"></a> [vault\_secrets\_operator\_vault\_address](#input\_vault\_secrets\_operator\_vault\_address) | n/a | `string` | `"http://vault.vault.svc.cluster.local:8200"` | no |
 | <a name="input_virtual_network_address_prefix"></a> [virtual\_network\_address\_prefix](#input\_virtual\_network\_address\_prefix) | The Virtual Network IP range. Minimum /26 NetMaskLength | `string` | `"10.21.0.0/16"` | no |
 | <a name="input_virtual_network_subnet_address_prefix"></a> [virtual\_network\_subnet\_address\_prefix](#input\_virtual\_network\_subnet\_address\_prefix) | n/a | `string` | `"10.21.0.0/16"` | no |
 | <a name="input_vnet_name"></a> [vnet\_name](#input\_vnet\_name) | n/a | `string` | `""` | no |

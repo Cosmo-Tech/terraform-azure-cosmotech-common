@@ -22,7 +22,7 @@
 |------|--------|---------|
 | <a name="module_cosmotech-platform"></a> [cosmotech-platform](#module\_cosmotech-platform) | Cosmo-Tech/platform-core/cosmotech | 1.1.3 |
 | <a name="module_cosmotech-prerequisites"></a> [cosmotech-prerequisites](#module\_cosmotech-prerequisites) | ./azure-common-resources | n/a |
-| <a name="module_create_vault_secrets_operator"></a> [create\_vault\_secrets\_operator](#module\_create\_vault\_secrets\_operator) | ./create-vault-operator | n/a |
+| <a name="module_create_vault_secrets_operator"></a> [create\_vault\_secrets\_operator](#module\_create\_vault\_secrets\_operator) | ./create-vault-secrets-operator | n/a |
 
 ## Resources
 

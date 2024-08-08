@@ -17,3 +17,12 @@ variable "helm_chart_version" {
 variable "helm_release_name" {
   type    = string
 }
+
+variable "vault_address" {
+  type = string
+}
+
+variable "allowed_namespaces" {
+  type        = list(string)
+  description = "List of namespaces allowed to access secrets"
+}

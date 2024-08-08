@@ -193,4 +193,6 @@ module "create_vault_secrets_operator" {
   helm_chart            = var.vault_secrets_operator_helm_chart
   helm_chart_version    = var.vault_secrets_operator_helm_chart_version
   helm_release_name     = var.vault_secrets_operator_helm_release_name
+  vault_address         = var.vault_secrets_operator_vault_address
+  allowed_namespaces    = var.vault_secrets_operator_allowed_namespaces
 }

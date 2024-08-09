@@ -78,7 +78,7 @@ resource "kubernetes_job" "vault_unseal" {
     name      = "vault-unseal"
     namespace = var.namespace
   }
-
+  wait_for_completion = false
   spec {
     template {
       metadata {

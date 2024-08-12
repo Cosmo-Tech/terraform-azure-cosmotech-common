@@ -4,3 +4,6 @@
 terraform.*
 tfplan*
 *.sh
+!argocd-setup.sh
+!get-password.sh
+!unseal.sh

@@ -38,3 +38,7 @@ variable "argocd_project" {
 variable "argocd_repositories" {
   type = list(string)
 }
+
+variable "argocd_dns_name" {
+  type = string
+}

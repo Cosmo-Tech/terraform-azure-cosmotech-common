@@ -11,8 +11,8 @@ server:
     enabled: ${CREATE_INGRESS}
     annotations: {}
     ingressClassName: ""
-    hostname: ""
-    path: /
+    hostname: ${ARGOCD_DNS_NAME}
+    path: /argocd
     pathType: Prefix
     tls: false
 

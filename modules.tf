@@ -145,9 +145,9 @@ module "create_vault" {
   helm_release_name     = var.vault_helm_release_name
   vault_replicas        = var.vault_replicas
   vault_secret_name     = var.vault_secret_name
-  # vault_ingress_enabled = var.vault_ingress_enabled
+  vault_ingress_enabled = var.vault_ingress_enabled
   # tls_secret_name       = var.tls_secret_name
-  # vault_dns_name        = var.vault_dns_name
+  vault_dns_name        = var.vault_dns_name
 }
 
 module "create_vault_secrets_operator" {
@@ -178,6 +178,7 @@ module "create_argocd" {
   helm_release_name       = var.argocd_helm_release_name
   replicas                = var.argocd_replicas
   create_ingress          = var.argocd_create_ingress
+  argocd_dns_name         = var.argocd_dns_name
   argocd_project          = var.argocd_project
   argocd_repositories     = var.argocd_repositories
 

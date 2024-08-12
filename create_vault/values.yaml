@@ -80,3 +80,42 @@ server:
     #           app.kubernetes.io/instance: "{{ .Release.Name }}"
     #           component: server
     #       topologyKey: kubernetes.io/hostname
+
+  ingress:
+    enabled: ${NVAULT_INGRESS_ENABLED}
+    labels: {}
+      # traffic: external
+    annotations: {}
+      # |
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+      #   or
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+
+    # Optionally use ingressClassName instead of deprecated annotation.
+    # See: https://kubernetes.io/docs/concepts/services-networking/ingress/#deprecated-annotation
+    ingressClassName: ""
+
+    # As of Kubernetes 1.19, all Ingress Paths must have a pathType configured. The default value below should be sufficient in most cases.
+    # See: https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types for other possible values.
+    pathType: Prefix
+
+    # When HA mode is enabled and K8s service registration is being used,
+    # configure the ingress to point to the Vault active service.
+    activeService: true
+    hosts:
+      - host: ${VAULT_DNS_NAME}
+        paths: ['/vault']
+    ## Extra paths to prepend to the host configuration. This is useful when working with annotation based services.
+    extraPaths: []
+    # - path: /*
+    #   backend:
+    #     service:
+    #       name: ssl-redirect
+    #       port:
+    #         number: use-annotation
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local

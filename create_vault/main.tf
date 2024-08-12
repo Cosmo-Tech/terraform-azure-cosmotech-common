@@ -11,8 +11,8 @@ locals {
   values_vault = {
     "REPLICAS"              = var.vault_replicas
     "NAMESPACE"             = var.namespace
-#     "VAULT_INGRESS_ENABLED" = var.vault_ingress_enabled
-#     "VAULT_DNS_NAME"        = var.vault_dns_name
+    "VAULT_INGRESS_ENABLED" = var.vault_ingress_enabled
+    "VAULT_DNS_NAME"        = var.vault_dns_name
 #     "TLS_SECRET_NAME"       = local.tls_secret_name
     }
   instance_name = "${var.helm_release_name}"

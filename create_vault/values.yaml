@@ -31,8 +31,8 @@ server:
 
         listener "tcp" {
           tls_disable = 1
-          address = "[::]:8200"
-          cluster_address = "[::]:8201"
+          address = "127.0.0.1:8200"
+          cluster_address = "127.0.0.1:8201"
           # Enable unauthenticated metrics access (necessary for Prometheus Operator)
           #telemetry {
           #  unauthenticated_metrics_access = "true"
@@ -41,6 +41,15 @@ server:
 
         storage "raft" {
           path = "/vault/data"
+          retry_join {
+          leader_api_addr = "http://vault-0.vault-internal:8200"
+          }
+          retry_join {
+          leader_api_addr = "http://vault-1.vault-internal:8200"
+          }
+          retry_join {
+          leader_api_addr = "http://vault-2.vault-internal:8200"
+          }
         }
 
         service_registration "kubernetes" {}
@@ -62,6 +71,7 @@ server:
     annotations:
       nginx.ingress.kubernetes.io/ssl-passthrough: "false"
       nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+#      nginx.ingress.kubernetes.io/proxy-body-size: "100m"
     ingressClassName: "nginx"
     pathType: Prefix
     activeService: true

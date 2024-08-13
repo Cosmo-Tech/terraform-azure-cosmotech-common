@@ -37,6 +37,7 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_argocd_create_ingress"></a> [argocd\_create\_ingress](#input\_argocd\_create\_ingress) | n/a | `bool` | n/a | yes |
+| <a name="input_argocd_dns_name"></a> [argocd\_dns\_name](#input\_argocd\_dns\_name) | n/a | `string` | n/a | yes |
 | <a name="input_argocd_helm_chart"></a> [argocd\_helm\_chart](#input\_argocd\_helm\_chart) | n/a | `string` | n/a | yes |
 | <a name="input_argocd_helm_chart_version"></a> [argocd\_helm\_chart\_version](#input\_argocd\_helm\_chart\_version) | n/a | `string` | n/a | yes |
 | <a name="input_argocd_helm_release_name"></a> [argocd\_helm\_release\_name](#input\_argocd\_helm\_release\_name) | n/a | `string` | n/a | yes |
@@ -56,10 +57,12 @@
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The project name | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The subscription id | `string` | n/a | yes |
 | <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | n/a | `string` | n/a | yes |
+| <a name="input_vault_dns_name"></a> [vault\_dns\_name](#input\_vault\_dns\_name) | n/a | `string` | n/a | yes |
 | <a name="input_vault_helm_chart"></a> [vault\_helm\_chart](#input\_vault\_helm\_chart) | n/a | `string` | n/a | yes |
 | <a name="input_vault_helm_chart_version"></a> [vault\_helm\_chart\_version](#input\_vault\_helm\_chart\_version) | n/a | `string` | n/a | yes |
 | <a name="input_vault_helm_release_name"></a> [vault\_helm\_release\_name](#input\_vault\_helm\_release\_name) | n/a | `string` | n/a | yes |
 | <a name="input_vault_helm_repo_url"></a> [vault\_helm\_repo\_url](#input\_vault\_helm\_repo\_url) | n/a | `string` | n/a | yes |
+| <a name="input_vault_ingress_enabled"></a> [vault\_ingress\_enabled](#input\_vault\_ingress\_enabled) | n/a | `bool` | n/a | yes |
 | <a name="input_vault_replicas"></a> [vault\_replicas](#input\_vault\_replicas) | n/a | `number` | n/a | yes |
 | <a name="input_vault_secret_name"></a> [vault\_secret\_name](#input\_vault\_secret\_name) | n/a | `string` | n/a | yes |
 | <a name="input_vault_secrets_operator_allowed_namespaces"></a> [vault\_secrets\_operator\_allowed\_namespaces](#input\_vault\_secrets\_operator\_allowed\_namespaces) | List of namespaces allowed to access secrets | `list(string)` | n/a | yes |

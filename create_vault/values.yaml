@@ -1,16 +1,10 @@
 global:
   enabled: true
   namespace: ${NAMESPACE}
-
-  # Image pull secret to use for registry authentication.
-  # Alternatively, the value may be specified as an array of strings.
-  imagePullSecrets: []
-  # imagePullSecrets:
-  #   - name: image-pull-secret
   tlsDisable: true
-  externalVaultAddr: ""
 server:
-  enabled: "-"
+  standalone:
+    enabled: false
 
 
   resources: {}
@@ -23,33 +17,16 @@ server:
   #     cpu: 250m
   dataStorage:
     enabled: true
-    # Size of the PVC created
     size: 10Gi
-    # Location where the PVC will be mounted.
     mountPath: "/vault/data"
-    # Name of the storage class to use.  If null it will use the
-    # configured default Storage Class.
     storageClass: null
-    # Access Mode of the storage device being used for the PVC
     accessMode: ReadWriteOnce
-    # Annotations to apply to the PVC
-    annotations: {}
-    # Labels to apply to the PVC
-    labels: {}
   ha:
     enabled: true
     replicas: ${REPLICAS}
     raft:
-
-      # Enables Raft integrated storage
       enabled: true
-      # Set the Node Raft ID to the name of the pod
       setNodeId: true
-
-      # Note: Configuration files are stored in ConfigMaps so sensitive data
-      # such as passwords should be either mounted through extraSecretEnvironmentVars
-      # or through a Kube secret.  For more information see:
-      # https://developer.hashicorp.com/vault/docs/platform/k8s/helm/run#protecting-sensitive-vault-configurations
       config: |
         ui = true
 
@@ -65,8 +42,17 @@ server:
 
         storage "raft" {
           path = "/vault/data"
+          retry_join {
+          leader_api_addr = "http://vault-0.vault-internal:8200"
+          }
+          retry_join {
+          leader_api_addr = "http://vault-1.vault-internal:8200"
+          }
+          retry_join {
+          leader_api_addr = "http://vault-2.vault-internal:8200"
+          }
         }
-
+        disable_mlock = true
         service_registration "kubernetes" {}
     disruptionBudget:
       enabled: false
@@ -80,3 +66,26 @@ server:
     #           app.kubernetes.io/instance: "{{ .Release.Name }}"
     #           component: server
     #       topologyKey: kubernetes.io/hostname
+
+  ingress:
+    enabled: ${VAULT_INGRESS_ENABLED}
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    ingressClassName: "nginx"
+    pathType: Prefix
+    activeService: true
+    hosts:
+      - host: ${VAULT_DNS_NAME}
+    extraPaths:
+      - path: "/(.*)"
+        pathType: Prefix
+        backend:
+          service:
+            name: vault-active
+            port:
+              number: 8200
+        
+ui:
+  enabled: true
+        

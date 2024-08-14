@@ -25,16 +25,12 @@ done
 echo "Waiting for 30 seconds before starting..."
 sleep 30
 
-# Join raft
-for i in $(seq 1 $(($REPLICAS - 1))); do
-  kubectl exec vault-$i -n $NAMESPACE -- vault operator raft join http://vault-0.vault-internal:8200
-done
-
 # Unseal replicas
 for i in $(seq 1 $(($REPLICAS - 1))); do
   for key in $unseal_keys; do
     kubectl exec vault-$i --namespace $NAMESPACE -- vault operator unseal $key
   done
+  echo "replica $i unsealed"
 done
 
 echo "Waiting for 30 seconds before starting..."

@@ -180,5 +180,5 @@ module "create_vault" {
   vault_secret_name     = var.vault_secret_name
   vault_ingress_enabled = var.vault_ingress_enabled
   # tls_secret_name       = var.tls_secret_name
-  vault_dns_name        = var.vault_dns_name
+  vault_dns_name        = var.api_dns_name
 }

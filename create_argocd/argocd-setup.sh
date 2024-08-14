@@ -15,12 +15,14 @@ ARGOCD_PASSWORD=$(cat /etc/argocd-initial-admin-secret/password)
 echo "Serveur Argo CD disponible à l'adresse : $ARGOCD_SERVER"
 
 # Login to argo cd
-argocd login $ARGOCD_SERVER --username admin --password $ARGOCD_PASSWORD --insecure
+argocd login $ARGOCD_SERVER --username admin --password $ARGOCD_PASSWORD --insecure --plaintext
+
+echo "logged"
 
 # Add repositories
 if [ -n "$REPOSITORIES" ]; then
     for repo_url in $repos; do
-        argocd repo add $repo_url
+        argocd repo add $repo_url --server $ARGOCD_SERVER
     done
 else
     echo "No repositories to add."
@@ -29,7 +31,7 @@ fi
 # Create project
 if [ -n "$PROJECT" ]; then
 
-    argocd proj create $PROJECT
+    argocd proj create $PROJECT --server $ARGOCD_SERVER
     echo "Project ${PROJECT} created"
 else
     echo "No Project to create"

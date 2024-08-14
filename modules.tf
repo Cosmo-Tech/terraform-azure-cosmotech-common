@@ -178,7 +178,7 @@ module "create_vault" {
   helm_release_name     = var.vault_helm_release_name
   vault_replicas        = var.vault_replicas
   vault_secret_name     = var.vault_secret_name
-  # vault_ingress_enabled = var.vault_ingress_enabled
+  vault_ingress_enabled = var.vault_ingress_enabled
   # tls_secret_name       = var.tls_secret_name
-  # vault_dns_name        = var.vault_dns_name
+  vault_dns_name        = var.vault_dns_name
 }

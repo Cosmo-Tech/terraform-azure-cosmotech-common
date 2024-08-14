@@ -12,6 +12,7 @@ locals {
     "REPLICAS"              = var.replicas
     "NAMESPACE"             = var.namespace
     "CREATE_INGRESS"        = var.create_ingress
+    "ARGOCD_DNS_NAME"       = var.argocd_dns_name
     }
   instance_name = "${var.helm_release_name}"
 }

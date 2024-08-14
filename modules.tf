@@ -160,4 +160,5 @@ module "create_argocd" {
   create_ingress          = var.argocd_create_ingress
   argocd_project          = var.argocd_project
   argocd_repositories     = var.argocd_repositories
+  argocd_dns_name         = var.api_dns_name
 }

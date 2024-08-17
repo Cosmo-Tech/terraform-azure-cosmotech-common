@@ -70,6 +70,7 @@
 | <a name="input_vault_secrets_operator_helm_chart_version"></a> [vault\_secrets\_operator\_helm\_chart\_version](#input\_vault\_secrets\_operator\_helm\_chart\_version) | n/a | `string` | n/a | yes |
 | <a name="input_vault_secrets_operator_helm_release_name"></a> [vault\_secrets\_operator\_helm\_release\_name](#input\_vault\_secrets\_operator\_helm\_release\_name) | n/a | `string` | n/a | yes |
 | <a name="input_vault_secrets_operator_helm_repo_url"></a> [vault\_secrets\_operator\_helm\_repo\_url](#input\_vault\_secrets\_operator\_helm\_repo\_url) | n/a | `string` | n/a | yes |
+| <a name="input_vault_secrets_operator_replicas"></a> [vault\_secrets\_operator\_replicas](#input\_vault\_secrets\_operator\_replicas) | n/a | `number` | n/a | yes |
 | <a name="input_api_dns_name"></a> [api\_dns\_name](#input\_api\_dns\_name) | n/a | `string` | `""` | no |
 | <a name="input_api_version_path"></a> [api\_version\_path](#input\_api\_version\_path) | The API version path | `string` | `"/"` | no |
 | <a name="input_argocd_namespace"></a> [argocd\_namespace](#input\_argocd\_namespace) | n/a | `string` | `"argocd"` | no |

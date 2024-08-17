@@ -2,6 +2,10 @@ variable "namespace" {
   type = string
 }
 
+variable "vault_namespace" {
+  type = string
+}
+
 variable "helm_repo_url" {
   type    = string
 }
@@ -25,4 +29,8 @@ variable "vault_address" {
 variable "allowed_namespaces" {
   type        = list(string)
   description = "List of namespaces allowed to access secrets"
+}
+
+variable "replicas" {
+  type = number
 }

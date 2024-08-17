@@ -47,7 +47,7 @@ echo "$GLOBAL_POLICY" | vault_cmd policy write global-secrets -
 
 # Créer un rôle pour l'opérateur Vault Secrets
 vault_cmd write auth/kubernetes/role/vault-secrets-operator \
-  bound_service_account_names=vault-secrets-operator \s
+  bound_service_account_names=vault-secrets-operator \
   bound_service_account_namespaces=${VAULT_SECRETS_OPERATOR_NAMESPACE} \
   policies=global-secrets \
   ttl=1h

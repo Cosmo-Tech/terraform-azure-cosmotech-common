@@ -32,3 +32,7 @@ variable "vault_secrets_operator_allowed_namespaces" {
   type        = list(string)
   description = "List of namespaces allowed to access secrets"
 }
+
+variable "vault_secrets_operator_replicas" {
+  type = number
+}

@@ -195,4 +195,8 @@ module "create_vault_secrets_operator" {
   helm_release_name     = var.vault_secrets_operator_helm_release_name
   vault_address         = var.vault_secrets_operator_vault_address
   allowed_namespaces    = var.vault_secrets_operator_allowed_namespaces
+  replicas              = var.vault_secrets_operator_replicas 
+  vault_namespace       = var.vault_namespace
+
+  depends_on = [ module.create_vault, module.create_argocd ]
 }

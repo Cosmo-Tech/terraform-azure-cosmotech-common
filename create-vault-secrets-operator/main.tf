@@ -1,11 +1,14 @@
 locals {
   values_vault_secrets_operator = {
     "NAMESPACE"             = var.namespace
-    }
+    "REPLICAS"              = var.replicas
+    "ALLOWED_NAMESPACES"    = jsonencode(concat(["vault", "default"], var.allowed_namespaces))
+    "VAULT_ADDR"            = var.vault_address
+  }
   instance_name = "${var.helm_release_name}"
 }
 
-resource "kubernetes_namespace" "vault_secrets_operator_namespace" {
+resource "kubernetes_namespace" "vault_secrets_operator" {
   metadata {
     name = var.namespace
   }
@@ -18,9 +21,9 @@ resource "helm_release" "vault_secrets_operator" {
   version    = var.helm_chart_version
   namespace  = var.namespace
 
-  reuse_values = true
-  timeout      = 600
-
+  values = [
+    templatefile("${path.module}/values.yaml", local.values_vault_secrets_operator)
+  ]
 
   set {
     name  = "vault.address"
@@ -34,64 +37,15 @@ resource "helm_release" "vault_secrets_operator" {
 
   set {
     name  = "serviceAccount.name"
-    value = kubernetes_service_account.vault_secrets_operator.metadata[0].name
+    value = "vault-secrets-operator"
   }
 
-  values = [
-    templatefile("${path.module}/values.yaml", local.values_vault_secrets_operator)
+  depends_on = [
+    kubernetes_namespace.vault_secrets_operator,
+    kubernetes_service_account.vault_secrets_operator,
+    kubernetes_cluster_role_binding.vault_secrets_operator,
+    kubernetes_role_binding.vault_secrets_operator_auth_delegator
   ]
-
-  depends_on = [kubernetes_service_account.vault_secrets_operator]
-}
-
-# RBACs
-
-resource "kubernetes_cluster_role" "vault_secrets_operator" {
-  metadata {
-    name = "vault-secrets-operator-role"
-  }
-
-  rule {
-    api_groups = [""]
-    resources  = ["secrets"]
-    verbs      = ["*"]
-  }
-
-  rule {
-    api_groups = ["vault.hashicorp.com"]
-    resources  = ["vaultsecrets"]
-    verbs      = ["*"]
-  }
-
-  rule {
-    api_groups = [""]
-    resources  = ["serviceaccounts", "namespaces"]
-    verbs      = ["get", "list", "watch"]
-  }
-
-  rule {
-    api_groups = ["authentication.k8s.io"]
-    resources  = ["tokenreviews"]
-    verbs      = ["create"]
-  }
-}
-
-resource "kubernetes_cluster_role_binding" "vault_secrets_operator" {
-  metadata {
-    name = "vault-secrets-operator-rolebinding"
-  }
-
-  role_ref {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.vault_secrets_operator.metadata[0].name
-  }
-
-  subject {
-    kind      = "ServiceAccount"
-    name      = kubernetes_service_account.vault_secrets_operator.metadata[0].name
-    namespace = var.namespace
-  }
 }
 
 resource "kubernetes_service_account" "vault_secrets_operator" {
@@ -101,40 +55,76 @@ resource "kubernetes_service_account" "vault_secrets_operator" {
   }
 }
 
-# Authorize vault access
-resource "kubernetes_role" "vault_auth" {
+resource "kubernetes_cluster_role_binding" "vault_secrets_operator" {
   metadata {
-    name      = "vault-auth"
-    namespace = "vault"
+    name = "vault-secrets-operator-rolebinding"
   }
-
-  rule {
-    api_groups = [""]
-    resources  = ["serviceaccounts"]
-    verbs      = ["get"]
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "vault-secrets-operator-role"
+  }
+  subject {
+    kind      = "ServiceAccount"
+    name      = kubernetes_service_account.vault_secrets_operator.metadata[0].name
+    namespace = var.namespace
   }
 }
 
-resource "kubernetes_role_binding" "vault_auth" {
+resource "kubernetes_role_binding" "vault_secrets_operator_auth_delegator" {
   metadata {
-    name      = "vault-auth"
-    namespace = "vault"
+    name      = "vault-secrets-operator-auth-delegator"
+    namespace = var.namespace
   }
 
   role_ref {
     api_group = "rbac.authorization.k8s.io"
-    kind      = "Role"
-    name      = kubernetes_role.vault_auth.metadata[0].name
+    kind      = "ClusterRole"
+    name      = "system:auth-delegator"
   }
 
   subject {
     kind      = "ServiceAccount"
-    name      = "vault-secrets-operator"
-    namespace = "vault-secrets-operator"
+    name      = kubernetes_service_account.vault_secrets_operator.metadata[0].name
+    namespace = var.namespace
   }
 }
 
-# Restrict secrets access by namespace
+resource "kubectl_manifest" "vault_connection" {
+  yaml_body = templatefile("${path.module}/templates/vault-connection.yaml.tpl", {
+    namespace     = var.namespace
+    vault_address = var.vault_address
+  })
+
+  depends_on = [helm_release.vault_secrets_operator]
+}
+
+resource "kubectl_manifest" "platform_vault_secret" {
+  yaml_body = templatefile("${path.module}/templates/platform-vault-secret.yaml.tpl", {
+    namespace = var.namespace
+  })
+
+  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.operator_vault_auth, kubernetes_job.vault_config ]
+}
+
+resource "kubectl_manifest" "workspace_vault_secret" {
+  yaml_body = templatefile("${path.module}/templates/workspace-vault-secret.yaml.tpl", {
+    namespace = var.namespace
+  })
+
+  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.operator_vault_auth, kubernetes_job.vault_config ]
+}
+
+resource "kubectl_manifest" "namespace_vault_secret" {
+  for_each = toset(var.allowed_namespaces)
+
+  yaml_body = templatefile("${path.module}/templates/vault-static-secret.yaml.tpl", {
+    namespace = each.key
+  })
+
+  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.namespace_vault_auth]
+}
+
 resource "kubernetes_role" "secret_access" {
   for_each = toset(var.allowed_namespaces)
 
@@ -144,36 +134,17 @@ resource "kubernetes_role" "secret_access" {
   }
 
   rule {
-    api_groups = [""]
-    resources  = ["secrets"]
-    verbs      = ["get", "list", "watch", "create", "update", "delete"]
-  }
-
-  rule {
     api_groups = ["secrets.hashicorp.com"]
-    resources  = ["vaultsecrets"]
-    verbs      = ["get", "list", "watch", "create", "update", "delete"]
-  }
-}
-
-resource "kubernetes_role" "operator_access" {
-  for_each = toset(var.allowed_namespaces)
-
-  metadata {
-    name      = "vault-secrets-operator-access-${each.key}"
-    namespace = each.key
+    resources  = ["vaultstaticsecrets"]
+    resource_names = ["${each.key}-secrets", "platform-secret", "workspace-secret"]
+    verbs      = ["get", "list", "watch"]
   }
 
   rule {
     api_groups = [""]
     resources  = ["secrets"]
-    verbs      = ["get", "list", "watch", "create", "update", "delete"]
-  }
-
-  rule {
-    api_groups = ["secrets.hashicorp.com"]
-    resources  = ["vaultsecrets"]
-    verbs      = ["get", "list", "watch", "create", "update", "delete"]
+    resource_names = ["${each.key}-secrets", "platform-secret", "workspace-secret"]
+    verbs      = ["get", "list", "watch"]
   }
 }
 
@@ -198,23 +169,93 @@ resource "kubernetes_role_binding" "secret_access" {
   }
 }
 
-resource "kubernetes_role_binding" "operator_access" {
+resource "kubectl_manifest" "operator_vault_auth" {
+  yaml_body = templatefile("${path.module}/templates/vault-secrets-operator-auth.yaml.tpl", {
+    namespace = var.namespace
+  })
+
+  depends_on = [kubectl_manifest.vault_connection]
+}
+
+resource "kubectl_manifest" "namespace_vault_auth" {
   for_each = toset(var.allowed_namespaces)
 
-  metadata {
-    name      = "vault-secrets-operator-access-binding-${each.key}"
+  yaml_body = templatefile("${path.module}/templates/vault-auth.yaml.tpl", {
     namespace = each.key
+  })
+
+  depends_on = [kubectl_manifest.vault_connection]
+}
+
+resource "kubernetes_config_map" "vault_config_script" {
+  metadata {
+    name      = "vault-config-script"
+    namespace = var.vault_namespace
   }
 
-  role_ref {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "Role"
-    name      = kubernetes_role.operator_access[each.key].metadata[0].name
+  data = {
+    "configure-vault.sh"               = templatefile("${path.module}/templates/configure-vault.sh.tpl", {
+      allowed_namespaces               = var.allowed_namespaces
+      VAULT_NAMESPACE                  = var.vault_namespace
+      VAULT_SECRETS_OPERATOR_NAMESPACE = var.namespace
+    })
+  }
+}
+
+resource "kubernetes_job" "vault_config" {
+  metadata {
+    name      = "vault-config-job"
+    namespace = var.vault_namespace
   }
 
-  subject {
-    kind      = "ServiceAccount"
-    name      = kubernetes_service_account.vault_secrets_operator.metadata[0].name
-    namespace = var.namespace
+  spec {
+    template {
+      metadata {
+        name = "vault-config"
+      }
+
+      spec {
+        service_account_name = "vault"
+        container {
+          name    = "vault-config"
+          image   = "bitnami/kubectl:latest"
+          command = ["/bin/bash", "-c", "bash /scripts/configure-vault.sh"]
+
+          env {
+            name  = "VAULT_ADDR"
+            value = var.vault_address
+          }
+
+          env {
+            name  = "VAULT_NAMESPACE"
+            value = var.vault_namespace
+          }
+
+          volume_mount {
+            name       = "config"
+            mount_path = "/scripts"
+          }
+        }
+
+        volume {
+          name = "config"
+          config_map {
+            name = kubernetes_config_map.vault_config_script.metadata[0].name
+          }
+        }
+
+        restart_policy = "OnFailure"
+      }
+    }
+
+    backoff_limit = 4
   }
+
+  wait_for_completion = true
+
+  depends_on = [
+    helm_release.vault_secrets_operator,
+    kubernetes_config_map.vault_config_script,
+    kubectl_manifest.operator_vault_auth
+  ]
 }

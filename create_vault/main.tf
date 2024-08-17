@@ -29,14 +29,18 @@ resource "helm_release" "vault" {
   values = [
     templatefile("${path.module}/values.yaml", local.values_vault)
   ]
+
+  depends_on = [
+    kubernetes_namespace.vault_namespace
+  ]
 }
 
 # RBAC
-resource "kubernetes_manifest" "vault_unseal_serviceaccount" {
-  manifest = yamldecode(templatefile("${path.module}/vault-unseal-serviceaccount.yaml.tpl", 
-    local.values_vault
-  ))
-}
+# resource "kubernetes_manifest" "vault_unseal_serviceaccount" {
+#   manifest = yamldecode(templatefile("${path.module}/vault-unseal-serviceaccount.yaml.tpl", 
+#     local.values_vault
+#   ))
+# }
 
 resource "kubernetes_manifest" "vault_unseal_role" {
   manifest = yamldecode(templatefile("${path.module}/vault-unseal-role.yaml.tpl",
@@ -78,11 +82,11 @@ resource "kubernetes_job" "vault_unseal" {
 
       spec {
         restart_policy = "OnFailure"
-        service_account_name = "vault-unseal"
+        service_account_name = "vault"
         container {
           name  = "vault-unseal"
           image = "bitnami/kubectl:latest"
-          command = ["/bin/bash", "/scripts/unseal.sh", var.namespace, var.vault_secret_name, var.vault_replicas]
+          command = ["/bin/bash", "/scripts/unseal.sh", var.namespace, var.vault_secret_name, var.vault_replicas ]
 
           volume_mount {
             name       = "script-volume"
@@ -110,7 +114,7 @@ resource "kubernetes_job" "vault_unseal" {
     helm_release.vault, 
     kubernetes_config_map.vault_unseal_script,
     kubernetes_manifest.vault_unseal_role,
-    kubernetes_manifest.vault_unseal_rolebinding,
-    kubernetes_manifest.vault_unseal_serviceaccount
+    kubernetes_manifest.vault_unseal_rolebinding
+    # kubernetes_manifest.vault_unseal_serviceaccount
     ]
 }

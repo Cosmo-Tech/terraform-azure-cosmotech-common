@@ -138,16 +138,16 @@ module "create_vault" {
 
   count = var.create_vault ? 1 : 0
 
-  namespace             = var.vault_namespace
-  helm_repo_url         = var.vault_helm_repo_url
-  helm_chart            = var.vault_helm_chart
-  helm_chart_version    = var.vault_helm_chart_version
-  helm_release_name     = var.vault_helm_release_name
-  vault_replicas        = var.vault_replicas
-  vault_secret_name     = var.vault_secret_name
-  vault_ingress_enabled = var.vault_ingress_enabled
-  # tls_secret_name       = var.tls_secret_name
-  vault_dns_name        = var.vault_dns_name
+  namespace                     = var.vault_namespace
+  helm_repo_url                 = var.vault_helm_repo_url
+  helm_chart                    = var.vault_helm_chart
+  helm_chart_version            = var.vault_helm_chart_version
+  helm_release_name             = var.vault_helm_release_name
+  vault_replicas                = var.vault_replicas
+  vault_secret_name             = var.vault_secret_name
+  vault_ingress_enabled         = var.vault_ingress_enabled
+  # tls_secret_name             = var.tls_secret_name
+  vault_dns_name                = var.api_dns_name
 }
 
 module "create_vault_secrets_operator" {
@@ -162,6 +162,8 @@ module "create_vault_secrets_operator" {
   helm_release_name     = var.vault_secrets_operator_helm_release_name
   vault_address         = var.vault_secrets_operator_vault_address
   allowed_namespaces    = var.vault_secrets_operator_allowed_namespaces
+  replicas              = var.vault_secrets_operator_replicas 
+  vault_namespace       = var.vault_namespace
 
   depends_on = [ module.create_vault, module.create_argocd ]
 }
@@ -178,9 +180,9 @@ module "create_argocd" {
   helm_release_name       = var.argocd_helm_release_name
   replicas                = var.argocd_replicas
   create_ingress          = var.argocd_create_ingress
-  argocd_dns_name         = var.argocd_dns_name
   argocd_project          = var.argocd_project
   argocd_repositories     = var.argocd_repositories
+  argocd_dns_name         = var.api_dns_name
 
   depends_on = [ module.create_vault ]
 }

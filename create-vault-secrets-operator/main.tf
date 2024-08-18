@@ -104,7 +104,7 @@ resource "kubectl_manifest" "platform_vault_secret" {
     namespace = var.namespace
   })
 
-  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.operator_vault_auth, kubernetes_job.vault_config ]
+  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.operator_vault_auth, kubernetes_job.vault_config, kubectl_manifest.vault_connection  ]
 }
 
 resource "kubectl_manifest" "workspace_vault_secret" {
@@ -112,7 +112,7 @@ resource "kubectl_manifest" "workspace_vault_secret" {
     namespace = var.namespace
   })
 
-  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.operator_vault_auth, kubernetes_job.vault_config ]
+  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.operator_vault_auth, kubernetes_job.vault_config, kubectl_manifest.vault_connection ]
 }
 
 resource "kubectl_manifest" "namespace_vault_secret" {
@@ -122,14 +122,14 @@ resource "kubectl_manifest" "namespace_vault_secret" {
     namespace = each.key
   })
 
-  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.namespace_vault_auth]
+  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.namespace_vault_auth, kubectl_manifest.namespace_vault_connection ]
 }
 
 resource "kubernetes_role" "secret_access" {
   for_each = toset(var.allowed_namespaces)
 
   metadata {
-    name      = "secret-access-${each.key}"
+    name      = "${each.key}-role"
     namespace = each.key
   }
 
@@ -177,6 +177,17 @@ resource "kubectl_manifest" "operator_vault_auth" {
   depends_on = [kubectl_manifest.vault_connection]
 }
 
+resource "kubectl_manifest" "namespace_vault_connection" {
+  for_each = toset(var.allowed_namespaces)
+
+  yaml_body = templatefile("${path.module}/templates/vault-connection.yaml.tpl", {
+    namespace     = each.key
+    vault_address = var.vault_address
+  })
+
+  depends_on = [helm_release.vault_secrets_operator]
+}
+
 resource "kubectl_manifest" "namespace_vault_auth" {
   for_each = toset(var.allowed_namespaces)
 
@@ -184,7 +195,7 @@ resource "kubectl_manifest" "namespace_vault_auth" {
     namespace = each.key
   })
 
-  depends_on = [kubectl_manifest.vault_connection]
+  depends_on = [kubectl_manifest.namespace_vault_connection]
 }
 
 resource "kubernetes_config_map" "vault_config_script" {

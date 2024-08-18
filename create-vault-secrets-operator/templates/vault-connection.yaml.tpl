@@ -5,3 +5,4 @@ metadata:
   namespace: ${namespace}
 spec:
   address: ${vault_address}
+  skipTLSVerify: true

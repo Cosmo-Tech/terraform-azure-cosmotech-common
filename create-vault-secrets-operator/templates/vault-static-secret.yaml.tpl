@@ -7,7 +7,7 @@ spec:
   vaultAuthRef: ${namespace}-vault-auth
   mount: cosmotech
   type: kv-v2
-  path: ${namespace}/secrets
+  path: ${namespace}
   destination:
     create: true
     name: ${namespace}-secrets

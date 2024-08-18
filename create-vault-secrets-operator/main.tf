@@ -115,6 +115,20 @@ resource "kubectl_manifest" "workspace_vault_secret" {
   depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.operator_vault_auth, kubernetes_job.vault_config, kubectl_manifest.vault_connection ]
 }
 
+resource "kubernetes_annotations" "namespace_default_annotation" {
+  for_each = toset(var.allowed_namespaces)
+
+  api_version = "v1"
+  kind        = "ServiceAccount"
+  metadata {
+    name      = "default"
+    namespace = each.key
+  }
+  annotations = {
+    "kubernetes.io/service-account.name" = "default"
+  }
+}
+
 resource "kubectl_manifest" "namespace_vault_secret" {
   for_each = toset(var.allowed_namespaces)
 
@@ -122,7 +136,7 @@ resource "kubectl_manifest" "namespace_vault_secret" {
     namespace = each.key
   })
 
-  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.namespace_vault_auth, kubectl_manifest.namespace_vault_connection ]
+  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.namespace_vault_auth, kubectl_manifest.namespace_vault_connection, kubernetes_annotations.namespace_default_annotation ]
 }
 
 resource "kubernetes_role" "secret_access" {

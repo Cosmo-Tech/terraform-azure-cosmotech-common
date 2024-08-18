@@ -42,7 +42,7 @@ echo "Creating/updating workspace secret"
 vault_cmd kv put -mount=cosmotech workspace dummy=value
 
 # Créer une politique pour les secrets de la plateforme et de l'espace de travail
-GLOBAL_POLICY='path "cosmotech/platform/*" { capabilities = ["read", "list"] } path "cosmotech/workspace/*" { capabilities = ["read", "list"] } path "cosmotech/data/platform/*" { capabilities = ["read", "list"] } path "cosmotech/data/workspace/*" { capabilities = ["read", "list"] }'
+GLOBAL_POLICY='path "cosmotech/data/platform" { capabilities = ["read", "list"] } path "cosmotech/data/workspace" { capabilities = ["read", "list"] } path "cosmotech/metadata/platform" { capabilities = ["read", "list"] } path "cosmotech/metadata/workspace" { capabilities = ["read", "list"] } path "cosmotech/data/platform/*" { capabilities = ["read", "list"] } path "cosmotech/data/workspace/*" { capabilities = ["read", "list"] } path "cosmotech/metadata/platform/*" { capabilities = ["read", "list"] } path "cosmotech/metadata/workspace/*" { capabilities = ["read", "list"] }'
 echo "$GLOBAL_POLICY" | vault_cmd policy write global-secrets -
 
 # Créer un rôle pour l'opérateur Vault Secrets
@@ -54,7 +54,7 @@ vault_cmd write auth/kubernetes/role/vault-secrets-operator \
 
 # Créer des politiques et des rôles pour chaque namespace autorisé
 %{ for namespace in allowed_namespaces ~}
-NAMESPACE_POLICY='path "cosmotech/${namespace}/*" { capabilities = ["read", "list"] }'
+NAMESPACE_POLICY='path "cosmotech/data/${namespace}" { capabilities = ["read", "list"] } path "cosmotech/metadata/${namespace}" { capabilities = ["read", "list"] } path "cosmotech/data/${namespace}/*" { capabilities = ["read", "list"] } path "cosmotech/metadata/${namespace}/*" { capabilities = ["read", "list"] }'
 echo "$NAMESPACE_POLICY" | vault_cmd policy write ${namespace}-policy -
 
 vault_cmd write auth/kubernetes/role/${namespace}-role \

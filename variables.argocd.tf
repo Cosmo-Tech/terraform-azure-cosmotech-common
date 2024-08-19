@@ -39,6 +39,16 @@ variable "argocd_repositories" {
   type = list(string)
 }
 
+variable "argocd_repository_username" {
+  type = string
+  sensitive = true
+}
+
+variable "argocd_repository_access_token" {
+  type = string
+  sensitive = true
+}
+
 variable "argocd_dns_name" {
   type = string
 }

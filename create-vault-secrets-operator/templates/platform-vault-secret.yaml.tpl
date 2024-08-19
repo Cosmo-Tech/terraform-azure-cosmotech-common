@@ -6,7 +6,7 @@ metadata:
 spec:
   vaultAuthRef: vault-secrets-operator-vault-auth
   mount: cosmotech
-  type: kv-v2
+  type: kv-v1
   path: platform
   refreshAfter: 10s
   destination:

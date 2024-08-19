@@ -198,5 +198,5 @@ module "create_vault_secrets_operator" {
   replicas              = var.vault_secrets_operator_replicas 
   vault_namespace       = var.vault_namespace
 
-  depends_on = [ module.create_vault, module.create_argocd ]
+  # depends_on = [ module.create_vault, module.create_argocd ]
 }

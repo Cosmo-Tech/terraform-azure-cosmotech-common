@@ -47,6 +47,7 @@
 | <a name="input_argocd_repositories"></a> [argocd\_repositories](#input\_argocd\_repositories) | n/a | `list(string)` | n/a | yes |
 | <a name="input_argocd_repository_access_token"></a> [argocd\_repository\_access\_token](#input\_argocd\_repository\_access\_token) | n/a | `string` | n/a | yes |
 | <a name="input_argocd_repository_username"></a> [argocd\_repository\_username](#input\_argocd\_repository\_username) | n/a | `string` | n/a | yes |
+| <a name="input_argocd_setup_job_image_version"></a> [argocd\_setup\_job\_image\_version](#input\_argocd\_setup\_job\_image\_version) | n/a | `string` | n/a | yes |
 | <a name="input_client_id"></a> [client\_id](#input\_client\_id) | The client id | `string` | n/a | yes |
 | <a name="input_client_secret"></a> [client\_secret](#input\_client\_secret) | The client secret | `string` | n/a | yes |
 | <a name="input_create_argocd"></a> [create\_argocd](#input\_create\_argocd) | n/a | `bool` | n/a | yes |

@@ -48,3 +48,7 @@ variable "argocd_repository_access_token" {
 variable "argocd_dns_name" {
   type = string
 }
+
+variable "argocd_setup_job_image_version" {
+  type = string
+}

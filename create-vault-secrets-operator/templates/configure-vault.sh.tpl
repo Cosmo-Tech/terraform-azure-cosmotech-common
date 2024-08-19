@@ -29,7 +29,7 @@ vault_cmd write auth/kubernetes/config \
 # Vérifier si le secret engine cosmotech existe, sinon le créer
 if ! vault_cmd secrets list | grep -q '^cosmotech/'; then
   echo "Creating cosmotech secret engine"
-  vault_cmd secrets enable -path=cosmotech kv-v2
+  vault_cmd secrets enable -path=cosmotech kv-v1
 else
   echo "cosmotech secret engine already exists"
 fi

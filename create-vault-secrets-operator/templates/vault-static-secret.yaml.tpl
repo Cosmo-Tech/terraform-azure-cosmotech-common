@@ -6,7 +6,7 @@ metadata:
 spec:
   vaultAuthRef: ${namespace}-vault-auth
   mount: cosmotech
-  type: kv-v2
+  type: kv-v1
   path: ${namespace}/secrets
   destination:
     create: true

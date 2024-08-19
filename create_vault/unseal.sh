@@ -4,6 +4,18 @@ NAMESPACE=$1
 SECRET_NAME=$2
 REPLICAS=$3
 
+# Check if required parameters are provided
+if [ -z "$NAMESPACE" ] || [ -z "$SECRET_NAME" ] || [ -z "$REPLICAS" ]; then
+    echo "Error: All parameters (NAMESPACE, SECRET_NAME, REPLICAS) are required"
+    exit 1
+fi
+
+# Check if REPLICAS is a positive integer
+if ! [[ "$REPLICAS" =~ ^[1-9][0-9]*$ ]]; then
+    echo "Error: REPLICAS must be a positive integer"
+    exit 1
+fi
+
 echo "Waiting for 30 seconds before starting..."
 sleep 30
 
@@ -24,6 +36,11 @@ done
 
 echo "Waiting for 30 seconds before starting..."
 sleep 30
+
+# Join raft
+for i in $(seq 1 $(($REPLICAS - 1))); do
+  kubectl exec vault-$i -n $NAMESPACE -- vault operator raft join http://vault-0.vault-internal:8200
+done
 
 # Unseal replicas
 for i in $(seq 1 $(($REPLICAS - 1))); do

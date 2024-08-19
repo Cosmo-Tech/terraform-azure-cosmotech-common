@@ -2,6 +2,8 @@
 NAMESPACE=$1
 PROJECT=$2
 REPOSITORIES=$3
+REPO_USERNAME=$4
+REPO_ACCESS_TOKEN=$5
 
 # Convert repositories into list
 repos=$(echo $REPOSITORIES | tr ',' ' ')
@@ -22,7 +24,7 @@ echo "logged"
 # Add repositories
 if [ -n "$REPOSITORIES" ]; then
     for repo_url in $repos; do
-        argocd repo add $repo_url --server $ARGOCD_SERVER
+        argocd repo add $repo_url --server $ARGOCD_SERVER --username $REPO_USERNAME --password $REPO_ACCESS_TOKEN
     done
 else
     echo "No repositories to add."

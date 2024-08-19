@@ -45,6 +45,8 @@
 | <a name="input_argocd_project"></a> [argocd\_project](#input\_argocd\_project) | n/a | `string` | n/a | yes |
 | <a name="input_argocd_replicas"></a> [argocd\_replicas](#input\_argocd\_replicas) | n/a | `number` | n/a | yes |
 | <a name="input_argocd_repositories"></a> [argocd\_repositories](#input\_argocd\_repositories) | n/a | `list(string)` | n/a | yes |
+| <a name="input_argocd_repository_access_token"></a> [argocd\_repository\_access\_token](#input\_argocd\_repository\_access\_token) | n/a | `string` | n/a | yes |
+| <a name="input_argocd_repository_username"></a> [argocd\_repository\_username](#input\_argocd\_repository\_username) | n/a | `string` | n/a | yes |
 | <a name="input_client_id"></a> [client\_id](#input\_client\_id) | The client id | `string` | n/a | yes |
 | <a name="input_client_secret"></a> [client\_secret](#input\_client\_secret) | The client secret | `string` | n/a | yes |
 | <a name="input_create_argocd"></a> [create\_argocd](#input\_create\_argocd) | n/a | `bool` | n/a | yes |

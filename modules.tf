@@ -163,4 +163,5 @@ module "create_argocd" {
   argocd_repository_username     = var.argocd_repository_username
   argocd_repository_access_token = var.argocd_repository_access_token
   argocd_dns_name                = var.api_dns_name
+  argocd_setup_job_image_version = var.argocd_setup_job_image_version
 }

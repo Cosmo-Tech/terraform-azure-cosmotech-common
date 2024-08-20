@@ -115,39 +115,21 @@ module "cosmotech-platform" {
 
   # keycloak
   create_keycloak             = var.create_keycloak  
-  keycloak_admin_user         = var.keycloak_admin_user
-  keycloak_postgres_user      = var.keycloak_postgres_user
-  keycloak_helm_repo          = var.keycloak_helm_repo
-  keycloak_helm_chart         = var.keycloak_helm_chart
-  keycloak_helm_chart_version = var.keycloak_helm_chart_version
-  postgres_helm_repo          = var.postgres_helm_repo
-  postgres_helm_chart         = var.postgres_helm_chart
-  postgres_helm_chart_version = var.postgres_helm_chart_version
 
   # cert-manager
   tls_secret_name                = local.tls_secret_name
   tls_certificate_type           = var.tls_certificate_type
   cluster_issuer_email           = var.cluster_issuer_email
   cluster_issuer_name            = var.cluster_issuer_name  
-  cluster_issuer_server          = var.cluster_issuer_server
-  cert_manager_namespace         = var.cert_manager_namespace
-  cert_manager_helm_repo_url     = var.cert_manager_helm_repo_url
-  cert_manager_helm_release_name = var.cert_manager_helm_release_name
-  cert_manager_version           = var.cert_manager_version
   certificate_cert_content       = var.tls_certificate_custom_certificate
   certificate_key_content        = var.tls_certificate_custom_key
 
   # ingress-nginx
   ingress_nginx_version           = var.ingress_nginx_version
-  ingress_nginx_helm_repo_url     = var.ingress_nginx_helm_repo_url
-  ingress_nginx_helm_release_name = var.ingress_nginx_helm_release_name
-  ingress_nginx_namespace         = var.ingress_nginx_namespace
   loadbalancer_ip                 = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : var.loadbalancer_ip
   publicip_resource_group         = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.publicip_resource_group
-  ingress_nginx_replica_count     = var.ingress_nginx_replica_count
 
   # loki
-  loki_namespace                       = var.loki_namespace
   loki_release_name                    = var.loki_release_name
   loki_persistence_memory              = var.loki_persistence_memory
   loki_retention_period                = var.loki_retention_period
@@ -159,17 +141,7 @@ module "cosmotech-platform" {
 
   # prometheus
   create_prometheus_stack       = var.create_prometheus_stack
-  prom_namespace                = var.prom_namespace
-  prometheus_stack_version      = var.prometheus_stack_version
-  prom_helm_chart               = var.prom_helm_chart
-  prom_helm_repo_url            = var.prom_helm_repo_url
-  prom_helm_release_name        = var.prom_helm_release_name
   prom_cpu_mem_limits           = var.prom_cpu_mem_limits
   prom_cpu_mem_request          = var.prom_cpu_mem_request
-  prom_storage_resource_request = var.prom_storage_resource_request
-  prom_storage_class_name       = var.prom_storage_class_name
-  prom_replicas_number          = var.prom_replicas_number
-  prom_retention                = var.prom_retention
-  redis_port                    = var.redis_port
 
 }

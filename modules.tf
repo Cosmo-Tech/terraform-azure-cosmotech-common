@@ -198,5 +198,11 @@ module "create_vault_secrets_operator" {
   replicas              = var.vault_secrets_operator_replicas 
   vault_namespace       = var.vault_namespace
 
-  # depends_on = [ module.create_vault, module.create_argocd ]
+  tenant_id             = var.tenant_id
+  cluster_name          = var.cluster_name
+  organization          = var.organization
+  organization_id       = var.organization_id
+  workspace_key         = var.workspace_key 
+
+  # depends_on = [ module.create_vault ]
 }

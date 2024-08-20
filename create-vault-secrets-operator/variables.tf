@@ -34,3 +34,24 @@ variable "allowed_namespaces" {
 variable "replicas" {
   type = number
 }
+
+variable "cluster_name" {
+  type    = string
+  default = ""
+}
+
+variable "tenant_id" {
+  type = string
+}
+
+variable "organization" {
+  type = string
+}
+
+variable "organization_id" {
+  type = string
+}
+
+variable "workspace_key" {
+  type = string
+}

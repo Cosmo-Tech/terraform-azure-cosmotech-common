@@ -24,7 +24,7 @@ variable "loadbalancer_ip" {
 }
 
 variable "publicip_resource_group" {
-  type = string
+  type    = string
   default = ""
 }
 

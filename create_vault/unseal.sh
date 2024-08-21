@@ -16,8 +16,24 @@ if ! [[ "$REPLICAS" =~ ^[1-9][0-9]*$ ]]; then
     exit 1
 fi
 
-echo "Waiting for 30 seconds before starting..."
-sleep 30
+# Function to check if all Vault pods are running
+check_vault_pods() {
+    for i in $(seq 0 $(($REPLICAS - 1))); do
+        status=$(kubectl get pod vault-$i -n $NAMESPACE -o jsonpath='{.status.phase}')
+        if [ "$status" != "Running" ]; then
+            return 1
+        fi
+    done
+    return 0
+}
+
+# Wait for Vault pods to be running
+echo "Waiting for all Vault pods to be in Running state..."
+while ! check_vault_pods; do
+    echo "Waiting for Vault pods..."
+    sleep 10
+done
+echo "All Vault pods are running."
 
 # Initialize Vault
 init_output=$(kubectl exec vault-0 --namespace $NAMESPACE -- vault operator init -format=json)

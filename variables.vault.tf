@@ -3,28 +3,28 @@ variable "create_vault" {
 }
 
 variable "vault_namespace" {
-  type = string
+  type    = string
   default = "vault"
 }
 
 variable "vault_helm_repo_url" {
-  type    = string
+  type = string
 }
 
 variable "vault_helm_chart" {
-  type    = string
+  type = string
 }
 
 variable "vault_helm_chart_version" {
-  type    = string
+  type = string
 }
 
 variable "vault_helm_release_name" {
-  type    = string
+  type = string
 }
 
 variable "vault_replicas" {
-    type = number
+  type = number
 }
 
 variable "vault_secret_name" {

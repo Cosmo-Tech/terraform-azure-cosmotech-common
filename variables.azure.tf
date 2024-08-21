@@ -13,7 +13,6 @@ variable "deployment_type" {
 
 variable "location" {
   description = "The Azure location"
-  default     = "West Europe"
 }
 
 variable "project_name" {

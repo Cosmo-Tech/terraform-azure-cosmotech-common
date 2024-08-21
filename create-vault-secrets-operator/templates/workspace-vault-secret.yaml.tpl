@@ -1,14 +1,14 @@
 apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultStaticSecret
 metadata:
-  name: workspace-secret
+  name: ${namespace}-workspace-secrets
   namespace: ${namespace}
 spec:
-  vaultAuthRef: vault-secrets-operator-vault-auth
-  mount: cosmotech
-  type: kv-v1
-  path: workspace
+  vaultAuthRef: ${namespace}-vault-auth
+  mount: ${organization}
+  type: kv-v2
+  path: ${tenant_id}/clusters/${cluster_name}/${namespace}/workspaces/${organization_id}-${workspace_key}
   refreshAfter: 10s
   destination:
     create: true
-    name: workspace-secret
+    name: ${organization_id}-${workspace_key}

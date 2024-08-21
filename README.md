@@ -52,6 +52,8 @@
 | <a name="input_create_vault"></a> [create\_vault](#input\_create\_vault) | n/a | `bool` | n/a | yes |
 | <a name="input_create_vault_secrets_operator"></a> [create\_vault\_secrets\_operator](#input\_create\_vault\_secrets\_operator) | n/a | `bool` | n/a | yes |
 | <a name="input_is_bare_metal"></a> [is\_bare\_metal](#input\_is\_bare\_metal) | n/a | `bool` | n/a | yes |
+| <a name="input_organization"></a> [organization](#input\_organization) | n/a | `string` | n/a | yes |
+| <a name="input_organization_id"></a> [organization\_id](#input\_organization\_id) | n/a | `string` | n/a | yes |
 | <a name="input_owner_list"></a> [owner\_list](#input\_owner\_list) | List of mail addresses for App Registration owners | `list(string)` | n/a | yes |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The project name | `string` | n/a | yes |
 | <a name="input_prom_namespace"></a> [prom\_namespace](#input\_prom\_namespace) | n/a | `string` | n/a | yes |
@@ -70,6 +72,7 @@
 | <a name="input_vault_secrets_operator_helm_release_name"></a> [vault\_secrets\_operator\_helm\_release\_name](#input\_vault\_secrets\_operator\_helm\_release\_name) | n/a | `string` | n/a | yes |
 | <a name="input_vault_secrets_operator_helm_repo_url"></a> [vault\_secrets\_operator\_helm\_repo\_url](#input\_vault\_secrets\_operator\_helm\_repo\_url) | n/a | `string` | n/a | yes |
 | <a name="input_vault_secrets_operator_replicas"></a> [vault\_secrets\_operator\_replicas](#input\_vault\_secrets\_operator\_replicas) | n/a | `number` | n/a | yes |
+| <a name="input_workspace_key"></a> [workspace\_key](#input\_workspace\_key) | n/a | `string` | n/a | yes |
 | <a name="input_api_dns_name"></a> [api\_dns\_name](#input\_api\_dns\_name) | n/a | `string` | `""` | no |
 | <a name="input_api_version_path"></a> [api\_version\_path](#input\_api\_version\_path) | The API version path | `string` | `"/"` | no |
 | <a name="input_argocd_namespace"></a> [argocd\_namespace](#input\_argocd\_namespace) | n/a | `string` | `"argocd"` | no |

@@ -2,7 +2,8 @@ name: Terraform Docs
 
 on:
   push:
-  workflow_dispatch:
+    tags:
+      - "*"
 
 jobs:
   build:

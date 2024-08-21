@@ -36,3 +36,15 @@ variable "vault_secrets_operator_allowed_namespaces" {
 variable "vault_secrets_operator_replicas" {
   type = number
 }
+
+variable "organization" {
+  type = string
+}
+
+variable "organization_id" {
+  type = string
+}
+
+variable "workspace_key" {
+  type = string
+}

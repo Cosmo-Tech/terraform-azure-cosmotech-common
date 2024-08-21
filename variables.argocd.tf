@@ -3,28 +3,28 @@ variable "create_argocd" {
 }
 
 variable "argocd_namespace" {
-  type = string
+  type    = string
   default = "argocd"
 }
 
 variable "argocd_helm_repo_url" {
-  type    = string
+  type = string
 }
 
 variable "argocd_helm_chart" {
-  type    = string
+  type = string
 }
 
 variable "argocd_helm_chart_version" {
-  type    = string
+  type = string
 }
 
 variable "argocd_helm_release_name" {
-  type    = string
+  type = string
 }
 
 variable "argocd_replicas" {
-    type = number
+  type = number
 }
 
 variable "argocd_create_ingress" {
@@ -40,12 +40,12 @@ variable "argocd_repositories" {
 }
 
 variable "argocd_repository_username" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "argocd_repository_access_token" {
-  type = string
+  type      = string
   sensitive = true
 }
 

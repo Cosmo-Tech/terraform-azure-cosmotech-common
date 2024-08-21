@@ -14,7 +14,7 @@ variable "kubernetes_version" {
 }
 
 variable "cluster_name" {
-  type    = string
+  type = string
 }
 
 variable "namespace" {

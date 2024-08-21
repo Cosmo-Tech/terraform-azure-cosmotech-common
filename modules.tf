@@ -164,6 +164,8 @@ module "create_argocd" {
   argocd_repository_access_token = var.argocd_repository_access_token
   argocd_dns_name                = var.api_dns_name
   argocd_setup_job_image_version = var.argocd_setup_job_image_version
+
+  depends_on = [module.cosmotech-prerequisites]
 }
 
 module "create_vault" {
@@ -180,6 +182,8 @@ module "create_vault" {
   vault_secret_name     = var.vault_secret_name
   vault_ingress_enabled = var.vault_ingress_enabled
   vault_dns_name        = var.api_dns_name
+
+  depends_on = [module.cosmotech-prerequisites]
 }
 
 module "create_vault_secrets_operator" {
@@ -196,12 +200,9 @@ module "create_vault_secrets_operator" {
   allowed_namespaces = var.vault_secrets_operator_allowed_namespaces
   replicas           = var.vault_secrets_operator_replicas
   vault_namespace    = var.vault_namespace
+  tenant_id          = var.tenant_id
+  cluster_name       = var.cluster_name
+  organization       = var.customer_name
 
-  tenant_id       = var.tenant_id
-  cluster_name    = var.cluster_name
-  organization    = var.organization
-  organization_id = var.organization_id
-  workspace_key   = var.workspace_key
-
-  depends_on = [module.create_vault]
+  depends_on = [module.create_vault, module.cosmotech-prerequisites]
 }

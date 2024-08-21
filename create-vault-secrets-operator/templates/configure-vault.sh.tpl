@@ -41,10 +41,6 @@ path "${organization}/data/${tenant_id}/clusters/${cluster_name}/${namespace}-pl
 path "${organization}/metadata/${tenant_id}/clusters/${cluster_name}/${namespace}-platform-secrets" { capabilities = ["read", "list"] } 
 path "${organization}/data/${tenant_id}/clusters/${cluster_name}/${namespace}-platform-secrets/*" { capabilities = ["read", "list"] }
 path "${organization}/metadata/${tenant_id}/clusters/${cluster_name}/${namespace}-platform-secrets/*" { capabilities = ["read", "list"] }
-path "${organization}/data/${tenant_id}/clusters/${cluster_name}/${namespace}/workspaces/${organization_id}-${workspace_key}" { capabilities = ["read", "list"] } 
-path "${organization}/metadata/${tenant_id}/clusters/${cluster_name}/${namespace}/workspaces/${organization_id}-${workspace_key}" { capabilities = ["read", "list"] } 
-path "${organization}/data/${tenant_id}/clusters/${cluster_name}/${namespace}/workspaces/${organization_id}-${workspace_key}/*" { capabilities = ["read", "list"] } 
-path "${organization}/metadata/${tenant_id}/clusters/${cluster_name}/${namespace}/workspaces/${organization_id}-${workspace_key}/*" { capabilities = ["read", "list"] }
 '
 echo "$NAMESPACE_POLICY" | vault_cmd policy write ${namespace}-policy -
 

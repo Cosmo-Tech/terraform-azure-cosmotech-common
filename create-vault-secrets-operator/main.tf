@@ -1,11 +1,11 @@
 locals {
   values_vault_secrets_operator = {
-    "NAMESPACE"             = var.namespace
-    "REPLICAS"              = var.replicas
-    "ALLOWED_NAMESPACES"    = jsonencode(concat(["vault", "default"], var.allowed_namespaces))
-    "VAULT_ADDR"            = var.vault_address
+    "NAMESPACE"          = var.namespace
+    "REPLICAS"           = var.replicas
+    "ALLOWED_NAMESPACES" = jsonencode(concat(["vault", "default"], var.allowed_namespaces))
+    "VAULT_ADDR"         = var.vault_address
   }
-  instance_name = "${var.helm_release_name}"
+  instance_name = var.helm_release_name
 }
 
 resource "kubernetes_namespace" "vault_secrets_operator" {
@@ -102,6 +102,7 @@ resource "kubernetes_role_binding" "vault_secrets_operator_auth_delegator" {
 }
 
 resource "kubectl_manifest" "vault_connection" {
+  validate_schema = false
   yaml_body = templatefile("${path.module}/templates/vault-connection.yaml.tpl", {
     namespace     = var.namespace
     vault_address = var.vault_address
@@ -111,24 +112,31 @@ resource "kubectl_manifest" "vault_connection" {
 }
 
 resource "kubectl_manifest" "platform_vault_secret" {
-  for_each = toset(var.allowed_namespaces)
+  validate_schema = false
+  for_each        = toset(var.allowed_namespaces)
 
   yaml_body = templatefile("${path.module}/templates/platform-vault-secret.yaml.tpl", {
     namespace = each.key, tenant_id = var.tenant_id, cluster_name = var.cluster_name, organization = var.organization
   })
 
-  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.namespace_vault_auth, kubectl_manifest.namespace_vault_connection, kubernetes_annotations.namespace_default_annotation, kubernetes_namespace.allowed_namespaces ]
+  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.namespace_vault_auth, kubectl_manifest.namespace_vault_connection, kubernetes_annotations.namespace_default_annotation, kubernetes_namespace.allowed_namespaces]
 }
 
-resource "kubectl_manifest" "workspace_vault_secret" {
-  for_each = toset(var.allowed_namespaces)
+# resource "kubectl_manifest" "kubectl_manifest" {
+#   validate_schema = false
+#   for_each        = toset(var.allowed_namespaces)
 
-  yaml_body = templatefile("${path.module}/templates/workspace-vault-secret.yaml.tpl", {
-    namespace = each.key, tenant_id = var.tenant_id, cluster_name = var.cluster_name, organization = var.organization, organization_id = var.organization_id, workspace_key = var.workspace_key
-  })
+#   yaml_body = templatefile("${path.module}/templates/workspace-vault-secret.yaml.tpl", {
+#     namespace = each.key, 
+#     tenant_id = var.tenant_id, 
+#     cluster_name = var.cluster_name, 
+#     organization = var.organization, 
+#     organization_id = var.organization_id, 
+#     workspace_key = var.workspace_key
+#   })
 
-  depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.namespace_vault_auth, kubectl_manifest.namespace_vault_connection, kubernetes_annotations.namespace_default_annotation, kubernetes_namespace.allowed_namespaces ]
-}
+#   depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.namespace_vault_auth, kubectl_manifest.namespace_vault_connection, kubernetes_annotations.namespace_default_annotation, kubernetes_namespace.allowed_namespaces]
+# }
 
 resource "kubernetes_annotations" "namespace_default_annotation" {
   for_each = toset(var.allowed_namespaces)
@@ -143,7 +151,7 @@ resource "kubernetes_annotations" "namespace_default_annotation" {
     "kubernetes.io/service-account.name" = "default"
   }
 
-  depends_on = [ kubernetes_namespace.allowed_namespaces ]
+  depends_on = [kubernetes_namespace.allowed_namespaces]
 }
 
 resource "kubernetes_role" "secret_access" {
@@ -155,20 +163,20 @@ resource "kubernetes_role" "secret_access" {
   }
 
   rule {
-    api_groups = ["secrets.hashicorp.com"]
-    resources  = ["vaultstaticsecrets"]
+    api_groups     = ["secrets.hashicorp.com"]
+    resources      = ["vaultstaticsecrets"]
     resource_names = ["${each.key}-platform-secrets", "${each.key}-workspace-secrets"]
-    verbs      = ["get", "list", "watch"]
+    verbs          = ["get", "list", "watch"]
   }
 
   rule {
-    api_groups = [""]
-    resources  = ["secrets"]
-    resource_names = ["${each.key}-platform-secrets", "${var.organization_id}-${var.workspace_key}"]
-    verbs      = ["get", "list", "watch"]
+    api_groups     = [""]
+    resources      = ["secrets"]
+    resource_names = ["${each.key}-platform-secrets"]
+    verbs          = ["get", "list", "watch"]
   }
 
-  depends_on = [ kubernetes_namespace.allowed_namespaces ]
+  depends_on = [kubernetes_namespace.allowed_namespaces]
 }
 
 resource "kubernetes_role_binding" "secret_access" {
@@ -191,10 +199,11 @@ resource "kubernetes_role_binding" "secret_access" {
     namespace = each.key
   }
 
-  depends_on = [ kubernetes_namespace.allowed_namespaces ]
+  depends_on = [kubernetes_namespace.allowed_namespaces]
 }
 
 resource "kubectl_manifest" "operator_vault_auth" {
+  validate_schema = false
   yaml_body = templatefile("${path.module}/templates/vault-secrets-operator-auth.yaml.tpl", {
     namespace = var.namespace
   })
@@ -203,18 +212,20 @@ resource "kubectl_manifest" "operator_vault_auth" {
 }
 
 resource "kubectl_manifest" "namespace_vault_connection" {
-  for_each = toset(var.allowed_namespaces)
+  validate_schema = false
+  for_each        = toset(var.allowed_namespaces)
 
   yaml_body = templatefile("${path.module}/templates/vault-connection.yaml.tpl", {
     namespace     = each.key
     vault_address = var.vault_address
   })
 
-  depends_on = [helm_release.vault_secrets_operator, kubernetes_namespace.allowed_namespaces ]
+  depends_on = [helm_release.vault_secrets_operator, kubernetes_namespace.allowed_namespaces]
 }
 
 resource "kubectl_manifest" "namespace_vault_auth" {
-  for_each = toset(var.allowed_namespaces)
+  validate_schema = false
+  for_each        = toset(var.allowed_namespaces)
 
   yaml_body = templatefile("${path.module}/templates/vault-auth.yaml.tpl", {
     namespace = each.key
@@ -230,18 +241,16 @@ resource "kubernetes_config_map" "vault_config_script" {
   }
 
   data = {
-    "configure-vault.sh"               = templatefile("${path.module}/templates/configure-vault.sh.tpl", {
+    "configure-vault.sh" = templatefile("${path.module}/templates/configure-vault.sh.tpl", {
       allowed_namespaces               = var.allowed_namespaces
       VAULT_NAMESPACE                  = var.vault_namespace
       VAULT_SECRETS_OPERATOR_NAMESPACE = var.namespace
       tenant_id                        = var.tenant_id
       cluster_name                     = var.cluster_name
       organization                     = var.organization
-      organization_id                  = var.organization_id
-      workspace_key                    = var.workspace_key
     })
   }
-  depends_on = [ kubernetes_namespace.allowed_namespaces ]
+  depends_on = [kubernetes_namespace.allowed_namespaces]
 }
 
 resource "kubernetes_job" "vault_config" {
@@ -257,7 +266,7 @@ resource "kubernetes_job" "vault_config" {
       }
 
       spec {
-        restart_policy = "OnFailure"
+        restart_policy       = "OnFailure"
         service_account_name = "vault"
         container {
           name    = "vault-config"

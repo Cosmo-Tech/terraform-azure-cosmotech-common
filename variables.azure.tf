@@ -33,7 +33,6 @@ variable "subscription_id" {
 
 variable "resource_group" {
   type    = string
-  default = ""
 }
 
 variable "platform_url" {

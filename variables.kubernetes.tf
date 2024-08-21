@@ -15,7 +15,6 @@ variable "kubernetes_version" {
 
 variable "cluster_name" {
   type    = string
-  default = ""
 }
 
 variable "namespace" {

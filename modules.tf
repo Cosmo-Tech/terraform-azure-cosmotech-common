@@ -106,28 +106,28 @@ module "cosmotech-platform" {
   source  = "Cosmo-Tech/platform-core/cosmotech"
   version = "1.1.3"
 
-  is_bare_metal            = var.is_bare_metal
-  namespace                = var.namespace
-  monitoring_namespace     = var.monitoring_namespace
-  api_dns_name             = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_fqdn : var.fqdn
-  resource_group           = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.resource_group
+  is_bare_metal        = var.is_bare_metal
+  namespace            = var.namespace
+  monitoring_namespace = var.monitoring_namespace
+  api_dns_name         = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_fqdn : var.fqdn
+  resource_group       = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.resource_group
   # kube_config              = module.cosmotech-prerequisites.out_aks_phoenix_config
 
   # keycloak
-  create_keycloak             = var.create_keycloak  
+  create_keycloak = var.create_keycloak
 
   # cert-manager
-  tls_secret_name                = local.tls_secret_name
-  tls_certificate_type           = var.tls_certificate_type
-  cluster_issuer_email           = var.cluster_issuer_email
-  cluster_issuer_name            = var.cluster_issuer_name  
-  certificate_cert_content       = var.tls_certificate_custom_certificate
-  certificate_key_content        = var.tls_certificate_custom_key
+  tls_secret_name          = local.tls_secret_name
+  tls_certificate_type     = var.tls_certificate_type
+  cluster_issuer_email     = var.cluster_issuer_email
+  cluster_issuer_name      = var.cluster_issuer_name
+  certificate_cert_content = var.tls_certificate_custom_certificate
+  certificate_key_content  = var.tls_certificate_custom_key
 
   # ingress-nginx
-  ingress_nginx_version           = var.ingress_nginx_version
-  loadbalancer_ip                 = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : var.loadbalancer_ip
-  publicip_resource_group         = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.publicip_resource_group
+  ingress_nginx_version   = var.ingress_nginx_version
+  loadbalancer_ip         = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : var.loadbalancer_ip
+  publicip_resource_group = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.publicip_resource_group
 
   # loki
   loki_release_name                    = var.loki_release_name
@@ -140,9 +140,9 @@ module "cosmotech-platform" {
   resources                            = var.resources
 
   # prometheus
-  create_prometheus_stack       = var.create_prometheus_stack
-  prom_cpu_mem_limits           = var.prom_cpu_mem_limits
-  prom_cpu_mem_request          = var.prom_cpu_mem_request
+  create_prometheus_stack = var.create_prometheus_stack
+  prom_cpu_mem_limits     = var.prom_cpu_mem_limits
+  prom_cpu_mem_request    = var.prom_cpu_mem_request
 
 }
 
@@ -179,7 +179,6 @@ module "create_vault" {
   vault_replicas        = var.vault_replicas
   vault_secret_name     = var.vault_secret_name
   vault_ingress_enabled = var.vault_ingress_enabled
-  # tls_secret_name       = var.tls_secret_name
   vault_dns_name        = var.api_dns_name
 }
 
@@ -188,21 +187,21 @@ module "create_vault_secrets_operator" {
 
   count = var.create_vault_secrets_operator ? 1 : 0
 
-  namespace             = var.vault_secrets_operator_namespace
-  helm_repo_url         = var.vault_secrets_operator_helm_repo_url
-  helm_chart            = var.vault_secrets_operator_helm_chart
-  helm_chart_version    = var.vault_secrets_operator_helm_chart_version
-  helm_release_name     = var.vault_secrets_operator_helm_release_name
-  vault_address         = var.vault_secrets_operator_vault_address
-  allowed_namespaces    = var.vault_secrets_operator_allowed_namespaces
-  replicas              = var.vault_secrets_operator_replicas 
-  vault_namespace       = var.vault_namespace
+  namespace          = var.vault_secrets_operator_namespace
+  helm_repo_url      = var.vault_secrets_operator_helm_repo_url
+  helm_chart         = var.vault_secrets_operator_helm_chart
+  helm_chart_version = var.vault_secrets_operator_helm_chart_version
+  helm_release_name  = var.vault_secrets_operator_helm_release_name
+  vault_address      = var.vault_secrets_operator_vault_address
+  allowed_namespaces = var.vault_secrets_operator_allowed_namespaces
+  replicas           = var.vault_secrets_operator_replicas
+  vault_namespace    = var.vault_namespace
 
-  tenant_id             = var.tenant_id
-  cluster_name          = var.cluster_name
-  organization          = var.organization
-  organization_id       = var.organization_id
-  workspace_key         = var.workspace_key 
+  tenant_id       = var.tenant_id
+  cluster_name    = var.cluster_name
+  organization    = var.organization
+  organization_id = var.organization_id
+  workspace_key   = var.workspace_key
 
-  # depends_on = [ module.create_vault ]
+  depends_on = [module.create_vault]
 }

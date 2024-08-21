@@ -1,14 +1,14 @@
 apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultStaticSecret
 metadata:
-  name: platform-secret
+  name: ${namespace}-platform-secrets
   namespace: ${namespace}
 spec:
-  vaultAuthRef: vault-secrets-operator-vault-auth
-  mount: cosmotech
-  type: kv-v1
-  path: platform
+  vaultAuthRef: ${namespace}-vault-auth
+  mount: ${organization}
+  type: kv-v2
+  path: ${tenant_id}/clusters/${cluster_name}/${namespace}-platform-secrets
   refreshAfter: 10s
   destination:
     create: true
-    name: platform-secret
+    name: ${namespace}-platform-secrets

@@ -47,11 +47,3 @@ variable "tenant_id" {
 variable "organization" {
   type = string
 }
-
-variable "organization_id" {
-  type = string
-}
-
-variable "workspace_key" {
-  type = string
-}

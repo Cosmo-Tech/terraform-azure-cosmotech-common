@@ -22,6 +22,10 @@ output "out_network_sp_object_id" {
   value = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_networkadt_sp_objectid : null
 }
 
+output "out_platform_client_id" {
+  value = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_platform_sp_client_id : null
+}
+
 output "out_platform_object_id" {
   value = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_platform_sp_object_id : null
 }

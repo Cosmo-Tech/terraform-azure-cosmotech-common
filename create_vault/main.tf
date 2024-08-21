@@ -4,9 +4,9 @@ locals {
     "NAMESPACE"             = var.namespace
     "VAULT_INGRESS_ENABLED" = var.vault_ingress_enabled
     "VAULT_DNS_NAME"        = var.vault_dns_name
-#     "TLS_SECRET_NAME"       = local.tls_secret_name
-    }
-  instance_name = "${var.helm_release_name}"
+    #     "TLS_SECRET_NAME"       = local.tls_secret_name
+  }
+  instance_name = var.helm_release_name
   # tls_secret_name = "${var.tls_secret_name}-${var.namespace}"
 }
 
@@ -35,23 +35,18 @@ resource "helm_release" "vault" {
   ]
 }
 
-# RBAC
-# resource "kubernetes_manifest" "vault_unseal_serviceaccount" {
-#   manifest = yamldecode(templatefile("${path.module}/vault-unseal-serviceaccount.yaml.tpl", 
-#     local.values_vault
-#   ))
-# }
-
-resource "kubernetes_manifest" "vault_unseal_role" {
-  manifest = yamldecode(templatefile("${path.module}/vault-unseal-role.yaml.tpl",
+resource "kubectl_manifest" "vault_unseal_role" {
+  validate_schema = false
+  yaml_body = templatefile("${path.module}/vault-unseal-role.yaml.tpl",
     local.values_vault
-  ))
+  )
 }
 
-resource "kubernetes_manifest" "vault_unseal_rolebinding" {
-  manifest = yamldecode(templatefile("${path.module}/vault-unseal-rolebinding.yaml.tpl",
+resource "kubectl_manifest" "vault_unseal_rolebinding" {
+  validate_schema = false
+  yaml_body = templatefile("${path.module}/vault-unseal-rolebinding.yaml.tpl",
     local.values_vault
-  ))
+  )
 }
 
 # Configmap
@@ -64,7 +59,7 @@ resource "kubernetes_config_map" "vault_unseal_script" {
   data = {
     "unseal.sh" = file("${path.module}/unseal.sh")
   }
-  depends_on = [ helm_release.vault ]
+  depends_on = [helm_release.vault]
 }
 
 #Job for script
@@ -81,12 +76,12 @@ resource "kubernetes_job" "vault_unseal" {
       }
 
       spec {
-        restart_policy = "OnFailure"
+        restart_policy       = "OnFailure"
         service_account_name = "vault"
         container {
-          name  = "vault-unseal"
-          image = "bitnami/kubectl:latest"
-          command = ["/bin/bash", "/scripts/unseal.sh", var.namespace, var.vault_secret_name, var.vault_replicas ]
+          name    = "vault-unseal"
+          image   = "bitnami/kubectl:latest"
+          command = ["/bin/bash", "/scripts/unseal.sh", var.namespace, var.vault_secret_name, var.vault_replicas]
 
           volume_mount {
             name       = "script-volume"
@@ -110,11 +105,11 @@ resource "kubernetes_job" "vault_unseal" {
       }
     }
   }
-  depends_on = [ 
-    helm_release.vault, 
+  depends_on = [
+    helm_release.vault,
     kubernetes_config_map.vault_unseal_script,
-    kubernetes_manifest.vault_unseal_role,
-    kubernetes_manifest.vault_unseal_rolebinding
-    # kubernetes_manifest.vault_unseal_serviceaccount
-    ]
+    kubectl_manifest.vault_unseal_role,
+    kubectl_manifest.vault_unseal_rolebinding
+    # kubectl_manifest.vault_unseal_serviceaccount
+  ]
 }

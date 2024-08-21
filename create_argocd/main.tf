@@ -1,11 +1,11 @@
 locals {
   values_argocd = {
-    "REPLICAS"              = var.replicas
-    "NAMESPACE"             = var.namespace
-    "CREATE_INGRESS"        = var.create_ingress
-    "ARGOCD_DNS_NAME"       = var.argocd_dns_name
-    }
-  instance_name = "${var.helm_release_name}"
+    "REPLICAS"        = var.replicas
+    "NAMESPACE"       = var.namespace
+    "CREATE_INGRESS"  = var.create_ingress
+    "ARGOCD_DNS_NAME" = var.argocd_dns_name
+  }
+  instance_name = var.helm_release_name
 }
 
 resource "kubernetes_namespace" "argocd_namespace" {
@@ -30,22 +30,25 @@ resource "helm_release" "argocd" {
 }
 
 # RBAC
-resource "kubernetes_manifest" "argocd_setup_serviceaccount" {
-  manifest = yamldecode(templatefile("${path.module}/argocd-setup-serviceaccount.yaml.tpl", 
+resource "kubectl_manifest" "argocd_setup_serviceaccount" {
+  validate_schema = false
+  yaml_body = templatefile("${path.module}/argocd-setup-serviceaccount.yaml.tpl",
     local.values_argocd
-  ))
+  )
 }
 
-resource "kubernetes_manifest" "argocd_setup_role" {
-  manifest = yamldecode(templatefile("${path.module}/argocd-setup-role.yaml.tpl",
+resource "kubectl_manifest" "argocd_setup_role" {
+  validate_schema = false
+  yaml_body = templatefile("${path.module}/argocd-setup-role.yaml.tpl",
     local.values_argocd
-  ))
+  )
 }
 
-resource "kubernetes_manifest" "argocd_setup_rolebinding" {
-  manifest = yamldecode(templatefile("${path.module}/argocd-setup-rolebinding.yaml.tpl",
+resource "kubectl_manifest" "argocd_setup_rolebinding" {
+  validate_schema = false
+  yaml_body = templatefile("${path.module}/argocd-setup-rolebinding.yaml.tpl",
     local.values_argocd
-  ))
+  )
 }
 
 # ------------- GET ARGOCD PASSWORD ------------ #
@@ -74,11 +77,11 @@ resource "kubernetes_job" "get_argocd_password" {
       }
 
       spec {
-        restart_policy = "OnFailure"
+        restart_policy       = "OnFailure"
         service_account_name = "argocd-setup"
         container {
-          name  = "get-password"
-          image = "bitnami/kubectl:latest"
+          name    = "get-password"
+          image   = "bitnami/kubectl:latest"
           command = ["/bin/sh", "/scripts/get-password.sh", var.namespace]
 
           volume_mount {
@@ -113,7 +116,7 @@ resource "kubernetes_config_map" "argocd_script" {
   data = {
     "setup.sh" = file("${path.module}/argocd-setup.sh")
   }
-  depends_on = [ helm_release.argocd ]
+  depends_on = [helm_release.argocd]
 }
 
 resource "kubernetes_job" "argocd_setup" {
@@ -129,11 +132,11 @@ resource "kubernetes_job" "argocd_setup" {
       }
 
       spec {
-        restart_policy = "OnFailure"
+        restart_policy       = "OnFailure"
         service_account_name = "argocd-setup"
         container {
-          name  = "setup-argocd"
-          image = "argoproj/argocd:${var.argocd_setup_job_image_version}"
+          name    = "setup-argocd"
+          image   = "argoproj/argocd:${var.argocd_setup_job_image_version}"
           command = ["/bin/sh", "/scripts/setup.sh", var.namespace, var.argocd_project, join(",", var.argocd_repositories), var.argocd_repository_username, var.argocd_repository_access_token]
 
           volume_mount {
@@ -169,10 +172,10 @@ resource "kubernetes_job" "argocd_setup" {
 
   depends_on = [
     kubernetes_job.get_argocd_password,
-    helm_release.argocd, 
+    helm_release.argocd,
     kubernetes_config_map.argocd_script,
-    kubernetes_manifest.argocd_setup_role,
-    kubernetes_manifest.argocd_setup_rolebinding,
-    kubernetes_manifest.argocd_setup_serviceaccount
+    kubectl_manifest.argocd_setup_role,
+    kubectl_manifest.argocd_setup_rolebinding,
+    kubectl_manifest.argocd_setup_serviceaccount
   ]
 }

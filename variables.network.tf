@@ -1,13 +1,13 @@
 variable "network_client_id" {
-  type    = string
+  type = string
 }
 
 variable "network_client_secret" {
-  type    = string
+  type = string
 }
 
 variable "fqdn" {
-  type    = string
+  type = string
 }
 
 variable "publicip_new_or_existing_or_none" {
@@ -16,11 +16,11 @@ variable "publicip_new_or_existing_or_none" {
 }
 
 variable "public_ip_name" {
-  type    = string
+  type = string
 }
 
 variable "vnet_name" {
-  type    = string
+  type = string
 }
 
 variable "vnet_new" {
@@ -29,7 +29,7 @@ variable "vnet_new" {
 }
 
 variable "vnet_resource_group" {
-  type    = string
+  type = string
 }
 
 variable "virtual_network_address_prefix" {
@@ -99,7 +99,7 @@ variable "dns_zone_rg" {
 }
 
 variable "api_dns_name" {
-  type    = string
+  type = string
 }
 
 

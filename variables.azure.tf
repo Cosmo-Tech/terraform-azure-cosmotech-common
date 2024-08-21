@@ -32,7 +32,7 @@ variable "subscription_id" {
 }
 
 variable "resource_group" {
-  type    = string
+  type = string
 }
 
 variable "platform_url" {

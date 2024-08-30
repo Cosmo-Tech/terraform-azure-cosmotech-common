@@ -24,20 +24,20 @@ module "cosmotech-prerequisites" {
   cost_center    = var.cost_center
 
   # publicip
-  create_publicip         = var.publicip_new_or_existing_or_none == "new" ? true : false
   create_dnsrecord        = var.create_dnsrecord
-  publicip_resource_group = var.deployment_type != "ARM" ? local.resource_group : var.publicip_resource_group
   project_stage           = var.project_stage
   project_name            = var.project_name
   customer_name           = var.customer_name
   dns_record              = var.dns_record
   dns_zone_name           = var.dns_zone_name
   dns_zone_rg             = var.dns_zone_rg
+  create_publicip         = var.publicip_new_or_existing_or_none == "new" ? true : false
+  publicip_resource_group = var.deployment_type != "ARM" ? local.resource_group : var.publicip_resource_group
 
   # network common
-  network_client_id     = var.network_client_id
-  network_client_secret = var.network_client_secret
-  network_sp_object_id  = var.network_sp_object_id
+  network_sp_client_id     = var.network_sp_client_id
+  network_sp_client_secret = var.network_sp_client_secret
+  network_sp_object_id     = var.network_sp_object_id
 
   # vnet
   vnet_name           = var.vnet_name

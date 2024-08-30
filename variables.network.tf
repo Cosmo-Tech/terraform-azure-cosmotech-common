@@ -1,9 +1,9 @@
-variable "network_client_id" {
+variable "network_sp_client_id" {
   type    = string
   default = ""
 }
 
-variable "network_client_secret" {
+variable "network_sp_client_secret" {
   type    = string
   default = ""
 }

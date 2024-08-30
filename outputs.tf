@@ -2,11 +2,11 @@ output "out_cluster_name" {
   value = module.cosmotech-prerequisites.out_aks_cluster_name
 }
 
-output "out_vnet_name" {
+output "out_network_name" {
   value = module.cosmotech-prerequisites.out_platform_vnet_name
 }
 
-output "out_public_ip_name" {
+output "out_publicip_name" {
   value = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip_name : var.public_ip_name
 }
 
@@ -18,7 +18,7 @@ output "out_network_sp_object_id" {
   value = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_network_sp_object_id : null
 }
 
-output "out_public_ip_address" {
+output "out_publicip_address" {
   value = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : null
 }
 
@@ -34,7 +34,7 @@ output "out_api_dns_name" {
   value = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_fqdn : null
 }
 
-output "keycloak_ingress_hostname" {
+output "out_keycloak_ingress_hostname" {
   value = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_fqdn : null
 }
 
@@ -46,8 +46,12 @@ output "out_publicip_resource_group" {
   value = var.publicip_resource_group
 }
 
-output "out_vnet_resource_group" {
+output "out_network_resource_group" {
   value = var.vnet_resource_group
+}
+
+output "out_network_dns_record" {
+  value = var.dns_record
 }
 
 # output "out_platform_sp_name" {

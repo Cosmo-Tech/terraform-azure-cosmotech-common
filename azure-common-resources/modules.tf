@@ -1,10 +1,9 @@
 module "create-cluster" {
   source = "./create-cluster"
 
-  network_clientid     = local.network_clientid
-  network_clientsecret = local.network_clientsecret
-  subnet_id            = local.platform_subnet_id
-
+  network_clientid                            = local.network_sp_client_id
+  network_clientsecret                        = local.network_sp_client_secret
+  subnet_id                                   = local.platform_subnet_id
   location                                    = var.location
   resource_group                              = var.resource_group
   cluster_name                                = var.cluster_name
@@ -69,7 +68,7 @@ module "create-network" {
 
   count = var.vnet_new == "new" ? 1 : 0
 
-  network_sp_objectid = local.network_sp_objectid
+  network_sp_objectid = local.network_sp_object_id
   resource_group      = local.resource_group
 
   vnet_name           = var.vnet_name
@@ -137,20 +136,18 @@ module "create-publicip" {
 
   count = var.create_publicip ? 1 : 0
 
-  network_sp_objectid     = local.network_sp_objectid
+  network_sp_objectid     = local.network_sp_object_id
   publicip_resource_group = local.publicip_resource_group
-  platform_client_id      = local.platform_client_id
-
-  cost_center      = var.cost_center
-  customer_name    = var.customer_name
-  project_name     = var.project_name
-  location         = var.location
-  project_stage    = var.project_stage
-  create_publicip  = var.create_publicip
-  create_dnsrecord = var.create_dnsrecord
-  dns_record       = var.dns_record
-  dns_zone_name    = var.dns_zone_name
-  dns_zone_rg      = var.dns_zone_rg
+  cost_center             = var.cost_center
+  customer_name           = var.customer_name
+  project_name            = var.project_name
+  location                = var.location
+  project_stage           = var.project_stage
+  create_publicip         = var.create_publicip
+  create_dnsrecord        = var.create_dnsrecord
+  dns_record              = var.dns_record
+  dns_zone_name           = var.dns_zone_name
+  dns_zone_rg             = var.dns_zone_rg
 
   depends_on = [module.create-platform-prerequisite]
 }

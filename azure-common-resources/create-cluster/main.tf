@@ -205,3 +205,18 @@ resource "azurerm_kubernetes_cluster_node_pool" "monitoring" {
     ]
   }
 }
+
+resource "kubernetes_secret" "network_client_secret" {
+  metadata {
+    name      = "network-client-secret"
+    namespace = "default"
+  }
+
+  data = {
+    password = var.network_clientsecret
+  }
+
+  type = "Opaque"
+
+  depends_on = [ azurerm_kubernetes_cluster.phoenixcluster ]
+}

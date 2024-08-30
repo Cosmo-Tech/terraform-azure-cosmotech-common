@@ -1,38 +1,21 @@
-output "out_platform_name" {
-  value = azuread_application.platform.display_name
-}
-
 output "out_tenant_id" {
   value = var.tenant_id
 }
 
-output "out_platform_sp_client_id" {
-  value = azuread_application.platform.client_id
-}
-
-output "out_platform_sp_object_id" {
-  value = azuread_service_principal.platform.id
-}
-
-output "out_platform_sp_client_secret" {
-  value     = var.create_secrets ? azuread_application_password.platform_password[0].value : null
-  sensitive = true
-}
-
 output "out_nerwork_sp_name" {
-  value = azuread_application.network_adt.display_name
-}
-
-output "out_network_sp_object_id" {
-  value = azuread_service_principal.network_adt.object_id
+  value = azuread_application.network_app.display_name
 }
 
 output "out_network_sp_client_id" {
-  value = azuread_application.network_adt.client_id
+  value = azuread_application.network_app.client_id
+}
+
+output "out_network_sp_object_id" {
+  value = azuread_service_principal.network_app.object_id
 }
 
 output "out_network_sp_client_secret" {
-  value     = var.create_secrets ? azuread_application_password.network_adt_password[0].value : null
+  value     = var.create_secrets ? azuread_application_password.network_app_password.0.value : null
   sensitive = true
 }
 
@@ -53,7 +36,7 @@ output "out_platform_resource_group_id" {
 }
 
 output "out_adt_principal_id" {
-  value = azuread_service_principal.network_adt.id
+  value = azuread_service_principal.network_app.id
 }
 
 output "out_platform_resource_group_object" {

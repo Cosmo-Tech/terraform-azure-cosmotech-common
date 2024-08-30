@@ -239,4 +239,24 @@ variable "user_app_role" {
   ]
 }
 
+variable "tenant_id" {
+  type = string
+}
+
+variable "tenant_name" {
+  type    = string
+  default = "phoenix"
+}
+
+variable "client_id" {
+  type        = string
+  description = "The client id"
+  default     = ""
+}
+
+variable "client_secret" {
+  type        = string
+  description = "The client secret"
+  default     = ""
+}
 

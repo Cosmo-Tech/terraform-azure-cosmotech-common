@@ -1,13 +1,16 @@
 variable "network_client_id" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "network_client_secret" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "fqdn" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "publicip_new_or_existing_or_none" {
@@ -16,11 +19,13 @@ variable "publicip_new_or_existing_or_none" {
 }
 
 variable "public_ip_name" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "vnet_name" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "vnet_new" {
@@ -79,6 +84,7 @@ variable "private_dns_name_adt" {
 variable "network_sp_object_id" {
   type        = string
   description = "The ID of the existing Network's service principal"
+  default     = ""
 }
 
 variable "dns_record" {
@@ -101,6 +107,3 @@ variable "dns_zone_rg" {
 variable "api_dns_name" {
   type = string
 }
-
-
-

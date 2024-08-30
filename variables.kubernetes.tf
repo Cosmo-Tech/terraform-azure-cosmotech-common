@@ -10,7 +10,7 @@ variable "api_version_path" {
 
 variable "kubernetes_version" {
   type    = string
-  default = "1.27.7"
+  default = "1.28.12"
 }
 
 variable "cluster_name" {
@@ -260,3 +260,4 @@ variable "kubernetes_nodepool_system_name" {
   type    = string
   default = "system"
 }
+

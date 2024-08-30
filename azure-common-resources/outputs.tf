@@ -1,9 +1,9 @@
 output "out_platform_sp_client_id" {
-  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_clientid : null
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_sp_client_id : null
 }
 
 output "out_platform_sp_client_secret" {
-  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_password : null
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_sp_client_secret : null
 }
 
 output "out_public_ip" {
@@ -23,12 +23,12 @@ output "out_ip_resource_group" {
   value = var.deployment_type != "ARM" ? module.create-publicip.0.out_ip_resource_group : null
 }
 
-output "out_networkadt_clientid" {
-  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_networkadt_clientid : null
+output "out_network_sp_client_id" {
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_network_sp_client_id : null
 }
 
-output "out_network_adt_password" {
-  value     = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_network_adt_password : null
+output "out_network_sp_client_secret" {
+  value     = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_network_sp_client_secret : null
   sensitive = true
 }
 
@@ -53,8 +53,8 @@ output "out_platform_sp_name" {
   value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_name : null
 }
 
-output "out_networkadt_sp_objectid" {
-  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_networkadt_sp_objectid : null
+output "out_network_sp_object_id" {
+  value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_network_sp_object_id : null
 }
 
 output "out_platform_sp_object_id" {

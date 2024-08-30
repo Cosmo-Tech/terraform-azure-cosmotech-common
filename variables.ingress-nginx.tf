@@ -18,14 +18,13 @@ variable "ingress_nginx_namespace" {
   default = "ingress-nginx"
 }
 
-variable "loadbalancer_ip" {
+variable "public_ip_address" {
   type    = string
   default = ""
 }
 
 variable "publicip_resource_group" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "ingress_nginx_replica_count" {

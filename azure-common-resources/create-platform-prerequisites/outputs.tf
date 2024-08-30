@@ -6,7 +6,7 @@ output "out_tenant_id" {
   value = var.tenant_id
 }
 
-output "out_platform_clientid" {
+output "out_platform_sp_client_id" {
   value = azuread_application.platform.client_id
 }
 
@@ -14,24 +14,24 @@ output "out_platform_sp_object_id" {
   value = azuread_service_principal.platform.id
 }
 
-output "out_platform_password" {
+output "out_platform_sp_client_secret" {
   value     = var.create_secrets ? azuread_application_password.platform_password[0].value : null
   sensitive = true
 }
 
-output "out_nerworkadt_name" {
+output "out_nerwork_sp_name" {
   value = azuread_application.network_adt.display_name
 }
 
-output "out_networkadt_sp_objectid" {
+output "out_network_sp_object_id" {
   value = azuread_service_principal.network_adt.object_id
 }
 
-output "out_networkadt_clientid" {
+output "out_network_sp_client_id" {
   value = azuread_application.network_adt.client_id
 }
 
-output "out_network_adt_password" {
+output "out_network_sp_client_secret" {
   value     = var.create_secrets ? azuread_application_password.network_adt_password[0].value : null
   sensitive = true
 }

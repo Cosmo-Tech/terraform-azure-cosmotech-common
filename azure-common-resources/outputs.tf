@@ -18,11 +18,6 @@ output "out_network_sp_client_id" {
   value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_network_sp_client_id : null
 }
 
-output "out_network_sp_client_secret" {
-  value     = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_network_sp_client_secret : null
-  sensitive = true
-}
-
 output "out_aks_phoenix_config" {
   value     = module.create-cluster.aks_phoenix_config
   sensitive = true

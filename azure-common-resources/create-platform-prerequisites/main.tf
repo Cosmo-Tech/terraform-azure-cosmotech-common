@@ -46,7 +46,6 @@ resource "azuread_service_principal" "network_app" {
 
 resource "azuread_application_password" "network_app_password" {
   display_name      = "network_secret"
-  count             = var.create_secrets ? 1 : 0
   application_id    = azuread_application.network_app.id
   end_date_relative = "4464h"
 }

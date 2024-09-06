@@ -15,7 +15,7 @@ output "out_network_sp_object_id" {
 }
 
 output "out_network_sp_client_secret" {
-  value     = var.create_secrets ? azuread_application_password.network_app_password.0.value : null
+  value     = azuread_application_password.network_app_password.value
   sensitive = true
 }
 

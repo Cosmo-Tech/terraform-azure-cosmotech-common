@@ -32,11 +32,7 @@ variable "deployment_type" {
 }
 
 variable "image_path" {
-  type    = string
-}
-
-variable "platform_url" {
-  description = "The platform url"
+  type = string
 }
 
 variable "identifier_uri" {
@@ -59,11 +55,6 @@ variable "audience" {
   }
 }
 
-variable "api_version_path" {
-  description = "The API version path"
-  type        = string
-}
-
 variable "create_publicip" {
   description = "Create the public IP for the platform"
   type        = bool
@@ -75,7 +66,7 @@ variable "create_dnsrecord" {
 }
 
 variable "publicip_resource_group" {
-  type = string
+  type    = string
 }
 
 variable "project_stage" {
@@ -175,7 +166,7 @@ variable "private_dns_name_eventhub" {
 }
 
 variable "kubernetes_version" {
-  type    = string
+  type = string
 }
 
 variable "kubernetes_max_db_instances" {
@@ -238,32 +229,8 @@ variable "kubernetes_network_plugin" {
   type = string
 }
 
-
-variable "user_app_role" {
-  type = list(object({
-    description  = string
-    display_name = string
-    id           = string
-    role_value   = string
-  }))
-  description = "App role for azuread_application"
-}
-
-variable "create_secrets" {
-  type    = bool
-}
-
-variable "create_babylon" {
-  description = "Create the Azure Active Directory Application for Babylon"
-  type        = bool
-}
-
 variable "cost_center" {
-  type    = string
-}
-
-variable "tenant_name" {
-  type    = string
+  type = string
 }
 
 variable "temporary_name_for_rotation_system_pool" {

@@ -2,10 +2,8 @@ variable "is_bare_metal" {
   type = bool
 }
 
-variable "api_version_path" {
-  description = "The API version path"
-  type        = string
-  default     = "/"
+variable "kubernetes_resource_group" {
+  type = string
 }
 
 variable "kubernetes_version" {
@@ -13,18 +11,8 @@ variable "kubernetes_version" {
   default = "1.28.12"
 }
 
-variable "cluster_name" {
+variable "kubernetes_cluster_name" {
   type = string
-}
-
-variable "namespace" {
-  type    = string
-  default = "phoenix"
-}
-
-variable "monitoring_namespace" {
-  type    = string
-  default = "cosmotech-monitoring"
 }
 
 variable "temporary_name_for_rotation_system_pool" {

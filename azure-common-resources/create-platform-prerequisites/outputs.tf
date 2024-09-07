@@ -1,7 +1,3 @@
-output "out_tenant_id" {
-  value = var.tenant_id
-}
-
 output "out_nerwork_sp_name" {
   value = azuread_application.network_app.display_name
 }
@@ -17,14 +13,6 @@ output "out_network_sp_object_id" {
 output "out_network_sp_client_secret" {
   value     = azuread_application_password.network_app_password.value
   sensitive = true
-}
-
-output "out_platform_url" {
-  value = var.platform_url
-}
-
-output "out_identifier_uri" {
-  value = var.identifier_uri
 }
 
 output "out_vnet_resource_group" {

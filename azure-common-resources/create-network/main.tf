@@ -30,3 +30,4 @@ resource "azurerm_role_assignment" "vnet_network_contributor" {
   role_definition_name = "Network Contributor"
   principal_id         = var.network_sp_objectid
 }
+

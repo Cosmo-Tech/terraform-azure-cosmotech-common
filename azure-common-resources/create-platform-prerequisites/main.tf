@@ -1,10 +1,6 @@
 locals {
   pre_name       = "Cosmo Tech "
   post_name      = " ${var.project_stage} For ${var.customer_name} ${var.project_name}"
-  subnet_name    = var.subnet_name
-  identifier_uri = "https://${var.dns_record}.${var.dns_zone_name}"
-  platform_url   = var.platform_url != "" ? var.platform_url : "https://${var.dns_record}.${var.dns_zone_name}"
-  vnet_iprange   = var.vnet_iprange != "" ? var.vnet_iprange : "10.21.0.0/16"
   tags = {
     vendor      = "cosmotech"
     stage       = var.project_stage
@@ -20,10 +16,6 @@ locals {
     var.project_name,
     "terraformed"
   ]
-  # Azure IDs
-  microsoft_graph_resource_access_id = "00000003-0000-0000-c000-000000000000" # Microsoft Graph
-  user_read_resource_access_id       = "e1fe6dd8-ba31-4d61-89e7-88639da4683d" # User.Read
-  platform_resource_access_id        = "6332363e-bcba-4c4a-a605-c25f23117400" # platform
 }
 
 data "azuread_users" "owners" {

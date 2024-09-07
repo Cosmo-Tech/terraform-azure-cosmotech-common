@@ -18,7 +18,7 @@ output "out_network_sp_object_id" {
   value = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_network_sp_object_id : null
 }
 
-output "out_publicip_address" {
+output "out_nginx_publicip_address" {
   value = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : null
 }
 

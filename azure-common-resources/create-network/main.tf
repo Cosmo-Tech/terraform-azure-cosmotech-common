@@ -19,7 +19,7 @@ resource "azurerm_virtual_network" "platform_vnet" {
 
   subnet {
     name           = var.subnet_name
-    address_prefix = var.subnet_iprange
+    address_prefixes = [ var.subnet_iprange ]
   }
 
   tags = local.tags

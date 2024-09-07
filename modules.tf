@@ -1,59 +1,50 @@
 module "cosmotech-prerequisites" {
   source = "./azure-common-resources"
 
+  # azure
   client_id       = var.client_id
   client_secret   = var.client_secret
   subscription_id = var.subscription_id
   tenant_id       = var.tenant_id
-  tenant_name     = var.tenant_name
   location        = var.location
+  resource_group  = local.resource_group
+  deployment_type = var.deployment_type
+  owner_list      = var.owner_list
 
-  resource_group   = local.resource_group
-  cluster_name     = local.cluster_name
-  deployment_type  = var.deployment_type
-  image_path       = var.image_path
-  platform_url     = var.platform_url
-  identifier_uri   = var.identifier_uri
-  owner_list       = var.owner_list
   audience         = var.audience
-  api_version_path = var.api_version_path
 
-  user_app_role  = var.user_app_role
-  create_secrets = var.create_secrets
-  create_babylon = var.create_babylon
-  cost_center    = var.cost_center
-
-  # publicip
-  create_dnsrecord        = var.create_dnsrecord
-  project_stage           = var.project_stage
-  project_name            = var.project_name
-  customer_name           = var.customer_name
-  dns_record              = var.dns_record
-  dns_zone_name           = var.dns_zone_name
-  dns_zone_rg             = var.dns_zone_rg
-  create_publicip         = var.publicip_new_or_existing_or_none == "new" ? true : false
-  publicip_resource_group = var.deployment_type != "ARM" ? local.resource_group : var.publicip_resource_group
+  # project
+  image_path    = var.project_image_path
+  cost_center   = var.project_cost_center
+  project_stage = var.project_stage
+  project_name  = var.project_name
+  customer_name = var.project_customer_name
 
   # network common
-  network_sp_client_id     = var.network_sp_client_id
-  network_sp_client_secret = var.network_sp_client_secret
-  network_sp_object_id     = var.network_sp_object_id
+  identifier_uri            = var.network_identifier_uri
+  create_publicip           = var.publicip_new_or_existing_or_none == "new" ? true : false
+  publicip_resource_group   = var.deployment_type != "ARM" ? local.resource_group : var.network_publicip_resource_group
+  create_dnsrecord          = var.network_dns_record_create
+  dns_record                = var.network_dns_record
+  dns_zone_name             = var.network_dns_zone_name
+  dns_zone_rg               = var.network_dns_zone_rg
+  network_sp_client_id      = var.network_sp_client_id
+  network_sp_client_secret  = var.network_sp_client_secret
+  network_sp_object_id      = var.network_sp_object_id
+  vnet_name                 = var.network_name
+  vnet_new                  = var.network_new
+  subnet_name               = var.network_subnet_name
+  vnet_iprange              = var.network_virtual_address_prefix
+  subnet_iprange            = var.network_virtual_subnet_address_prefix
+  vnet_resource_group       = var.network_resource_group
+  private_dns_name_blob     = var.network_private_dns_name_blob
+  private_dns_name_queue    = var.network_private_dns_name_queue
+  private_dns_name_table    = var.network_private_dns_name_table
+  private_dns_name_adt      = var.network_private_dns_name_adt
+  private_dns_name_eventhub = var.network_private_dns_name_eventhub
 
-  # vnet
-  vnet_name           = var.vnet_name
-  vnet_new            = var.vnet_new
-  subnet_name         = var.subnet_name
-  vnet_iprange        = var.virtual_network_address_prefix
-  subnet_iprange      = var.virtual_network_subnet_address_prefix
-  vnet_resource_group = var.vnet_resource_group
-
-  # privatelink dns
-  private_dns_name_blob     = var.private_dns_name_blob
-  private_dns_name_queue    = var.private_dns_name_queue
-  private_dns_name_table    = var.private_dns_name_table
-  private_dns_name_adt      = var.private_dns_name_adt
-  private_dns_name_eventhub = var.private_dns_name_eventhub
-
+  # kubernetes
+  cluster_name                                = local.cluster_name
   kubernetes_version                          = var.kubernetes_version
   kubernetes_max_db_instances                 = var.kubernetes_max_db_instances
   kubernetes_min_db_instances                 = var.kubernetes_min_db_instances

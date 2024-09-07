@@ -91,29 +91,14 @@ module "create-platform-prerequisite" {
 
   count = var.deployment_type != "ARM" ? 1 : 0
 
-  tenant_id        = var.tenant_id
-  subscription_id  = var.subscription_id
-  client_id        = var.client_id
-  client_secret    = var.client_secret
-  platform_url     = var.platform_url
-  identifier_uri   = var.identifier_uri
-  project_stage    = var.project_stage
-  project_name     = var.project_name
-  owner_list       = var.owner_list
-  audience         = var.audience
-  location         = var.location
-  resource_group   = var.resource_group
-  dns_zone_name    = var.dns_zone_name
-  dns_zone_rg      = var.dns_zone_rg
-  dns_record       = var.dns_record
-  vnet_iprange     = var.vnet_iprange
-  api_version_path = var.api_version_path
-  customer_name    = var.customer_name
-  user_app_role    = var.user_app_role
-  image_path       = var.image_path
-  cost_center      = var.cost_center
-  create_secrets   = var.create_secrets
-  subnet_name      = var.subnet_name
+  project_stage  = var.project_stage
+  project_name   = var.project_name
+  owner_list     = var.owner_list
+  location       = var.location
+  resource_group = var.resource_group
+  customer_name  = var.customer_name
+  image_path     = var.image_path
+  cost_center    = var.cost_center
 }
 
 module "create-privatedns" {

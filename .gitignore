@@ -1,8 +1,12 @@
-.terraform/
 .terraform.lock.hcl
+modules.json
+.terraform/
 .terraform.*
 terraform.*
 tfplan*
+out_*
+export_*
+providers.azure.tf
 *.sh
-!argocd-setup.sh
-!get-password.sh
+!*/*/*.sh
+!*/*.sh

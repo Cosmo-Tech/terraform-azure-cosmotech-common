@@ -40,11 +40,11 @@ variable "network_resource_group" {
 variable "network_virtual_address_prefix" {
   description = "The Virtual Network IP range. Minimum /26 NetMaskLength"
   type        = string
-  default     = "10.21.0.0/24"
+  default     = "10.21.0.0/16"
 }
 variable "network_virtual_subnet_address_prefix" {
   type    = string
-  default = "10.21.0.0/24"
+  default = "10.21.0.0/16"
 }
 
 variable "network_subnet_name" {

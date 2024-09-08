@@ -36,7 +36,7 @@ output "out_subscription_id" {
 }
 
 output "out_api_dns_name" {
-  value = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_fqdn : null
+  value = var.deployment_type != "ARM" ? module.covar.network_sp_client_idsmotech-prerequisites.out_fqdn : null
 }
 
 output "out_keycloak_ingress_hostname" {

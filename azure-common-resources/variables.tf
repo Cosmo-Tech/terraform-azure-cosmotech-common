@@ -1,20 +1,25 @@
 variable "client_id" {
+  type        = string
   description = "The client id"
 }
 
 variable "client_secret" {
+  type        = string
   description = "The client secret"
 }
 
 variable "subscription_id" {
+  type        = string
   description = "The subscription id"
 }
 
 variable "tenant_id" {
+  type        = string
   description = "The tenant id"
 }
 
 variable "location" {
+  type        = string
   description = "The Azure location"
 }
 
@@ -66,7 +71,7 @@ variable "create_dnsrecord" {
 }
 
 variable "publicip_resource_group" {
-  type    = string
+  type = string
 }
 
 variable "project_stage" {
@@ -86,10 +91,12 @@ variable "project_stage" {
 }
 
 variable "project_name" {
+  type        = string
   description = "The project name"
 }
 
 variable "customer_name" {
+  type        = string
   description = "The customer name"
 }
 
@@ -121,8 +128,8 @@ variable "network_sp_object_id" {
   description = "The ID of the existing Network's service principal"
 }
 
-variable "vnet_name" {
-  type = string
+variable "network_name" {
+  type    = string
 }
 
 variable "vnet_new" {

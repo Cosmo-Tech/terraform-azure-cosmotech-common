@@ -44,7 +44,7 @@ variable "network_virtual_address_prefix" {
 }
 variable "network_virtual_subnet_address_prefix" {
   type    = string
-  default = "10.31.0.0/24"
+  default = "10.21.0.0/24"
 }
 
 variable "network_subnet_name" {
@@ -96,7 +96,7 @@ variable "network_dns_zone_name" {
   description = "The DNS zone name to create platform subdomain. Example: api.cosmotech.com"
   type        = string
   validation {
-    condition = can(regex("${var.network_dns_zone_name}$", var.network_api_dns_name))
+    condition     = can(regex("${var.network_dns_zone_name}$", var.network_api_dns_name))
     error_message = "The dns zone match error"
   }
 }
@@ -110,7 +110,7 @@ variable "network_dns_zone_rg" {
 variable "network_api_dns_name" {
   type = string
   validation {
-    condition = can(regex("^${var.network_dns_record}\\.", var.network_api_dns_name))
+    condition     = can(regex("^${var.network_dns_record}\\.", var.network_api_dns_name))
     error_message = "The dns record match error"
   }
 }

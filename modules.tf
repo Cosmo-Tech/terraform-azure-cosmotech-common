@@ -31,7 +31,7 @@ module "cosmotech-prerequisites" {
   network_sp_client_id      = var.network_sp_client_id
   network_sp_client_secret  = var.network_sp_client_secret
   network_sp_object_id      = var.network_sp_object_id
-  vnet_name                 = var.network_name
+  network_name              = var.network_name
   vnet_new                  = var.network_new
   subnet_name               = var.network_subnet_name
   vnet_iprange              = var.network_virtual_address_prefix

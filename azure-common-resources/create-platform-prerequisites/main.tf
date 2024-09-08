@@ -1,6 +1,6 @@
 locals {
   pre_name       = "Cosmo Tech "
-  post_name      = " ${var.project_stage} For ${var.customer_name} ${var.project_name}"
+  post_name      = " ${var.customer_name} For ${var.project_stage} ${var.project_name}"
   tags = {
     vendor      = "cosmotech"
     stage       = var.project_stage
@@ -23,7 +23,7 @@ data "azuread_users" "owners" {
 }
 
 resource "azuread_application" "network_app" {
-  display_name     = "${local.pre_name}Network ${local.post_name}"
+  display_name     = "${local.pre_name}Network${local.post_name}"
   logo_image       = filebase64(var.image_path)
   owners           = data.azuread_users.owners.object_ids
   sign_in_audience = "AzureADMyOrg"

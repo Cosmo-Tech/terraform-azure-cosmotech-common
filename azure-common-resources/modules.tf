@@ -1,3 +1,79 @@
+module "create-platform-prerequisite" {
+  source = "./create-platform-prerequisites"
+
+  count = var.deployment_type != "ARM" ? 1 : 0
+
+  project_stage  = var.project_stage
+  project_name   = var.project_name
+  owner_list     = var.owner_list
+  location       = var.location
+  resource_group = var.resource_group
+  customer_name  = var.customer_name
+  image_path     = var.image_path
+  cost_center    = var.cost_center
+}
+
+module "create-network" {
+  source = "./create-network"
+
+  count = var.vnet_new == "new" ? 1 : 0
+
+  network_sp_objectid = local.network_sp_object_id
+  resource_group      = local.resource_group
+  vnet_resource_group = local.vnet_resource_group
+  network_name        = var.network_name
+  vnet_iprange        = var.vnet_iprange
+  location            = var.location
+  customer_name       = var.customer_name
+  cost_center         = var.cost_center
+  project_stage       = var.project_stage
+  project_name        = var.project_name
+  subscription_id     = var.subscription_id
+  subnet_iprange      = var.subnet_iprange
+  subnet_name         = var.subnet_name
+
+  depends_on = [module.create-platform-prerequisite]
+}
+
+module "create-privatedns" {
+  source = "./create-privatedns"
+
+  resource_group = local.resource_group
+  vnet_id        = local.platform_vnet_id
+
+  private_dns_name_blob     = var.private_dns_name_blob
+  private_dns_name_adt      = var.private_dns_name_adt
+  private_dns_name_queue    = var.private_dns_name_queue
+  private_dns_name_table    = var.private_dns_name_table
+  private_dns_name_eventhub = var.private_dns_name_eventhub
+
+  depends_on = [
+    module.create-platform-prerequisite,
+    module.create-network
+  ]
+}
+
+module "create-publicip" {
+  source = "./create-publicip"
+
+  count = var.create_publicip ? 1 : 0
+
+  network_sp_objectid     = local.network_sp_object_id
+  publicip_resource_group = local.publicip_resource_group
+  cost_center             = var.cost_center
+  customer_name           = var.customer_name
+  project_name            = var.project_name
+  location                = var.location
+  project_stage           = var.project_stage
+  create_publicip         = var.create_publicip
+  create_dnsrecord        = var.create_dnsrecord
+  dns_record              = var.dns_record
+  dns_zone_name           = var.dns_zone_name
+  dns_zone_rg             = var.dns_zone_rg
+
+  depends_on = [module.create-platform-prerequisite]
+}
+
 module "create-cluster" {
   source = "./create-cluster"
 
@@ -59,80 +135,9 @@ module "create-cluster" {
   kubernetes_nodepool_system_name             = var.kubernetes_nodepool_system_name
 
   depends_on = [
-    module.create-platform-prerequisite, module.create-network, module.create-privatedns
+    module.create-platform-prerequisite,
+    module.create-network,
+    module.create-privatedns,
+    module.create-publicip
   ]
-}
-
-module "create-network" {
-  source = "./create-network"
-
-  count = var.vnet_new == "new" ? 1 : 0
-
-  network_sp_objectid = local.network_sp_object_id
-  resource_group      = local.resource_group
-
-  vnet_name           = var.vnet_name
-  vnet_iprange        = var.vnet_iprange
-  location            = var.location
-  customer_name       = var.customer_name
-  cost_center         = var.cost_center
-  project_stage       = var.project_stage
-  project_name        = var.project_name
-  subscription_id     = var.subscription_id
-  vnet_resource_group = local.vnet_resource_group
-  subnet_iprange      = var.subnet_iprange
-  subnet_name         = var.subnet_name
-
-  depends_on = [module.create-platform-prerequisite]
-}
-
-module "create-platform-prerequisite" {
-  source = "./create-platform-prerequisites"
-
-  count = var.deployment_type != "ARM" ? 1 : 0
-
-  project_stage  = var.project_stage
-  project_name   = var.project_name
-  owner_list     = var.owner_list
-  location       = var.location
-  resource_group = var.resource_group
-  customer_name  = var.customer_name
-  image_path     = var.image_path
-  cost_center    = var.cost_center
-}
-
-module "create-privatedns" {
-  source = "./create-privatedns"
-
-  resource_group = local.resource_group
-  vnet_id        = local.platform_vnet_id
-
-  private_dns_name_blob     = var.private_dns_name_blob
-  private_dns_name_adt      = var.private_dns_name_adt
-  private_dns_name_queue    = var.private_dns_name_queue
-  private_dns_name_table    = var.private_dns_name_table
-  private_dns_name_eventhub = var.private_dns_name_eventhub
-
-  depends_on = [module.create-platform-prerequisite]
-}
-
-module "create-publicip" {
-  source = "./create-publicip"
-
-  count = var.create_publicip ? 1 : 0
-
-  network_sp_objectid     = local.network_sp_object_id
-  publicip_resource_group = local.publicip_resource_group
-  cost_center             = var.cost_center
-  customer_name           = var.customer_name
-  project_name            = var.project_name
-  location                = var.location
-  project_stage           = var.project_stage
-  create_publicip         = var.create_publicip
-  create_dnsrecord        = var.create_dnsrecord
-  dns_record              = var.dns_record
-  dns_zone_name           = var.dns_zone_name
-  dns_zone_rg             = var.dns_zone_rg
-
-  depends_on = [module.create-platform-prerequisite]
 }

@@ -3,7 +3,7 @@ variable "resource_group" {
 }
 
 variable "vnet_iprange" {
-  type    = string
+  type = string
 }
 
 variable "network_sp_objectid" {
@@ -11,6 +11,7 @@ variable "network_sp_objectid" {
 }
 
 variable "project_stage" {
+  type        = string
   description = "The platform stage"
   validation {
     condition = contains([
@@ -27,14 +28,17 @@ variable "project_stage" {
 }
 
 variable "customer_name" {
+  type        = string
   description = "The customer name"
 }
 
 variable "project_name" {
+  type        = string
   description = "The project name"
 }
 
 variable "location" {
+  type        = string
   description = "The Azure location"
 }
 
@@ -46,16 +50,16 @@ variable "subscription_id" {
   type = string
 }
 
-variable "vnet_name" {
-  type = string
+variable "network_name" {
+  type    = string
 }
 
 variable "subnet_name" {
-  type    = string
+  type = string
 }
 
 variable "subnet_iprange" {
-  type    = string
+  type = string
 }
 
 variable "vnet_resource_group" {

@@ -1,6 +1,7 @@
 variable "project_name" {
   description = "The project name"
   type        = string
+  default     = ""
 }
 
 variable "project_stage" {

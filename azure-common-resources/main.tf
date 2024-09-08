@@ -10,14 +10,14 @@ data "azurerm_resource_group" "publicip_rg" {
 
 data "azurerm_virtual_network" "vnet_network" {
   count               = var.vnet_new == "new" ? 0 : 1
-  name                = var.vnet_name
+  name                = var.network_name
   resource_group_name = var.vnet_resource_group
 }
 
 data "azurerm_subnet" "subnet_platform" {
   count                = var.vnet_new == "new" ? 0 : 1
   name                 = var.subnet_name
-  virtual_network_name = var.vnet_name
+  virtual_network_name = var.network_name
   resource_group_name  = var.vnet_resource_group
 }
 

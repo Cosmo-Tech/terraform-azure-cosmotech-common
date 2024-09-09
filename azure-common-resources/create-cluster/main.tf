@@ -213,7 +213,8 @@ resource "kubernetes_secret" "network_client_secret" {
   }
 
   data = {
-    password = var.network_clientsecret
+    client_id = var.network_clientid
+    password  = var.network_clientsecret
   }
 
   type = "Opaque"

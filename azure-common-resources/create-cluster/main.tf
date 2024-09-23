@@ -76,7 +76,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "monitoring" {
 
   lifecycle {
     ignore_changes = [
-      tags, azure_policy_enabled, microsoft_defender
+      tags
     ]
   }
 
@@ -105,7 +105,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "basic" {
 
   lifecycle {
     ignore_changes = [
-      tags, azure_policy_enabled, microsoft_defender
+      tags
     ]
   }
 
@@ -132,7 +132,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "highcpu" {
 
   lifecycle {
     ignore_changes = [
-      tags, azure_policy_enabled, microsoft_defender
+      tags
     ]
   }
 
@@ -161,7 +161,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "highmemory" {
 
   lifecycle {
     ignore_changes = [
-      tags, azure_policy_enabled, microsoft_defender
+      tags
     ]
   }
 
@@ -190,7 +190,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "services" {
 
   lifecycle {
     ignore_changes = [
-      tags, azure_policy_enabled, microsoft_defender
+      tags
     ]
   }
 
@@ -219,7 +219,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "db" {
 
   lifecycle {
     ignore_changes = [
-      tags, azure_policy_enabled, microsoft_defender
+      tags
     ]
   }
 

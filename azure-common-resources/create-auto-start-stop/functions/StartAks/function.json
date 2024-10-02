@@ -1,0 +1,12 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "name": "startakstimer",
+      "type": "timerTrigger",
+      "direction": "in",
+      "schedule": "%KEYSCHEDULESTART%",
+      "useMonitor": false
+    }
+  ]
+}

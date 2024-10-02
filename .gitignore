@@ -10,3 +10,4 @@ providers.azure.tf
 *.sh
 !*/*/*.sh
 !*/*.sh
+functions.zip

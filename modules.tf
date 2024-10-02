@@ -91,4 +91,25 @@ module "cosmotech-prerequisites" {
   kubernetes_services_os_disk_size            = var.kubernetes_services_os_disk_size
   kubernetes_system_os_disk_size              = var.kubernetes_system_os_disk_size
   kubernetes_nodepool_system_name             = var.kubernetes_nodepool_system_name
+
+  resource_group_name   = local.resource_group
+  storage_account_name  = var.storage_account_name
+  app_service_plan_name = var.app_service_plan_name
+  function_app_name     = var.function_app_name
+
+  holiday_country        = var.holiday_country
+  solidarity_day         = var.solidarity_day
+  adx_clusters_config    = var.adx_clusters_config
+  aks_resource_group     = local.resource_group
+  aks_cluster_name       = local.cluster_name
+  powerbi_resource_group = var.powerbi_resource_group
+  powerbi_name           = var.powerbi_name
+  vm_resource_group      = var.vm_resource_group
+  vm_name                = var.vm_name
+
+  auto_start_stop_deploy = var.auto_start_stop_deploy
+  start_hours            = var.start_hours
+  stop_hours             = var.stop_hours
+  start_minutes          = var.start_minutes
+  stop_minutes           = var.stop_minutes
 }

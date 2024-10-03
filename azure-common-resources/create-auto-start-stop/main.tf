@@ -39,7 +39,7 @@ resource "null_resource" "package_functions" {
       fi
 
       FUNCTIONS_DIR="${path.module}/functions"
-      ZIP_FILE="../../functions.zip"
+      ZIP_FILE="../../../functions.zip"
 
       cd "$FUNCTIONS_DIR" ; zip -r "$ZIP_FILE" .
     EOT

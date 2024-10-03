@@ -149,8 +149,8 @@ module "create-auto-start-stop" {
 
   subscription_id       = var.subscription_id
   tenant_id             = var.tenant_id
-  client_id             = var.client_id
-  client_secret         = var.client_secret
+  client_id             = module.create-platform-prerequisite.out_network_sp_client_id
+  client_secret         = module.create-platform-prerequisite.out_network_sp_client_secret
   resource_group_name   = var.resource_group_name
   location              = var.location
   storage_account_name  = var.storage_account_name
@@ -173,4 +173,8 @@ module "create-auto-start-stop" {
   stop_hours             = var.stop_hours
   start_minutes          = var.start_minutes
   stop_minutes           = var.stop_minutes
+
+  depends_on = [
+    module.create-platform-prerequisite
+  ]
 }

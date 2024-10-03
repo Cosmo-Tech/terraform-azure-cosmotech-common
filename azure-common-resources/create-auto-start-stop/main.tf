@@ -1,12 +1,13 @@
 locals {
-  storage_account_name           = azurerm_storage_account.sa.name
+  storage_account_name           = "${azurerm_storage_account.sa.name}${random_string.func_suffix.result}"
   storage_account_resource_group = var.resource_group_name
   storage_account_access_key     = azurerm_storage_account.sa.primary_access_key
   storage_connection_string      = azurerm_storage_account.sa.primary_connection_string
+  function_app_name              = "${var.function_app_name}${random_string.func_suffix.result}"
 }
 
-resource "random_string" "function_app_version" {
-  length  = 8
+resource "random_string" "func_suffix" {
+  length  = 6
   special = false
   upper   = false
 }
@@ -63,7 +64,7 @@ resource "azurerm_service_plan" "asp" {
 }
 
 resource "azurerm_linux_function_app" "fa" {
-  name                       = var.function_app_name
+  name                       = local.function_app_name
   location                   = var.location
   resource_group_name        = var.resource_group_name
   service_plan_id            = azurerm_service_plan.asp.id
@@ -76,7 +77,7 @@ resource "azurerm_linux_function_app" "fa" {
     "AzureWebJobsStorage"                      = local.storage_connection_string
     "FUNCTIONS_EXTENSION_VERSION"              = "~4"
     "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING" = local.storage_connection_string
-    "WEBSITE_CONTENTSHARE"                     = lower(var.function_app_name)
+    "WEBSITE_CONTENTSHARE"                     = lower(local.function_app_name)
     "FUNCTIONS_WORKER_RUNTIME"                 = "python"
     "HOLIDAY_COUNTRY"                          = var.holiday_country
     "SOLIDARITY_DAY"                           = var.solidarity_day

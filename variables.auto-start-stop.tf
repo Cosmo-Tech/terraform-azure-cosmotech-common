@@ -1,19 +1,19 @@
 variable "storage_account_name" {
   description = "The name of the storage account"
   type        = string
-  default     = "autostartstopfunction"
+  default     = "saautorestart"
 }
 
 variable "app_service_plan_name" {
   description = "The name of the App Service Plan"
   type        = string
-  default     = "asp-auto-start-stop-function"
+  default     = "asp-auto-restart"
 }
 
 variable "function_app_name" {
   description = "The name of the Function App"
   type        = string
-  default     = "auto-start-stop-function"
+  default     = "auto-restart"
 }
 
 variable "holiday_country" {

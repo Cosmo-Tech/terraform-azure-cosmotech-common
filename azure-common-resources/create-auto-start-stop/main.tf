@@ -1,5 +1,5 @@
 locals {
-  storage_account_name           = "${azurerm_storage_account.sa.name}${random_string.func_suffix.result}"
+  storage_account_name           = "${var.storage_account_name}${random_string.func_suffix.result}"
   storage_account_resource_group = var.resource_group_name
   storage_account_access_key     = azurerm_storage_account.sa.primary_access_key
   storage_connection_string      = azurerm_storage_account.sa.primary_connection_string
@@ -64,6 +64,13 @@ resource "azurerm_service_plan" "asp" {
   sku_name            = "Y1"
 }
 
+resource "azurerm_application_insights" "app_insights" {
+  name                = "${local.function_app_name}-insights"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  application_type    = "web"
+}
+
 resource "azurerm_linux_function_app" "fa" {
   name                       = local.function_app_name
   location                   = var.location
@@ -76,6 +83,8 @@ resource "azurerm_linux_function_app" "fa" {
     "ENABLE_ORYX_BUILD"                        = "true"
     "SCM_DO_BUILD_DURING_DEPLOYMENT"           = "true"
     "AzureWebJobsStorage"                      = local.storage_connection_string
+    "APPINSIGHTS_INSTRUMENTATIONKEY"           = azurerm_application_insights.app_insights.instrumentation_key
+    "APPLICATIONINSIGHTS_CONNECTION_STRING"    = azurerm_application_insights.app_insights.connection_string
     "FUNCTIONS_EXTENSION_VERSION"              = "~4"
     "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING" = local.storage_connection_string
     "WEBSITE_CONTENTSHARE"                     = lower(local.function_app_name)

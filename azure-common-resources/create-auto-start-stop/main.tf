@@ -4,6 +4,7 @@ locals {
   storage_account_access_key     = azurerm_storage_account.sa.primary_access_key
   storage_connection_string      = azurerm_storage_account.sa.primary_connection_string
   function_app_name              = "${var.function_app_name}${random_string.func_suffix.result}"
+  app_service_plan_name          = "${var.app_service_plan_name}${random_string.func_suffix.result}"
 }
 
 resource "random_string" "func_suffix" {
@@ -48,7 +49,7 @@ resource "null_resource" "package_functions" {
 }
 
 resource "azurerm_storage_account" "sa" {
-  name                     = var.storage_account_name
+  name                     = local.storage_account_name
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_tier             = "Standard"
@@ -56,7 +57,7 @@ resource "azurerm_storage_account" "sa" {
 }
 
 resource "azurerm_service_plan" "asp" {
-  name                = var.app_service_plan_name
+  name                = local.app_service_plan_name
   location            = var.location
   resource_group_name = var.resource_group_name
   os_type             = "Linux"

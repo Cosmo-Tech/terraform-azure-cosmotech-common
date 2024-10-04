@@ -142,8 +142,8 @@ module "create-cluster" {
   ]
 }
 
-module "create-auto-start-stop" {
-  source = "./create-auto-start-stop"
+module "create-auto-restart" {
+  source = "./create-auto-restart"
 
   count = var.auto_start_stop_deploy ? 1 : 0
 

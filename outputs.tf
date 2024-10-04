@@ -62,3 +62,23 @@ output "out_network_dns_record" {
 output "out_network_app_name" {
   value = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_network_sp_name : null
 }
+
+output "out_auto_restart_start_minutes" {
+  value = var.start_minutes
+}
+
+output "out_auto_restart_start_hours" {
+  value = var.start_hours
+}
+
+output "out_auto_restart_stop_minutes" {
+  value = var.stop_minutes
+}
+
+output "out_auto_restart_stop_minutes" {
+  value = var.stop_hours
+}
+
+output "out_auto_restart_deploy" {
+  value = var.auto_start_stop_deploy
+}

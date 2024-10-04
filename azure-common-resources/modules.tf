@@ -149,8 +149,8 @@ module "create-auto-start-stop" {
 
   subscription_id       = var.subscription_id
   tenant_id             = var.tenant_id
-  client_id             = module.create-platform-prerequisite[0].out_network_sp_client_id
-  client_secret         = module.create-platform-prerequisite[0].out_network_sp_client_secret
+  client_id             = var.deployment_type == "ARM" ? var.network_sp_client_id : module.create-platform-prerequisite[0].out_network_sp_client_id
+  client_secret         = var.deployment_type == "ARM" ? var.network_sp_client_secret : module.create-platform-prerequisite[0].out_network_sp_client_secret
   resource_group_name   = var.resource_group_name
   location              = var.location
   storage_account_name  = var.storage_account_name

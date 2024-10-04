@@ -71,14 +71,6 @@ output "out_auto_restart_start_hours" {
   value = var.start_hours
 }
 
-output "out_auto_restart_stop_minutes" {
-  value = var.stop_minutes
-}
-
-output "out_auto_restart_stop_minutes" {
-  value = var.stop_hours
-}
-
 output "out_auto_restart_deploy" {
   value = var.auto_start_stop_deploy
 }

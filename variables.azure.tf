@@ -1,6 +1,5 @@
 variable "deployment_type" {
   type    = string
-  default = "Terraform"
   validation {
     condition = contains([
       "ARM",
@@ -45,11 +44,9 @@ variable "tenant_id" {
 variable "client_id" {
   type        = string
   description = "The client id"
-  default     = ""
 }
 
 variable "client_secret" {
   type        = string
   description = "The client secret"
-  default     = ""
 }

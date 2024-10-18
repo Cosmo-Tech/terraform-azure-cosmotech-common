@@ -7,8 +7,7 @@ variable "kubernetes_resource_group" {
 }
 
 variable "kubernetes_version" {
-  type    = string
-  default = "1.28.12"
+  type = string
 }
 
 variable "kubernetes_cluster_name" {
@@ -16,236 +15,189 @@ variable "kubernetes_cluster_name" {
 }
 
 variable "temporary_name_for_rotation_system_pool" {
-  type    = string
-  default = "systemrotation"
+  type = string
 }
 
 variable "kubernetes_azurefile_storage_class_sku" {
-  type    = string
-  default = "Premium_LRS"
+  type = string
 }
 
 variable "kubernetes_azurefile_storage_tags" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "kubernetes_network_plugin" {
-  type    = string
-  default = "azure"
+  type = string
 }
 
 variable "kubernetes_nodepool_system_type" {
-  type    = string
-  default = "Standard_A2_v2"
+  type = string
 }
 
 variable "kubernetes_basic_compute_type" {
-  type    = string
-  default = "Standard_F4s_v2"
+  type = string
 }
 
 variable "kubernetes_highcpu_compute_type" {
-  type    = string
-  default = "Standard_F72s_v2"
+  type = string
 }
 
 variable "kubernetes_highmemory_compute_type" {
-  type    = string
-  default = "Standard_E16ads_v5"
+  type = string
 }
 
 variable "kubernetes_monitoring_type" {
-  type    = string
-  default = "Standard_D2ads_v5"
+  type = string
 }
 
 variable "kubernetes_services_type" {
-  type    = string
-  default = "Standard_B4ms"
+  type = string
 }
 
 variable "kubernetes_db_type" {
-  type    = string
-  default = "Standard_D2ads_v5"
+  type = string
 }
 
 variable "kubernetes_max_basic_compute_instances" {
-  type    = number
-  default = 5
+  type = number
 }
 
 variable "kubernetes_max_highcpu_compute_instances" {
-  type    = number
-  default = 2
+  type = number
 }
 variable "kubernetes_max_highmemory_compute_instances" {
-  type    = number
-  default = 3
+  type = number
 }
 
 variable "kubernetes_max_monitoring_instances" {
-  type    = number
-  default = 10
+  type = number
 }
 
 variable "kubernetes_max_services_instances" {
-  type    = number
-  default = 5
+  type = number
 }
 
 variable "kubernetes_min_db_instances" {
-  type    = number
-  default = 2
+  type = number
 }
 
 variable "kubernetes_max_db_instances" {
-  type    = number
-  default = 6
+  type = number
 }
 
 variable "kubernetes_min_monitoring_instances" {
-  type    = number
-  default = 1
+  type = number
 }
 
 variable "kubernetes_min_services_instances" {
-  type    = number
-  default = 2
+  type = number
 }
 
 variable "kubernetes_min_highmemory_compute_instances" {
-  type    = number
-  default = 0
+  type = number
 }
 
 variable "kubernetes_min_highcpu_compute_instances" {
-  type    = number
-  default = 0
+  type = number
 }
 
 variable "kubernetes_min_basic_compute_instances" {
-  type    = number
-  default = 1
+  type = number
 }
 
 variable "kubernetes_min_system_instances" {
-  type    = number
-  default = 3
+  type = number
 }
 
 variable "kubernetes_max_system_instances" {
-  type    = number
-  default = 6
+  type = number
 }
 
 variable "kubernetes_max_monitoring_pods" {
-  type    = number
-  default = 110
+  type = number
 }
 
 variable "kubernetes_max_db_pods" {
-  type    = number
-  default = 110
+  type = number
 }
 
 variable "kubernetes_max_services_pods" {
-  type    = number
-  default = 110
+  type = number
 }
 
 variable "kubernetes_max_highmemory_pods" {
-  type    = number
-  default = 110
+  type = number
 }
 
 variable "kubernetes_max_highcpu_pods" {
-  type    = number
-  default = 110
+  type = number
 }
 
 variable "kubernetes_max_basic_pods" {
-  type    = number
-  default = 110
+  type = number
 }
 
 variable "kubernetes_max_system_pods" {
-  type    = number
-  default = 110
+  type = number
 }
 
 variable "kubernetes_monitoring_os_disk_size" {
-  type    = number
-  default = 128
+  type = number
 }
 
 variable "kubernetes_db_os_disk_size" {
-  type    = number
-  default = 128
+  type = number
 }
 
 variable "kubernetes_services_os_disk_size" {
-  type    = number
-  default = 128
+  type = number
 }
 
 variable "kubernetes_highmemory_os_disk_size" {
-  type    = number
-  default = 128
+  type = number
 }
 
 variable "kubernetes_highcpu_os_disk_size" {
-  type    = number
-  default = 128
+  type = number
 }
 
 variable "kubernetes_basic_os_disk_size" {
-  type    = number
-  default = 128
+  type = number
 }
 
 variable "kubernetes_system_os_disk_size" {
-  type    = number
-  default = 128
+  type = number
 }
 
 variable "kubernetes_system_enable_auto_scaling" {
-  type    = bool
-  default = true
+  type = bool
 }
 
 variable "kubernetes_basic_enable_auto_scaling" {
-  type    = bool
-  default = true
+  type = bool
 }
 
 variable "kubernetes_highcpu_enable_auto_scaling" {
-  type    = bool
-  default = true
+  type = bool
 }
 
 variable "kubernetes_highmemory_enable_auto_scaling" {
-  type    = bool
-  default = true
+  type = bool
 }
 
 variable "kubernetes_services_enable_auto_scaling" {
-  type    = bool
-  default = true
+  type = bool
 }
 
 variable "kubernetes_db_enable_auto_scaling" {
-  type    = bool
-  default = true
+  type = bool
 }
 
 variable "kubernetes_monitoring_enable_auto_scaling" {
-  type    = bool
-  default = true
+  type = bool
 }
 
 variable "kubernetes_nodepool_system_name" {
-  type    = string
-  default = "system"
+  type = string
 }
 

@@ -1,13 +1,11 @@
 variable "project_name" {
   description = "The project name"
   type        = string
-  default     = ""
 }
 
 variable "project_stage" {
   description = "The Project stage"
   type        = string
-  default     = "Dev"
   validation {
     condition = contains([
       "OnBoarding",
@@ -28,15 +26,12 @@ variable "project_stage" {
 variable "project_customer_name" {
   description = "The customer name"
   type        = string
-  default     = "cosmotech"
 }
 
 variable "project_image_path" {
-  type    = string
-  default = "./cosmotech.png"
+  type = string
 }
 
 variable "project_cost_center" {
-  type    = string
-  default = "NA"
+  type = string
 }

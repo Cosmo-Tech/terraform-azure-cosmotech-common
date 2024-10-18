@@ -1,7 +1,6 @@
 # Backend remote vars
 variable "tf_resource_group_name" {
   type        = string
-  default     = ""
   description = <<EOT
 Variable to be used with backend remote option :
 First set necessary vars:
@@ -18,7 +17,6 @@ EOT
 
 variable "tf_storage_account_name" {
   type        = string
-  default     = ""
   description = <<EOT
 Variable to be used with backend remote option :
 First set necessary vars:
@@ -35,7 +33,6 @@ EOT
 
 variable "tf_container_name" {
   type        = string
-  default     = ""
   description = <<EOT
 Variable to be used with backend remote option :
 First set necessary vars:
@@ -52,7 +49,6 @@ EOT
 
 variable "tf_blob_name" {
   type        = string
-  default     = ""
   description = <<EOT
 Variable to be used with backend remote option :
 First set necessary vars:
@@ -69,7 +65,6 @@ EOT
 
 variable "tf_access_key" {
   type        = string
-  default     = ""
   description = <<EOT
 Variable to be used with backend remote option :
 First set necessary vars:

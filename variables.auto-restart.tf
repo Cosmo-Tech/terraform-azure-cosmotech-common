@@ -49,7 +49,7 @@ variable "vm_name" {
 }
 
 variable "auto_start_stop_deploy" {
-  type    = bool
+  type = bool
 }
 
 variable "stop_minutes" {

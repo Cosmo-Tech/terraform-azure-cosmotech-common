@@ -1,5 +1,5 @@
 variable "deployment_type" {
-  type    = string
+  type = string
   validation {
     condition = contains([
       "ARM",

@@ -29,9 +29,9 @@ variable "project_customer_name" {
 }
 
 variable "project_image_path" {
-  type    = string
+  type = string
 }
 
 variable "project_cost_center" {
-  type    = string
+  type = string
 }

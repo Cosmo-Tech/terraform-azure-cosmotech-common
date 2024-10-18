@@ -1,29 +1,29 @@
 variable "network_sp_client_id" {
-  type    = string
+  type = string
 }
 
 variable "network_sp_client_secret" {
-  type    = string
+  type = string
 }
 
 variable "network_fqdn" {
-  type    = string
+  type = string
 }
 
 variable "publicip_new_or_existing_or_none" {
-  type    = string
+  type = string
 }
 
 variable "network_publicip_name" {
-  type    = string
+  type = string
 }
 
 variable "network_name" {
-  type    = string
+  type = string
 }
 
 variable "network_new" {
-  type    = string
+  type = string
 }
 
 variable "network_resource_group" {
@@ -35,11 +35,11 @@ variable "network_virtual_address_prefix" {
   type        = string
 }
 variable "network_virtual_subnet_address_prefix" {
-  type    = string
+  type = string
 }
 
 variable "network_subnet_name" {
-  type    = string
+  type = string
 }
 
 variable "network_dns_record_create" {
@@ -48,20 +48,20 @@ variable "network_dns_record_create" {
 }
 
 variable "network_private_dns_name_blob" {
-  type    = string
+  type = string
 }
 
 variable "network_private_dns_name_queue" {
-  type    = string
+  type = string
 }
 variable "network_private_dns_name_table" {
-  type    = string
+  type = string
 }
 variable "network_private_dns_name_eventhub" {
-  type    = string
+  type = string
 }
 variable "network_private_dns_name_adt" {
-  type    = string
+  type = string
 }
 
 # ARM deployment mode

@@ -34,7 +34,6 @@ variable "audience" {
     ], var.audience)
     error_message = "Only AzureADMyOrg and AzureADMultipleOrgs are supported for audience."
   }
-  default = "AzureADMultipleOrgs"
 }
 
 variable "tenant_id" {

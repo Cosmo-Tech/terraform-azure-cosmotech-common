@@ -58,7 +58,6 @@ variable "stop_minutes" {
     condition     = var.stop_minutes >= 0 && var.stop_minutes < 60
     error_message = "Minutes must be between 0 and 59"
   }
-  default = 0
 }
 
 variable "stop_hours" {
@@ -67,7 +66,6 @@ variable "stop_hours" {
     condition     = var.stop_hours >= 0 && var.stop_hours < 24
     error_message = "Hours must be between 0 and 23"
   }
-  default = 17
 }
 
 variable "start_minutes" {
@@ -76,7 +74,6 @@ variable "start_minutes" {
     condition     = var.start_minutes >= 0 && var.start_minutes < 60
     error_message = "Minutes must be between 0 and 59"
   }
-  default = 0
 }
 
 variable "start_hours" {
@@ -85,5 +82,4 @@ variable "start_hours" {
     condition     = var.start_hours >= 0 && var.start_hours < 24
     error_message = "Hours must be between 0 and 23"
   }
-  default = 5
 }

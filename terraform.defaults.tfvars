@@ -1,5 +1,6 @@
 # Azure
 deployment_type = "Terraform"
+audience        = "AzureADMultipleOrgs"
 client_id       = ""
 client_secret   = ""
 

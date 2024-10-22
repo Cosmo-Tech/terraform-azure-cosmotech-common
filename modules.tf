@@ -97,7 +97,7 @@ module "cosmotech-prerequisites" {
 }
 
 module "cosmotech-platform" {
-  source  = "Cosmo-Tech/platform-core/cosmotech"
+  source  = "Cosmo-Tech/cosmotech-common/kubernetes"
   version = "1.1.3"
 
   cluster_issuer_email     = var.cluster_issuer_email

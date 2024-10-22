@@ -97,7 +97,7 @@ module "cosmotech-prerequisites" {
 }
 
 module "cosmotech-platform" {
-  source  = "Cosmo-Tech/platform-core/cosmotech"
+  source  = "Cosmo-Tech/cosmotech-common/kubernetes"
   version = "1.0.0"
 
   client_id                = var.client_id     # Should be discarded

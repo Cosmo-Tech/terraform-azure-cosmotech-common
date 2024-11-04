@@ -11,20 +11,8 @@ variable "network_sp_objectid" {
 }
 
 variable "project_stage" {
-  type        = string
   description = "The platform stage"
-  validation {
-    condition = contains([
-      "OnBoarding",
-      "Dev",
-      "QA",
-      "IA",
-      "EA",
-      "Demo",
-      "Prod"
-    ], var.project_stage)
-    error_message = "Stage must be either: OnBoarding, Dev, QA, IA, EA, Demo, Prod."
-  }
+  type = string
 }
 
 variable "customer_name" {

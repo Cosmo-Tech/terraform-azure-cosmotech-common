@@ -170,6 +170,30 @@ resource "azurerm_kubernetes_cluster_node_pool" "highmemory" {
   ]
 }
 
+resource "azurerm_kubernetes_cluster_node_pool" "tekton" {
+  name                  = "tekton"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
+  orchestrator_version  = var.kubernetes_version
+  vm_size               = var.kubernetes_tekton_compute_type
+  max_pods              = var.kubernetes_max_tekton_pods
+  max_count             = var.kubernetes_max_tekton_compute_instances
+  min_count             = var.kubernetes_min_tekton_compute_instances
+  enable_auto_scaling   = var.kubernetes_tekton_enable_auto_scaling
+  mode                  = "User"
+  os_type               = "Linux"
+  os_disk_size_gb       = var.kubernetes_tekton_os_disk_size
+  os_disk_type          = "Managed"
+  node_taints           = ["vendor=tekton:NoSchedule"]
+  node_labels           = { "cosmotech.com/tier" = "tekton" }
+  vnet_subnet_id        = var.subnet_id
+  tags                  = local.tags
+  lifecycle {
+    ignore_changes = [
+      tags,
+    ]
+  }
+}
+
 resource "azurerm_kubernetes_cluster_node_pool" "services" {
   name                  = "services"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id

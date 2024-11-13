@@ -91,6 +91,12 @@ module "cosmotech-prerequisites" {
   kubernetes_services_os_disk_size            = var.kubernetes_services_os_disk_size
   kubernetes_system_os_disk_size              = var.kubernetes_system_os_disk_size
   kubernetes_nodepool_system_name             = var.kubernetes_nodepool_system_name
+  kubernetes_tekton_compute_type              = var.kubernetes_tekton_compute_type
+  kubernetes_max_tekton_pods                  = var.kubernetes_max_tekton_pods
+  kubernetes_max_tekton_compute_instances     = var.kubernetes_max_tekton_compute_instances
+  kubernetes_min_tekton_compute_instances     = var.kubernetes_min_tekton_compute_instances
+  kubernetes_tekton_enable_auto_scaling       = var.kubernetes_tekton_enable_auto_scaling
+  kubernetes_tekton_os_disk_size              = var.kubernetes_tekton_os_disk_size
 
   resource_group_name   = local.resource_group
   storage_account_name  = var.storage_account_name

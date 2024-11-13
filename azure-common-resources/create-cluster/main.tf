@@ -178,7 +178,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "tekton" {
   max_pods              = var.kubernetes_max_tekton_pods
   max_count             = var.kubernetes_max_tekton_compute_instances
   min_count             = var.kubernetes_min_tekton_compute_instances
-  enable_auto_scaling   = var.kubernetes_tekton_enable_auto_scaling
+  auto_scaling_enabled  = var.kubernetes_tekton_enable_auto_scaling
   mode                  = "User"
   os_type               = "Linux"
   os_disk_size_gb       = var.kubernetes_tekton_os_disk_size

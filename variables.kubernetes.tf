@@ -208,3 +208,33 @@ variable "kubernetes_azure_rbac_enabled" {
 variable "kubernetes_admin_group_object_ids" {
   type = list(string)
 }
+variable "kubernetes_tekton_compute_type" {
+  type = string
+  default = "Standard_D2ads_v5"
+}
+
+variable "kubernetes_max_tekton_pods" {
+  type = number
+  default = 110
+}
+
+variable "kubernetes_max_tekton_compute_instances" {
+  type = number
+  default = 2
+}
+
+variable "kubernetes_min_tekton_compute_instances" {
+  type = number
+  default = 1
+}
+
+variable "kubernetes_tekton_enable_auto_scaling" {
+  type = bool
+  default = true
+}
+
+variable "kubernetes_tekton_os_disk_size" {
+  type = number
+  default = 128
+}
+

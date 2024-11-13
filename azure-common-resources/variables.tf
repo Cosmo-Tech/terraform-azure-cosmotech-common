@@ -494,4 +494,3 @@ variable "kubernetes_tekton_enable_auto_scaling" {
 variable "kubernetes_tekton_os_disk_size" {
   type = number
 }
-}

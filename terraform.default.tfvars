@@ -110,6 +110,7 @@ velero_resource_group                = ""
 velero_location                      = "francecentral"
 velero_storage_tier                  = "Standard"
 velero_storage_replication_type      = "LRS"
+velero_resource_group                = ""
 velero_public_network_access_enabled = false
 velero_storage_name                  = "velero"
 velero_storage_kind                  = "StorageV2"

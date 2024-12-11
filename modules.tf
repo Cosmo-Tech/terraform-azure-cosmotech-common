@@ -112,4 +112,16 @@ module "cosmotech-prerequisites" {
   stop_hours             = var.stop_hours
   start_minutes          = var.start_minutes
   stop_minutes           = var.stop_minutes
+
+  # Storage Backup velero
+  velero_location                      = var.velero_location
+  velero_storage_tier                  = var.velero_storage_tier
+  velero_storage_replication_type      = var.velero_storage_replication_type
+  velero_resource_group                = var.velero_resource_group
+  velero_public_network_access_enabled = var.velero_public_network_access_enabled
+  velero_storage_name                  = var.velero_storage_name
+  velero_tags                          = var.velero_tags
+  velero_storage_kind                  = var.velero_storage_kind
+  velero_storage_csm_ip                = var.velero_storage_csm_ip
+
 }

@@ -105,3 +105,20 @@ stop_minutes           = 0
 stop_hours             = 17
 start_minutes          = 0
 start_hours            = 5
+velero_resource_group                = ""
+
+velero_location                      = "francecentral"
+velero_storage_tier                  = "Standard"
+velero_storage_replication_type      = "LRS"
+velero_resource_group                = ""
+velero_public_network_access_enabled = false
+velero_storage_name                  = "velero"
+velero_storage_kind                  = "StorageV2"
+velero_storage_csm_ip                = ""
+velero_tags = {
+  vendor      = "cosmotech"
+  cost_center = "NA"
+  customer    = ""
+  project     = ""
+  stage       = "Dev"
+}

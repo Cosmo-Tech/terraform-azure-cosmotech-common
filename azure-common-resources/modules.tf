@@ -178,3 +178,22 @@ module "create-auto-restart" {
     module.create-platform-prerequisite
   ]
 }
+
+
+module "deploy-backup-storage" {
+  source = "./deploy-storage-backup"
+
+  tags                          = var.velero_tags
+  storage_name                  = var.velero_storage_name
+  location                      = var.velero_location
+  resource_group                = var.velero_resource_group
+  storage_tier                  = var.velero_storage_tier
+  storage_replication_type      = var.velero_storage_replication_type
+  storage_kind                  = var.velero_storage_kind
+  public_network_access_enabled = var.velero_public_network_access_enabled
+  resource_aks_managed          = module.create-cluster.resource_group_managed_cluster
+  storage_csm_ip                = var.velero_storage_csm_ip
+  network_subnet_id             = module.create-network.0.out_subnet_id
+
+  depends_on = [module.create-cluster, module.create-network]
+}

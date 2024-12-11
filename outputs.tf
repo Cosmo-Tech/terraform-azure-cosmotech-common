@@ -74,3 +74,7 @@ output "out_auto_restart_start_hours" {
 output "out_auto_restart_deploy" {
   value = var.auto_start_stop_deploy
 }
+
+output "out_backup_storage_account_name" {
+  value = module.cosmotech-prerequisites.out_backup_storage_account_name
+}

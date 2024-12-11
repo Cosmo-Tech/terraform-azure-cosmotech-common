@@ -42,3 +42,12 @@ output "out_network_sp_object_id" {
 output "out_network_sp_name" {
   value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_nerwork_sp_name : ""
 }
+
+output "out_backup_storage_account_name" {
+  value = module.deploy-backup-storage.out_backup_storage_account_name
+}
+
+output "out_backup_storage_account_key" {
+  value     = module.deploy-backup-storage.out_backup_storage_account_key
+  sensitive = true
+}

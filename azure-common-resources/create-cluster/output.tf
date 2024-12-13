@@ -21,6 +21,6 @@ output "aks_phoenix_config" {
   sensitive = true
 }
 
-output "resource_group_managed_cluster" {
+output "aks_cluster_resource_group_managed" {
   value = azurerm_kubernetes_cluster.phoenixcluster.node_resource_group
 }

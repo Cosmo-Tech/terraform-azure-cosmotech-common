@@ -251,3 +251,15 @@ variable "kubernetes_tekton_enable_auto_scaling" {
 variable "kubernetes_tekton_os_disk_size" {
   type = number
 }
+
+variable "kubernetes_azure_rbac_enabled" {
+  type = bool
+}
+
+variable "tenant_id" {
+  type = string
+}
+
+variable "kubernetes_admin_group_object_ids" {
+  type = list(string)
+}

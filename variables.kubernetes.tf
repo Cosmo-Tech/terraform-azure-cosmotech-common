@@ -201,3 +201,10 @@ variable "kubernetes_nodepool_system_name" {
   type = string
 }
 
+variable "kubernetes_azure_rbac_enabled" {
+  type = bool
+}
+
+variable "kubernetes_admin_group_object_ids" {
+  type = list(string)
+}

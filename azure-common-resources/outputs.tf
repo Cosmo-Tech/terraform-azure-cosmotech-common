@@ -18,8 +18,8 @@ output "out_network_sp_client_id" {
   value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_network_sp_client_id : null
 }
 
-output "out_aks_phoenix_config" {
-  value     = module.create-cluster.aks_phoenix_config
+output "out_aks_cluster_admin_config" {
+  value     = module.create-cluster.aks_cluster_config
   sensitive = true
 }
 
@@ -28,7 +28,7 @@ output "out_fqdn" {
 }
 
 output "out_aks_cluster_name" {
-  value = module.create-cluster.cluster.name
+  value = module.create-cluster.aks_cluster_name
 }
 
 output "out_network_name" {

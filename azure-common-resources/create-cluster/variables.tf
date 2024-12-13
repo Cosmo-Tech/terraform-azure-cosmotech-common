@@ -10,6 +10,10 @@ variable "network_clientsecret" {
   type = string
 }
 
+variable "network_client_object_id" {
+  type = string
+}
+
 variable "resource_group" {
   type = string
 }
@@ -210,4 +214,16 @@ variable "kubernetes_monitoring_enable_auto_scaling" {
 
 variable "kubernetes_nodepool_system_name" {
   type = string
+}
+
+variable "kubernetes_azure_rbac_enabled" {
+  type = bool
+}
+
+variable "tenant_id" {
+  type = string
+}
+
+variable "kubernetes_admin_group_object_ids" {
+  type = list(string)
 }

@@ -91,6 +91,8 @@ module "cosmotech-prerequisites" {
   kubernetes_services_os_disk_size            = var.kubernetes_services_os_disk_size
   kubernetes_system_os_disk_size              = var.kubernetes_system_os_disk_size
   kubernetes_nodepool_system_name             = var.kubernetes_nodepool_system_name
+  kubernetes_azure_rbac_enabled               = var.kubernetes_azure_rbac_enabled
+  kubernetes_admin_group_object_ids           = var.kubernetes_admin_group_object_ids
 
   resource_group_name   = local.resource_group
   storage_account_name  = var.storage_account_name

@@ -13,7 +13,8 @@ tf_access_key           = ""
 
 # Kubernetes
 kubernetes_version                          = "1.30.5"
-temporary_name_for_rotation_system_pool     = "systemrotation"
+kubernetes_azure_rbac_enabled               = true
+temporary_name_for_rotation_system_pool     = "system"
 kubernetes_azurefile_storage_class_sku      = "Premium_LRS"
 kubernetes_azurefile_storage_tags           = ""
 kubernetes_network_plugin                   = "azure"
@@ -60,6 +61,9 @@ kubernetes_services_enable_auto_scaling     = true
 kubernetes_db_enable_auto_scaling           = true
 kubernetes_monitoring_enable_auto_scaling   = true
 kubernetes_nodepool_system_name             = "system"
+kubernetes_admin_group_object_ids = [
+  ""
+]
 
 # Network
 network_sp_client_id                  = ""
@@ -105,12 +109,11 @@ stop_minutes           = 0
 stop_hours             = 17
 start_minutes          = 0
 start_hours            = 5
-velero_resource_group                = ""
 
+velero_resource_group                = ""
 velero_location                      = "francecentral"
 velero_storage_tier                  = "Standard"
 velero_storage_replication_type      = "LRS"
-velero_resource_group                = ""
 velero_public_network_access_enabled = false
 velero_storage_name                  = "velero"
 velero_storage_kind                  = "StorageV2"

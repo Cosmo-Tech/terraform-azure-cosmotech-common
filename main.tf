@@ -10,7 +10,7 @@ resource "random_string" "cluster_id" {
 }
 
 locals {
-  kube_config            = module.cosmotech-prerequisites.out_aks_phoenix_config
+  kube_config            = module.cosmotech-prerequisites.out_aks_cluster_admin_config
   host                   = local.kube_config.0.host
   client_certificate     = base64decode(local.kube_config.0.client_certificate)
   client_key             = base64decode(local.kube_config.0.client_key)

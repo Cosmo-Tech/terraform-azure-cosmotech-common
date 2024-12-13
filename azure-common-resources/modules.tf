@@ -77,9 +77,12 @@ module "create-publicip" {
 module "create-cluster" {
   source = "./create-cluster"
 
+  tenant_id                                   = var.tenant_id
   network_clientid                            = local.network_sp_client_id
   network_clientsecret                        = local.network_sp_client_secret
+  network_client_object_id                    = local.network_sp_object_id
   subnet_id                                   = local.platform_subnet_id
+  kubernetes_admin_group_object_ids           = var.kubernetes_admin_group_object_ids
   location                                    = var.location
   resource_group                              = var.resource_group
   cluster_name                                = var.cluster_name
@@ -133,6 +136,7 @@ module "create-cluster" {
   kubernetes_system_os_disk_size              = var.kubernetes_system_os_disk_size
   kubernetes_min_highcpu_compute_instances    = var.kubernetes_min_highcpu_compute_instances
   kubernetes_nodepool_system_name             = var.kubernetes_nodepool_system_name
+  kubernetes_azure_rbac_enabled               = var.kubernetes_azure_rbac_enabled
 
   depends_on = [
     module.create-platform-prerequisite,
@@ -191,8 +195,8 @@ module "deploy-backup-storage" {
   storage_replication_type      = var.velero_storage_replication_type
   storage_kind                  = var.velero_storage_kind
   public_network_access_enabled = var.velero_public_network_access_enabled
-  resource_aks_managed          = module.create-cluster.resource_group_managed_cluster
   storage_csm_ip                = var.velero_storage_csm_ip
+  resource_aks_managed          = module.create-cluster.aks_cluster_resource_group_managed
   network_subnet_id             = module.create-network.0.out_subnet_id
 
   depends_on = [module.create-cluster, module.create-network]

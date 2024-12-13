@@ -76,7 +76,7 @@ variable "publicip_resource_group" {
 
 variable "project_stage" {
   description = "The platform stage"
-  type = string
+  type        = string
 }
 
 variable "project_name" {
@@ -118,7 +118,7 @@ variable "network_sp_object_id" {
 }
 
 variable "network_name" {
-  type    = string
+  type = string
 }
 
 variable "vnet_new" {
@@ -428,7 +428,7 @@ variable "vm_name" {
 }
 
 variable "auto_start_stop_deploy" {
-  type    = bool
+  type = bool
 }
 
 variable "stop_minutes" {
@@ -488,4 +488,12 @@ variable "velero_public_network_access_enabled" {
 
 variable "velero_storage_csm_ip" {
   type = string
+}
+
+variable "kubernetes_azure_rbac_enabled" {
+  type = bool
+}
+
+variable "kubernetes_admin_group_object_ids" {
+  type = list(string)
 }

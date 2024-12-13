@@ -9,6 +9,17 @@ locals {
   }
 }
 
+data "azurerm_resource_group" "current" {
+  name = var.resource_group
+}
+
+resource "azurerm_role_assignment" "k8s_admin" {
+  scope                = data.azurerm_resource_group.current.id
+  role_definition_name = "Azure Kubernetes Service RBAC Admin"
+  for_each             = toset(var.kubernetes_admin_group_object_ids)
+  principal_id         = each.key
+}
+
 resource "azurerm_kubernetes_cluster" "phoenixcluster" {
   name                              = var.cluster_name
   location                          = var.location
@@ -17,9 +28,14 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
   kubernetes_version                = var.kubernetes_version
   role_based_access_control_enabled = true
   private_cluster_enabled           = false
-  automatic_upgrade_channel         = "patch"
-  sku_tier                          = "Standard"
-  tags                              = local.tags
+  azure_active_directory_role_based_access_control {
+    azure_rbac_enabled     = var.kubernetes_azure_rbac_enabled
+    tenant_id              = var.tenant_id
+    admin_group_object_ids = var.kubernetes_admin_group_object_ids
+  }
+  automatic_upgrade_channel = "patch"
+  sku_tier                  = "Standard"
+  tags                      = local.tags
 
   network_profile {
     load_balancer_sku = "standard"
@@ -54,6 +70,8 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
       tags, azure_policy_enabled, microsoft_defender
     ]
   }
+
+  depends_on = [azurerm_role_assignment.k8s_admin]
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "monitoring" {
@@ -228,7 +246,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "db" {
   ]
 }
 
-
 resource "kubernetes_secret" "network_client_secret" {
   metadata {
     name      = "network-client-secret"
@@ -240,6 +257,6 @@ resource "kubernetes_secret" "network_client_secret" {
     password  = var.network_clientsecret
   }
 
-  type = "Opaque"
+  type       = "Opaque"
   depends_on = [azurerm_kubernetes_cluster.phoenixcluster]
 }

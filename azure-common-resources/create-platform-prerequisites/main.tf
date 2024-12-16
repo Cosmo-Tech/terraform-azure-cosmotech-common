@@ -42,8 +42,6 @@ resource "azuread_application_password" "network_app_password" {
 }
 
 # Resource group
-resource "azurerm_resource_group" "platform_rg" {
+data "azurerm_resource_group" "platform_rg" {
   name     = var.resource_group
-  location = var.location
-  tags     = local.tags
 }

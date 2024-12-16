@@ -69,21 +69,17 @@ kubernetes_admin_group_object_ids = [
 network_sp_client_id                  = ""
 network_sp_client_secret              = ""
 network_fqdn                          = ""
-publicip_new_or_existing_or_none      = "new"
-network_publicip_name                 = ""
 network_name                          = ""
 network_new                           = "new"
 network_virtual_address_prefix        = "10.10.0.0/16"
 network_virtual_subnet_address_prefix = "10.10.0.0/16"
 network_subnet_name                   = "default"
-network_dns_record_create             = true
 network_private_dns_name_blob         = "privatelink.blob.core.windows.net"
 network_private_dns_name_queue        = "privatelink.queue.core.windows.net"
 network_private_dns_name_table        = "privatelink.table.core.windows.net"
 network_private_dns_name_eventhub     = "privatelink.servicebus.windows.net"
 network_private_dns_name_adt          = "privatelink.digitaltwins.azure.net"
 network_sp_object_id                  = ""
-network_dns_zone_rg                   = "phoenix"
 network_identifier_uri                = ""
 
 # Project

@@ -16,11 +16,11 @@ output "out_network_sp_client_secret" {
 }
 
 output "out_vnet_resource_group" {
-  value = azurerm_resource_group.platform_rg.name
+  value = data.azurerm_resource_group.platform_rg.name
 }
 
 output "out_platform_resource_group_id" {
-  value = azurerm_resource_group.platform_rg.id
+  value = data.azurerm_resource_group.platform_rg.id
 }
 
 output "out_adt_principal_id" {
@@ -28,5 +28,5 @@ output "out_adt_principal_id" {
 }
 
 output "out_platform_resource_group_object" {
-  value = azurerm_resource_group.platform_rg
+  value = data.azurerm_resource_group.platform_rg
 }

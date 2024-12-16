@@ -32,9 +32,8 @@ resource "azurerm_virtual_network" "network_vnet" {
   tags = local.tags
 }
 
-resource "azurerm_role_assignment" "vnet_network_contributor" {
-  scope                = azurerm_virtual_network.network_vnet.id
-  role_definition_name = "Network Contributor"
+resource "azurerm_role_assignment" "publicip_contributor" {
+  scope                = var.network_publicip_id
+  role_definition_name = "Contributor"
   principal_id         = var.network_sp_objectid
 }
-

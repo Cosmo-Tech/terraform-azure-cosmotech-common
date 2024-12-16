@@ -3,11 +3,6 @@ data "azurerm_resource_group" "platform" {
   name  = var.resource_group
 }
 
-data "azurerm_resource_group" "publicip_rg" {
-  count = var.deployment_type != "ARM" ? 0 : 1
-  name  = var.publicip_resource_group
-}
-
 data "azurerm_virtual_network" "vnet_network" {
   count               = var.vnet_new == "new" ? 0 : 1
   name                = var.network_name
@@ -29,5 +24,4 @@ locals {
   network_sp_client_id     = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_network_sp_client_id : var.network_sp_client_id
   network_sp_object_id     = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_network_sp_object_id : var.network_sp_object_id
   network_sp_client_secret = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_network_sp_client_secret : var.network_sp_client_secret
-  publicip_resource_group  = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_platform_resource_group_object : data.azurerm_resource_group.publicip_rg.0
 }

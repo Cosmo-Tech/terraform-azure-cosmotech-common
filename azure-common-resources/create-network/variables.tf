@@ -6,10 +6,6 @@ variable "vnet_iprange" {
   type = string
 }
 
-variable "network_sp_objectid" {
-  type = string
-}
-
 variable "project_stage" {
   description = "The platform stage"
   type = string
@@ -51,5 +47,13 @@ variable "subnet_iprange" {
 }
 
 variable "vnet_resource_group" {
+  type = string
+}
+
+variable "network_publicip_id" {
+  type = string
+}
+
+variable "network_sp_objectid" {
   type = string
 }

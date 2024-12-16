@@ -22,12 +22,6 @@ module "cosmotech-prerequisites" {
 
   # network common
   identifier_uri            = var.network_identifier_uri
-  create_publicip           = var.publicip_new_or_existing_or_none == "new" ? true : false
-  publicip_resource_group   = var.deployment_type != "ARM" ? local.resource_group : var.network_publicip_resource_group
-  create_dnsrecord          = var.network_dns_record_create
-  dns_record                = var.network_dns_record
-  dns_zone_name             = var.network_dns_zone_name
-  dns_zone_rg               = var.network_dns_zone_rg
   network_sp_client_id      = var.network_sp_client_id
   network_sp_client_secret  = var.network_sp_client_secret
   network_sp_object_id      = var.network_sp_object_id
@@ -42,6 +36,7 @@ module "cosmotech-prerequisites" {
   private_dns_name_table    = var.network_private_dns_name_table
   private_dns_name_adt      = var.network_private_dns_name_adt
   private_dns_name_eventhub = var.network_private_dns_name_eventhub
+  network_publicip_id       = var.network_publicip_id
 
   # kubernetes
   cluster_name                                = local.cluster_name

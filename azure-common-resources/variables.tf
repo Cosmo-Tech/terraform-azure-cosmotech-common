@@ -60,20 +60,6 @@ variable "audience" {
   }
 }
 
-variable "create_publicip" {
-  description = "Create the public IP for the platform"
-  type        = bool
-}
-
-variable "create_dnsrecord" {
-  description = "Create the DNS record"
-  type        = bool
-}
-
-variable "publicip_resource_group" {
-  type = string
-}
-
 variable "project_stage" {
   description = "The platform stage"
   type        = string
@@ -87,21 +73,6 @@ variable "project_name" {
 variable "customer_name" {
   type        = string
   description = "The customer name"
-}
-
-variable "dns_record" {
-  description = "The DNS zone name to create platform subdomain. Example: myplatform"
-  type        = string
-}
-
-variable "dns_zone_name" {
-  description = "The DNS zone name to create platform subdomain. Example: api.cosmotech.com"
-  type        = string
-}
-
-variable "dns_zone_rg" {
-  description = "The DNS zone resource group"
-  type        = string
 }
 
 variable "network_sp_client_id" {
@@ -496,4 +467,8 @@ variable "kubernetes_azure_rbac_enabled" {
 
 variable "kubernetes_admin_group_object_ids" {
   type = list(string)
+}
+
+variable "network_publicip_id" {
+  type = string
 }

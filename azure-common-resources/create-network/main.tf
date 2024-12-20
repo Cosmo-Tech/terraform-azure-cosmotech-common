@@ -37,3 +37,15 @@ resource "azurerm_role_assignment" "publicip_contributor" {
   role_definition_name = "Contributor"
   principal_id         = var.network_sp_objectid
 }
+
+
+# Resource group
+data "azurerm_resource_group" "platform_rg" {
+  name     = var.resource_group
+}
+
+resource "azurerm_role_assignment" "rg_contributor" {
+  scope                = data.azurerm_resource_group.platform_rg.id
+  role_definition_name = "Contributor"
+  principal_id         = var.network_sp_objectid
+}

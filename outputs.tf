@@ -53,3 +53,95 @@ output "out_auto_restart_deploy" {
 output "out_backup_storage_account_name" {
   value = module.cosmotech-prerequisites.out_backup_storage_account_name
 }
+
+output "out_kubernetes_version" {
+  value = var.kubernetes_version
+}
+
+output "out_location" {
+  value = var.location
+}
+
+output "out_kubernetes_nodepool_system_type" {
+  value = var.kubernetes_nodepool_system_type
+}
+
+output "out_kubernetes_basic_compute_type" {
+  value = var.kubernetes_basic_compute_type
+}
+
+output "out_kubernetes_highcpu_compute_type" {
+  value = var.kubernetes_highcpu_compute_type
+}
+
+output "out_kubernetes_highmemory_compute_type" {
+  value = var.kubernetes_highmemory_compute_type
+}
+
+output "out_kubernetes_monitoring_type" {
+  value = var.kubernetes_monitoring_type
+}
+
+output "out_kubernetes_services_type" {
+  value = var.kubernetes_services_type
+}
+
+output "out_kubernetes_db_type" {
+  value = var.kubernetes_db_type
+}
+
+output "out_kubernetes_max_basic_compute_instances" {
+  value = var.kubernetes_max_basic_compute_instances
+}
+
+output "out_kubernetes_min_basic_compute_instances" {
+  value = var.kubernetes_min_basic_compute_instances
+}
+
+output "out_kubernetes_max_db_instances" {
+  value = var.kubernetes_max_db_instances
+}
+
+output "out_kubernetes_min_db_instances" {
+  value = var.kubernetes_min_db_instances
+}
+
+output "out_kubernetes_max_highcpu_compute_instances" {
+  value = var.kubernetes_max_highcpu_compute_instances
+}
+
+output "out_kubernetes_min_highcpu_compute_instances" {
+  value = var.kubernetes_min_highcpu_compute_instances
+}
+
+output "out_kubernetes_max_highmemory_compute_instances" {
+  value = var.kubernetes_max_highmemory_compute_instances
+}
+
+output "out_kubernetes_min_highmemory_compute_instances" {
+  value = var.kubernetes_min_highmemory_compute_instances
+}
+
+output "out_kubernetes_max_monitoring_instances" {
+  value = var.kubernetes_max_monitoring_instances
+}
+
+output "out_kubernetes_min_monitoring_instances" {
+  value = var.kubernetes_min_monitoring_instances
+}
+
+output "out_kubernetes_max_services_instances" {
+  value = var.kubernetes_max_services_instances
+}
+
+output "out_kubernetes_min_services_instances" {
+  value = var.kubernetes_min_services_instances
+}
+
+output "out_kubernetes_max_system_instances" {
+  value = var.kubernetes_max_system_instances
+}
+
+output "out_kubernetes_min_system_instances" {
+  value = var.kubernetes_min_system_instances
+}

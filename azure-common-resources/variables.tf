@@ -418,6 +418,7 @@ variable "start_hours" {
   type = number
 }
 
+
 variable "velero_tags" {
   type = object({
     vendor      = string
@@ -471,6 +472,7 @@ variable "kubernetes_admin_group_object_ids" {
 variable "network_publicip_id" {
   type = string
 }
+
 variable "kubernetes_tekton_compute_type" {
   type = string
 }
@@ -493,4 +495,8 @@ variable "kubernetes_tekton_enable_auto_scaling" {
 
 variable "kubernetes_tekton_os_disk_size" {
   type = number
+}
+
+variable "kubernetes_tekton_deploy" {
+  type = bool
 }

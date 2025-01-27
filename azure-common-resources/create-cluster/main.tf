@@ -189,6 +189,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "highmemory" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "tekton" {
+  count                 = var.kubernetes_tekton_deploy ? 1 : 0
   name                  = "tekton"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
   orchestrator_version  = var.kubernetes_version

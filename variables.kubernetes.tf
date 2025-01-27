@@ -232,14 +232,6 @@ variable "kubernetes_tekton_os_disk_size" {
   type = number
 }
 
-variable "kubernetes_azure_rbac_enabled" {
-  type = bool
-}
-
-variable "kubernetes_admin_group_object_ids" {
-  type = list(string)
-}
-
 variable "kubernetes_tekton_deploy" {
   type = bool
 }

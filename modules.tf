@@ -94,8 +94,7 @@ module "cosmotech-prerequisites" {
   kubernetes_min_tekton_compute_instances     = var.kubernetes_min_tekton_compute_instances
   kubernetes_tekton_enable_auto_scaling       = var.kubernetes_tekton_enable_auto_scaling
   kubernetes_tekton_os_disk_size              = var.kubernetes_tekton_os_disk_size
-  kubernetes_azure_rbac_enabled               = var.kubernetes_azure_rbac_enabled
-  kubernetes_admin_group_object_ids           = var.kubernetes_admin_group_object_ids
+  kubernetes_tekton_deploy                    = var.kubernetes_tekton_deploy
 
   resource_group_name   = local.resource_group
   storage_account_name  = var.storage_account_name

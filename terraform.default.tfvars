@@ -64,6 +64,15 @@ kubernetes_nodepool_system_name             = "system"
 kubernetes_admin_group_object_ids = [
   ""
 ]
+kubernetes_tekton_deploy                = false
+kubernetes_cluster_name                 = ""
+kubernetes_tekton_compute_type          = "Standard_D2ads_v5"
+kubernetes_max_tekton_compute_instances = 2
+kubernetes_max_tekton_pods              = 110
+kubernetes_min_tekton_compute_instances = 1
+kubernetes_resource_group               = ""
+kubernetes_tekton_enable_auto_scaling   = true
+kubernetes_tekton_os_disk_size          = 128
 
 # Network
 network_sp_client_id                  = ""

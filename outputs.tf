@@ -145,3 +145,7 @@ output "out_kubernetes_max_system_instances" {
 output "out_kubernetes_min_system_instances" {
   value = var.kubernetes_min_system_instances
 }
+
+output "out_kubernetes_mc_resource_group_name" {
+  value = module.cosmotech-prerequisites.out_kubernetes_mc_resource_group_name
+}

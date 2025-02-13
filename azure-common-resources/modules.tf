@@ -183,7 +183,7 @@ module "deploy-backup-storage" {
   public_network_access_enabled = var.velero_public_network_access_enabled
   storage_csm_ip                = var.velero_storage_csm_ip
   resource_aks_managed          = module.create-cluster.aks_cluster_resource_group_managed
-  network_subnet_id             = module.create-network.0.out_subnet_id
+  network_subnet_id             = var.deployment_type == "ARM" ? var.network_subnet_id : module.create-network.0.out_subnet_id
 
   depends_on = [module.create-cluster, module.create-network]
 }

@@ -38,6 +38,10 @@ variable "network_subnet_name" {
   type = string
 }
 
+variable "network_subnet_id" {
+  type = string
+}
+
 variable "network_private_dns_name_blob" {
   type = string
 }

@@ -398,6 +398,10 @@ variable "vm_name" {
   type        = string
 }
 
+variable "network_subnet_id" {
+  type = string
+}
+
 variable "auto_start_stop_deploy" {
   type = bool
 }

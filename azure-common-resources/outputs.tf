@@ -35,3 +35,7 @@ output "out_backup_storage_account_key" {
   value     = module.deploy-backup-storage.out_backup_storage_account_key
   sensitive = true
 }
+
+output "out_kubernetes_mc_resource_group_name" {
+  value = module.create-cluster.aks_cluster_resource_group_managed
+}

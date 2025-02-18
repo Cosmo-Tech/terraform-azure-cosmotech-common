@@ -26,7 +26,7 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
   resource_group_name               = var.resource_group
   dns_prefix                        = local.dns_prefix
   kubernetes_version                = var.kubernetes_version
-  role_based_access_control_enabled = true
+  role_based_access_control_enabled = var.kubernetes_azure_rbac_enabled
   private_cluster_enabled           = false
   azure_active_directory_role_based_access_control {
     azure_rbac_enabled     = var.kubernetes_azure_rbac_enabled

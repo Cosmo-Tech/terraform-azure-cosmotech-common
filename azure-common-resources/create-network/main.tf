@@ -26,7 +26,7 @@ resource "azurerm_virtual_network" "network_vnet" {
   subnet {
     name              = var.subnet_name
     address_prefixes  = [var.subnet_iprange]
-    service_endpoints = ["Microsoft.Storage"]
+    service_endpoints = ["Microsoft.Storage.Global"]
   }
 
   tags = local.tags

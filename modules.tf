@@ -10,8 +10,7 @@ module "cosmotech-prerequisites" {
   resource_group  = local.resource_group
   deployment_type = var.deployment_type
   owner_list      = var.owner_list
-
-  audience = var.audience
+  audience        = var.audience
 
   # project
   image_path    = var.project_image_path
@@ -129,4 +128,12 @@ module "cosmotech-prerequisites" {
   velero_storage_kind                  = var.velero_storage_kind
   velero_storage_csm_ip                = var.velero_storage_csm_ip
 
+  # keycloak
+  keycloak_config_deploy           = var.keycloak_config_deploy
+  keycloak_admin_password          = var.keycloak_admin_password
+  keycloak_admin_user              = var.keycloak_admin_user
+  keycloak_postgres_admin_password = var.keycloak_postgres_admin_password
+  keycloak_postgres_password       = var.keycloak_postgres_password
+  keycloak_postgres_user           = var.keycloak_postgres_user
+  keycloak_namespace               = var.keycloak_namespace
 }

@@ -136,4 +136,12 @@ module "cosmotech-prerequisites" {
   keycloak_postgres_password       = var.keycloak_postgres_password
   keycloak_postgres_user           = var.keycloak_postgres_user
   keycloak_namespace               = var.keycloak_namespace
+
+  # keycloak pv
+  pv_keycloak_postgres_deploy               = var.pv_keycloak_postgres_deploy
+  pv_keycloak_postgres_provider             = var.pv_keycloak_postgres_provider
+  pv_keycloak_postgres_storage_gbi          = var.pv_keycloak_postgres_storage_gbi
+  pv_keycloak_postgres_storage_account_type = var.pv_keycloak_postgres_storage_account_type
+  pv_keycloak_postgres_storage_class_name   = var.pv_keycloak_postgres_storage_class_name
+
 }

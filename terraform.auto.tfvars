@@ -131,3 +131,12 @@ velero_tags = {
   project     = ""
   stage       = "Dev"
 }
+
+# keycloak
+keycloak_config_deploy           = false
+keycloak_namespace               = "keycloak"
+keycloak_admin_password          = ""
+keycloak_admin_user              = "admin-cosmo"
+keycloak_postgres_user           = "keycloak_postgres_user"
+keycloak_postgres_admin_password = ""
+keycloak_postgres_password       = ""

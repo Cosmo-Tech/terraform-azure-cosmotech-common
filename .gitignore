@@ -12,3 +12,4 @@ providers.azure.tf
 !*/*.sh
 functions.zip
 !terraform.default.tfvars
+!terraform.auto.tfvars

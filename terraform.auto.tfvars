@@ -140,3 +140,10 @@ keycloak_admin_user              = "admin-cosmo"
 keycloak_postgres_user           = "keycloak_postgres_user"
 keycloak_postgres_admin_password = ""
 keycloak_postgres_password       = ""
+
+# keycloak pv
+pv_keycloak_postgres_deploy               = false
+pv_keycloak_postgres_storage_gbi          = 32
+pv_keycloak_postgres_storage_account_type = "PremiumV2_LRS"
+pv_keycloak_postgres_storage_class_name   = "default"
+pv_keycloak_postgres_provider             = "azure"

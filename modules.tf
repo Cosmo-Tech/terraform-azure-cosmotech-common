@@ -144,4 +144,11 @@ module "cosmotech-prerequisites" {
   pv_keycloak_postgres_storage_account_type = var.pv_keycloak_postgres_storage_account_type
   pv_keycloak_postgres_storage_class_name   = var.pv_keycloak_postgres_storage_class_name
 
+  # prometheus pv
+  pv_prometheus_deploy               = var.pv_prometheus_deploy
+  pv_prometheus_provider             = var.pv_prometheus_provider
+  pv_prometheus_storage_account_type = var.pv_prometheus_storage_account_type
+  pv_prometheus_storage_class_name   = var.pv_prometheus_storage_class_name
+  pv_prometheus_storage_gbi          = var.pv_prometheus_storage_gbi
+
 }

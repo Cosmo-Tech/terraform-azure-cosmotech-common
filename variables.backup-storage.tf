@@ -36,7 +36,6 @@ variable "velero_public_network_access_enabled" {
   type = bool
 }
 
-
 variable "velero_storage_csm_ip" {
   type = string
 }

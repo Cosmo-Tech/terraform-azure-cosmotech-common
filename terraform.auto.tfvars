@@ -154,3 +154,14 @@ pv_prometheus_storage_gbi          = 64
 pv_prometheus_storage_account_type = "Premium_LRS"
 pv_prometheus_storage_class_name   = "default"
 pv_prometheus_provider             = "azure"
+
+# loki pv
+pv_loki_deploy                  = false
+pv_loki_storage_gbi             = 8
+pv_loki_storage_account_type    = "Premium_LRS"
+pv_loki_storage_class_name      = "default"
+pv_loki_provider                = "azure"
+pv_grafana_storage_gbi          = 8
+pv_grafana_storage_account_type = "Premium_LRS"
+pv_grafana_storage_class_name   = "default"
+pv_grafana_provider             = "azure"

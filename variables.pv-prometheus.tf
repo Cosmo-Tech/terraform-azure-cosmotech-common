@@ -13,3 +13,9 @@ variable "pv_prometheus_provider" {
 variable "pv_prometheus_deploy" {
   type = bool
 }
+variable "pv_prometheus_disk_deploy" {
+  type = bool
+}
+variable "pv_prometheus_disk_source_existing" {
+  type = bool
+}

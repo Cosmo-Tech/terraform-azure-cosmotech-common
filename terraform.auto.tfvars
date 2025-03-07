@@ -152,6 +152,8 @@ pv_keycloak_postgres_provider             = "azure"
 
 # prometheus pv
 pv_prometheus_deploy               = false
+pv_prometheus_disk_deploy          = true
+pv_prometheus_disk_source_existing = false
 pv_prometheus_storage_gbi          = 64
 pv_prometheus_storage_account_type = "Premium_LRS"
 pv_prometheus_storage_class_name   = "default"

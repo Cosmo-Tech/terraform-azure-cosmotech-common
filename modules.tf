@@ -139,6 +139,8 @@ module "cosmotech-prerequisites" {
 
   # keycloak pv
   pv_keycloak_postgres_deploy               = var.pv_keycloak_postgres_deploy
+  pv_keycloak_disk_deploy                   = var.pv_keycloak_disk_deploy
+  pv_keycloak_disk_source_existing          = var.pv_keycloak_disk_source_existing
   pv_keycloak_postgres_provider             = var.pv_keycloak_postgres_provider
   pv_keycloak_postgres_storage_gbi          = var.pv_keycloak_postgres_storage_gbi
   pv_keycloak_postgres_storage_account_type = var.pv_keycloak_postgres_storage_account_type

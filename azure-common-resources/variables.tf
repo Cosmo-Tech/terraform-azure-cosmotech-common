@@ -527,6 +527,12 @@ variable "keycloak_config_deploy" {
   type = bool
 }
 
+variable "pv_keycloak_disk_deploy" {
+  type = bool
+}
+variable "pv_keycloak_disk_source_existing" {
+  type = bool
+}
 variable "pv_keycloak_postgres_storage_gbi" {
   type = number
 }
@@ -598,3 +604,4 @@ variable "pv_grafana_storage_class_name" {
 variable "pv_grafana_provider" {
   type = string
 }
+

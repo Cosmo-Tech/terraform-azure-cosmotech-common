@@ -13,12 +13,6 @@ variable "storage_account_name" {
   type        = string
 }
 
-variable "use_existing_storage_account" {
-  description = "Set to true to use an existing storage account, false to create a new one"
-  type        = bool
-  default     = false
-}
-
 variable "app_service_plan_name" {
   description = "The name of the App Service Plan"
   type        = string

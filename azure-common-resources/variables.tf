@@ -336,12 +336,6 @@ variable "storage_account_name" {
   type        = string
 }
 
-variable "use_existing_storage_account" {
-  description = "Set to true to use an existing storage account, false to create a new one"
-  type        = bool
-  default     = false
-}
-
 variable "app_service_plan_name" {
   description = "The name of the App Service Plan"
   type        = string
@@ -565,6 +559,15 @@ variable "pv_prometheus_deploy" {
   type = bool
 }
 
+variable "pv_loki_stack_deploy" {
+  type = bool
+}
+variable "pv_loki_disk_deploy" {
+  type = bool
+}
+variable "pv_loki_disk_source_existing" {
+  type = bool
+}
 variable "pv_loki_storage_gbi" {
   type = number
 }
@@ -577,7 +580,10 @@ variable "pv_loki_storage_class_name" {
 variable "pv_loki_provider" {
   type = string
 }
-variable "pv_loki_deploy" {
+variable "pv_grafana_disk_deploy" {
+  type = bool
+}
+variable "pv_grafana_disk_source_existing" {
   type = bool
 }
 variable "pv_grafana_storage_gbi" {

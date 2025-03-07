@@ -143,6 +143,8 @@ keycloak_postgres_password       = ""
 
 # keycloak pv
 pv_keycloak_postgres_deploy               = false
+pv_keycloak_disk_deploy                   = true
+pv_keycloak_disk_source_existing          = false
 pv_keycloak_postgres_storage_gbi          = 32
 pv_keycloak_postgres_storage_account_type = "Premium_LRS"
 pv_keycloak_postgres_storage_class_name   = "default"

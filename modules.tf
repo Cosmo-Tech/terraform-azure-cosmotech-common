@@ -1,53 +1,46 @@
 module "cosmotech-prerequisites" {
   source = "./azure-common-resources"
 
+  # azure
   client_id       = var.client_id
   client_secret   = var.client_secret
   subscription_id = var.subscription_id
   tenant_id       = var.tenant_id
   location        = var.location
+  resource_group  = local.resource_group
+  deployment_type = var.deployment_type
+  owner_list      = var.owner_list
 
-  resource_group   = local.resource_group
-  cluster_name     = local.cluster_name
-  deployment_type  = var.deployment_type
-  image_path       = var.image_path
-  platform_url     = var.platform_url
-  identifier_uri   = var.identifier_uri
-  owner_list       = var.owner_list
-  audience         = var.audience
-  api_version_path = var.api_version_path
+  audience = var.audience
 
-  # publicip
-  create_publicip         = var.publicip_new_or_existing_or_none == "new" ? true : false
-  create_dnsrecord        = var.create_dnsrecord
-  publicip_resource_group = var.deployment_type != "ARM" ? local.resource_group : var.publicip_resource_group
-  project_stage           = var.project_stage
-  project_name            = var.project_name
-  customer_name           = var.customer_name
-  dns_record              = var.dns_record
-  dns_zone_name           = var.dns_zone_name
-  dns_zone_rg             = var.dns_zone_rg
+  # project
+  image_path    = var.project_image_path
+  cost_center   = var.project_cost_center
+  project_stage = var.project_stage
+  project_name  = var.project_name
+  customer_name = var.project_customer_name
 
   # network common
-  network_client_id     = var.network_client_id
-  network_client_secret = var.network_client_secret
-  network_sp_object_id  = var.network_sp_object_id
+  identifier_uri            = var.network_identifier_uri
+  network_sp_client_id      = var.network_sp_client_id
+  network_sp_client_secret  = var.network_sp_client_secret
+  network_sp_object_id      = var.network_sp_object_id
+  network_name              = var.network_name
+  network_subnet_id         = var.network_subnet_id
+  vnet_new                  = var.network_new
+  subnet_name               = var.network_subnet_name
+  vnet_iprange              = var.network_virtual_address_prefix
+  subnet_iprange            = var.network_virtual_subnet_address_prefix
+  vnet_resource_group       = var.network_resource_group
+  private_dns_name_blob     = var.network_private_dns_name_blob
+  private_dns_name_queue    = var.network_private_dns_name_queue
+  private_dns_name_table    = var.network_private_dns_name_table
+  private_dns_name_adt      = var.network_private_dns_name_adt
+  private_dns_name_eventhub = var.network_private_dns_name_eventhub
+  network_publicip_id       = var.network_publicip_id
 
-  # vnet
-  vnet_name           = var.vnet_name
-  vnet_new            = var.vnet_new
-  subnet_name         = var.subnet_name
-  vnet_iprange        = var.virtual_network_address_prefix
-  subnet_iprange      = var.virtual_network_subnet_address_prefix
-  vnet_resource_group = var.vnet_resource_group
-
-  # privatelink dns
-  private_dns_name_blob     = var.private_dns_name_blob
-  private_dns_name_queue    = var.private_dns_name_queue
-  private_dns_name_table    = var.private_dns_name_table
-  private_dns_name_adt      = var.private_dns_name_adt
-  private_dns_name_eventhub = var.private_dns_name_eventhub
-
+  # kubernetes
+  cluster_name                                = local.cluster_name
   kubernetes_version                          = var.kubernetes_version
   kubernetes_max_db_instances                 = var.kubernetes_max_db_instances
   kubernetes_min_db_instances                 = var.kubernetes_min_db_instances
@@ -94,41 +87,46 @@ module "cosmotech-prerequisites" {
   kubernetes_services_os_disk_size            = var.kubernetes_services_os_disk_size
   kubernetes_system_os_disk_size              = var.kubernetes_system_os_disk_size
   kubernetes_nodepool_system_name             = var.kubernetes_nodepool_system_name
-}
+  kubernetes_azure_rbac_enabled               = var.kubernetes_azure_rbac_enabled
+  kubernetes_admin_group_object_ids           = var.kubernetes_admin_group_object_ids
+  kubernetes_tekton_compute_type              = var.kubernetes_tekton_compute_type
+  kubernetes_max_tekton_pods                  = var.kubernetes_max_tekton_pods
+  kubernetes_max_tekton_compute_instances     = var.kubernetes_max_tekton_compute_instances
+  kubernetes_min_tekton_compute_instances     = var.kubernetes_min_tekton_compute_instances
+  kubernetes_tekton_enable_auto_scaling       = var.kubernetes_tekton_enable_auto_scaling
+  kubernetes_tekton_os_disk_size              = var.kubernetes_tekton_os_disk_size
+  kubernetes_tekton_deploy                    = var.kubernetes_tekton_deploy
 
-module "cosmotech-platform" {
-  source  = "Cosmo-Tech/cosmotech-common/kubernetes"
-  version = "1.1.3"
+  resource_group_name   = local.resource_group
+  storage_account_name  = var.storage_account_name
+  app_service_plan_name = var.app_service_plan_name
+  function_app_name     = var.function_app_name
 
-  cluster_issuer_email     = var.cluster_issuer_email
-  cluster_issuer_name      = var.cluster_issuer_name
-  tls_secret_name          = local.tls_secret_name
-  tls_certificate_type     = var.tls_certificate_type
-  namespace                = var.namespace
-  monitoring_namespace     = var.monitoring_namespace
-  ingress_nginx_version    = var.ingress_nginx_version
-  create_prometheus_stack  = var.create_prometheus_stack
-  publicip_resource_group  = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.publicip_resource_group
-  api_dns_name             = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_fqdn : var.fqdn
-  resource_group           = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_ip_resource_group : var.resource_group
-  loadbalancer_ip          = var.deployment_type != "ARM" ? module.cosmotech-prerequisites.out_public_ip : var.loadbalancer_ip
-  # kube_config              = module.cosmotech-prerequisites.out_aks_phoenix_config
-  certificate_cert_content = var.tls_certificate_custom_certificate
-  certificate_key_content  = var.tls_certificate_custom_key
+  holiday_country        = var.holiday_country
+  solidarity_day         = var.solidarity_day
+  adx_clusters_config    = var.adx_clusters_config
+  aks_resource_group     = local.resource_group
+  aks_cluster_name       = local.cluster_name
+  powerbi_resource_group = var.powerbi_resource_group
+  powerbi_name           = var.powerbi_name
+  vm_resource_group      = var.vm_resource_group
+  vm_name                = var.vm_name
 
-  # loki
-  loki_release_name                    = var.loki_release_name
-  loki_persistence_memory              = var.loki_persistence_memory
-  loki_retention_period                = var.loki_retention_period
-  helm_repo_url                        = var.helm_repo_url
-  helm_chart                           = var.helm_chart
-  loki_max_entries_limet_per_query     = var.loki_max_entries_limet_per_query
-  grafana_loki_compatibility_image_tag = var.grafana_loki_compatibility_image_tag
+  auto_start_stop_deploy = var.auto_start_stop_deploy
+  start_hours            = var.start_hours
+  stop_hours             = var.stop_hours
+  start_minutes          = var.start_minutes
+  stop_minutes           = var.stop_minutes
 
-  # prometheus
-  prom_cpu_mem_limits  = var.prom_cpu_mem_limits
-  prom_cpu_mem_request = var.prom_cpu_mem_request
+  # Storage Backup velero
+  velero_location                      = var.velero_location
+  velero_storage_tier                  = var.velero_storage_tier
+  velero_storage_replication_type      = var.velero_storage_replication_type
+  velero_resource_group                = var.velero_resource_group
+  velero_public_network_access_enabled = var.velero_public_network_access_enabled
+  velero_storage_name                  = var.velero_storage_name
+  velero_tags                          = var.velero_tags
+  velero_storage_kind                  = var.velero_storage_kind
+  velero_storage_csm_ip                = var.velero_storage_csm_ip
 
-  is_bare_metal   = var.is_bare_metal
-  create_keycloak = var.create_keycloak
 }

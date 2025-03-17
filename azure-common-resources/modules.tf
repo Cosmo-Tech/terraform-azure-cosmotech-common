@@ -1,10 +1,68 @@
+module "create-platform-prerequisite" {
+  source = "./create-platform-prerequisites"
+
+  count = var.deployment_type != "ARM" ? 1 : 0
+
+  project_stage  = var.project_stage
+  project_name   = var.project_name
+  owner_list     = var.owner_list
+  location       = var.location
+  resource_group = var.resource_group
+  customer_name  = var.customer_name
+  image_path     = var.image_path
+  cost_center    = var.cost_center
+}
+
+module "create-network" {
+  source = "./create-network"
+
+  count = var.vnet_new == "new" ? 1 : 0
+
+  resource_group      = local.resource_group
+  vnet_resource_group = local.vnet_resource_group
+  network_name        = var.network_name
+  vnet_iprange        = var.vnet_iprange
+  location            = var.location
+  customer_name       = var.customer_name
+  cost_center         = var.cost_center
+  project_stage       = var.project_stage
+  project_name        = var.project_name
+  subscription_id     = var.subscription_id
+  subnet_iprange      = var.subnet_iprange
+  subnet_name         = var.subnet_name
+  network_publicip_id = var.network_publicip_id
+  network_sp_objectid = module.create-platform-prerequisite.0.out_network_sp_object_id
+
+  depends_on = [module.create-platform-prerequisite]
+}
+
+module "create-privatedns" {
+  source = "./create-privatedns"
+
+  resource_group = local.resource_group
+  vnet_id        = local.platform_vnet_id
+
+  private_dns_name_blob     = var.private_dns_name_blob
+  private_dns_name_adt      = var.private_dns_name_adt
+  private_dns_name_queue    = var.private_dns_name_queue
+  private_dns_name_table    = var.private_dns_name_table
+  private_dns_name_eventhub = var.private_dns_name_eventhub
+
+  depends_on = [
+    module.create-platform-prerequisite,
+    module.create-network
+  ]
+}
+
 module "create-cluster" {
   source = "./create-cluster"
 
-  network_clientid     = local.network_clientid
-  network_clientsecret = local.network_clientsecret
-  subnet_id            = local.platform_subnet_id
-
+  tenant_id                                   = var.tenant_id
+  network_clientid                            = local.network_sp_client_id
+  network_clientsecret                        = local.network_sp_client_secret
+  network_client_object_id                    = local.network_sp_object_id
+  subnet_id                                   = local.platform_subnet_id
+  kubernetes_admin_group_object_ids           = var.kubernetes_admin_group_object_ids
   location                                    = var.location
   resource_group                              = var.resource_group
   cluster_name                                = var.cluster_name
@@ -58,95 +116,74 @@ module "create-cluster" {
   kubernetes_system_os_disk_size              = var.kubernetes_system_os_disk_size
   kubernetes_min_highcpu_compute_instances    = var.kubernetes_min_highcpu_compute_instances
   kubernetes_nodepool_system_name             = var.kubernetes_nodepool_system_name
+  kubernetes_azure_rbac_enabled               = var.kubernetes_azure_rbac_enabled
+  kubernetes_tekton_compute_type              = var.kubernetes_tekton_compute_type
+  kubernetes_max_tekton_pods                  = var.kubernetes_max_tekton_pods
+  kubernetes_max_tekton_compute_instances     = var.kubernetes_max_tekton_compute_instances
+  kubernetes_min_tekton_compute_instances     = var.kubernetes_min_tekton_compute_instances
+  kubernetes_tekton_enable_auto_scaling       = var.kubernetes_tekton_enable_auto_scaling
+  kubernetes_tekton_os_disk_size              = var.kubernetes_tekton_os_disk_size
+  kubernetes_tekton_deploy                    = var.kubernetes_tekton_deploy
 
   depends_on = [
-    module.create-platform-prerequisite, module.create-network, module.create-privatedns
+    module.create-platform-prerequisite,
+    module.create-network,
+    module.create-privatedns,
   ]
 }
 
-module "create-network" {
-  source = "./create-network"
+module "create-auto-restart" {
+  source = "./create-auto-restart"
 
-  count = var.vnet_new == "new" ? 1 : 0
+  count = var.auto_start_stop_deploy ? 1 : 0
 
-  network_sp_objectid = local.network_sp_objectid
-  resource_group      = local.resource_group
+  subscription_id       = var.subscription_id
+  tenant_id             = var.tenant_id
+  client_id             = local.network_sp_client_id
+  client_secret         = local.network_sp_client_secret
+  resource_group_name   = var.resource_group_name
+  location              = var.location
+  storage_account_name  = var.storage_account_name
+  app_service_plan_name = var.app_service_plan_name
+  function_app_name     = var.function_app_name
 
-  vnet_name           = var.vnet_name
-  vnet_iprange        = var.vnet_iprange
-  location            = var.location
-  customer_name       = var.customer_name
-  cost_center         = var.cost_center
-  project_stage       = var.project_stage
-  project_name        = var.project_name
-  subscription_id     = var.subscription_id
-  vnet_resource_group = local.vnet_resource_group
+  # If existing storage account
+  use_existing_storage_account = var.use_existing_storage_account
 
-  depends_on = [module.create-platform-prerequisite]
+  holiday_country        = var.holiday_country
+  solidarity_day         = var.solidarity_day
+  adx_clusters_config    = var.adx_clusters_config
+  aks_resource_group     = var.aks_resource_group
+  aks_cluster_name       = var.aks_cluster_name
+  powerbi_resource_group = var.powerbi_resource_group
+  powerbi_name           = var.powerbi_name
+  vm_resource_group      = var.vm_resource_group
+  vm_name                = var.vm_name
+  start_hours            = var.start_hours
+  stop_hours             = var.stop_hours
+  start_minutes          = var.start_minutes
+  stop_minutes           = var.stop_minutes
+
+  depends_on = [
+    module.create-platform-prerequisite
+  ]
 }
 
-module "create-platform-prerequisite" {
-  source = "./create-platform-prerequisites"
 
-  count = var.deployment_type != "ARM" ? 1 : 0
+module "deploy-backup-storage" {
+  source = "./deploy-storage-backup"
 
-  tenant_id        = var.tenant_id
-  subscription_id  = var.subscription_id
-  client_id        = var.client_id
-  client_secret    = var.client_secret
-  platform_url     = var.platform_url
-  identifier_uri   = var.identifier_uri
-  project_stage    = var.project_stage
-  project_name     = var.project_name
-  owner_list       = var.owner_list
-  audience         = var.audience
-  location         = var.location
-  resource_group   = var.resource_group
-  dns_zone_name    = var.dns_zone_name
-  dns_zone_rg      = var.dns_zone_rg
-  dns_record       = var.dns_record
-  vnet_iprange     = var.vnet_iprange
-  api_version_path = var.api_version_path
-  customer_name    = var.customer_name
-  user_app_role    = var.user_app_role
-  image_path       = var.image_path
-  cost_center      = var.cost_center
-}
+  tags                          = var.velero_tags
+  storage_name                  = var.velero_storage_name
+  location                      = var.velero_location
+  resource_group                = var.velero_resource_group
+  storage_tier                  = var.velero_storage_tier
+  storage_replication_type      = var.velero_storage_replication_type
+  storage_kind                  = var.velero_storage_kind
+  public_network_access_enabled = var.velero_public_network_access_enabled
+  storage_csm_ip                = var.velero_storage_csm_ip
+  resource_aks_managed          = module.create-cluster.aks_cluster_resource_group_managed
+  network_subnet_id             = var.deployment_type == "ARM" ? var.network_subnet_id : module.create-network.0.out_subnet_id
 
-module "create-privatedns" {
-  source = "./create-privatedns"
-
-  resource_group = local.resource_group
-  vnet_id        = local.platform_vnet_id
-
-  private_dns_name_blob     = var.private_dns_name_blob
-  private_dns_name_adt      = var.private_dns_name_adt
-  private_dns_name_queue    = var.private_dns_name_queue
-  private_dns_name_table    = var.private_dns_name_table
-  private_dns_name_eventhub = var.private_dns_name_eventhub
-
-  depends_on = [module.create-platform-prerequisite]
-}
-
-module "create-publicip" {
-  source = "./create-publicip"
-
-  count = var.create_publicip ? 1 : 0
-
-  network_sp_objectid     = local.network_sp_objectid
-  publicip_resource_group = local.publicip_resource_group
-  platform_client_id      = local.platform_client_id
-
-  cost_center      = var.cost_center
-  customer_name    = var.customer_name
-  project_name     = var.project_name
-  location         = var.location
-  project_stage    = var.project_stage
-  create_publicip  = var.create_publicip
-  create_dnsrecord = var.create_dnsrecord
-  dns_record       = var.dns_record
-  dns_zone_name    = var.dns_zone_name
-  dns_zone_rg      = var.dns_zone_rg
-
-  depends_on = [module.create-platform-prerequisite]
+  depends_on = [module.create-cluster, module.create-network]
 }

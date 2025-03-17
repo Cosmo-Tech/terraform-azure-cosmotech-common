@@ -3,41 +3,27 @@ variable "resource_group" {
 }
 
 variable "vnet_iprange" {
-  type    = string
-  default = "10.21.0.0/16"
-}
-
-variable "network_sp_objectid" {
   type = string
 }
 
 variable "project_stage" {
   description = "The platform stage"
-  validation {
-    condition = contains([
-      "OnBoarding",
-      "Dev",
-      "QA",
-      "IA",
-      "EA",
-      "Demo",
-      "Prod"
-    ], var.project_stage)
-    error_message = "Stage must be either: OnBoarding, Dev, QA, IA, EA, Demo, Prod."
-  }
+  type = string
 }
 
 variable "customer_name" {
+  type        = string
   description = "The customer name"
 }
 
 variable "project_name" {
+  type        = string
   description = "The project name"
 }
 
 variable "location" {
+  type        = string
   description = "The Azure location"
-  default     = "West Europe"
 }
 
 variable "cost_center" {
@@ -48,20 +34,26 @@ variable "subscription_id" {
   type = string
 }
 
-variable "vnet_name" {
-  type = string
+variable "network_name" {
+  type    = string
 }
 
 variable "subnet_name" {
-  type    = string
-  default = "default"
+  type = string
 }
 
 variable "subnet_iprange" {
-  type    = string
-  default = "10.21.0.0/16"
+  type = string
 }
 
 variable "vnet_resource_group" {
+  type = string
+}
+
+variable "network_publicip_id" {
+  type = string
+}
+
+variable "network_sp_objectid" {
   type = string
 }

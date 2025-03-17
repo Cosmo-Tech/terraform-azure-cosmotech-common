@@ -10,6 +10,10 @@ variable "network_clientsecret" {
   type = string
 }
 
+variable "network_client_object_id" {
+  type = string
+}
+
 variable "resource_group" {
   type = string
 }
@@ -24,27 +28,11 @@ variable "subnet_id" {
 
 variable "kubernetes_version" {
   type    = string
-  default = "1.26.6"
 }
 
 variable "project_stage" {
-  description = "The Project stage"
-  type        = string
-  validation {
-    condition = contains([
-      "OnBoarding",
-      "Dev",
-      "QA",
-      "IA",
-      "EA",
-      "Doc",
-      "Support",
-      "Demo",
-      "Prod",
-      "PreProd"
-    ], var.project_stage)
-    error_message = "Stage must be either: OnBoarding, Dev, QA, IA, EA, Demo, Prod, PreProd, Doc, Support."
-  }
+  description = "The platform stage"
+  type = string
 }
 
 variable "customer_name" {
@@ -59,7 +47,6 @@ variable "project_name" {
 
 variable "cost_center" {
   type    = string
-  default = "NA"
 }
 
 # aks variables
@@ -227,4 +214,44 @@ variable "kubernetes_monitoring_enable_auto_scaling" {
 
 variable "kubernetes_nodepool_system_name" {
   type = string
+}
+
+variable "kubernetes_azure_rbac_enabled" {
+  type = bool
+}
+
+variable "tenant_id" {
+  type = string
+}
+
+variable "kubernetes_admin_group_object_ids" {
+  type = list(string)
+}
+
+variable "kubernetes_tekton_compute_type" {
+  type = string
+}
+
+variable "kubernetes_max_tekton_pods" {
+  type = number
+}
+
+variable "kubernetes_max_tekton_compute_instances" {
+  type = number
+}
+
+variable "kubernetes_min_tekton_compute_instances" {
+  type = number
+}
+
+variable "kubernetes_tekton_enable_auto_scaling" {
+  type = bool
+}
+
+variable "kubernetes_tekton_os_disk_size" {
+  type = number
+}
+
+variable "kubernetes_tekton_deploy" {
+  type = bool
 }

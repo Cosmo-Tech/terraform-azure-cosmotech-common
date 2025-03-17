@@ -1,8 +1,10 @@
 # Azure
-deployment_type = "Terraform"
-audience        = "AzureADMultipleOrgs"
-client_id       = ""
-client_secret   = ""
+deployment_type         = "Terraform"
+audience                = "AzureADMultipleOrgs"
+client_id               = ""
+client_secret           = ""
+publicip_resource_group = ""
+publicip_address        = ""
 
 # Backend remote
 tf_resource_group_name  = ""
@@ -99,7 +101,7 @@ project_customer_name = "cosmotech"
 project_image_path    = "./cosmotech.png"
 project_cost_center   = "NA"
 
-# Auto-restart AZ function
+# auto-restart az function
 auto_start_stop_deploy = false
 storage_account_name   = "saautorestart"
 app_service_plan_name  = "asp-auto-restart"
@@ -131,6 +133,13 @@ velero_tags = {
   project     = ""
   stage       = "Dev"
 }
+
+# ingress nginx
+ingress_nginx_helm_repo_url     = "https://kubernetes.github.io/ingress-nginx"
+ingress_nginx_namespace         = "ingress-nginx"
+ingress_nginx_helm_release_name = "ingress-nginx"
+ingress_nginx_replica_count     = 1
+ingress_nginx_version           = "4.2.5"
 
 # keycloak
 keycloak_config_deploy           = false

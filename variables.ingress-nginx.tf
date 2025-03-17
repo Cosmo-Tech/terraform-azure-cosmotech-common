@@ -1,26 +1,21 @@
 variable "ingress_nginx_version" {
-  type    = string
-  default = "4.2.5"
+  type = string
 }
 
 variable "ingress_nginx_helm_repo_url" {
-  type    = string
-  default = "https://kubernetes.github.io/ingress-nginx"
+  type = string
 }
 
 variable "ingress_nginx_helm_release_name" {
-  type    = string
-  default = "ingress-nginx"
+  type = string
 }
 
 variable "ingress_nginx_namespace" {
-  type    = string
-  default = "ingress-nginx"
+  type = string
 }
 
-variable "public_ip_address" {
-  type    = string
-  default = ""
+variable "publicip_address" {
+  type = string
 }
 
 variable "publicip_resource_group" {
@@ -28,6 +23,5 @@ variable "publicip_resource_group" {
 }
 
 variable "ingress_nginx_replica_count" {
-  type    = number
-  default = 1
+  type = number
 }

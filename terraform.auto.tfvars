@@ -4,6 +4,11 @@ audience        = "AzureADMultipleOrgs"
 client_id       = ""
 client_secret   = ""
 
+host                   = ""
+client_certificate     = ""
+client_key             = ""
+cluster_ca_certificate = ""
+
 # Backend remote
 tf_resource_group_name  = ""
 tf_storage_account_name = ""

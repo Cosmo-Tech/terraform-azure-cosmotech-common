@@ -72,3 +72,11 @@ variable "network_identifier_uri" {
 variable "network_publicip_id" {
   type = string
 }
+
+variable "network_publicip_address" {
+  type = string
+}
+
+variable "network_publicip_resource_group" {
+  type = string
+}

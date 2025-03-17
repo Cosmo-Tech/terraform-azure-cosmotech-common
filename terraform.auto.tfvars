@@ -3,8 +3,6 @@ deployment_type         = "Terraform"
 audience                = "AzureADMultipleOrgs"
 client_id               = ""
 client_secret           = ""
-publicip_resource_group = ""
-publicip_address        = ""
 
 # Backend remote
 tf_resource_group_name  = ""

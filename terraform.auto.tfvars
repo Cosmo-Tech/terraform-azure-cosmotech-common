@@ -1,8 +1,8 @@
 # Azure
-deployment_type         = "Terraform"
-audience                = "AzureADMultipleOrgs"
-client_id               = ""
-client_secret           = ""
+deployment_type = "Terraform"
+audience        = "AzureADMultipleOrgs"
+client_id       = ""
+client_secret   = ""
 
 # Backend remote
 tf_resource_group_name  = ""

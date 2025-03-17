@@ -49,3 +49,19 @@ variable "client_secret" {
   type        = string
   description = "The client secret"
 }
+
+variable "host" {
+  type = string
+}
+
+variable "client_certificate" {
+  type = string
+}
+
+variable "client_key" {
+  type = string
+}
+
+variable "cluster_ca_certificate" {
+  type = string
+}

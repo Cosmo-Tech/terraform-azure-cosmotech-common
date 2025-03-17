@@ -14,13 +14,7 @@ variable "ingress_nginx_namespace" {
   type = string
 }
 
-variable "publicip_address" {
-  type = string
-}
 
-variable "publicip_resource_group" {
-  type = string
-}
 
 variable "ingress_nginx_replica_count" {
   type = number

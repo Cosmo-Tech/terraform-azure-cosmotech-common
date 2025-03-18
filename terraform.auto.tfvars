@@ -174,13 +174,11 @@ pv_prometheus_provider             = "azure"
 
 # loki-stack pv
 pv_loki_stack_deploy            = false
-pv_loki_disk_deploy             = true
 pv_loki_disk_source_existing    = false
 pv_loki_storage_gbi             = 8
 pv_loki_storage_account_type    = "Premium_LRS"
 pv_loki_storage_class_name      = "default"
 pv_loki_provider                = "azure"
-pv_grafana_disk_deploy          = true
 pv_grafana_disk_source_existing = false
 pv_grafana_storage_gbi          = 8
 pv_grafana_storage_account_type = "Premium_LRS"

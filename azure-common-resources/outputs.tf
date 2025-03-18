@@ -28,11 +28,11 @@ output "out_network_sp_name" {
 }
 
 output "out_backup_storage_account_name" {
-  value = module.deploy-backup-storage.out_backup_storage_account_name
+  value = var.velero_deploy ? module.deploy-backup-storage.0.out_backup_storage_account_name : ""
 }
 
 output "out_backup_storage_account_key" {
-  value     = module.deploy-backup-storage.out_backup_storage_account_key
+  value     = var.velero_deploy ? module.deploy-backup-storage.0.out_backup_storage_account_key : ""
   sensitive = true
 }
 

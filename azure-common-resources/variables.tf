@@ -416,6 +416,9 @@ variable "start_hours" {
   type = number
 }
 
+variable "velero_deploy" {
+  type = bool
+}
 
 variable "velero_tags" {
   type = object({

@@ -118,6 +118,7 @@ module "cosmotech-prerequisites" {
   stop_minutes           = var.stop_minutes
 
   # Storage Backup velero
+  velero_deploy                        = var.velero_deploy
   velero_location                      = var.velero_location
   velero_storage_tier                  = var.velero_storage_tier
   velero_storage_replication_type      = var.velero_storage_replication_type

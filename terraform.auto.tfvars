@@ -121,6 +121,7 @@ stop_hours             = 17
 start_minutes          = 0
 start_hours            = 5
 
+velero_deploy                        = false
 velero_resource_group                = ""
 velero_location                      = "francecentral"
 velero_storage_tier                  = "Standard"

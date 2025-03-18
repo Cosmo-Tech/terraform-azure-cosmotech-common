@@ -1,6 +1,8 @@
 module "deploy-backup-storage" {
   source = "./deploy-storage-backup"
 
+  count = var.velero_deploy ? 1 : 0
+
   tags                          = var.velero_tags
   storage_name                  = var.velero_storage_name
   location                      = var.velero_location
@@ -14,4 +16,5 @@ module "deploy-backup-storage" {
   network_subnet_id             = var.deployment_type == "ARM" ? var.network_subnet_id : module.create-network.0.out_subnet_id
 
   depends_on = [module.create-cluster, module.create-network]
+
 }

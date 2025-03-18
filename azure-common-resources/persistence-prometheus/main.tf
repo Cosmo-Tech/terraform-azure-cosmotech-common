@@ -13,7 +13,7 @@ resource "azurerm_managed_disk" "prometheus_master" {
 }
 
 data "azurerm_managed_disk" "disk_managed_prometheus" {
-  count               = var.pv_prometheus_disk_source_existing ? 1 : 0
+  count               = var.pv_prometheus_provider == "azure" && var.pv_prometheus_disk_source_existing ? 1 : 0
   name                = local.disk_master_name
   resource_group_name = var.kubernetes_mc_resource_group_name
 }

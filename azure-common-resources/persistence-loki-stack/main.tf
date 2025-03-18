@@ -14,7 +14,7 @@ resource "azurerm_managed_disk" "loki_master" {
 }
 
 data "azurerm_managed_disk" "disk_managed_loki" {
-  count               = var.pv_loki_disk_source_existing ? 1 : 0
+  count               = var.pv_loki_provider == "azure" && var.pv_loki_disk_source_existing ? 1 : 0
   name                = local.disk_loki_name
   resource_group_name = var.kubernetes_mc_resource_group_name
 }
@@ -57,7 +57,7 @@ resource "azurerm_managed_disk" "grafana_master" {
 }
 
 data "azurerm_managed_disk" "disk_managed_grafana" {
-  count               = var.pv_grafana_disk_source_existing ? 1 : 0
+  count               = var.pv_loki_provider == "azure" && var.pv_grafana_disk_source_existing ? 1 : 0
   name                = local.disk_grafana_name
   resource_group_name = var.kubernetes_mc_resource_group_name
 }

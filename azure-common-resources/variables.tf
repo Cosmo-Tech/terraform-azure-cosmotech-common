@@ -549,9 +549,6 @@ variable "pv_keycloak_postgres_deploy" {
   type = bool
 }
 
-variable "pv_prometheus_disk_deploy" {
-  type = bool
-}
 variable "pv_prometheus_disk_source_existing" {
   type = bool
 }

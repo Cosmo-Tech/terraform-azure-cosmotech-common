@@ -39,3 +39,7 @@ variable "velero_public_network_access_enabled" {
 variable "velero_storage_csm_ip" {
   type = string
 }
+
+variable "velero_deploy" {
+  type = bool
+}

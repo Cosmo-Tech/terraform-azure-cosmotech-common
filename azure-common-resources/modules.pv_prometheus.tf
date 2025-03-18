@@ -5,7 +5,6 @@ module "deploy-persistence-prometheus" {
 
   kubernetes_mc_resource_group_name  = module.create-cluster.aks_cluster_resource_group_managed
   location                           = var.location
-  pv_prometheus_disk_deploy          = var.pv_prometheus_disk_deploy
   pv_prometheus_disk_source_existing = var.pv_prometheus_disk_source_existing
   pv_prometheus_provider             = var.pv_prometheus_provider
   pv_prometheus_storage_account_type = var.pv_prometheus_storage_account_type

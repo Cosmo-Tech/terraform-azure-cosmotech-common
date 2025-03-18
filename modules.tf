@@ -148,7 +148,6 @@ module "cosmotech-prerequisites" {
 
   # prometheus pv
   pv_prometheus_deploy               = var.pv_prometheus_deploy
-  pv_prometheus_disk_deploy          = var.pv_prometheus_disk_deploy
   pv_prometheus_disk_source_existing = var.pv_prometheus_disk_source_existing
   pv_prometheus_provider             = var.pv_prometheus_provider
   pv_prometheus_storage_account_type = var.pv_prometheus_storage_account_type

@@ -4,7 +4,7 @@ locals {
 }
 
 resource "azurerm_managed_disk" "loki_master" {
-  count                = var.pv_loki_provider == "azure" && var.pv_loki_disk_deploy ? 1 : 0
+  count                = var.pv_loki_provider == "azure" && var.pv_loki_disk_source_existing ? 0 : 1
   name                 = local.disk_loki_name
   location             = var.location
   resource_group_name  = var.kubernetes_mc_resource_group_name
@@ -47,7 +47,7 @@ resource "kubernetes_persistent_volume" "pv_loki_master" {
 
 
 resource "azurerm_managed_disk" "grafana_master" {
-  count                = var.pv_grafana_provider == "azure" && var.pv_grafana_disk_deploy ? 1 : 0
+  count                = var.pv_grafana_provider == "azure" && var.pv_grafana_disk_source_existing ? 0 : 1
   name                 = local.disk_grafana_name
   location             = var.location
   resource_group_name  = var.kubernetes_mc_resource_group_name

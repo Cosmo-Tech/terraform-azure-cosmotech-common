@@ -3,7 +3,7 @@ locals {
 }
 
 resource "azurerm_managed_disk" "postgres_keycloak_master" {
-  count                = var.pv_keycloak_postgres_provider == "azure" && var.pv_keycloak_disk_deploy ? 1 : 0
+  count                = var.pv_keycloak_postgres_provider == "azure" && var.pv_keycloak_disk_source_existing ? 0 : 1
   name                 = local.disk_master_name
   location             = var.location
   resource_group_name  = var.kubernetes_mc_resource_group_name

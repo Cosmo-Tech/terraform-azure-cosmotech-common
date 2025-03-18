@@ -530,9 +530,6 @@ variable "keycloak_config_deploy" {
   type = bool
 }
 
-variable "pv_keycloak_disk_deploy" {
-  type = bool
-}
 variable "pv_keycloak_disk_source_existing" {
   type = bool
 }

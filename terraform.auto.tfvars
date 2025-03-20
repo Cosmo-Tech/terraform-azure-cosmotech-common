@@ -4,11 +4,6 @@ audience        = "AzureADMultipleOrgs"
 client_id       = ""
 client_secret   = ""
 
-host                   = ""
-client_certificate     = ""
-client_key             = ""
-cluster_ca_certificate = ""
-
 # Backend remote
 tf_resource_group_name  = ""
 tf_storage_account_name = ""
@@ -30,6 +25,7 @@ kubernetes_highmemory_compute_type          = "Standard_E16ads_v5"
 kubernetes_monitoring_type                  = "Standard_D2ads_v5"
 kubernetes_services_type                    = "Standard_B4ms"
 kubernetes_db_type                          = "Standard_D2ads_v5"
+kubernetes_nodepool_system_name             = "system"
 kubernetes_max_basic_compute_instances      = 5
 kubernetes_max_highcpu_compute_instances    = 2
 kubernetes_max_highmemory_compute_instances = 3
@@ -65,19 +61,25 @@ kubernetes_highmemory_enable_auto_scaling   = true
 kubernetes_services_enable_auto_scaling     = true
 kubernetes_db_enable_auto_scaling           = true
 kubernetes_monitoring_enable_auto_scaling   = true
-kubernetes_nodepool_system_name             = "system"
 kubernetes_admin_group_object_ids = [
   ""
 ]
-kubernetes_tekton_deploy                = false
-kubernetes_cluster_name                 = ""
-kubernetes_tekton_compute_type          = "Standard_D2ads_v5"
-kubernetes_max_tekton_compute_instances = 2
-kubernetes_max_tekton_pods              = 110
-kubernetes_min_tekton_compute_instances = 1
-kubernetes_resource_group               = ""
-kubernetes_tekton_enable_auto_scaling   = true
-kubernetes_tekton_os_disk_size          = 128
+kubernetes_tekton_deploy                    = false
+kubernetes_cluster_name                     = ""
+kubernetes_tekton_compute_type              = "Standard_D2ads_v5"
+kubernetes_max_tekton_compute_instances     = 2
+kubernetes_max_tekton_pods                  = 110
+kubernetes_min_tekton_compute_instances     = 1
+kubernetes_resource_group                   = ""
+kubernetes_tekton_enable_auto_scaling       = true
+kubernetes_tekton_os_disk_size              = 128
+temporary_name_for_rotation_basic_pool      = "basictemp"
+temporary_name_for_rotation_db_pool         = "dbtemp"
+temporary_name_for_rotation_highcpu_pool    = "hightemp"
+temporary_name_for_rotation_highmemoty_pool = "memtemp"
+temporary_name_for_rotation_monitoring_pool = "montemp"
+temporary_name_for_rotation_services_pool   = "svctemp"
+temporary_name_for_rotation_tekton_pool     = "tektemp"
 
 # Network
 network_sp_client_id                  = ""

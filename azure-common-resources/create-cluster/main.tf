@@ -63,6 +63,11 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
     os_disk_size_gb             = var.kubernetes_system_os_disk_size
     os_disk_type                = "Managed"
     vnet_subnet_id              = var.subnet_id
+    upgrade_settings {
+      drain_timeout_in_minutes      = 0
+      max_surge                     = "10%"
+      node_soak_duration_in_minutes = 0
+    }
   }
 
   lifecycle {
@@ -133,23 +138,23 @@ resource "azurerm_kubernetes_cluster_node_pool" "basic" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "highcpu" {
-  name                  = "highcpu"
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
+  name                        = "highcpu"
+  kubernetes_cluster_id       = azurerm_kubernetes_cluster.phoenixcluster.id
   temporary_name_for_rotation = substr(var.temporary_name_for_rotation_highcpu_pool, 0, 12)
-  orchestrator_version  = var.kubernetes_version
-  vm_size               = var.kubernetes_highcpu_compute_type
-  max_pods              = var.kubernetes_max_highcpu_pods
-  max_count             = var.kubernetes_max_highcpu_compute_instances
-  min_count             = var.kubernetes_min_highcpu_compute_instances
-  auto_scaling_enabled  = var.kubernetes_highcpu_enable_auto_scaling
-  mode                  = "User"
-  os_type               = "Linux"
-  os_disk_size_gb       = var.kubernetes_highcpu_os_disk_size
-  os_disk_type          = "Managed"
-  node_taints           = ["vendor=cosmotech:NoSchedule"]
-  node_labels           = { "cosmotech.com/tier" = "compute", "cosmotech.com/size" = "highcpu" }
-  vnet_subnet_id        = var.subnet_id
-  tags                  = local.tags
+  orchestrator_version        = var.kubernetes_version
+  vm_size                     = var.kubernetes_highcpu_compute_type
+  max_pods                    = var.kubernetes_max_highcpu_pods
+  max_count                   = var.kubernetes_max_highcpu_compute_instances
+  min_count                   = var.kubernetes_min_highcpu_compute_instances
+  auto_scaling_enabled        = var.kubernetes_highcpu_enable_auto_scaling
+  mode                        = "User"
+  os_type                     = "Linux"
+  os_disk_size_gb             = var.kubernetes_highcpu_os_disk_size
+  os_disk_type                = "Managed"
+  node_taints                 = ["vendor=cosmotech:NoSchedule"]
+  node_labels                 = { "cosmotech.com/tier" = "compute", "cosmotech.com/size" = "highcpu" }
+  vnet_subnet_id              = var.subnet_id
+  tags                        = local.tags
 
   lifecycle {
     ignore_changes = [
@@ -163,23 +168,23 @@ resource "azurerm_kubernetes_cluster_node_pool" "highcpu" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "highmemory" {
-  name                  = "highmemory"
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
+  name                        = "highmemory"
+  kubernetes_cluster_id       = azurerm_kubernetes_cluster.phoenixcluster.id
   temporary_name_for_rotation = substr(var.temporary_name_for_rotation_highmemoty_pool, 0, 12)
-  orchestrator_version  = var.kubernetes_version
-  vm_size               = var.kubernetes_highmemory_compute_type
-  max_pods              = var.kubernetes_max_highmemory_pods
-  max_count             = var.kubernetes_max_highmemory_compute_instances
-  min_count             = var.kubernetes_min_highmemory_compute_instances
-  auto_scaling_enabled  = var.kubernetes_highmemory_enable_auto_scaling
-  mode                  = "User"
-  os_type               = "Linux"
-  os_disk_size_gb       = var.kubernetes_highmemory_os_disk_size
-  os_disk_type          = "Managed"
-  node_taints           = ["vendor=cosmotech:NoSchedule"]
-  node_labels           = { "cosmotech.com/tier" = "compute", "cosmotech.com/size" = "highmemory" }
-  vnet_subnet_id        = var.subnet_id
-  tags                  = local.tags
+  orchestrator_version        = var.kubernetes_version
+  vm_size                     = var.kubernetes_highmemory_compute_type
+  max_pods                    = var.kubernetes_max_highmemory_pods
+  max_count                   = var.kubernetes_max_highmemory_compute_instances
+  min_count                   = var.kubernetes_min_highmemory_compute_instances
+  auto_scaling_enabled        = var.kubernetes_highmemory_enable_auto_scaling
+  mode                        = "User"
+  os_type                     = "Linux"
+  os_disk_size_gb             = var.kubernetes_highmemory_os_disk_size
+  os_disk_type                = "Managed"
+  node_taints                 = ["vendor=cosmotech:NoSchedule"]
+  node_labels                 = { "cosmotech.com/tier" = "compute", "cosmotech.com/size" = "highmemory" }
+  vnet_subnet_id              = var.subnet_id
+  tags                        = local.tags
 
   lifecycle {
     ignore_changes = [
@@ -193,24 +198,24 @@ resource "azurerm_kubernetes_cluster_node_pool" "highmemory" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "tekton" {
-  count                 = var.kubernetes_tekton_deploy ? 1 : 0
-  name                  = "tekton"
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
+  count                       = var.kubernetes_tekton_deploy ? 1 : 0
+  name                        = "tekton"
+  kubernetes_cluster_id       = azurerm_kubernetes_cluster.phoenixcluster.id
   temporary_name_for_rotation = substr(var.temporary_name_for_rotation_tekton_pool, 0, 12)
-  orchestrator_version  = var.kubernetes_version
-  vm_size               = var.kubernetes_tekton_compute_type
-  max_pods              = var.kubernetes_max_tekton_pods
-  max_count             = var.kubernetes_max_tekton_compute_instances
-  min_count             = var.kubernetes_min_tekton_compute_instances
-  auto_scaling_enabled  = var.kubernetes_tekton_enable_auto_scaling
-  mode                  = "User"
-  os_type               = "Linux"
-  os_disk_size_gb       = var.kubernetes_tekton_os_disk_size
-  os_disk_type          = "Managed"
-  node_taints           = ["vendor=tekton:NoSchedule"]
-  node_labels           = { "cosmotech.com/tier" = "tekton" }
-  vnet_subnet_id        = var.subnet_id
-  tags                  = local.tags
+  orchestrator_version        = var.kubernetes_version
+  vm_size                     = var.kubernetes_tekton_compute_type
+  max_pods                    = var.kubernetes_max_tekton_pods
+  max_count                   = var.kubernetes_max_tekton_compute_instances
+  min_count                   = var.kubernetes_min_tekton_compute_instances
+  auto_scaling_enabled        = var.kubernetes_tekton_enable_auto_scaling
+  mode                        = "User"
+  os_type                     = "Linux"
+  os_disk_size_gb             = var.kubernetes_tekton_os_disk_size
+  os_disk_type                = "Managed"
+  node_taints                 = ["vendor=tekton:NoSchedule"]
+  node_labels                 = { "cosmotech.com/tier" = "tekton" }
+  vnet_subnet_id              = var.subnet_id
+  tags                        = local.tags
   lifecycle {
     ignore_changes = [
       tags,
@@ -219,23 +224,23 @@ resource "azurerm_kubernetes_cluster_node_pool" "tekton" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "services" {
-  name                  = "services"
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
+  name                        = "services"
+  kubernetes_cluster_id       = azurerm_kubernetes_cluster.phoenixcluster.id
   temporary_name_for_rotation = substr(var.temporary_name_for_rotation_services_pool, 0, 12)
-  orchestrator_version  = var.kubernetes_version
-  vm_size               = var.kubernetes_services_type
-  max_pods              = var.kubernetes_max_services_pods
-  max_count             = var.kubernetes_max_services_instances
-  min_count             = var.kubernetes_min_services_instances
-  auto_scaling_enabled  = var.kubernetes_services_enable_auto_scaling
-  mode                  = "User"
-  os_type               = "Linux"
-  os_disk_size_gb       = var.kubernetes_services_os_disk_size
-  os_disk_type          = "Managed"
-  node_taints           = ["vendor=cosmotech:NoSchedule"]
-  node_labels           = { "cosmotech.com/tier" = "services" }
-  vnet_subnet_id        = var.subnet_id
-  tags                  = local.tags
+  orchestrator_version        = var.kubernetes_version
+  vm_size                     = var.kubernetes_services_type
+  max_pods                    = var.kubernetes_max_services_pods
+  max_count                   = var.kubernetes_max_services_instances
+  min_count                   = var.kubernetes_min_services_instances
+  auto_scaling_enabled        = var.kubernetes_services_enable_auto_scaling
+  mode                        = "User"
+  os_type                     = "Linux"
+  os_disk_size_gb             = var.kubernetes_services_os_disk_size
+  os_disk_type                = "Managed"
+  node_taints                 = ["vendor=cosmotech:NoSchedule"]
+  node_labels                 = { "cosmotech.com/tier" = "services" }
+  vnet_subnet_id              = var.subnet_id
+  tags                        = local.tags
 
   lifecycle {
     ignore_changes = [
@@ -249,23 +254,23 @@ resource "azurerm_kubernetes_cluster_node_pool" "services" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "db" {
-  name                  = "db"
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.phoenixcluster.id
+  name                        = "db"
+  kubernetes_cluster_id       = azurerm_kubernetes_cluster.phoenixcluster.id
   temporary_name_for_rotation = substr(var.temporary_name_for_rotation_db_pool, 0, 12)
-  orchestrator_version  = var.kubernetes_version
-  vm_size               = var.kubernetes_db_type
-  max_pods              = var.kubernetes_max_db_pods
-  max_count             = var.kubernetes_max_db_instances
-  min_count             = var.kubernetes_min_db_instances
-  auto_scaling_enabled  = var.kubernetes_db_enable_auto_scaling
-  mode                  = "User"
-  os_type               = "Linux"
-  os_disk_size_gb       = var.kubernetes_db_os_disk_size
-  os_disk_type          = "Managed"
-  node_taints           = ["vendor=cosmotech:NoSchedule"]
-  node_labels           = { "cosmotech.com/tier" = "db" }
-  vnet_subnet_id        = var.subnet_id
-  tags                  = local.tags
+  orchestrator_version        = var.kubernetes_version
+  vm_size                     = var.kubernetes_db_type
+  max_pods                    = var.kubernetes_max_db_pods
+  max_count                   = var.kubernetes_max_db_instances
+  min_count                   = var.kubernetes_min_db_instances
+  auto_scaling_enabled        = var.kubernetes_db_enable_auto_scaling
+  mode                        = "User"
+  os_type                     = "Linux"
+  os_disk_size_gb             = var.kubernetes_db_os_disk_size
+  os_disk_type                = "Managed"
+  node_taints                 = ["vendor=cosmotech:NoSchedule"]
+  node_labels                 = { "cosmotech.com/tier" = "db" }
+  vnet_subnet_id              = var.subnet_id
+  tags                        = local.tags
 
   lifecycle {
     ignore_changes = [

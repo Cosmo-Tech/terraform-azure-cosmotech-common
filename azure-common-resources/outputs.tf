@@ -6,8 +6,8 @@ output "out_network_sp_client_id" {
   value = var.deployment_type != "ARM" ? module.create-platform-prerequisite.0.out_network_sp_client_id : null
 }
 
-output "out_aks_cluster_admin_config" {
-  value     = module.create-cluster.aks_cluster_config
+output "out_aks_cluster_config" {
+  value     = var.kubernetes_azure_rbac_enabled ? module.create-cluster.aks_cluster_admin_config : module.create-cluster.aks_cluster_config
   sensitive = true
 }
 

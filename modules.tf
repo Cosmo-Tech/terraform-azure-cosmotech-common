@@ -95,6 +95,13 @@ module "cosmotech-prerequisites" {
   kubernetes_tekton_enable_auto_scaling       = var.kubernetes_tekton_enable_auto_scaling
   kubernetes_tekton_os_disk_size              = var.kubernetes_tekton_os_disk_size
   kubernetes_tekton_deploy                    = var.kubernetes_tekton_deploy
+  temporary_name_for_rotation_basic_pool      = var.temporary_name_for_rotation_basic_pool
+  temporary_name_for_rotation_db_pool         = var.temporary_name_for_rotation_db_pool
+  temporary_name_for_rotation_highcpu_pool    = var.temporary_name_for_rotation_highcpu_pool
+  temporary_name_for_rotation_highmemoty_pool = var.temporary_name_for_rotation_highmemoty_pool
+  temporary_name_for_rotation_monitoring_pool = var.temporary_name_for_rotation_monitoring_pool
+  temporary_name_for_rotation_services_pool   = var.temporary_name_for_rotation_services_pool
+  temporary_name_for_rotation_tekton_pool     = var.temporary_name_for_rotation_tekton_pool
 
   resource_group_name   = local.resource_group
   storage_account_name  = var.storage_account_name

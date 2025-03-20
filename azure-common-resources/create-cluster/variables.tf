@@ -255,3 +255,24 @@ variable "kubernetes_tekton_os_disk_size" {
 variable "kubernetes_tekton_deploy" {
   type = bool
 }
+variable "temporary_name_for_rotation_db_pool" {
+  type = string
+}
+variable "temporary_name_for_rotation_services_pool" {
+  type = string
+}
+variable "temporary_name_for_rotation_tekton_pool" {
+  type = string
+}
+variable "temporary_name_for_rotation_highmemoty_pool" {
+  type = string
+}
+variable "temporary_name_for_rotation_highcpu_pool" {
+  type = string
+}
+variable "temporary_name_for_rotation_basic_pool" {
+  type = string
+}
+variable "temporary_name_for_rotation_monitoring_pool" {
+  type = string
+}

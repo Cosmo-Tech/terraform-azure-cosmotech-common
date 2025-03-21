@@ -622,3 +622,6 @@ variable "temporary_name_for_rotation_basic_pool" {
 variable "temporary_name_for_rotation_monitoring_pool" {
   type = string
 }
+variable "kubernetes_cluster_admin_group_object_ids" {
+  type = list(string)
+}

@@ -102,6 +102,7 @@ module "cosmotech-prerequisites" {
   temporary_name_for_rotation_monitoring_pool = var.temporary_name_for_rotation_monitoring_pool
   temporary_name_for_rotation_services_pool   = var.temporary_name_for_rotation_services_pool
   temporary_name_for_rotation_tekton_pool     = var.temporary_name_for_rotation_tekton_pool
+  kubernetes_cluster_admin_group_object_ids   = var.kubernetes_cluster_admin_group_object_ids
 
   resource_group_name   = local.resource_group
   storage_account_name  = var.storage_account_name

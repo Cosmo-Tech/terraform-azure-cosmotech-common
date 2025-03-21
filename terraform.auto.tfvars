@@ -64,6 +64,9 @@ kubernetes_monitoring_enable_auto_scaling   = true
 kubernetes_admin_group_object_ids = [
   ""
 ]
+kubernetes_cluster_admin_group_object_ids = [
+  ""
+]
 kubernetes_tekton_deploy                    = false
 kubernetes_cluster_name                     = ""
 kubernetes_tekton_compute_type              = "Standard_D2ads_v5"

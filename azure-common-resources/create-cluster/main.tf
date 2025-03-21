@@ -20,6 +20,13 @@ resource "azurerm_role_assignment" "k8s_admin" {
   principal_id         = each.key
 }
 
+resource "azurerm_role_assignment" "k8s_cluster_admin" {
+  scope                = data.azurerm_resource_group.current.id
+  role_definition_name = "Azure Kubernetes Service RBAC Cluster Admin"
+  for_each             = toset(var.kubernetes_cluster_admin_group_object_ids)
+  principal_id         = each.key
+}
+
 resource "azurerm_kubernetes_cluster" "phoenixcluster" {
   name                              = var.cluster_name
   location                          = var.location
@@ -134,7 +141,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "basic" {
     ]
   }
 
-  depends_on = [azurerm_kubernetes_cluster_node_pool.monitoring]
+  depends_on = [
+    azurerm_kubernetes_cluster.phoenixcluster
+  ]
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "highcpu" {
@@ -163,7 +172,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "highcpu" {
   }
 
   depends_on = [
-    azurerm_kubernetes_cluster_node_pool.basic
+    azurerm_kubernetes_cluster.phoenixcluster
   ]
 }
 
@@ -193,7 +202,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "highmemory" {
   }
 
   depends_on = [
-    azurerm_kubernetes_cluster_node_pool.highcpu
+    azurerm_kubernetes_cluster.phoenixcluster
   ]
 }
 
@@ -249,7 +258,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "services" {
   }
 
   depends_on = [
-    azurerm_kubernetes_cluster_node_pool.highmemory
+    azurerm_kubernetes_cluster.phoenixcluster
   ]
 }
 
@@ -279,7 +288,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "db" {
   }
 
   depends_on = [
-    azurerm_kubernetes_cluster_node_pool.services
+    azurerm_kubernetes_cluster.phoenixcluster
   ]
 }
 
@@ -288,12 +297,12 @@ resource "kubernetes_secret" "network_client_secret" {
     name      = "network-client-secret"
     namespace = "default"
   }
-
   data = {
     client_id = var.network_clientid
     password  = var.network_clientsecret
   }
-
   type       = "Opaque"
-  depends_on = [azurerm_kubernetes_cluster.phoenixcluster]
+  depends_on = [
+    azurerm_kubernetes_cluster.phoenixcluster
+  ]
 }

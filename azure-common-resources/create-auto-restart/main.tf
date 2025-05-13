@@ -5,13 +5,6 @@ locals {
   storage_connection_string      = azurerm_storage_account.sa.primary_connection_string
   function_app_name              = "${var.function_app_name}${random_string.func_suffix.result}"
   app_service_plan_name          = "${var.app_service_plan_name}${random_string.func_suffix.result}"
-  #   tags = {
-  #   vendor      = "cosmotech"
-  #   stage       = var.project_stage
-  #   customer    = var.customer_name
-  #   project     = var.project_name
-  #   cost_center = var.cost_center
-  # }
 }
 
 resource "random_string" "func_suffix" {

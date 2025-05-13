@@ -35,3 +35,8 @@ variable "pv_grafana_provider" {
 variable "pv_grafana_disk_source_existing" {
   type = bool
 }
+
+variable "common_tags" {
+  description = "Standard tags to apply to all resources"
+  type        = map(string)
+}

@@ -625,3 +625,13 @@ variable "temporary_name_for_rotation_monitoring_pool" {
 variable "kubernetes_cluster_admin_group_object_ids" {
   type = list(string)
 }
+
+variable "common_tags" {
+  type = object({
+    cost_center = string
+    customer    = string
+    project     = string
+    stage       = string
+    vendor      = string
+  })
+}

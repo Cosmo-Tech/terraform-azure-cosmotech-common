@@ -19,3 +19,7 @@ variable "pv_prometheus_storage_class_name" {
 variable "pv_prometheus_provider" {
   type = string
 }
+variable "common_tags" {
+  description = "Standard tags to apply to all resources"
+  type        = map(string)
+}

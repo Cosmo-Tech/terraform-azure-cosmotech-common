@@ -3,6 +3,13 @@ deployment_type = "Terraform"
 audience        = "AzureADMultipleOrgs"
 client_id       = ""
 client_secret   = ""
+common_tags = {
+  cost_center = "NA"
+  customer    = ""
+  project     = ""
+  stage       = "Dev"
+  vendor      = "cosmotech"
+}
 
 # Backend remote
 tf_resource_group_name  = ""

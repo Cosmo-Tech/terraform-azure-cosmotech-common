@@ -5,6 +5,13 @@ locals {
   storage_connection_string      = azurerm_storage_account.sa.primary_connection_string
   function_app_name              = "${var.function_app_name}${random_string.func_suffix.result}"
   app_service_plan_name          = "${var.app_service_plan_name}${random_string.func_suffix.result}"
+  #   tags = {
+  #   vendor      = "cosmotech"
+  #   stage       = var.project_stage
+  #   customer    = var.customer_name
+  #   project     = var.project_name
+  #   cost_center = var.cost_center
+  # }
 }
 
 resource "random_string" "func_suffix" {
@@ -54,6 +61,7 @@ resource "azurerm_storage_account" "sa" {
   location                 = var.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  tags = var.common_tags
 }
 
 resource "azurerm_service_plan" "asp" {
@@ -62,6 +70,7 @@ resource "azurerm_service_plan" "asp" {
   resource_group_name = var.resource_group_name
   os_type             = "Linux"
   sku_name            = "Y1"
+  tags                = var.common_tags 
 }
 
 resource "azurerm_application_insights" "app_insights" {
@@ -69,6 +78,7 @@ resource "azurerm_application_insights" "app_insights" {
   location            = var.location
   resource_group_name = var.resource_group_name
   application_type    = "web"
+  tags                = var.common_tags 
 }
 
 resource "azurerm_linux_function_app" "fa" {
@@ -78,6 +88,7 @@ resource "azurerm_linux_function_app" "fa" {
   service_plan_id            = azurerm_service_plan.asp.id
   storage_account_name       = local.storage_account_name
   storage_account_access_key = local.storage_account_access_key
+  tags                       = var.common_tags
 
   app_settings = {
     "ENABLE_ORYX_BUILD"                        = "true"

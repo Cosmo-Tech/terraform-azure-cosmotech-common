@@ -15,6 +15,7 @@ module "deploy-persistence-loki-stack" {
   pv_grafana_storage_account_type   = var.pv_grafana_storage_account_type
   pv_grafana_storage_class_name     = var.pv_grafana_storage_class_name
   pv_grafana_storage_gbi            = var.pv_grafana_storage_gbi
+  common_tags                       = var.common_tags 
 
   depends_on = [module.create-cluster]
 

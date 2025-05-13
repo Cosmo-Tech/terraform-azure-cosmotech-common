@@ -1,3 +1,4 @@
+
 module "create-auto-restart" {
   source = "./create-auto-restart"
 
@@ -25,6 +26,7 @@ module "create-auto-restart" {
   stop_hours             = var.stop_hours
   start_minutes          = var.start_minutes
   stop_minutes           = var.stop_minutes
+  tags                   = var.common_tags 
 
   depends_on = [
     module.create-platform-prerequisite

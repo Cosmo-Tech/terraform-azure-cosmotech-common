@@ -10,6 +10,7 @@ resource "azurerm_managed_disk" "prometheus_master" {
   storage_account_type = var.pv_prometheus_storage_account_type
   create_option        = "Empty"
   disk_size_gb         = var.pv_prometheus_storage_gbi
+  tags                 = var.common_tags 
 }
 
 data "azurerm_managed_disk" "disk_managed_prometheus" {

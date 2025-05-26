@@ -16,3 +16,18 @@ variable "pv_prometheus_deploy" {
 variable "pv_prometheus_disk_source_existing" {
   type = bool
 }
+variable "pv_grafana_disk_source_existing" {
+  type = bool
+}
+variable "pv_grafana_storage_gbi" {
+  type = number
+}
+variable "pv_grafana_storage_account_type" {
+  type = string
+}
+variable "pv_grafana_storage_class_name" {
+  type = string
+}
+variable "pv_grafana_provider" {
+  type = string
+}

@@ -20,11 +20,11 @@ variable "subnet_id" {
   type = string
 }
 variable "kubernetes_version" {
-  type    = string
+  type = string
 }
 variable "project_stage" {
   description = "The platform stage"
-  type = string
+  type        = string
 }
 variable "customer_name" {
   description = "The customer name"
@@ -35,7 +35,7 @@ variable "project_name" {
   type        = string
 }
 variable "cost_center" {
-  type    = string
+  type = string
 }
 variable "kubernetes_max_db_instances" {
   type = number
@@ -225,4 +225,8 @@ variable "temporary_name_for_rotation_basic_pool" {
 }
 variable "temporary_name_for_rotation_monitoring_pool" {
   type = string
+}
+
+variable "tags" {
+  type = map(string)
 }

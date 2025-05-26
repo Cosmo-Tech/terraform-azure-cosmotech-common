@@ -19,3 +19,6 @@ variable "pv_loki_storage_class_name" {
 variable "pv_loki_provider" {
   type = string
 }
+variable "tags" {
+  type = map(string)
+}

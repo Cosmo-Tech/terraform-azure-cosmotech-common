@@ -26,7 +26,7 @@ module "create-auto-restart" {
   stop_hours             = var.stop_hours
   start_minutes          = var.start_minutes
   stop_minutes           = var.stop_minutes
-  common_tags            = var.common_tags 
+  tags                   = var.tags
 
   depends_on = [
     module.create-platform-prerequisite

@@ -9,7 +9,7 @@ module "create-privatedns" {
   private_dns_name_queue    = var.private_dns_name_queue
   private_dns_name_table    = var.private_dns_name_table
   private_dns_name_eventhub = var.private_dns_name_eventhub
-  common_tags               = var.common_tags 
+  tags                      = var.tags
 
   depends_on = [
     module.create-platform-prerequisite,

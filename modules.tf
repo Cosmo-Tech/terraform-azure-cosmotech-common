@@ -11,7 +11,7 @@ module "cosmotech-prerequisites" {
   deployment_type = var.deployment_type
   owner_list      = var.owner_list
   audience        = var.audience
-  common_tags     = var.common_tags
+  tags            = var.tags
 
   # project
   image_path    = var.project_image_path

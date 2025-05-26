@@ -83,12 +83,6 @@ variable "start_hours" {
     error_message = "Hours must be between 0 and 23"
   }
 }
-variable "common_tags" {
-  type = object({
-    cost_center = string
-    customer    = string
-    project     = string
-    stage       = string
-    vendor      = string
-  })
+variable "tags" {
+  type = map(string)
 }

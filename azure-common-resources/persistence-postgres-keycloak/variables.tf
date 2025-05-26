@@ -19,7 +19,6 @@ variable "pv_keycloak_postgres_storage_class_name" {
 variable "pv_keycloak_postgres_provider" {
   type = string
 }
-variable "common_tags" {
-  description = "Standard tags to apply to all resources"
-  type        = map(string)
+variable "tags" {
+  type = map(string)
 }

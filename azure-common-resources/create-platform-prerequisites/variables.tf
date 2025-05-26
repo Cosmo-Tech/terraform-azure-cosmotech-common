@@ -1,6 +1,6 @@
 variable "project_stage" {
   description = "The platform stage"
-  type = string
+  type        = string
 }
 
 variable "customer_name" {
@@ -28,9 +28,9 @@ variable "resource_group" {
 }
 
 variable "image_path" {
-  type    = string
+  type = string
 }
 
 variable "cost_center" {
-  type    = string
+  type = string
 }

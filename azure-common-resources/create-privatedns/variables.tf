@@ -26,7 +26,6 @@ variable "private_dns_name_eventhub" {
   type = string
 }
 
-variable "common_tags" {
-  description = "Standard tags to apply to all resources"
-  type        = map(string)
+variable "tags" {
+  type = map(string)
 }

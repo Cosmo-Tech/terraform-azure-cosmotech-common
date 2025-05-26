@@ -34,3 +34,6 @@ variable "pv_grafana_provider" {
 variable "pv_grafana_disk_source_existing" {
   type = bool
 }
+variable "tags" {
+  type = map(string)
+}

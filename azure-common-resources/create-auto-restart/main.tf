@@ -54,7 +54,7 @@ resource "azurerm_storage_account" "sa" {
   location                 = var.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
-  tags = var.common_tags
+  tags                     = var.tags
 }
 
 resource "azurerm_service_plan" "asp" {
@@ -63,7 +63,7 @@ resource "azurerm_service_plan" "asp" {
   resource_group_name = var.resource_group_name
   os_type             = "Linux"
   sku_name            = "Y1"
-  tags                = var.common_tags 
+  tags                = var.tags
 }
 
 resource "azurerm_application_insights" "app_insights" {
@@ -71,7 +71,7 @@ resource "azurerm_application_insights" "app_insights" {
   location            = var.location
   resource_group_name = var.resource_group_name
   application_type    = "web"
-  tags                = var.common_tags 
+  tags                = var.tags
 }
 
 resource "azurerm_linux_function_app" "fa" {
@@ -81,7 +81,7 @@ resource "azurerm_linux_function_app" "fa" {
   service_plan_id            = azurerm_service_plan.asp.id
   storage_account_name       = local.storage_account_name
   storage_account_access_key = local.storage_account_access_key
-  tags                       = var.common_tags
+  tags                       = var.tags
 
   app_settings = {
     "ENABLE_ORYX_BUILD"                        = "true"

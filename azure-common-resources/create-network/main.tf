@@ -1,13 +1,6 @@
 locals {
   local_vnet_name = var.network_name == "" ? substr("CosmoTech${var.customer_name}${var.project_name}${var.project_stage}VNet", 0, 80) : var.network_name
   vnet_iprange    = var.vnet_iprange != "" ? var.vnet_iprange : "10.21.0.0/24"
-  tags = {
-    vendor      = "cosmotech"
-    stage       = var.project_stage
-    customer    = var.customer_name
-    project     = var.project_name
-    cost_center = var.cost_center
-  }
 }
 
 locals {
@@ -29,7 +22,7 @@ resource "azurerm_virtual_network" "network_vnet" {
     service_endpoints = ["Microsoft.Storage.Global"]
   }
 
-  tags = local.tags
+  tags = var.tags
 }
 
 resource "azurerm_role_assignment" "publicip_contributor" {
@@ -41,7 +34,7 @@ resource "azurerm_role_assignment" "publicip_contributor" {
 
 # Resource group
 data "azurerm_resource_group" "platform_rg" {
-  name     = var.resource_group
+  name = var.resource_group
 }
 
 resource "azurerm_role_assignment" "rg_contributor" {

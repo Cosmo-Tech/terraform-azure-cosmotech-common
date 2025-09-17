@@ -20,30 +20,39 @@ resource "null_resource" "package_functions" {
 
   provisioner "local-exec" {
     command = <<EOT
-      #!/bin/bash
+      #!/bin/sh
+
       set -e
       set -x
-
-      sed -i 's/%KEYSCHEDULESTOP%/0 ${var.stop_minutes} ${var.stop_hours} * * 1-5/g' ${path.module}/functions/StopAdxCluster/function.json
-      sed -i 's/%KEYSCHEDULESTOP%/0 ${var.stop_minutes} ${var.stop_hours} * * 1-5/g' ${path.module}/functions/StopAks/function.json
-      sed -i 's/%KEYSCHEDULESTOP%/0 ${var.stop_minutes} ${var.stop_hours} * * 1-5/g' ${path.module}/functions/StopPowerBI/function.json
-      sed -i 's/%KEYSCHEDULESTOP%/0 ${var.stop_minutes} ${var.stop_hours} * * 1-5/g' ${path.module}/functions/StopStudioVM/function.json
-
-
-      sed -i 's/%KEYSCHEDULESTART%/0 ${var.start_minutes} ${var.start_hours} * * 1-5/g' ${path.module}/functions/StartAdxCluster/function.json
-      sed -i 's/%KEYSCHEDULESTART%/0 ${var.start_minutes} ${var.start_hours} * * 1-5/g' ${path.module}/functions/StartAks/function.json
-      sed -i 's/%KEYSCHEDULESTART%/0 ${var.start_minutes} ${var.start_hours} * * 1-5/g' ${path.module}/functions/StartPowerBI/function.json
-      sed -i 's/%KEYSCHEDULESTART%/0 ${var.start_minutes} ${var.start_hours} * * 1-5/g' ${path.module}/functions/StartStudioVM/function.json
 
       if ! [ -x "$(command -v zip)" ]; then
         echo "'zip' is not installed. Please install it."
         exit 1
       fi
 
-      FUNCTIONS_DIR="${path.module}/functions"
-      ZIP_FILE="../../../functions.zip"
+      dir_tmp="/tmp/terraform-functions"
+      file_archive="$dir_tmp/functions.zip"
 
-      cd "$FUNCTIONS_DIR" ; zip -r "$ZIP_FILE" .
+      rm -rf $dir_tmp
+      mkdir -p $dir_tmp/functions
+      cp -R ${path.module}/functions $dir_tmp/
+
+      functions_start="$(ls ${path.module}/functions | grep Start)"
+      for fstart in $functions_start; do
+        # echo $fstart
+        sed -i 's|%KEYSCHEDULE%|0 ${var.start_minutes} ${var.start_hours} * * 1-5|' $dir_tmp/functions/$fstart/function.json
+      done
+
+      functions_stop="$(ls ${path.module}/functions | grep Stop)"
+      for fstop in $functions_stop; do
+        # echo $fstop
+        sed -i 's|%KEYSCHEDULE%|0 ${var.stop_minutes} ${var.stop_hours} * * 1-5|' $dir_tmp/functions/$fstop/function.json
+      done
+
+      cd $dir_tmp/functions
+      zip -r "$file_archive" .
+
+      chmod -R 777 $dir_tmp
     EOT
   }
 }
@@ -64,10 +73,27 @@ resource "azurerm_service_plan" "asp" {
   sku_name            = "Y1"
 }
 
-resource "azurerm_application_insights" "app_insights" {
-  name                = "${local.function_app_name}-insights"
+# resource "azurerm_application_insights" "app_insights" {
+#   name                = "${local.function_app_name}-analytics"
+#   location            = var.location
+#   resource_group_name = var.resource_group_name
+#   application_type    = "web"
+# }
+
+
+resource "azurerm_log_analytics_workspace" "app_insights_workspace" {
+  name                = "${local.function_app_name}-analytics-workspace"
   location            = var.location
   resource_group_name = var.resource_group_name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+}
+
+resource "azurerm_application_insights" "app_insights" {
+  name                = "${local.function_app_name}-analytics"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  workspace_id        = azurerm_log_analytics_workspace.app_insights_workspace.id
   application_type    = "web"
 }
 
@@ -102,6 +128,12 @@ resource "azurerm_linux_function_app" "fa" {
     "POWERBI_NAME"                             = var.powerbi_name
     "VM_RESOURCE_GROUP"                        = var.vm_resource_group
     "VM_NAME"                                  = var.vm_name
+    "AzureWebJobs.ResumePowerBI.Disabled"      = "0"
+    "AzureWebJobs.StartStudioVM.Disabled"      = "0"
+    "AzureWebJobs.StopAdxCluster.Disabled"     = "0"
+    "AzureWebJobs.StopAks.Disabled"            = "0"
+    "AzureWebJobs.StopBowerBI.Disabled"        = "0"
+    "AzureWebJobs.StopStudioVM.Disabled"       = "0"
   }
 
   site_config {
@@ -110,7 +142,7 @@ resource "azurerm_linux_function_app" "fa" {
     }
   }
 
-  zip_deploy_file = "${path.root}/functions.zip"
+  zip_deploy_file = "/tmp/terraform-functions/functions.zip"
 
   depends_on = [null_resource.package_functions]
 }

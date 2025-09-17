@@ -143,12 +143,12 @@ velero_tags = {
   stage       = "Dev"
 }
 
-# ingress nginx
-ingress_nginx_helm_repo_url     = "https://kubernetes.github.io/ingress-nginx"
-ingress_nginx_namespace         = "ingress-nginx"
-ingress_nginx_helm_release_name = "ingress-nginx"
-ingress_nginx_replica_count     = 1
-ingress_nginx_version           = "4.2.5"
+# # ingress nginx
+# ingress_nginx_helm_repo_url     = "https://kubernetes.github.io/ingress-nginx"
+# ingress_nginx_namespace         = "ingress-nginx"
+# ingress_nginx_helm_release_name = "ingress-nginx"
+# ingress_nginx_replica_count     = 1
+# ingress_nginx_version           = "4.2.5"
 
 # keycloak
 keycloak_config_deploy           = false

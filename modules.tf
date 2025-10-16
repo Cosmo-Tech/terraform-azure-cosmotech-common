@@ -11,6 +11,7 @@ module "cosmotech-prerequisites" {
   deployment_type = var.deployment_type
   owner_list      = var.owner_list
   audience        = var.audience
+  tags            = var.tags
 
   # project
   image_path    = var.project_image_path
@@ -154,25 +155,24 @@ module "cosmotech-prerequisites" {
   pv_keycloak_postgres_storage_account_type = var.pv_keycloak_postgres_storage_account_type
   pv_keycloak_postgres_storage_class_name   = var.pv_keycloak_postgres_storage_class_name
 
-  # prometheus pv
+  # prometheus-stack pv
   pv_prometheus_deploy               = var.pv_prometheus_deploy
   pv_prometheus_disk_source_existing = var.pv_prometheus_disk_source_existing
   pv_prometheus_provider             = var.pv_prometheus_provider
   pv_prometheus_storage_account_type = var.pv_prometheus_storage_account_type
   pv_prometheus_storage_class_name   = var.pv_prometheus_storage_class_name
   pv_prometheus_storage_gbi          = var.pv_prometheus_storage_gbi
+  pv_grafana_disk_source_existing    = var.pv_grafana_disk_source_existing
+  pv_grafana_provider                = var.pv_grafana_provider
+  pv_grafana_storage_account_type    = var.pv_grafana_storage_account_type
+  pv_grafana_storage_class_name      = var.pv_grafana_storage_class_name
+  pv_grafana_storage_gbi             = var.pv_grafana_storage_gbi
 
   # loki-stack
-  pv_loki_stack_deploy            = var.pv_loki_stack_deploy
-  pv_loki_disk_source_existing    = var.pv_loki_disk_source_existing
-  pv_loki_provider                = var.pv_loki_provider
-  pv_loki_storage_account_type    = var.pv_loki_storage_account_type
-  pv_loki_storage_class_name      = var.pv_loki_storage_class_name
-  pv_loki_storage_gbi             = var.pv_loki_storage_gbi
-  pv_grafana_disk_source_existing = var.pv_grafana_disk_source_existing
-  pv_grafana_provider             = var.pv_grafana_provider
-  pv_grafana_storage_account_type = var.pv_grafana_storage_account_type
-  pv_grafana_storage_class_name   = var.pv_grafana_storage_class_name
-  pv_grafana_storage_gbi          = var.pv_grafana_storage_gbi
-
+  pv_loki_stack_deploy         = var.pv_loki_stack_deploy
+  pv_loki_disk_source_existing = var.pv_loki_disk_source_existing
+  pv_loki_provider             = var.pv_loki_provider
+  pv_loki_storage_account_type = var.pv_loki_storage_account_type
+  pv_loki_storage_class_name   = var.pv_loki_storage_class_name
+  pv_loki_storage_gbi          = var.pv_loki_storage_gbi
 }

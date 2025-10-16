@@ -3,6 +3,13 @@ deployment_type = "Terraform"
 audience        = "AzureADMultipleOrgs"
 client_id       = ""
 client_secret   = ""
+tags = {
+  cost_center = "NA"
+  customer    = ""
+  project     = ""
+  stage       = "Dev"
+  vendor      = "cosmotech"
+}
 
 # Backend remote
 tf_resource_group_name  = ""
@@ -167,23 +174,23 @@ pv_keycloak_postgres_storage_account_type = "Premium_LRS"
 pv_keycloak_postgres_storage_class_name   = "default"
 pv_keycloak_postgres_provider             = "azure"
 
-# prometheus pv
+# prometheus-stack pv
 pv_prometheus_deploy               = false
 pv_prometheus_disk_source_existing = false
 pv_prometheus_storage_gbi          = 64
 pv_prometheus_storage_account_type = "Premium_LRS"
 pv_prometheus_storage_class_name   = "default"
 pv_prometheus_provider             = "azure"
+pv_grafana_disk_source_existing    = false
+pv_grafana_storage_gbi             = 8
+pv_grafana_storage_account_type    = "Premium_LRS"
+pv_grafana_storage_class_name      = "default"
+pv_grafana_provider                = "azure"
 
 # loki-stack pv
-pv_loki_stack_deploy            = false
-pv_loki_disk_source_existing    = false
-pv_loki_storage_gbi             = 8
-pv_loki_storage_account_type    = "Premium_LRS"
-pv_loki_storage_class_name      = "default"
-pv_loki_provider                = "azure"
-pv_grafana_disk_source_existing = false
-pv_grafana_storage_gbi          = 8
-pv_grafana_storage_account_type = "Premium_LRS"
-pv_grafana_storage_class_name   = "default"
-pv_grafana_provider             = "azure"
+pv_loki_stack_deploy         = false
+pv_loki_disk_source_existing = false
+pv_loki_storage_gbi          = 8
+pv_loki_storage_account_type = "Premium_LRS"
+pv_loki_storage_class_name   = "default"
+pv_loki_provider             = "azure"

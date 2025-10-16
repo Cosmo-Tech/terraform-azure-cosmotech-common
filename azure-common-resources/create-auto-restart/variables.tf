@@ -105,3 +105,7 @@ variable "start_minutes" {
 variable "start_hours" {
   type = number
 }
+
+variable "tags" {
+  type = map(string)
+}

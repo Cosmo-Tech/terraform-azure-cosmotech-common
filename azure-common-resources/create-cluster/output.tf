@@ -8,7 +8,7 @@ output "aks_cluster_admin_config" {
 }
 
 output "aks_cluster_config" {
-  value = azurerm_kubernetes_cluster.phoenixcluster.kube_config
+  value     = azurerm_kubernetes_cluster.phoenixcluster.kube_config
   sensitive = true
 }
 

@@ -10,6 +10,7 @@ module "deploy-persistence-keycloak" {
   pv_keycloak_postgres_storage_account_type = var.pv_keycloak_postgres_storage_account_type
   pv_keycloak_postgres_storage_class_name   = var.pv_keycloak_postgres_storage_class_name
   pv_keycloak_postgres_storage_gbi          = var.pv_keycloak_postgres_storage_gbi
+  tags                                      = var.tags
 
   depends_on = [module.create-cluster]
 }

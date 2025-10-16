@@ -1,12 +1,5 @@
 locals {
   dns_prefix = "${var.cluster_name}-aks"
-  tags = {
-    vendor      = "cosmotech"
-    stage       = var.project_stage
-    customer    = var.customer_name
-    project     = var.project_name
-    cost_center = var.cost_center
-  }
 }
 
 data "azurerm_resource_group" "current" {
@@ -42,7 +35,7 @@ resource "azurerm_kubernetes_cluster" "phoenixcluster" {
   }
   automatic_upgrade_channel = "patch"
   sku_tier                  = "Standard"
-  tags                      = local.tags
+  tags                      = var.tags
 
   network_profile {
     load_balancer_sku = "standard"
@@ -103,7 +96,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "monitoring" {
   node_taints                 = ["vendor=cosmotech:NoSchedule"]
   node_labels                 = { "cosmotech.com/tier" = "monitoring" }
   vnet_subnet_id              = var.subnet_id
-  tags                        = local.tags
+  tags                        = var.tags
 
   lifecycle {
     ignore_changes = [
@@ -133,7 +126,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "basic" {
   node_taints                 = ["vendor=cosmotech:NoSchedule"]
   node_labels                 = { "cosmotech.com/tier" = "compute", "cosmotech.com/size" = "basic" }
   vnet_subnet_id              = var.subnet_id
-  tags                        = local.tags
+  tags                        = var.tags
 
   lifecycle {
     ignore_changes = [
@@ -163,7 +156,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "highcpu" {
   node_taints                 = ["vendor=cosmotech:NoSchedule"]
   node_labels                 = { "cosmotech.com/tier" = "compute", "cosmotech.com/size" = "highcpu" }
   vnet_subnet_id              = var.subnet_id
-  tags                        = local.tags
+  tags                        = var.tags
 
   lifecycle {
     ignore_changes = [
@@ -193,7 +186,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "highmemory" {
   node_taints                 = ["vendor=cosmotech:NoSchedule"]
   node_labels                 = { "cosmotech.com/tier" = "compute", "cosmotech.com/size" = "highmemory" }
   vnet_subnet_id              = var.subnet_id
-  tags                        = local.tags
+  tags                        = var.tags
 
   lifecycle {
     ignore_changes = [
@@ -224,7 +217,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "tekton" {
   node_taints                 = ["vendor=tekton:NoSchedule"]
   node_labels                 = { "cosmotech.com/tier" = "tekton" }
   vnet_subnet_id              = var.subnet_id
-  tags                        = local.tags
+  tags                        = var.tags
   lifecycle {
     ignore_changes = [
       tags,
@@ -249,7 +242,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "services" {
   node_taints                 = ["vendor=cosmotech:NoSchedule"]
   node_labels                 = { "cosmotech.com/tier" = "services" }
   vnet_subnet_id              = var.subnet_id
-  tags                        = local.tags
+  tags                        = var.tags
 
   lifecycle {
     ignore_changes = [
@@ -279,7 +272,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "db" {
   node_taints                 = ["vendor=cosmotech:NoSchedule"]
   node_labels                 = { "cosmotech.com/tier" = "db" }
   vnet_subnet_id              = var.subnet_id
-  tags                        = local.tags
+  tags                        = var.tags
 
   lifecycle {
     ignore_changes = [
@@ -301,7 +294,7 @@ resource "kubernetes_secret" "network_client_secret" {
     client_id = var.network_clientid
     password  = var.network_clientsecret
   }
-  type       = "Opaque"
+  type = "Opaque"
   depends_on = [
     azurerm_kubernetes_cluster.phoenixcluster
   ]

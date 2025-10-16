@@ -8,7 +8,7 @@ variable "vnet_iprange" {
 
 variable "project_stage" {
   description = "The platform stage"
-  type = string
+  type        = string
 }
 
 variable "customer_name" {
@@ -35,7 +35,7 @@ variable "subscription_id" {
 }
 
 variable "network_name" {
-  type    = string
+  type = string
 }
 
 variable "subnet_name" {
@@ -56,4 +56,8 @@ variable "network_publicip_id" {
 
 variable "network_sp_objectid" {
   type = string
+}
+
+variable "tags" {
+  type = map(string)
 }

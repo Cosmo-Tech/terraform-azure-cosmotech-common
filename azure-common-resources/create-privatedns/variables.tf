@@ -25,3 +25,7 @@ variable "private_dns_name_adt" {
 variable "private_dns_name_eventhub" {
   type = string
 }
+
+variable "tags" {
+  type = map(string)
+}
